@@ -2506,6 +2506,12 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
 }
+.lb{
+	width: 110px !important;
+}
+.lb2{
+	width: 70px !important;
+}
 input[type="search"] {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;

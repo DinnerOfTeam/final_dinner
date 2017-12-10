@@ -16,8 +16,11 @@
 				</div>
 				<div class="login-info">
 				<form action="#" method="post">
-						<input type="text" class="user" name="email" placeholder="ID" required="">
-						<input type="password" name="password" class="lock" placeholder="PASSWORD">
+						<label for="userid">회원ID</label>
+						<input type="text" class="user" name="email">
+						<br>
+						<label for="pwd">비밀번호</label>
+						<input type="password" name="password" class="lock" >
 						<div class="forgot-top-grids">
 							<div class="forgot-grid">
 								<ul>

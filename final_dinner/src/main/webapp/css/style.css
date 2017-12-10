@@ -1962,11 +1962,13 @@ button.btn1.btn-1.btn-1b:hover {
 
 .login-heading {
 	background: #37767A;
+	width: 600px;
 	
 }
 .login-heading2 {
 	background: #37767A;
 	padding: 3em 0em;
+	width: 600px;
 }
 
 .login-heading h1 {
@@ -1983,12 +1985,33 @@ button.btn1.btn-1.btn-1b:hover {
 .login-info {
 	padding: 4em 1.5em 1em;
 	background: #FFFFFF;
+	width: 600px;
 }
 
+.tx {
+	width: 250px !important; 
+	 
+}
+.tx2 {
+	width: 100px !important; 
+	 
+}
+.tx3 {
+	width: 150px !important; 
+	padding-bottom: 0px !important;
+	margin: 0px !important;
+	 
+}
+.tx4 {
+	width: 400px !important;
+	padding-bottom: 0px !important;
+	
+	 
+}
 .login-info input[type="text"], .login-info input[type="password"] {
 	font-size: 0.9em;
 	padding: 10px 0px;
-	width: 100%;
+	width: 100%; 
 	color: #A8A8A8;
 	outline: none;
 	border: 1px solid #D3D3D3;
@@ -1998,6 +2021,7 @@ button.btn1.btn-1.btn-1b:hover {
 	background: #FFFFFF;
 	margin: 0em 0em 1.5em 0em;
 }
+
 
 .login-info input[type="submit"] {
 	border: none;
@@ -2010,6 +2034,7 @@ button.btn1.btn-1.btn-1b:hover {
 	font-size: 1em;
 	margin: 1.5em 0 0;
 }
+
 
 .login-info input[type="submit"]:hover {
 	background: #9E1616;
