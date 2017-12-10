@@ -10,12 +10,12 @@
 				<!-- <div class="border" style="height: 200px"></div> -->
 				<!-- <script src="js/responsiveslides.min.js"></script>
 				<script>
-						// You can also use "$(window).load(functioihn() {"
+						// You can also use "$(window).load(function() {"
 						$(function () {
 						// Slideshow 4
 							$("#slider3").responsiveSlides({
 								auto: true,
-								pager: true,d
+								pager: true,
 								nav: true,
 								speed: 500,
 								namespace: "callbacks",
