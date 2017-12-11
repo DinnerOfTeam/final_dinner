@@ -35,10 +35,13 @@
 		
 	});
 </script>
-<div class="site-board-title">
+<div class="site-board-title wow fadeInUp animated"
+		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 	<h1 class="col-center">게시판 이름</h1>
 </div>
-<div class="site-board">
+
+<div class="site-board wow fadeInUp animated"
+		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 	
 	<div class="container">
 		

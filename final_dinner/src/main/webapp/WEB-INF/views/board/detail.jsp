@@ -27,12 +27,22 @@
 				return false;
 			}
 		});
+		
+		$('.comments-act > a').click(function(){
+			event.preventDefault();
+			window.open($(this).attr("href"), 'commentsAct',
+				'width=600px, height=350px, top=0, left=0, location=yes, resizable=yes');
+		});
+		
 	});
 </script>
-<div class="site-board-title">
+<div class="site-board-title wow fadeInUp animated"
+		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 	<h1 class="col-center">게시판 이름</h1>
 </div>
-<div class="site-board">
+
+<div class="site-board wow fadeInUp animated"
+		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 	
 	<div class="container">
 		
@@ -61,8 +71,8 @@
 				<div class="col-xs-12">asdf</div>
 			</div>
 			<div class="col-left">
-				<a href="#" class="btn btn-default btn-sm">수정</a>
-				<a href="#" class="btn btn-default btn-sm">삭제</a>
+				<a href="<c:url value='/board/edit.do?no='/>" class="btn btn-default btn-sm">수정</a>
+				<a href="<c:url value='/board/delete.do?no='/>" class="btn btn-default btn-sm">삭제</a>
 				<a href="<c:url value='/board/list.do'/>" class="btn btn-default btn-sm">목록</a>
 			</div>
 			<div class="row board-detail-comments">
@@ -74,10 +84,10 @@
 								Tester
 								<span>2017-01-01 20:33</span>
 							</div>
-							<div class="col-right col-xs-4">
-								<a href="#">수정</a>
+							<div class="comments-act col-right col-xs-4">
+								<a href="<c:url value='/comments/edit.do?boardNo=&no='/>">수정</a>
 								|
-								<a href="#">삭제</a>
+								<a href="<c:url value='/comments/delete.do?boardNo=&no='/>">삭제</a>
 							</div>
 						</div>
 						<div class="board-detail-comments-contents">
