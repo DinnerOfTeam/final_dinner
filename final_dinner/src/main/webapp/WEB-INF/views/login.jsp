@@ -2,6 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@include file="inc/top.jsp" %>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#SignIn').click(function(){
+		if($('#memId').val()==''){
+			alert('아이디를 입력하세요');
+			$('#memId').focus();
+			return false;
+		}else if($('#memPwd').val()==''){
+			alert('비밀번호를 입력하세요');
+			$('#memPwd').focus();
+			return false;
+		}
+			
+		});
+	});
+
+</script>
+
 	
 	<!-- login -->
 	<div class="login">
@@ -15,12 +33,12 @@
 							</ul>
 				</div>
 				<div class="login-info">
-				<form action="#" method="post">
-						<label for="userid">회원ID</label>
-						<input type="text" class="user" name="email">
+				<form action="#" name="frmLogin" method="post">
+						<label for="memId">회원ID</label>
+						<input type="text" class="user" name="memId" id="memId">
 						<br>
-						<label for="pwd">비밀번호</label>
-						<input type="password" name="password" class="lock" >
+						<label for="memPwd">비밀번호</label>
+						<input type="password" name="memPwd" class="lock" id="memPwd" >
 						<div class="forgot-top-grids">
 							<div class="forgot-grid">
 								<ul>
@@ -35,9 +53,9 @@
 							</div>
 							<div class="clearfix"> </div>
 						</div>
-						<input type="submit" name="Sign In" value="로그인">
+						<input type="submit" name="SignIn" id="SignIn" value="로그인">
 						<div class="signup-text">
-							<a href="signup.jsp">회원가입</a>
+							<a href="<c:url value= '/signup.do'/>">회원가입</a>
 						</div>
 						
 						
