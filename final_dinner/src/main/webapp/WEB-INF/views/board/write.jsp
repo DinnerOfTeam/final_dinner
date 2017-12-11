@@ -11,7 +11,8 @@
 		});
 		
 		var $fileRow=$('.site-fileup-list').find('.site-fileup-row').clone(true);
-	
+		$('.site-fileup-list').empty();
+		
 		$('.btn-file-add').click(function(){
 			$(this).parent().parent().find('.site-fileup-list').append($fileRow.clone(true));
 		});

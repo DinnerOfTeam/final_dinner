@@ -11,6 +11,7 @@
 		});
 		
 		var $fileRow=$('.site-fileup-list').find('.site-fileup-row').clone(true);
+		$('.site-fileup-list').empty();
 	
 		$('.btn-file-add').click(function(){
 			$(this).parent().parent().find('.site-fileup-list').append($fileRow.clone(true));
@@ -20,10 +21,6 @@
 			if($('#freeTitle').val()==""){
 				alert('제목을 입력하세요');
 				$('#freeTitle').focus();
-				return false;
-			}else if($('#freeName').length>0 && $('#freeName').val()==""){
-				alert('이름을 입력하세요');
-				$('#freeName').focus();
 				return false;
 			}else if($('#freePwd').length>0 && $('#freePwd').val()==""){
 				alert('비밀번호를 입력하세요');
@@ -40,7 +37,6 @@
 <div class="site-board">
 	
 	<div class="container">
-		
 		<div class="col-md-8 col-md-offset-2">
 			<div class="board-inner">
 				<form name="frmBoardWrite" method="post" action="<c:url value='/board/write.do'/>" enctype="multipart/form-data">
