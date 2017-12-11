@@ -1,13 +1,24 @@
-.site-board{
+.site-board-title{
 	padding: 4em 0;
+	background: #DDD;
+}
+
+.site-board{
+	padding: 2em 0 4em 0;
 	background: #F9F9F9;
 }
+
+.site-board>.container{
+	max-width: 970px;
+}
+
 .board-inner{
 	background-color: white;
 	width: 100%;
 	box-shadow: 0 0 0.25em 0.0005em #999;
 	padding: 0.5em;
 	overflow: hidden;
+	
 }
 
 .board-inner a{
@@ -16,13 +27,13 @@
 
 .board-list{
 	background-color: #fff;
-	border-top: 1px solid lightgray;
+	border-top: 1px solid gray;
 }
 
 .board-list-header{
 	font-weight: bold;
 	text-align: center;
-	border-bottom: 3px solid lightgray;
+	border-bottom: 1px solid gray;
 	margin: 0;
 }
 
@@ -30,23 +41,24 @@
 	padding: 0.5em 0;
 }
 
-.board-list-body>div{
-	padding: 0.5em;
-}
-
 .board-list-body{
 	text-align: center;
-	border-bottom: 1px solid lightgray;
 	margin: 0;
 }
 
 .board-list-row{
 	margin: 0;
-	padding: 0 0.25em;
+}
+
+.board-list-row>a{
+	padding: 0.75em;
+	display: block;
+	overflow: hidden;
 }
 
 .board-list-row .board-list-title{
 	text-align: left;
+	font-size: 150%;
 	font-weight: bold;
 	padding-bottom: 0.25em;
 }
@@ -73,13 +85,27 @@
 	text-align: right;
 }
 
+.board-list-nodata{
+	text-align: center;
+	padding: 2.5em 1em;
+}
+
+.board-list-row, .board-list-nodata{
+	border-bottom: 1px solid lightgray;
+}
+
 .board-list-sub{
-	padding: 0.5em 0 0 0;
+	padding: 0.5em 0;
 	text-align: center;
 }
 
 .board-list-sub .pagination{
 	margin: 0;
+}
+
+.board-search-type, .board-search-keyword{
+	padding: 0;
+	margin-bottom: 0.25em;
 }
 
 .col-left{
@@ -113,6 +139,33 @@
 	font-size: 75%;
 }
 
+.board-detail-file{
+	margin: 0;
+	padding: 0.25em 0.75em 0 0;
+}
+
+.board-detail-file>div{
+	font-size: 75%;
+	color: #999;
+	position: relative;
+}
+
+.board-detail-file-list{
+	position:absolute;
+	top: 100%;
+	right: 0;
+	padding: 0.5em;
+	border: 1px solid #AAA;
+	background-color: white;
+}
+
+.board-detail-file-list > ul{
+	list-style: none;
+	color: #333;
+	padding: 0;
+	margin: 0;
+}
+
 .board-detail-content{
 	padding: 0.75em;
 	margin: 0 0 0.75em 0;
@@ -121,6 +174,15 @@
 
 .board-detail-comments{
 	margin: 0;
+}
+
+.board-detail-comments-list{
+	width: 100%;
+	margin-bottom: 1.5em;
+}
+
+.board-detail-comments-row{
+	border-bottom: 1px solid #EEE;
 }
 
 .board-detail-comments>h4{
@@ -139,13 +201,22 @@
 	border bottom: #EEE solid 1px;
 }
 
+.board-comments-form-top>div{
+	padding : 0;
+}
+
+.board-comment-frm > .form-group{
+	padding: 0 15px;
+}
+
 @media (min-width: 768px) {
-	.board-list-body>div{
+	.board-list-row>a{
 		padding: 0.5em 0;
 	}
 	
 	.board-list-row .board-list-title{
 		font-weight: unset;
+		font-size: 100%;
 		padding-bottom: 0;
 	}
 	
