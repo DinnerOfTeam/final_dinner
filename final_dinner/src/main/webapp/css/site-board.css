@@ -1,0 +1,162 @@
+.site-board{
+	padding: 4em 0;
+	background: #F9F9F9;
+}
+.board-inner{
+	background-color: white;
+	width: 100%;
+	box-shadow: 0 0 0.25em 0.0005em #999;
+	padding: 0.5em;
+	overflow: hidden;
+}
+
+.board-inner a{
+	color: #333;
+}
+
+.board-list{
+	background-color: #fff;
+	border-top: 1px solid lightgray;
+}
+
+.board-list-header{
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 3px solid lightgray;
+	margin: 0;
+}
+
+.board-list-header>div{
+	padding: 0.5em 0;
+}
+
+.board-list-body>div{
+	padding: 0.5em;
+}
+
+.board-list-body{
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+	margin: 0;
+}
+
+.board-list-row{
+	margin: 0;
+	padding: 0 0.25em;
+}
+
+.board-list-row .board-list-title{
+	text-align: left;
+	font-weight: bold;
+	padding-bottom: 0.25em;
+}
+
+.board-list-row > a > div{
+	padding: 0;
+}
+
+.board-list-row:hover{
+	background-color: #EEE;
+}
+
+.board-list-row .board-list-writer, .board-list-row .board-list-date{
+	color: #777;
+	font-size: 75%;
+	padding-top: 0.25em;
+}
+
+.board-list-row .board-list-writer{
+	text-align: left;
+}
+
+.board-list-row .board-list-date{
+	text-align: right;
+}
+
+.board-list-sub{
+	padding: 0.5em 0 0 0;
+	text-align: center;
+}
+
+.board-list-sub .pagination{
+	margin: 0;
+}
+
+.col-left{
+	text-align: left;
+}
+
+.col-center{
+	text-align: center;
+}
+
+.col-right{
+	text-align: right;
+}
+
+.board-detail-title{
+	margin: 0;
+}
+
+.board-detail-title>*{
+	padding: 0.5em;
+}
+
+.board-detail-title>div{
+	font-size: 75%;
+}
+
+.board-detail-sub{
+	margin: 0;
+	padding: 0.5em;
+	background-color: #DDD;
+	font-size: 75%;
+}
+
+.board-detail-content{
+	padding: 0.75em;
+	margin: 0 0 0.75em 0;
+	border-bottom: #DDD solid 1px;
+}
+
+.board-detail-comments{
+	margin: 0;
+}
+
+.board-detail-comments>h4{
+	padding: 0.75em 0;
+}
+
+.board-detail-comments-sub{
+	padding: 0.25em;
+	background-color: #EEE;
+	font-size: 75%;
+	overflow: hidden;
+}
+
+.board-detail-comments-contents{
+	padding : 0.5em;
+	border bottom: #EEE solid 1px;
+}
+
+@media (min-width: 768px) {
+	.board-list-body>div{
+		padding: 0.5em 0;
+	}
+	
+	.board-list-row .board-list-title{
+		font-weight: unset;
+		padding-bottom: 0;
+	}
+	
+	.board-list-row:hover .board-list-title{
+		text-decoration: underline;
+	}
+	
+	.board-list-row .board-list-writer, .board-list-row .board-list-date{
+		text-align: center;
+		color: #333;
+		padding-top: 0;
+		font-size: 100%;
+	}
+}
