@@ -50,9 +50,9 @@
 					<a href="#" class="board-detail-file-btn">첨부파일(3)</a>
 					<div class="board-detail-file-list">
 						<ul>
-							<li>file1.dat (0.1M)</li>
-							<li>file2.dat (0.2M)</li>
-							<li>file3.dat (0.3M)</li>
+							<li><a href="#">file1.dat</a></li>
+							<li><a href="#">file2.dat</a></li>
+							<li><a href="#">file3.dat</a></li>
 						</ul>
 					</div>
 				</div>
@@ -87,6 +87,7 @@
 				</div>
 				<div class="board-detail-comments-write">
 					<form class="board-comment-frm" name="frmBoardComment" method="post" action="#">
+						<input type="hidden" name="freeNo" value="글번호">
 						<div class="board-comments-form-top">
 							<div class="col-sm-6 form-group">
 								<label for="commentName" class="col-sm-4 col-md-3">이름</label>

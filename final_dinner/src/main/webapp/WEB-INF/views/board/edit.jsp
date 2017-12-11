@@ -44,13 +44,14 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="board-inner">
 				<form name="frmBoardWrite" method="post" action="<c:url value='/board/write.do'/>" enctype="multipart/form-data">
+					<input type="hidden" name="freeNo" value="글번호">
 					<div class="form-group">
 						<label for="freeTitle">제목</label>
-						<input type="text" class="form-control" id="freeTitle" name="freeTitle" placeholder="제목">
+						<input type="text" class="form-control" id="freeTitle" name="freeTitle" placeholder="제목" value="Test Title">
 					</div>
 					<div class="form-group">
 						<label for="freeName">이름</label>
-						<input type="text" class="form-control" id="freeName" name="freeName" placeholder="이름">
+						<p class="form-control-static">Tester</p>
 					</div>
 					<div class="form-group">
 						<label for="freePwd">비밀번호</label>
@@ -58,7 +59,28 @@
 					</div>
 					<div class="form-group">
 						<label for="freeContents">내용</label>
-						<textarea class="form-control" rows="10" id="freeContents" name="freeContents"></textarea>
+						<textarea class="form-control" rows="10" id="freeContents" name="freeContents">Test</textarea>
+					</div>
+					<div class="form-group">
+						<label>삭제할 파일</label>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="deleteFile" value="파일 번호">
+								file1.dat
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="deleteFile" value="파일 번호">
+								file2.dat
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="deleteFile" value="파일 번호">
+								file3.dat
+							</label>
+						</div>
 					</div>
 					<div class="row form-group">
 						<label class="col-xs-9">첨부파일</label>

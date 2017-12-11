@@ -18,7 +18,18 @@ public class BoardCon {
 	}
 	
 	@RequestMapping(value="/write.do", method=RequestMethod.GET)
-	public String write() {
+	public String write_get() {
 		return "board/write";
 	}
+	
+	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
+	public String edit_get() {
+		return "board/edit";
+	}
+	
+	@RequestMapping(value="/delete.do", method=RequestMethod.GET)
+	public String delete_get() {
+		return "board/delete";
+	}
+	
 }
