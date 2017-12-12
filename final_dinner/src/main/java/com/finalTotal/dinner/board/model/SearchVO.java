@@ -2,7 +2,7 @@ package com.finalTotal.dinner.board.model;
 
 public class SearchVO {
 	private String keyword;		//검색어
-	private String type;		//검색종류(name, title, content)
+	private String type="free_title";		//검색종류(name, title, content)
 	private int CurrentPage=1;	//현재페이지
 	private int firstRowNum;	//현재 페이지의 첫번째글의 rownum
 	private int pageSize;		//페이지내의 글개수
@@ -17,7 +17,11 @@ public class SearchVO {
 		return type;
 	}
 	public void setType(String type) {
-		this.type = type;
+		if("title".equals(type)
+				|| "contents".equals(type)
+				|| "name".equals(type)) {
+			this.type = "free_"+type;
+		}
 	}
 	public int getCurrentPage() {
 		return CurrentPage;

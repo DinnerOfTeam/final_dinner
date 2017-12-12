@@ -88,7 +88,7 @@
 							<select class="form-control" name="boardSearchType">
 								<option value="title">제목</option>
 								<option value="contents">내용</option>
-								<option value="writer">작성자</option>
+								<option value="name">작성자</option>
 							</select>
 						</div>
 						<div class="board-search-keyword input-group col-sm-4">

@@ -29,7 +29,7 @@ public class BoardCon {
 	public String list(@ModelAttribute SearchVO searchVO, Model model) {
 		logger.info("게시판 목록보기, 파라미터 SearchVO={}", searchVO);
 		
-		searchVO.setPageSize(Utility.BOARD_PAGE_SIZE);
+		searchVO.setPageSize(Utility.PAGE_SIZE);
 		
 		List<BoardVO> list=boardService.selectAll(searchVO);
 		logger.info("게시판 목록조회 결과, list.size()={}", list.size());
