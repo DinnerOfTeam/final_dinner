@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +82,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ul class="nav navbar-nav">
 								<li><a href="<c:url value= '/#' />" class="active">브랜드소개</a></li>
 								<li><a href="<c:url value= '/about.do'/>">통합검색</a></li>
-								<li><a href="<c:url value= '/#'/>">게시판</a></li>
+								<li><a href="<c:url value= '/board/list.do'/>">게시판</a></li>
 								<li><a href="<c:url value= '/#'/>">이벤트</a></li>								
 								<li><a href="<c:url value= '/#'/>">고객센터</a></li>
 								<li><a href="<c:url value= '/indiGroup/main.do'/>">그룹</a></li>
