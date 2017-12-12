@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.board">
+	
+	<sql id="searchWhere">
+		<if test="keyword!=null and keyword!=''">
+			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>
+	</sql>
+
+	<insert id="insertBoard" parameterType="BoardVO" >
+		<selectKey order="BEFORE" keyProperty="freeNo" resultType="int">
+			select board_free_seq.nextval from dual
+		</selectKey>
+		insert into board_free(free_no, mem_no, free_name, free_pwd, free_title, free_contents)
+		values(#{freeNo}, 
+		<if test="memNo==0">
+			null
+		</if>
+		<if test="memNo>0">
+			#{memNo}
+		</if>
+		, #{freeName}, #{freePwd}, #{freeTitle}, #{freeContents})
+	</insert>
+	
+	<select id="selectAll" resultType="BoardVO" parameterType="SearchVO" >
+		select c.*
+		from(
+			select rownum as rnum, b.*
+			from(
+				select * from board_free
+				<include refid="searchWhere"/>
+				order by free_no desc
+			)b
+		)c
+		<![CDATA[
+		where c.rnum>#{firstRowNum}
+		and c.rnum<=#{pageSize}+#{firstRowNum}
+		]]>
+	</select>
+	
+	<select id="selectRecordCount" resultType="BoardVO" parameterType="SearchVO" >
+		select count(free_no) from board_free
+		<include refid="searchWhere"/>
+	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="BoardVO" >
+		select * from board_free
+		where free_no=#{freeNo}
+	</select>
+	
+	<update id="editBoard" parameterType="BoardVO">
+		update board_free
+		set free_title=#{freeTitle}, free_contents=#{freeContents}
+		where free_no=#{freeNo}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from board_free
+		where free_no=#{freeNo}
+	</delete>
+	
+</mapper>

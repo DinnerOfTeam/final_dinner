@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--BoardList-page -->
 <link href="<c:url value='/css/site-board.css'/>" rel="stylesheet" type="text/css" media="all" />
@@ -28,28 +29,34 @@
 				<div class="row board-list-header hidden-xs">
 					<div class="col-xs-1">번호</div>
 					<div class="col-xs-6">제목</div>
-					<div class="col-xs-2">글쓴이</div>
+					<div class="col-xs-3">작성자</div>
 					<div class="col-xs-2">날짜</div>
-					<div class="col-xs-1">조회</div>
 				</div>
 				<div class="row board-list-body">
-					<div class="row board-list-row">
-						<a href="<c:url value='/board/detail.do'/>">
-							<div class="col-sm-1 hidden-xs">1</div>
-							<div class="board-list-title col-xs-12 col-sm-6">제목</div>
-							<div class="board-list-writer col-xs-4 col-sm-2">Tester</div>
-							<div class="board-list-date col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">2017-02-02</div>
-							<div class="col-sm-1 hidden-xs">3</div>
-						</a>
-					</div>
+					<c:if test="${empty list }">
 					<div class="row board-list-nodata">
 						<span>글이 없습니다.</span>
 					</div>
+					</c:if>
+					<c:if test="${!empty list }">
+					<c:forEach var="vo" items="${list }">
+					<div class="row board-list-row">
+						<a href="<c:url value='/board/detail.do?no=${vo.freeNo }'/>">
+							<div class="col-sm-1 hidden-xs">${vo.freeNo }</div>
+							<div class="board-list-title col-xs-12 col-sm-6">${vo.freeTitle }</div>
+							<div class="board-list-writer col-xs-4 col-sm-3">${vo.freeName }</div>
+							<div class="board-list-date col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
+								<fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd" />
+							</div>
+						</a>
+					</div>
+					</c:forEach>
+					</c:if>
 				</div>
 				<div class="visible-xs">
 					<ul class="pager">
 						<li class="previous"><a href="#">← 이전 글 </a></li>
-						<li class="current"><span>1</span></li>
+						<li class="current"><span>${searchVO.currentPage }</span></li>
 						<li class="next"><a href="#">다음 글 →</a></li>
 					</ul>
 				</div>

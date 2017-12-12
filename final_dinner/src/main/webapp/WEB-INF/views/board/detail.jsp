@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--Board-page -->
 <link href="<c:url value='/css/site-board.css'/>" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
@@ -48,12 +48,11 @@
 		
 		<div class="board-inner">
 			<div class="row board-detail-title">
-				<h3 class="col-left col-xs-12 col-sm-8">Test title</h3>
-				<div class="col-right col-xs-12 col-sm-4">2017-01-01 20:30</div>
+				<h3 class="col-left col-xs-12 col-sm-8">${vo.freeTitle }</h3>
 			</div>
 			<div class="row board-detail-sub">
-				<div class="col-left col-xs-6">Tester</div>
-				<div class="col-right col-xs-6">조회수 : 3</div>
+				<div class="col-left col-xs-12 col-sm-6">${vo.freeName }</div>
+				<div class="col-right col-xs-12 col-sm-6"><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd hh:mm" /></div>
 			</div>
 			<div class="row board-detail-file">
 				<div class="col-right">
