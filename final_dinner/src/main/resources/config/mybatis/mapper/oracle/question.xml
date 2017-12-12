@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="config.mybatis.mapper.oracle.question">
+	<insert id="insertqna" parameterType="QuestionVO">
+		<selectKey resultType="int" keyProperty="" order="BEFORE">
+		select qna_question_seq.nextval
+		</selectKey>
+		
+		insert into qna_question (qna_question_no, mem_no, question_title,question_content)
+		values(qna_question_seq.nextval, #{mem_no}, #{question_title},#{question_content});
+	</insert>
+
+</mapper>
