@@ -16,5 +16,13 @@ public interface MemberService {
 	
 	public MemberVO selectMember(String userid);
 	
+	public int duplicatedmemId(String memId);
+	
+	public int insertMember(MemberVO vo);
+	
+	public int updateMember(MemberVO vo);
+	
+	
+	
 	
 }

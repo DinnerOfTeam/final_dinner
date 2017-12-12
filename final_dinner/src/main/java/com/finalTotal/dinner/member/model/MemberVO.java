@@ -14,7 +14,6 @@ public class MemberVO {
     private String memTel3;
     private String memEmail1;
     private String memEmail2;
-    private String memEmail3;
     private int memGrade;
 	
     public MemberVO() {
@@ -24,7 +23,7 @@ public class MemberVO {
 
 	public MemberVO(int memNo, String memId, String memPwd, String memName, String memZipcode, String memAdd,
 			String memAddDetail, String memTel1, String memTel2, String memTel3, String memEmail1, String memEmail2,
-			String memEmail3, int memGrade) {
+			 int memGrade) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
@@ -38,7 +37,6 @@ public class MemberVO {
 		this.memTel3 = memTel3;
 		this.memEmail1 = memEmail1;
 		this.memEmail2 = memEmail2;
-		this.memEmail3 = memEmail3;
 		this.memGrade = memGrade;
 	}
 
@@ -136,15 +134,7 @@ public class MemberVO {
 
 	public void setMemEmail2(String memEmail2) {
 		this.memEmail2 = memEmail2;
-	}
-
-	public String getMemEmail3() {
-		return memEmail3;
-	}
-
-	public void setMemEmail3(String memEmail3) {
-		this.memEmail3 = memEmail3;
-	}
+	}	
 
 	public int getMemGrade() {
 		return memGrade;
@@ -159,7 +149,7 @@ public class MemberVO {
 		return "MemberVO [memNo=" + memNo + ", memId=" + memId + ", memPwd=" + memPwd + ", memName=" + memName
 				+ ", memZipcode=" + memZipcode + ", memAdd=" + memAdd + ", memAddDetail=" + memAddDetail + ", memTel1="
 				+ memTel1 + ", memTel2=" + memTel2 + ", memTel3=" + memTel3 + ", memEmail1=" + memEmail1
-				+ ", memEmail2=" + memEmail2 + ", memEmail3=" + memEmail3 + ", memGrade=" + memGrade + "]";
+				+ ", memEmail2=" + memEmail2 +  ", memGrade=" + memGrade + "]";
 	}
     
     

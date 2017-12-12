@@ -14,17 +14,17 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('form[name=frmId]').submit(function(){
-			if($('#userid').val()==""){
+			if($('#memId').val()==""){
 				alert("아이디를 입력하세요");
-				$('#userid').focus();
+				$('#memId').focus();
 				return false;
 			}
 		});	
 		
 		$('#btUse').click(function(){
-			$(opener.document).find('#userid').val('${param.userid}');
+			$(opener.document).find('#memId').val('${param.memId}');
 			$(opener.document).find('#chkId').val('Y');
-			$(opener.document).find('#userid').prop('readOnly',true);
+			$(opener.document).find('#memId').prop('readOnly',true);
 			
 			self.close();
 		});
@@ -54,9 +54,9 @@
 	<h1>아이디 중복검사</h1>
 	<form name="frmId" method="post" action="<c:url value='checkId.do'/>">
 			
-		<label for="userid">아이디 : </label>
-		<input type="text" name="userid" id="userid"
-		 value="${param.userid}">
+		<label for="memId">아이디 : </label>
+		<input type="text" name="memId" id="memId"
+		 value="${param.memId}">
 		<input type="submit" value="아이디 확인">
 		<c:if test="${result==EXIST_ID }">
 			<p>이미 등록된 아이디입니다. 다른 아이디를 입력하세요</p>

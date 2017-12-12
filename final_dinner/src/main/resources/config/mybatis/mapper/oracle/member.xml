@@ -13,6 +13,29 @@
 		select mem_Pwd from member where mem_Id=#{memId}
 	</select>
 	
+	<select id="selectDup" parameterType="string" resultType="int">
+		select count(*) from member where mem_Id=#{memId}
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberVO">
+		<selectKey  keyProperty="memNo" resultType="int" order="BEFORE">
+			select member_seq.nextval from dual
+		</selectKey>
+		insert into member(mem_No, mem_Id, mem_Pwd, mem_Name,
+			mem_Zipcode, mem_Add, mem_Add_Detail, mem_Tel1, mem_Tel2, mem_Tel3,
+			mem_Email1, mem_Email2)
+		values(#{memNo}, #{memId}, #{memPwd}, #{memName},
+			#{memZipcode}, #{memAdd}, #{memAddDetail}, #{memTel1}, #{memTel2}, #{memTel3},
+			#{memEmail1}, #{memEmail2})
+	</insert>
+	
+	<update id="updateMember" parameterType="MemberVO">
+		update member set
+		mem_Zipcode=#{memZipcode}, mem_Add=#{memAdd}, mem_Add_Detail=#{memAddDetail}, 
+		mem_Tel1=#{memTel1}, mem_Tel2=#{mem_Tel2}, mem_Tel3=#{mem_Tel3},
+		mem_Email1=#{mem_Email1}, mem_Email2=#{mem_Email2}
+		where mem_Id=#{memId}
+	</update>
 	
 	
 </mapper>

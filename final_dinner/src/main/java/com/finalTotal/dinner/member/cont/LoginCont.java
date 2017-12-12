@@ -1,4 +1,4 @@
-package com.finalTotal.dinner.login.cont;
+package com.finalTotal.dinner.member.cont;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

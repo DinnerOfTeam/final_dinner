@@ -55,8 +55,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="top-header-right wow fadeInRight animated" data-wow-delay=".5s">
 						<div class="top-header-right-info">
 							<ul>
+								<c:if test="${empty sessionScope.memId }">
 								<li><a href="<c:url value= '/login/login.do'/>">로그인</a></li>
-								<li><a href="<c:url value= '/signup.do'/>">회원가입</a></li>
+								<li><a href="<c:url value= '/member/signup.do'/>">회원가입</a></li>
+								</c:if>
+								
+								<c:if test="${!empty sessionScope.memId }">								
+								<li><a href="<c:url value= '/login/login.do'/>">로그아웃</a>
+								<a href="<c:url value= '/member/memberEdit.do'/>">회원정보수정</a>
+								<a href="<c:url value= '/member/signup.do'/>">마이페이지</a></li>
+								</c:if>
 							</ul>
 						</div>
 						
