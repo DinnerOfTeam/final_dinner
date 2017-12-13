@@ -1,12 +1,14 @@
 package com.finalTotal.dinner.indiGroup.cont;
-
+ 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,16 +17,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.board_review.model.Board_reviewVO;
+import com.finalTotal.dinner.chat.model.ChattingService;
 import com.finalTotal.dinner.chat.model.ChattingVO;
+import com.finalTotal.dinner.indiGroup.model.IndiGroupService;
+import com.finalTotal.dinner.indiGroup.model.IndigroupVO;
 import com.finalTotal.dinner.vote.model.VoteVO;
-
+ 
 @Controller
 @RequestMapping("/indiGroup")
 public class IndiGroupCont {
-	private Logger logger= LoggerFactory.getLogger(IndiGroupCont.class);
+	public static final Logger logger= LoggerFactory.getLogger(IndiGroupCont.class);
 	private int[] date_arr= new int[28];
 	private String[] work_arr= new String[28];
-
+	
+	@Autowired
+	private ChattingService chat_service;
+	@Autowired
+	private IndiGroupService group_service;
+ 
 	@RequestMapping(value= "/main.do", method= RequestMethod.GET)
 	public void main(@RequestParam(required=false, defaultValue= "0") int year,
 			@RequestParam(required=false, defaultValue= "0") int month,
@@ -42,6 +52,8 @@ public class IndiGroupCont {
 			if(date< 1) {
 				int beforeLastDay= getLastDay(d.getYear()+ 1900, d.getMonth()- 1);
 				date_arr[i]= date+ beforeLastDay;
+			}else if(date> getLastDay(d.getYear()+ 1900, d.getMonth())) {
+				date_arr[i]= date- getLastDay(d.getYear()+ 1900, d.getMonth());
 			}else {
 				date_arr[i]= date;
 			}
@@ -65,23 +77,7 @@ public class IndiGroupCont {
 	public String chat(Model model) {
 		logger.info("indiGroup chat page");
 		
-		List<ChattingVO> chat_list= new ArrayList<ChattingVO>();
-		ChattingVO vo= new ChattingVO();
-		vo.setMemNo(3);
-		vo.setChatContents("하이");
-		chat_list.add(vo);
-		vo= new ChattingVO();
-		vo.setMemNo(4);
-		vo.setChatContents("하이2");
-		chat_list.add(vo);
-		vo= new ChattingVO();
-		vo.setMemNo(5);
-		vo.setChatContents("하이3");
-		chat_list.add(vo);
-		vo= new ChattingVO();
-		vo.setMemNo(4);
-		vo.setChatContents("뭐뇽");
-		chat_list.add(vo);
+		List<ChattingVO> chat_list= chat_service.showAll(1);
 		
 		List<String> user_list= new ArrayList<String>();
 		user_list.add("손성현");
@@ -127,6 +123,45 @@ public class IndiGroupCont {
 		return "indiGroup/board_review";
 	}
 	
+	@RequestMapping(value= "/page.do", method= RequestMethod.GET)
+	public void page() {
+		
+	}
+	@RequestMapping("/regi.do")
+	public String groupRegi_submit(@RequestParam(required=false) String groupName, Model model) {
+		logger.info("group regi page parameter : groupName={}", groupName);
+		
+		if(groupName== null|| groupName.isEmpty()) {
+			return "indiGroup/regi";
+		}
+		List<IndigroupVO> list= group_service.selectByGroupName(groupName);
+		model.addAttribute("list", list);
+		
+		return "indiGroup/regi";
+	}
+	@RequestMapping(value= "/create.do", method= RequestMethod.GET)
+	public void groupCreate_form() {
+		logger.info("group create page");
+		
+		
+	}
+	@RequestMapping(value= "/create.do", method= RequestMethod.POST)
+	public void groupCreate_submit(@ModelAttribute IndigroupVO vo, HttpSession session) {
+		logger.info("group create submit page parameter : vo={}", vo);
+//		vo.setMemNo((Integer)session.getAttribute("memNo"));
+		vo.setMemNo(1);
+		group_service.createGroup(vo);
+	}
+	@RequestMapping(value= "/checkName.do")
+	public void groupCheck(@ModelAttribute IndigroupVO vo, Model model) {
+		logger.info("group check page parameter : vo={}", vo);
+		
+		int result= group_service.checkGroupName(vo.getGroupName());
+		logger.info("그룹명 중복 체크 결과 : cnt={}", result);
+		
+		model.addAttribute("result", result);
+	}
+	
 	public int getLastDay(int year, int month) {
 		switch(month) {
 			case -1: return 31;
@@ -141,7 +176,7 @@ public class IndiGroupCont {
 			case 8: return 30;
 			case 9: return 31;
 			case 10: return 30;
-			default: return 30;
+			default: return 31;
 		}
 	}
 	public static boolean yearcalc(int year){

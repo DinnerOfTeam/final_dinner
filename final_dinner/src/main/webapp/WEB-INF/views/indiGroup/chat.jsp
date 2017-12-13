@@ -9,6 +9,9 @@
 		overflow: hidden;
 		padding: 5px;
 	}
+	.text_08 {
+		font-size: 0.8em;
+	}
 	.user_icon {
 		overflow: hidden;
 	}
@@ -16,6 +19,19 @@
 		text-align: left;
 	}
 </style>
+<script type="text/javascript">
+	$(function() {
+		$('button').click(chat);
+		$('input').on('keypress', function(e) {
+			if(e.which== 13)
+				chat();
+		});
+		function chat() {
+			alert('채팅 보내기');
+			$('input#chatText').val('');
+		}
+	});
+</script>
 <div class= 'vote'>
 	<div title= "header">
 		<i class="fa fa-comments-o left_align" aria-hidden="true">우리들의 채팅</i>
@@ -36,12 +52,15 @@
 		</div>
 	</div>
 	<div class= 'div_list'>
+		<c:if test="${empty chat_list }">
+			<p class= 'text_left text_08'><strong>최근 채팅이 없습니다</strong></p>
+		</c:if>
 		<c:forEach var="vo" items="${chat_list }">
-			<p class= 'text_left'>${vo.memNo }님 曰 : ${vo.chatContents }</p>
+			<p class= 'text_left text_08'>${vo.memNo }님 曰 : ${vo.chatContents }</p>
 		</c:forEach>
 	</div>
 	<div class= 'div_list'>
-		<input type="text" />
+		<input type="text" id= 'chatText' class='text_08' />
 		<button>전송</button>
 	</div>
 </div>

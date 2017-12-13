@@ -20,38 +20,36 @@
 			<th title= 'friday' class= 'col-md-1'>금</th>
 			<th title= 'saterday' class= 'col-md-1'>토</th>
 		</tr>
-<!-- 							<tr>
-								<th title= 'sunday'>일</th>
-								<th title= 'monday''>월</th>
-								<th title= 'tuesday'>화</th>
-								<th title= 'wendsday'>수</th>
-								<th title= 'thurday'>목</th>
-								<th title= 'friday'>금</th>
-								<th title= 'saterday'>토</th>
-							</tr> -->
 		<c:set var="i" value="0" />
 		<c:forEach var="date" items="${date_arr }">
-			<c:if test="${i% 7== 0 }">
-				<tr>
-			</c:if>
+			<c:if test="${i% 7== 0 }"><tr></c:if>
 			<td>
-			<c:if test="${today.date== date }">
-				<strong style="color:blue">
-			</c:if>
+				<c:if test="${today.date== date }">
+					<c:set var="temp" value="${i }" />
+					<strong style="color:blue">
+				</c:if>
 				<c:if test="${date== 1 }">
-					${today.month+ 1 }/
+					<c:if test="${!(temp<= i )}">
+						${today.month+ 1 }/
+					</c:if>
+					<c:if test="${temp<= i }">
+						<c:if test="${today.month== 11 }">
+							1/
+						</c:if>
+						<c:if test="${today.month!= 11 }">
+							${today.month+ 2 }/
+						</c:if>
+					</c:if>
 				</c:if>
 				${date }
-			<c:if test="${today.date== date }">
-				</strong>
-			</c:if>
-			<c:if test="${!empty work_arr[i] }">
-				<p class= 'work'>&nbsp;</p>
-			</c:if>
+				<c:if test="${today.date== date }">
+					</strong>
+				</c:if>
+				<c:if test="${!empty work_arr[i] }">
+					<p class= 'work'>&nbsp;</p>
+				</c:if>
 			</td>
-			<c:if test="${i% 7== 6 }">
-				</tr>
-			</c:if>
+			<c:if test="${i% 7== 6 }"></tr></c:if>
 			<c:set var="i" value="${i+ 1 }" />
 		</c:forEach>
 	</table>
