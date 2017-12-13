@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="<c:url value= '/about.do'/>">통합검색</a></li>
 								<li><a href="<c:url value= '/board/list.do'/>">게시판</a></li>
 								<li><a href="<c:url value= '/#'/>">이벤트</a></li>								
-								<li><a href="<c:url value= '/#'/>">고객센터</a></li>
+								<li><a href="<c:url value= '/customer/list.do'/>">고객센터</a></li>
 								<li><a href="<c:url value= '/indiGroup/main.do'/>">그룹</a></li>
 							</ul>	
 							<div class="clearfix"> </div>

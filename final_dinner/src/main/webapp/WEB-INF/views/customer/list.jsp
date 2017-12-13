@@ -1,17 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="../inc/top.jsp" %>
+<%@ include file="tab_menu.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+#container	{
+	/*clear: both;*/
+	width:60%;margin: 0 auto;
+	float: right;
+	overflow: auto;
+	background: white;
+	}
+</style>
 </head>
 <body>
-	<div>
+	<div id="container">
 		<table summary="">
-			<caption>고객센터</caption>
 			<colgroup>
 				<col style="width:10%;" />
 				<col style="width:50%;" />
@@ -45,7 +53,7 @@
 					</a>
 						</td>
 						<td>${vo.mem_no}</td>
-						<td><fmt:formatDate value="${vo.question_regdate }
+						<td><fmt:formatDate value="${vo.question_regdate }"
 							pattern="yyyy-MM-dd"/></td>
 						<td>${vo.question_view_count }</td>
 						</tr>
@@ -56,3 +64,4 @@
 	</div>
 </body>
 </html>
+<%@ include file="../inc/footer.jsp" %>

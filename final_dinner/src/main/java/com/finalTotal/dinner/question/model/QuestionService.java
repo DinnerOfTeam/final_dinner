@@ -1,5 +1,9 @@
 package com.finalTotal.dinner.question.model;
 
-public interface QuestionService {
+import java.util.List;
 
+public interface QuestionService {
+	public int insertqna(QuestionVO vo);
+	public List<QuestionVO> selectQnaAll();
+	
 }

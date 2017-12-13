@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="../inc/top.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,8 +42,8 @@
 	</div>
 	<div>
 		<label for="secret">비밀글 설정</label>
-		<input type="radio" id="open" name="open"/>
-		<input type="radio" id="close" name="close"/>
+		<input type="radio" id="open" name="open" value="1"/>
+		<input type="radio" id="close" name="open" value="2"/>
 	</div>
 	<div class="center">
 		<input type="submit" value="등록"/>
@@ -55,3 +55,4 @@
 </div>
 </body>
 </html>
+<%@ include file="../inc/footer.jsp" %>
