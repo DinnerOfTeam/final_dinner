@@ -45,12 +45,13 @@ public class LoginCont {
 		if(result==memberService.LOGIN_OK) {
 			//로그인 성공
 			MemberVO memVo = memberService.selectMember(vo.getMemId());
+			logger.info("로그인 결과 : vo={}", memVo);
 			
 			//[1]  성공한 경우에만 세션에 저장
 			HttpSession session = request.getSession();
-			session.setAttribute("memId", vo.getMemId());
-			session.setAttribute("memName", vo.getMemName());
-			session.setAttribute("memNo", vo.getMemNo());
+			session.setAttribute("memId", memVo.getMemId());
+			session.setAttribute("memName", memVo.getMemName());
+			session.setAttribute("memNo", memVo.getMemNo());
 			
 			//[2]쿠키에 저장
 			Cookie ck = new Cookie("ck_memId", vo.getMemId());

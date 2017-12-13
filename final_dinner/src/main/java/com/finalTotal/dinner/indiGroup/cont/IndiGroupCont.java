@@ -140,17 +140,19 @@ public class IndiGroupCont {
 		return "indiGroup/regi";
 	}
 	@RequestMapping(value= "/create.do", method= RequestMethod.GET)
-	public void groupCreate_form() {
+	public void groupCreate_form(HttpSession session) {
 		logger.info("group create page");
-		
-		
+
 	}
 	@RequestMapping(value= "/create.do", method= RequestMethod.POST)
 	public void groupCreate_submit(@ModelAttribute IndigroupVO vo, HttpSession session) {
 		logger.info("group create submit page parameter : vo={}", vo);
-//		vo.setMemNo((Integer)session.getAttribute("memNo"));
-		vo.setMemNo(1);
-		group_service.createGroup(vo);
+		vo.setMemNo((Integer)session.getAttribute("memNo"));
+		logger.info("setting 후 : vo={}", vo);
+		int cnt= group_service.createGroup(vo);
+		if(cnt> 0) {
+			
+		}
 	}
 	@RequestMapping(value= "/checkName.do")
 	public void groupCheck(@ModelAttribute IndigroupVO vo, Model model) {

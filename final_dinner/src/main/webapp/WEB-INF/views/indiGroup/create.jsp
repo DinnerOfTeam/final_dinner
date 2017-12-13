@@ -20,6 +20,12 @@
 			window.open("<c:url value='../indiGroup/checkName.do?groupName="+ name+"'/>",
 			'chk','left=0,top=0,width=400,height=250,locations=yes,resizable=yes');
 		});
+		$('button').click(function() {
+			if(!$('#dupli').val()) {
+				alert("중복확인을 하셔야 합니다.");
+				return false;
+			}
+		});
 	});
 </script>
 				<div class="contact-form wow fadeInUp animated text_left"
@@ -32,7 +38,8 @@
 								required=""> 
 						<input type="button" id="btnChkGroupName" title="새창열림"
 								class="btn1 btn-1 btn-1b" value= '중복확인' />
-						<textarea placeholder="그룹 설명" id= 'groupInfo' name= 'groupInfo' ></textarea>
+						<textarea placeholder="그룹 설명" id= 'groupInfo' name= 'groupInfo'  required=""></textarea>
+						<input type="hidden" id= 'dupli' name= 'dupli' required="" />
 						<button class="btn1 btn-1 btn-1b">그룹 생성</button>
 					</form>
 				</div>

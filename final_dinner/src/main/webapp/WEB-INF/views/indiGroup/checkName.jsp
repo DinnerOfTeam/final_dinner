@@ -23,6 +23,7 @@
 		$('#btUse').click(function(){
 			$(opener.document).find('#groupName').val('${param.groupName}');
 			$(opener.document).find('#groupName').prop('readonly', true);
+			$(opener.document).find('#dupli').val("y");
 			self.close();
 		});
 		
