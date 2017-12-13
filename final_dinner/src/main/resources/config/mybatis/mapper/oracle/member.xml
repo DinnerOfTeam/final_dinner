@@ -32,8 +32,8 @@
 	<update id="updateMember" parameterType="MemberVO">
 		update member set
 		mem_Zipcode=#{memZipcode}, mem_Add=#{memAdd}, mem_Add_Detail=#{memAddDetail}, 
-		mem_Tel1=#{memTel1}, mem_Tel2=#{mem_Tel2}, mem_Tel3=#{mem_Tel3},
-		mem_Email1=#{mem_Email1}, mem_Email2=#{mem_Email2}
+		mem_Tel1=#{memTel1}, mem_Tel2=#{memTel2}, mem_Tel3=#{memTel3},
+		mem_Email1=#{memEmail1}, mem_Email2=#{memEmail2}
 		where mem_Id=#{memId}
 	</update>
 	

@@ -99,9 +99,10 @@ public class MemberCont {
 		
 	}
 	
-	@RequestMapping(value="memberEdit.do", method=RequestMethod.GET)
+	@RequestMapping(value="/memberEdit.do", method=RequestMethod.GET)
 	public String memEdit_get(HttpSession session, Model model) {
 		String memId=(String) session.getAttribute("memId");
+		logger.info("회원정보 수정 화면, 파라미터 memId={}", memId);
 		
 		MemberVO vo = memberService.selectMember(memId);
 		logger.info("회원정보 수정페이지 조회 결과, vo={}", vo);
@@ -111,6 +112,7 @@ public class MemberCont {
 		return "member/memberEdit";
 	}
 	
+	@RequestMapping(value="/memberEdit.do", method=RequestMethod.POST)
 	public String memEdit_post(@ModelAttribute MemberVO memberVo,
 			@RequestParam(required=false)String memEmail3,
 			HttpSession session, Model model) {
@@ -145,7 +147,7 @@ public class MemberCont {
 		}
 		
 		
-		String msg="", url="/member/memberEdit.do";
+		String msg="", url="/index.do";
 		int result=memberService.loginCheck(memberVo.getMemId(), memberVo.getMemPwd());
 		if(result==MemberService.LOGIN_OK) {
 			int cnt = memberService.updateMember(memberVo);
@@ -165,6 +167,9 @@ public class MemberCont {
 		
 		return "common/message";
 	}
+	
+	
+	
 }
 
 

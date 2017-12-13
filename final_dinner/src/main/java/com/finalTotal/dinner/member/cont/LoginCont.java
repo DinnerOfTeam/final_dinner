@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,7 @@ public class LoginCont {
 			HttpSession session = request.getSession();
 			session.setAttribute("memId", vo.getMemId());
 			session.setAttribute("memName", vo.getMemName());
+			session.setAttribute("memNo", vo.getMemNo());
 			
 			//[2]쿠키에 저장
 			Cookie ck = new Cookie("ck_memId", vo.getMemId());
@@ -76,15 +78,27 @@ public class LoginCont {
 		
 		return "common/message";
 		
-	}
-	
-	
+	}	
 	
 	@RequestMapping("/signup.do")
 	public String regi_form() {
 		logger.info("regi form page");
 		
 		return "signup";
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session, Model model) {
+		logger.info("로그아웃 처리");
+		
+		session.invalidate();//세션의 모든 속성을 삭제
+		
+		String  msg="로그아웃되었습니다", url="/index.do";
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);	
+		
+		return "common/message";
 	}
 
 }

@@ -3,16 +3,36 @@
 
 <%@include file="../inc/top.jsp"%>
 
+<script type="text/javascript" src="<c:url value='/js/member.js'/>"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#wr_submit').click(function() {
+			if ($('#memPwd').val() == "") {
+				alert('비밀번호를 입력하세요');
+				$('#memPwd').focus();
+				return false;
+			} else if ($('#memPwd').val() != $('#memPwd2').val()) {
+				alert('비밀번호가 일치하지 않습니다.');
+				$('#memPwd2').focus();
+				return false;
+			}
+		});
+
+	});
+</script>
+
+
 
 <div class="login">
 	<div class="container">
 		<div class="login-body">
 			<div class="login-heading2 w3layouts">
-				<h1>회원가입</h1>
+				<h1>회원가입수정</h1>
 
 			</div>
 			<div class="login-info">
-				<form method="post" action="<c:url value='/member/memWrite.do' />">
+				<form name="frm1" method="post"
+					action="<c:url value='/member/memberEdit.do'/>">
 
 
 
@@ -21,7 +41,7 @@
 						<div>
 							<label for="memId" class="lb">회원ID</label> <input type="text"
 								name="memId" id="memId" style="ime-mode: inactive" class="tx"
-								value="${sessionScope.userid}">&nbsp; <input
+								value="${sessionScope.memId}">&nbsp; <input
 								type="button" value="중복확인" id="btnChkId" title="새창열림">
 						</div>
 						<div>
@@ -88,30 +108,54 @@
 								class="tx tx3" value="${vo.memEmail1}">@ <select
 								name="memEmail2" id="memEmail2" title="이메일주소 뒷자리">
 								<option value="naver.com"
-								<
-									<c:if test="${vo.email2=='naver.com'}">
+									<c:if test="${vo.memEmail2=='naver.com'}">
 					            		selected
 					            	</c:if>>naver.com</option>
-													<option value="hanmail.net"
-														<c:if test="${vo.email2=='hanmail.net'}">
+								<option value="hanmail.net"
+									<c:if test="${vo.memEmail2=='hanmail.net'}">
 					            		selected
 					            	</c:if>>hanmail.net</option>
-													<option value="nate.com"
-														<c:if test="${vo.email2=='nate.com'}">
+								<option value="nate.com"
+									<c:if test="${vo.memEmail2=='nate.com'}">
 					            		selected
 					            	</c:if>>nate.com</option>
-													<option value="gmail.com"
-														<c:if test="${vo.email2=='gmail.com'}">
+								<option value="gmail.com"
+									<c:if test="${vo.memEmail2=='gmail.com'}">
 					            		selected
 					            	</c:if>>gmail.com</option>
+									<c:set var="isEtc" value="false" />
+									<c:choose>
+										<c:when
+											test="${vo.memEmail2!='naver.com' 
+								            		&& vo.memEmail2!='hanmail.net' && vo.memEmail2!='nate.com'
+								            		&& vo.memEmail2!='gmail.com' && !empty vo.memEmail2}">
+											<c:set var="isEtc" value="true" />
+										</c:when>
+										<c:otherwise>
+											<c:set var="isEtc" value="false" />
+										</c:otherwise>
+									</c:choose>
+									<option value="etc"
+										<c:if test='${isEtc==true}'>
+								            		selected
+								            	</c:if>>직접입력</option>
+
+
+
 							</select> <input type="text" name="memEmail3" id="memEmail3"
-								title="직접입력인 경우 이메일주소 뒷자리" style="visibility: hidden"
-								class="tx tx3">
+								title="직접입력인 경우 이메일주소 뒷자리" class="tx tx3"
+								<c:if test='${isEtc}'>
+					        		value="${vo.memEmail2}"
+					            	style="visibility:visible"	
+					            </c:if>
+													<c:if test='${!isEtc}'>         
+					        		style="visibility:hidden"
+					        	</c:if>>
 						</div>
 
 					</fieldset>
 					<input type="text" name="chkId" id="chkId"> <input
-						type="submit" id="wr_submit" value="회원가입">
+						type="submit" id="wr_submit" value="회원가입수정">
 					<div class="signup-text">
 						<a href="<c:url value= '/login/login.do'/>">로그인</a>
 					</div>
