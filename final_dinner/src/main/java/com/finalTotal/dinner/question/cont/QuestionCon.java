@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +22,7 @@ import com.finalTotal.dinner.member.model.MemberServiceImpl;
 import com.finalTotal.dinner.member.model.MemberVO;
 import com.finalTotal.dinner.question.model.QuestionService;
 import com.finalTotal.dinner.question.model.QuestionVO;
+
 
 @Controller
 @RequestMapping("/customer")
@@ -88,5 +90,59 @@ public class QuestionCon {
 		model.addAttribute("list", list);
 		
 		return "customer/list";
+	}
+	
+	//공지사항 10개 띄우기
+	@RequestMapping("/mainNotice.do")
+	public String mainNotice(ModelMap model) {
+		logger.info("자주묻는 질문 조회");
+		
+		List<QuestionVO> list = questionService.mainNotice();
+		logger.info("메인 질문  조회 결과, list.size()={}", list.size());
+	
+		model.addAttribute("list", list);
+		
+		return "/mainNotice";
+	}
+	
+	@RequestMapping("/question/countUpdate.do")
+	public String countUpdate(@RequestParam(defaultValue="0") int no,
+			Model model) {
+		logger.info("조회수 증가, 파라미터 no={}", no);
+		
+		if(no==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/board/list.do");
+			return "common/message";
+		}
+		
+		int cnt = questionService.updateReadCount(no);
+		logger.info("조회수 증가 결과, cnt={}", cnt);
+		
+		return "redirect:/customer/detail.do?no="+no;
+	}
+	@RequestMapping("/board/detail.do")
+	public String detail(@RequestParam(defaultValue="0") int no, 
+			ModelMap model) {
+		logger.info("상세보기 파라미터 no={}", no);
+		
+		if(no==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/board/list.do");
+			return "common/message";
+		}
+		
+		QuestionVO vo =questionService.selectByNo(no);
+		logger.info("상세보기 결과, vo={}", vo);
+		
+		String content=vo.getQuestionViewContent();
+		if(content!=null && !content.isEmpty()) {
+			content=content.replace("\r\n", "<br>");
+			vo.setQuestionViewContent(content);
+		}
+		
+		model.addAttribute("vo", vo);
+		
+		return "board/detail";
 	}
 }

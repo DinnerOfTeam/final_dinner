@@ -38,7 +38,7 @@
 				</tr>
 			</c:if>	 --%>
 			<c:if test="${!empty list }">
-				<c:forEach var="vo" items="${list }">
+				<c:forEach var="vo" items="${list }" >
 					<tr>
 						<td>
 							<a href

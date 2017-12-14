@@ -8,11 +8,28 @@
 		</selectKey>
 		
 		insert into qna_question (qna_question_no, mem_no, question_title,question_content)
-		values(qna_question_seq.nextval, #{mem_no}, #{question_title},#{question_content})
+		values(qna_question_seq.nextval, #{memNo}, #{questionTitle},#{questionContent})
 	</insert>
 	
 	<select id="selectQnaAll" resultType="QuestionVO">
 		select * from qna_question
 	</select>
-
+	
+	<select id="selectMainNotice" resultType="QuestionVO">
+		select *
+		from (select * from board order by no desc)
+		<![CDATA[
+			where rownum<=10
+		]]>
+	</select>
+	
+	<update id="updateReadCount" parameterType="int">
+		update qna_question
+		set question_view_count = question_view_count+1
+		where qna_question_no = ${qnaQuestionNo};
+	</update>
+	
+	<select id="selectByNo" parameterType="int" resultType="QuestionVO">
+		select * from board where no=#{no}
+	</select>
 </mapper>

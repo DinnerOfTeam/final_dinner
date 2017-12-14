@@ -15,14 +15,17 @@
 	overflow: auto;
 	background: white;
 	}
+#list tbody tr td a{
+	color: black;
+}
 </style>
 </head>
 <body>
 	<div id="container">
-		<table summary="">
+		<table summary="" border="1" id="list">
 			<colgroup>
 				<col style="width:10%;" />
-				<col style="width:50%;" />
+				<col style="width:30%;" />
 				<col style="width:15%;" />
 				<col style="width:15%;" />
 				<col style="width:10%;" />	
@@ -45,17 +48,17 @@
 				<c:if test="${!empty list}">
 					<c:forEach var="vo" items="${list }">
 						<tr style="text-align:center">
-						<td>${vo.qna_question_no }</td>
+					<td>${vo.qnaQuestionNo }</td>
 						<td style="text-align:left">
 						<a href
-					="<c:url value='/customer/countUpdate.do?no=${vo.question_view_count}'/>">
-						${vo.question_title }
+					="<c:url value='/customer/detail.do?no=${vo.qnaQuestionNo}'/>">
+						${vo.questionTitle }
 					</a>
 						</td>
-						<td>${vo.mem_no}</td>
-						<td><fmt:formatDate value="${vo.question_regdate }"
+						<td>${vo.memNo}</td>
+						<td><fmt:formatDate value="${vo.questionRegdate }"
 							pattern="yyyy-MM-dd"/></td>
-						<td>${vo.question_view_count }</td>
+						<td>${vo.questionViewCount }</td>
 						</tr>
 					</c:forEach>
 				</c:if>

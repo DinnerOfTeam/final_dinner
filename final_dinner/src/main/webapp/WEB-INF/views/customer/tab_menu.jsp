@@ -32,6 +32,9 @@
     font-size: 16px;
     letter-spacing: -1px;
 }
+.tab_menu li a{
+ 	color: black;
+}
 
 </style>
 </head>
@@ -41,13 +44,13 @@
 			<a href="#">전체</a>
 		</li>
 		<li>
-			<a href="#">공지사항</a>
+			<a href="#">회원문의</a>
 		</li>
 		<li>
-			<a href="#">공지사항</a>
+			<a href="#">업체문의</a>
 		</li>
 		<li>
-			<a href="#">공지사항</a>
+			<a href="#">예약문의</a>
 		</li>
 	</div>
 </body>

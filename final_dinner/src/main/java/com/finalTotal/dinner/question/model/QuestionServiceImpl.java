@@ -19,6 +19,21 @@ public class QuestionServiceImpl implements QuestionService{
 	public List<QuestionVO> selectQnaAll() {
 		return questionDao.selectQnaAll();
 	}
+
+	@Override
+	public List<QuestionVO> mainNotice() {
+		return questionDao.mainNotice();
+	}
+
+	@Override
+	public int updateReadCount(int no) {
+		return questionDao.updateReadCount(no);
+	}
+
+	@Override
+	public QuestionVO selectByNo(int no) {
+		return questionDao.selectByNo(no);
+	}
 	
 	
 }

@@ -32,17 +32,19 @@
 		<label for="content">내용</label>
 		<textarea id="content" name="content" rows="12" cols="40"></textarea>
 	</div>
-	<div>
+	<!-- <div>
 		<label for="upfile">첨부파일</label>
 		<input type="file" id="upfile" name="upfile"/>
-	</div>
+	</div> -->
 	<div>
 		<label for="pwd">비밀번호</label>
 		<input type="password" id="pwd" name="pwd"/>
 	</div>
 	<div>
 		<label for="secret">비밀글 설정</label>
+		<label>공개글</label>
 		<input type="radio" id="open" name="open" value="1"/>
+		<label>비밀글</label>
 		<input type="radio" id="close" name="open" value="2"/>
 	</div>
 	<div class="center">

@@ -17,6 +17,21 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 	public List<QuestionVO> selectQnaAll() {
 		return getSqlSession().selectList(namespace+".selectQnaAll");
 	}
+
+	@Override
+	public List<QuestionVO> mainNotice() {
+		return getSqlSession().selectList(namespace+".selectMainNotice");
+	}
+
+	@Override
+	public int updateReadCount(int no) {
+		return getSqlSession().update(namespace+".updateReadCount");
+	}
+
+	@Override
+	public QuestionVO selectByNo(int no) {
+		return getSqlSession().selectOne(namespace+".selectByNo");
+	}
 	
 	
 }

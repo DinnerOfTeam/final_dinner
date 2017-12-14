@@ -3,60 +3,75 @@ package com.finalTotal.dinner.question.model;
 import java.sql.Timestamp;
 
 public class QuestionVO {
-	private int qna_question_no;
-	private int mem_no;
-	private int question_type;
-	private String question_title;
-	private String question_content;
-	private int question_view_count;
-	private Timestamp question_regdate;
-	public int getQna_question_no() {
-		return qna_question_no;
+	private int qnaQuestionNo;
+	private int memNo;
+	private String questionTitle;
+	private String questionViewContent;
+	private int questionViewCount;
+	private Timestamp questionRegdate;
+	private String questionOpen;
+	private String questionPwd;
+	private int qnaTypeNo;
+	public int getQnaQuestionNo() {
+		return qnaQuestionNo;
 	}
-	public void setQna_question_no(int qna_question_no) {
-		this.qna_question_no = qna_question_no;
+	public void setQnaQuestionNo(int qnaQuestionNo) {
+		this.qnaQuestionNo = qnaQuestionNo;
 	}
-	public int getMem_no() {
-		return mem_no;
+	public int getMemNo() {
+		return memNo;
 	}
-	public void setMem_no(int mem_no) {
-		this.mem_no = mem_no;
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
 	}
-	public int getQuestion_type() {
-		return question_type;
+	public String getQuestionTitle() {
+		return questionTitle;
 	}
-	public void setQuestion_type(int question_type) {
-		this.question_type = question_type;
+	public void setQuestionTitle(String questionTitle) {
+		this.questionTitle = questionTitle;
 	}
-	public String getQuestion_title() {
-		return question_title;
+	public String getQuestionViewContent() {
+		return questionViewContent;
 	}
-	public void setQuestion_title(String question_title) {
-		this.question_title = question_title;
+	public void setQuestionViewContent(String questionViewContent) {
+		this.questionViewContent = questionViewContent;
 	}
-	public String getQuestion_content() {
-		return question_content;
+	public int getQuestionViewCount() {
+		return questionViewCount;
 	}
-	public void setQuestion_content(String question_content) {
-		this.question_content = question_content;
+	public void setQuestionViewCount(int questionViewCount) {
+		this.questionViewCount = questionViewCount;
 	}
-	public int getQuestion_view_count() {
-		return question_view_count;
+	public Timestamp getQuestionRegdate() {
+		return questionRegdate;
 	}
-	public void setQuestion_view_count(int question_view_count) {
-		this.question_view_count = question_view_count;
+	public void setQuestionRegdate(Timestamp questionRegdate) {
+		this.questionRegdate = questionRegdate;
 	}
-	public Timestamp getQuestion_regdate() {
-		return question_regdate;
+	public String getQuestionOpen() {
+		return questionOpen;
 	}
-	public void setQuestion_regdate(Timestamp question_regdate) {
-		this.question_regdate = question_regdate;
+	public void setQuestionOpen(String questionOpen) {
+		this.questionOpen = questionOpen;
+	}
+	public String getQuestionPwd() {
+		return questionPwd;
+	}
+	public void setQuestionPwd(String questionPwd) {
+		this.questionPwd = questionPwd;
+	}
+	public int getQnaTypeNo() {
+		return qnaTypeNo;
+	}
+	public void setQnaTypeNo(int qnaTypeNo) {
+		this.qnaTypeNo = qnaTypeNo;
 	}
 	@Override
 	public String toString() {
-		return "QuestionVO [qna_question_no=" + qna_question_no + ", mem_no=" + mem_no + ", question_type="
-				+ question_type + ", question_title=" + question_title + ", question_content=" + question_content
-				+ ", question_view_count=" + question_view_count + ", question_regdate=" + question_regdate + "]";
+		return "QuestionVO [qnaQuestionNo=" + qnaQuestionNo + ", memNo=" + memNo + ", questionTitle=" + questionTitle
+				+ ", questionViewContent=" + questionViewContent + ", questionViewCount=" + questionViewCount
+				+ ", questionRegdate=" + questionRegdate + ", questionOpen=" + questionOpen + ", questionPwd="
+				+ questionPwd + ", qnaTypeNo=" + qnaTypeNo + "]";
 	}
 	
 }
