@@ -8,7 +8,14 @@
 			select board_comment_seq.nextval from dual
 		</selectKey>
 		insert into board_comment(comment_no, mem_no, free_no, comment_name, comment_pwd, comment_contents, comment_groupno)
-		values(#{commentNo}, #{memNo}, #{freeNo}, #{commentName}, #{commentPwd}, #{commentContents}, null)
+		values(#{commentNo}, 
+		<if test="memNo==0">
+			null
+		</if>
+		<if test="memNo>0">
+			#{memNo}
+		</if>
+		, #{freeNo}, #{commentName}, #{commentPwd}, #{commentContents}, null)
 	</insert>
 	
 	<insert id="replyComment" parameterType="CommentVO">
@@ -24,10 +31,10 @@
 		from(
 			SELECT c.*, level as comment_step
 			FROM board_comment c
-			START WITH comment_groupno=null
+			START WITH comment_groupno is null
 			CONNECT BY NOCYCLE PRIOR comment_no = comment_groupno
 		)
-		where free_no=#{freeNo};
+		where free_no=#{freeNo}
 	</select>
 	
 	<update id="editComment" parameterType="CommentVO">

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--Board-page -->
 <link href="<c:url value='/css/site-board.css'/>" rel="stylesheet" type="text/css" media="all" />
@@ -36,13 +37,11 @@
 		
 	});
 </script>
-<div class="site-board-title wow fadeInUp animated"
-		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+<div class="site-board-title wow fadeIn animated" data-wow-delay=".5s">
 	<h1 class="col-center">게시판 이름</h1>
 </div>
 
-<div class="site-board wow fadeInUp animated"
-		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+<div class="site-board wow fadeIn animated" data-wow-delay=".5s">
 	
 	<div class="container">
 		
@@ -51,8 +50,8 @@
 				<h3 class="col-left col-xs-12 col-sm-8">${vo.freeTitle }</h3>
 			</div>
 			<div class="row board-detail-sub">
-				<div class="col-left col-xs-12 col-sm-6">${vo.freeName }</div>
-				<div class="col-right col-xs-12 col-sm-6"><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd hh:mm" /></div>
+				<div class="col-left col-xs-6">${vo.freeName }</div>
+				<div class="col-right col-xs-6"><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd hh:mm" /></div>
 			</div>
 			<div class="row board-detail-file">
 				<div class="col-right">
@@ -67,50 +66,66 @@
 				</div>
 			</div>
 			<div class="row board-detail-content">
-				<div class="col-xs-12">asdf</div>
+				<div class="col-xs-12">${vo.freeContents }</div>
 			</div>
 			<div class="col-left">
-				<a href="<c:url value='/board/edit.do?no='/>" class="btn btn-default btn-sm">수정</a>
-				<a href="<c:url value='/board/delete.do?no='/>" class="btn btn-default btn-sm">삭제</a>
+				<a href="<c:url value='/board/edit.do?freeNo=${vo.freeNo }'/>" class="btn btn-default btn-sm">수정</a>
+				<a href="<c:url value='/board/delete.do?freeNo=${vo.freeNo }'/>" class="btn btn-default btn-sm">삭제</a>
 				<a href="<c:url value='/board/list.do'/>" class="btn btn-default btn-sm">목록</a>
 			</div>
 			<div class="row board-detail-comments">
 				<h4>Comments</h4>
 				<div class="board-detail-comments-list">
-					<div class="board-detail-comments-row">
-						<div class="board-detail-comments-sub">
-							<div class="col-left col-xs-8">
-								Tester
-								<span>2017-01-01 20:33</span>
+					<c:choose>
+						<c:when test="${empty commentList }">
+							<div class="board-detail-comments-row board-detail-comments-nodata">
+								<p class="col-center">댓글이 없습니다</p>
 							</div>
-							<div class="comments-act col-right col-xs-4">
-								<a href="<c:url value='/comments/edit.do?boardNo=&no='/>">수정</a>
-								|
-								<a href="<c:url value='/comments/delete.do?boardNo=&no='/>">삭제</a>
-							</div>
-						</div>
-						<div class="board-detail-comments-contents">
-							comment test
-						</div>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="cVO" items="${commentList }">
+								<div class="board-detail-comments-row"
+										style="margin-left: ${(cVO.commentStep-1)*1.5}em;">
+									<div class="board-detail-comments-sub">
+										<div class="col-left col-sm-8">
+											${cVO.commentName}
+											<span><fmt:formatDate value="${cVO.commentRegdate}" pattern="yyyy-MM-dd hh:mm" /></span>
+										</div>
+										<div class="comments-act col-right col-sm-4">
+											<a href="<c:url value='/board/comments/reply.do?boardNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">답글</a>
+											|
+											<a href="<c:url value='/board/comments/edit.do?boardNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">수정</a>
+											|
+											<a href="<c:url value='/board/comments/delete.do?boardNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">삭제</a>
+										</div>
+									</div>
+									<div class="board-detail-comments-contents">
+										${cVO.commentContents}
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="board-detail-comments-write">
-					<form class="board-comment-frm" name="frmBoardComment" method="post" action="#">
-						<input type="hidden" name="freeNo" value="글번호">
-						<div class="board-comments-form-top">
-							<div class="col-sm-6 form-group">
-								<label for="commentName" class="col-sm-4 col-md-3">이름</label>
-								<div class="col-sm-8 col-md-9">
-									<input type="text" class="form-control" id="commentName" name="commentName" placeholder="이름">
+					<form class="board-comment-frm" name="frmBoardComment" method="post" action="<c:url value='/board/comment/write.do'/>">
+						<input type="hidden" name="freeNo" value="${vo.freeNo }">
+						<c:if test="${empty sessionScope.memId}">
+							<div class="board-comments-form-top">
+								<div class="col-sm-6 form-group">
+									<label for="commentName" class="col-sm-4 col-md-3">이름</label>
+									<div class="col-sm-8 col-md-9">
+										<input type="text" class="form-control" id="commentName" name="commentName" placeholder="이름">
+									</div>
+								</div>
+								<div class="col-sm-6 form-group">
+									<label for="commentPwd" class="col-sm-4 col-md-3">비밀번호</label>
+									<div class="col-sm-8 col-md-9">
+										<input type="password" class="form-control" id="commentPwd" name="commentPwd">
+									</div>
 								</div>
 							</div>
-							<div class="col-sm-6 form-group">
-								<label for="commentPwd" class="col-sm-4 col-md-3">비밀번호</label>
-								<div class="col-sm-8 col-md-9">
-									<input type="password" class="form-control" id="commentPwd" name="commentPwd">
-								</div>
-							</div>
-						</div>
+						</c:if>
 						<div class="form-group">
 							<textarea class="form-control" rows="5" id="commentContents" name="commentContents"></textarea>
 						</div>
@@ -123,6 +138,12 @@
 		</div>
 	</div>
 </div>
+
+<c:import url="/board/list.do">
+	<c:param name="freeNo" value="${vo.freeNo }"/>
+	<c:param name="isImport" value="yes"/>
+	<c:param name="hideStyle" value="yes"/>
+</c:import>
 <!--//BoardPage-->
 	
 <%@include file="../inc/footer.jsp" %>	

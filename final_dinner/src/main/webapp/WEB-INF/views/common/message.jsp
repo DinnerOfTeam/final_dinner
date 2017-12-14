@@ -22,7 +22,7 @@
 			alert("${msg}");
 		</c:if>
 		<c:choose>
-			<c:when test="${back=='yes' }">
+			<c:when test="${back}">
 				history.back();
 			</c:when>
 			<c:otherwise>
@@ -48,7 +48,7 @@
 	</noscript>
 </body>
 </html>
-
+	
 
 
 

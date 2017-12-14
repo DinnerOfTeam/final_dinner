@@ -85,6 +85,18 @@
 	text-align: right;
 }
 
+.board-list-sel{
+	background-color: #AAA;
+}
+
+.board-list-sel:hover{
+	background-color: #999 !important;
+}
+
+.board-list-sel *{
+	color: #FFF !important;
+}
+
 .board-list-nodata{
 	text-align: center;
 	padding: 2.5em 1em;
@@ -183,6 +195,14 @@
 
 .board-detail-comments-row{
 	border-bottom: 1px solid #EEE;
+}
+
+.board-detail-comments-nodata{
+	border-top: 1px solid #EEE;
+}
+
+.board-detail-comments-nodata>p{
+	margin: 1.5em;
 }
 
 .board-detail-comments>h4{

@@ -48,6 +48,9 @@ public class PagingVO {
 	}
 	public int getLastRowNum() {
 		lastRowNum=firstRowNum+pageSize;
+		if(lastRowNum>=totalRecord) {
+			lastRowNum=totalRecord;
+		}
 		return lastRowNum;
 	}
 	public int getFirstBlockPage() {
@@ -56,6 +59,9 @@ public class PagingVO {
 	}
 	public int getLastBlockPage() {
 		lastBlockPage=firstBlockPage+blockSize-1;
+		if(lastBlockPage>totalPage) {
+			lastBlockPage=totalPage;
+		}
 		return lastBlockPage;
 	}
 	

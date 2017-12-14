@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--Board-page -->
 <link href="<c:url value='/css/site-board.css'/>" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
@@ -35,13 +36,11 @@
 		
 	});
 </script>
-<div class="site-board-title wow fadeInUp animated"
-		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+<div class="site-board-title wow fadeIn animated" data-wow-delay=".5s">
 	<h1 class="col-center">게시판 이름</h1>
 </div>
 
-<div class="site-board wow fadeInUp animated"
-		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+<div class="site-board wow fadeIn animated" data-wow-delay=".5s">
 	
 	<div class="container">
 		
@@ -52,14 +51,16 @@
 						<label for="freeTitle">제목</label>
 						<input type="text" class="form-control" id="freeTitle" name="freeTitle" placeholder="제목">
 					</div>
-					<div class="form-group">
-						<label for="freeName">이름</label>
-						<input type="text" class="form-control" id="freeName" name="freeName" placeholder="이름">
-					</div>
-					<div class="form-group">
-						<label for="freePwd">비밀번호</label>
-						<input type="password" class="form-control" id="freePwd" name="freePwd">
-					</div>
+					<c:if test="${empty sessionScope.memId}">
+						<div class="form-group">
+							<label for="freeName">이름</label>
+							<input type="text" class="form-control" id="freeName" name="freeName" placeholder="이름">
+						</div>
+						<div class="form-group">
+							<label for="freePwd">비밀번호</label>
+							<input type="password" class="form-control" id="freePwd" name="freePwd">
+						</div>
+					</c:if>
 					<div class="form-group">
 						<label for="freeContents">내용</label>
 						<textarea class="form-control" rows="10" id="freeContents" name="freeContents"></textarea>

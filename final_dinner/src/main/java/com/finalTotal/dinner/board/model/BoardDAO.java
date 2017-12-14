@@ -7,6 +7,8 @@ public interface BoardDAO {
 	public List<BoardVO> selectAll(SearchVO searchVO);
 	public int selectRecordCount(SearchVO searchVO);
 	public BoardVO selectByNo(int no);
-	public int editBoard(int no);
+	public int editBoard(BoardVO vo);
 	public int deleteBoard(int no);
+	public int deleteCommentByBoardNo(int no);
+	
 }

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--Board-page -->
 <link href="<c:url value='/css/site-board.css'/>" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
@@ -31,33 +32,34 @@
 		
 	});
 </script>
-<div class="site-board-title wow fadeInUp animated"
-		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+<div class="site-board-title wow fadeIn animated" data-wow-delay=".5s">
 	<h1 class="col-center">게시판 이름</h1>
 </div>
 
-<div class="site-board wow fadeInUp animated"
-		data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+<div class="site-board wow fadeIn animated" data-wow-delay=".5s">
 	<div class="container">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="board-inner">
-				<form name="frmBoardWrite" method="post" action="<c:url value='/board/write.do'/>" enctype="multipart/form-data">
-					<input type="hidden" name="freeNo" value="글번호">
+				<form name="frmBoardWrite" method="post" action="<c:url value='/board/edit.do'/>" enctype="multipart/form-data">
+					<input type="hidden" name="freeNo" value="${vo.freeNo }">
 					<div class="form-group">
 						<label for="freeTitle">제목</label>
-						<input type="text" class="form-control" id="freeTitle" name="freeTitle" placeholder="제목" value="Test Title">
+						<input type="text" class="form-control" id="freeTitle" name="freeTitle" placeholder="제목" value="${vo.freeTitle }">
 					</div>
-					<div class="form-group">
-						<label for="freeName">이름</label>
-						<p class="form-control-static">Tester</p>
-					</div>
-					<div class="form-group">
-						<label for="freePwd">비밀번호</label>
-						<input type="password" class="form-control" id="freePwd" name="freePwd">
-					</div>
+					<c:if test="${vo.memNo==0 and !empty vo.freePwd }">
+						<div class="form-group">
+							<label for="freeName">이름</label>
+							<p class="form-control-static">${vo.freeName }</p>
+							<input type="hidden" name="freeName" value="${vo.freeName }">
+						</div>
+						<div class="form-group">
+							<label for="freePwd">비밀번호</label>
+							<input type="password" class="form-control" id="freePwd" name="freePwd">
+						</div>
+					</c:if>
 					<div class="form-group">
 						<label for="freeContents">내용</label>
-						<textarea class="form-control" rows="10" id="freeContents" name="freeContents">Test</textarea>
+						<textarea class="form-control" rows="10" id="freeContents" name="freeContents">${vo.freeContents }</textarea>
 					</div>
 					<div class="form-group">
 						<label>삭제할 파일</label>

@@ -25,11 +25,17 @@ public class BoardDAOMyBatis extends SqlSessionDaoSupport implements BoardDAO {
 		return getSqlSession().selectOne(namespace+".selectByNo", no);
 	}
 	
-	public int editBoard(int no) {
-		return getSqlSession().update(namespace+".editBoard", no);
+	public int editBoard(BoardVO vo) {
+		return getSqlSession().update(namespace+".editBoard", vo);
 	}
 	
 	public int deleteBoard(int no) {
 		return getSqlSession().delete(namespace+".deleteBoard", no);
 	}
+	
+	public int deleteCommentByBoardNo(int no) {
+		return getSqlSession().delete(namespace+".deleteCommentByBoardNo", no);
+	}
+	
+	
 }

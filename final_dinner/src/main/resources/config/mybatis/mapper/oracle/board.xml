@@ -6,7 +6,7 @@
 	
 	<sql id="searchWhere">
 		<if test="keyword!=null and keyword!=''">
-			where ${searchCondition} like '%' || #{searchKeyword} || '%'
+			where ${type} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
 
@@ -41,7 +41,7 @@
 		]]>
 	</select>
 	
-	<select id="selectRecordCount" resultType="BoardVO" parameterType="SearchVO" >
+	<select id="selectRecordCount" resultType="int" parameterType="SearchVO" >
 		select count(free_no) from board_free
 		<include refid="searchWhere"/>
 	</select>
@@ -51,14 +51,27 @@
 		where free_no=#{freeNo}
 	</select>
 	
+	<select id="selectPwdByNo" parameterType="string" resultType="BoardVO" >
+		select free_pwd from board_free
+		where free_no=#{freeNo}
+	</select>
+	
 	<update id="editBoard" parameterType="BoardVO">
 		update board_free
 		set free_title=#{freeTitle}, free_contents=#{freeContents}
+		<if test="freeName!=null and freeName!=''">
+			,free_name=#{freeName}
+		</if>
 		where free_no=#{freeNo}
 	</update>
 	
 	<delete id="deleteBoard" parameterType="int">
 		delete from board_free
+		where free_no=#{freeNo}
+	</delete>
+	
+	<delete id="deleteCommentByBoardNo" parameterType="int">
+		delete from board_comment
 		where free_no=#{freeNo}
 	</delete>
 	

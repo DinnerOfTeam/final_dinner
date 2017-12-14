@@ -11,17 +11,17 @@ public class CommentServiceImpl implements CommentService{
 	private CommentDAO commentDAO;
 
 	@Override
-	public int insertComment(BoardVO vo) {
+	public int insertComment(CommentVO vo) {
 		return commentDAO.insertComment(vo);
 	}
 
 	@Override
-	public int replyComment(BoardVO vo) {
+	public int replyComment(CommentVO vo) {
 		return commentDAO.replyComment(vo);
 	}
 
 	@Override
-	public List<BoardVO> selectCommentByFreeNo(int freeNo) {
+	public List<CommentVO> selectCommentByFreeNo(int freeNo) {
 		return commentDAO.selectCommentByFreeNo(freeNo);
 	}
 

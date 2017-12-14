@@ -2,11 +2,16 @@ package com.finalTotal.dinner.board.model;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BoardServiceImpl implements BoardService{
+	private static final Logger logger=LoggerFactory.getLogger(BoardServiceImpl.class);
+	
 	@Autowired
 	private BoardDAO boardDAO;
 	
@@ -31,13 +36,21 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int editBoard(int no) {
-		return boardDAO.editBoard(no);
+	public int editBoard(BoardVO vo) {
+		return boardDAO.editBoard(vo);
 	}
 
 	@Override
+	@Transactional
 	public int deleteBoard(int no) {
-		return boardDAO.deleteBoard(no);
+		int cnt=boardDAO.deleteCommentByBoardNo(no);
+		logger.info("게시판 글삭제 댓글 삭제결과 cnt={}", cnt);
+		
+		cnt=boardDAO.deleteBoard(no);
+		logger.info("게시판 글삭제 결과 cnt={}", cnt);
+		
+		return cnt;
 	}
+
 
 }

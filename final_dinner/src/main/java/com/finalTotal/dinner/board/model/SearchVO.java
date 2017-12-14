@@ -1,11 +1,14 @@
 package com.finalTotal.dinner.board.model;
 
 public class SearchVO {
-	private String keyword;		//검색어
+	private String keyword="";		//검색어
 	private String type="free_title";		//검색종류(name, title, content)
-	private int CurrentPage=1;	//현재페이지
+	private int currentPage=1;	//현재페이지
 	private int firstRowNum;	//현재 페이지의 첫번째글의 rownum
-	private int pageSize;		//페이지내의 글개수
+	private int pageSize;		//한페이지내의 글개수
+	private int firstBlockPage;	//현재 블록의 첫번째 페이지
+	private int lastBlockPage;	//현재 블록의 마지막 페이지
+	private int totalPage;		//최대 페이지 수
 	
 	public String getKeyword() {
 		return keyword;
@@ -24,10 +27,10 @@ public class SearchVO {
 		}
 	}
 	public int getCurrentPage() {
-		return CurrentPage;
+		return currentPage;
 	}
 	public void setCurrentPage(int currentPage) {
-		CurrentPage = currentPage;
+		this.currentPage = currentPage;
 	}
 	public int getFirstRowNum() {
 		return firstRowNum;
@@ -41,11 +44,30 @@ public class SearchVO {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+	public int getFirstBlockPage() {
+		return firstBlockPage;
+	}
+	public void setFirstBlockPage(int firstBlockPage) {
+		this.firstBlockPage = firstBlockPage;
+	}
+	public int getLastBlockPage() {
+		return lastBlockPage;
+	}
+	public void setLastBlockPage(int lastBlockPage) {
+		this.lastBlockPage = lastBlockPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
 	
 	@Override
 	public String toString() {
-		return "SearchVO [keyword=" + keyword + ", type=" + type + ", CurrentPage=" + CurrentPage + ", firstRowNum="
-				+ firstRowNum + ", pageSize=" + pageSize + "]";
+		return "SearchVO [keyword=" + keyword + ", type=" + type + ", currentPage=" + currentPage + ", firstRowNum="
+				+ firstRowNum + ", pageSize=" + pageSize + ", firstBlockPage=" + firstBlockPage + ", lastBlockPage="
+				+ lastBlockPage + ", totalPage=" + totalPage + "]";
 	}
 	
 }
