@@ -11,6 +11,9 @@
 		font-size: 1em;
 		outline: none;
 	}
+	a {
+		color: red;
+	}
 </style>
 <script type="text/javascript">
 	$(function() {

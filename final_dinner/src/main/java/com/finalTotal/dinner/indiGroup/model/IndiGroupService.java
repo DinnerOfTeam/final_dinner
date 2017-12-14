@@ -7,4 +7,6 @@ public interface IndiGroupService {
 	public int createGroup(IndigroupVO vo);
 	public int checkGroupName(String name);
 	public List<IndigroupVO> selectByGroupName(String name);
+	public int regiGroup(GroupRegiVO vo);
+	public int insertGroupMember(GroupMemberVO vo);
 }

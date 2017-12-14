@@ -20,9 +20,16 @@
 	</select>
 	
 	<insert id="regiGroup" parameterType="GroupRegiVO">
-		<selectKey order="BEFORE" resultType="int" keyProperty="groupRegi">
+		<selectKey order="BEFORE" resultType="int" keyProperty="groupRegiNo">
 			select group_regi_seq.nextval from dual
 		</selectKey>
 		insert into group_regi values(#{groupRegiNo}, #{groupNo}, #{memNo})
+	</insert>
+	
+	<insert id="insertGroupMember" parameterType="GroupMemberVO">
+		<selectKey order="BEFORE" resultType="int" keyProperty="groupMemNo">
+			select group_member_seq.nextval from dual
+		</selectKey>
+		insert into group_member values(#{groupMemNo}, #{groupNo}, #{memNo})
 	</insert>
 </mapper>

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.finalTotal.dinner.board_review.model.Board_reviewVO;
 import com.finalTotal.dinner.chat.model.ChattingService;
 import com.finalTotal.dinner.chat.model.ChattingVO;
+import com.finalTotal.dinner.indiGroup.model.GroupMemberVO;
+import com.finalTotal.dinner.indiGroup.model.GroupRegiVO;
 import com.finalTotal.dinner.indiGroup.model.IndiGroupService;
 import com.finalTotal.dinner.indiGroup.model.IndigroupVO;
 import com.finalTotal.dinner.vote.model.VoteVO;
@@ -127,6 +129,7 @@ public class IndiGroupCont {
 	public void page() {
 		
 	}
+	
 	@RequestMapping("/regi.do")
 	public String groupRegi_submit(@RequestParam(required=false) String groupName, Model model) {
 		logger.info("group regi page parameter : groupName={}", groupName);
@@ -139,21 +142,28 @@ public class IndiGroupCont {
 		
 		return "indiGroup/regi";
 	}
+	
 	@RequestMapping(value= "/create.do", method= RequestMethod.GET)
 	public void groupCreate_form(HttpSession session) {
 		logger.info("group create page");
 
 	}
+	
 	@RequestMapping(value= "/create.do", method= RequestMethod.POST)
 	public void groupCreate_submit(@ModelAttribute IndigroupVO vo, HttpSession session) {
 		logger.info("group create submit page parameter : vo={}", vo);
 		vo.setMemNo((Integer)session.getAttribute("memNo"));
 		logger.info("setting 후 : vo={}", vo);
 		int cnt= group_service.createGroup(vo);
+		logger.info("그룹 생성 결과 : cnt= {}, vo={}", cnt, vo);
 		if(cnt> 0) {
-			
+			GroupMemberVO mem_vo= new GroupMemberVO();
+			mem_vo.setGroupNo(vo.getGroupNo());
+			mem_vo.setMemNo(vo.getMemNo());
+			group_service.insertGroupMember(mem_vo);
 		}
 	}
+	
 	@RequestMapping(value= "/checkName.do")
 	public void groupCheck(@ModelAttribute IndigroupVO vo, Model model) {
 		logger.info("group check page parameter : vo={}", vo);
@@ -163,6 +173,8 @@ public class IndiGroupCont {
 		
 		model.addAttribute("result", result);
 	}
+	
+	
 	
 	public int getLastDay(int year, int month) {
 		switch(month) {

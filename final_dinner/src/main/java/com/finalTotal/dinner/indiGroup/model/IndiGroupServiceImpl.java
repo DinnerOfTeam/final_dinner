@@ -24,6 +24,16 @@ public class IndiGroupServiceImpl implements IndiGroupService{
 	public List<IndigroupVO> selectByGroupName(String name) {
 		return dao.selectByGroupName(name);
 	}
+
+	@Override
+	public int regiGroup(GroupRegiVO vo) {
+		return dao.regiGroup(vo);
+	}
+
+	@Override
+	public int insertGroupMember(GroupMemberVO vo) {
+		return dao.insertGroupMember(vo);
+	}
 	
 	
 }
