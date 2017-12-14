@@ -21,10 +21,31 @@
 		<c:if test="${!empty msg}">
 			alert("${msg}");
 		</c:if>
+		<c:choose>
+			<c:when test="${back=='yes' }">
+				history.back();
+			</c:when>
+			<c:otherwise>
+				location.href="<c:url value='${url}'/>"; 
+			</c:otherwise>
+		</c:choose>
 		
-		location.href="<c:url value='${url}'/>"; 
+		
 	</script>
 	
+	<noscript>
+		<c:if test="${!empty msg}">
+			<h2>${msg}</h2>
+		</c:if>
+		<c:choose>
+			<c:when test="${back}">
+				뒤로가기 버튼을 클릭해서 이동
+			</c:when>
+			<c:otherwise>
+				<a href="<c:url value='${url}'/>">여기를 클릭해서 이동</a>
+			</c:otherwise>
+		</c:choose>
+	</noscript>
 </body>
 </html>
 
