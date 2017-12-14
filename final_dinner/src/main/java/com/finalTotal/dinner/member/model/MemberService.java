@@ -14,7 +14,7 @@ public interface MemberService {
 	
 	public int loginCheck(String memId, String memPwd);
 	
-	public MemberVO selectMember(String userid);
+	public MemberVO selectMember(String memId);
 	
 	public int duplicatedmemId(String memId);
 	

@@ -27,6 +27,8 @@
 </style>
 
 
+
+
 <!-- login -->
 <div class="login">
 	<div class="container">
@@ -46,13 +48,17 @@
 				<form action="<c:url value='/login/login.do'/>" name="frmLogin"
 					method="post">
 					<label for="memId">회원ID</label> <input type="text" class="user"
-						name="memId" id="memId"> <br> <label for="memPwd">비밀번호</label>
+						name="memId" id="memId" value="${cookie.ck_memId.value }"> <br> <label for="memPwd">비밀번호</label>
 					<input type="password" name="memPwd" class="lock" id="memPwd">
 					<div class="forgot-top-grids">
 						<div class="forgot-grid">
 							<ul>
-								<li><input type="checkbox" id="brand1" value=""> <label
-									for="brand1"><span></span>아이디 기억하기</label></li>
+								<li><input type="checkbox" id="chkSaveId" name="chkSaveId" value=""
+								<c:if test="${!empty cookie.ck_memId }">
+										checked
+									</c:if>> 
+								<label for="chkSaveId">
+									<span></span>아이디 기억하기</label></li>
 							</ul>
 						</div>
 						<div class="forgot">

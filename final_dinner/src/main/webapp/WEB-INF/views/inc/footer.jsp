@@ -3,7 +3,7 @@
 
 </section>
 <!-- footer -->
-	<footer class="footer agileits">
+	<footer class="footer agileits" style="clear:both">
 		<div class="container">
 			<!--  -->
 			<div class="copyright w3l wow fadeInUp animated" data-wow-delay=".5s">

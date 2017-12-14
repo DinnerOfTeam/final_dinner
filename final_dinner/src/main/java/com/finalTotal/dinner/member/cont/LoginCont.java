@@ -38,20 +38,20 @@ public class LoginCont {
 			@RequestParam(required=false)String chkSaveId,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
-		logger.info("로그인 처리, 파라미터vo={}, saveId={}",vo, chkSaveId);
+		logger.info("로그인 처리, 파라미터vo={}, chkSaveId={}",vo, chkSaveId);
 		
 		String msg="", url="/login/login.do";
 		int result = memberService.loginCheck(vo.getMemId(), vo.getMemPwd());
 		if(result==memberService.LOGIN_OK) {
 			//로그인 성공
-			MemberVO memVo = memberService.selectMember(vo.getMemId());
-			logger.info("로그인 결과 : vo={}", memVo);
+			vo = memberService.selectMember(vo.getMemId());
+			logger.info("로그인 결과 : vo={}", vo);
 			
 			//[1]  성공한 경우에만 세션에 저장
 			HttpSession session = request.getSession();
-			session.setAttribute("memId", memVo.getMemId());
-			session.setAttribute("memName", memVo.getMemName());
-			session.setAttribute("memNo", memVo.getMemNo());
+			session.setAttribute("memId", vo.getMemId());
+			session.setAttribute("memName", vo.getMemName());
+			session.setAttribute("memNo", vo.getMemNo());
 			
 			//[2]쿠키에 저장
 			Cookie ck = new Cookie("ck_memId", vo.getMemId());
@@ -64,7 +64,7 @@ public class LoginCont {
 				response.addCookie(ck);
 			}
 			
-			msg=memVo.getMemName()+"님 로그인되었습니다";
+			msg=vo.getMemName()+"님 로그인되었습니다";
 			url="/index.do";					
 		}else if(result==memberService.ID_NONE) {
 			msg="해당 아이디가 존재하지 않습니다.";

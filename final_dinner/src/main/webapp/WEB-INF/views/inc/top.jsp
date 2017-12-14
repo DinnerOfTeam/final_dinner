@@ -123,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<c:if test="${!empty sessionScope.memId }">								
 								<li><a href="<c:url value= '/login/logout.do'/>">로그아웃</a>
 								<a href="<c:url value= '/member/memberEdit.do'/>">회원정보수정</a>
-								<a href="<c:url value= '/member/signup.do'/>">마이페이지</a></li>
+								<a href="<c:url value= '/member/myPage.do'/>">마이페이지</a></li>
 								</c:if>
 							</ul>
 						</div>
@@ -137,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="bottom-header">
 			<div class="container">
 				<div class="logo wow fadeInDown animated" data-wow-delay=".5s">
-					<h1><a href="index.html"><img src="<c:url value= '/images/logo.jpg'/>" alt="" /></a></h1>
+					<h1><a href="<c:url value='/index.do'/>"><img src="<c:url value= '/images/logo.jpg'/>" alt="" /></a></h1>
 				</div>
 				<div class="top-nav wow fadeInRight animated" data-wow-delay=".5s">
 					<nav class="navbar navbar-default">
