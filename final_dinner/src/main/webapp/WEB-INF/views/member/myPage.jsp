@@ -48,14 +48,36 @@ a {
 	margin-bottom: 10px;
 }
 
+.eee{
+	
+	width: 200px;
+}
+
+
+
+
 </style>
 <script type="text/javascript">
 	$(function() {
-		$('.right-menu').hide();
-		$('.right-toggle').click(function() {
-			$('.right-menu').toggle();
+		$('.right-menu1').hide();
+		$('.right-toggle1').click(function() {
+			$('.right-menu1').toggle();
+		});
+	
+		$('.right-menu2').hide();
+		$('.right-toggle2').click(function() {
+			$('.right-menu2').toggle();
+		});
+	
+		$('.eee').find('li').hover(function(){
+			$(this).css('background', 'gray');
+		}, function(){
+			$(this).css('background', '');
 		});
 	});
+	
+	
+	
 </script>
 
 <title>Insert title here</title>
@@ -82,11 +104,11 @@ START MODULE AREA 2: Sub Navigation 1
 	<div style="display: inline-block; float: left;" class="col-md-3">
 		
 		<div data-layout="al16 al-o2 de-o1 de6 ec4">
-			<nav class="MOD_SUBNAVIGATION1_Menu" data-theme="_bo2">
+			<nav class="MOD_SUBNAVIGATION1_Menu" >
 			<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs">sss님</p>
 			<ul>
-				<li><a href="#">회원정보 수정</a></li>
-				<li><a href="#">Sub menu item 2</a></li>
+				<li><a href="/dinner/member/memberEdit.do">회원정보 수정</a></li>
+				<li><a href="#">회원탈퇴</a></li>
 				<li><a href="#">Sub menu item 3</a></li>
 				<li><a href="#">Sub menu item 4</a></li>
 				<li><a href="#">Sub menu item 5</a></li>
@@ -98,25 +120,46 @@ START MODULE AREA 2: Sub Navigation 1
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade active in" id="general">
-						<a href="#">회원정보수정</a><br> <a href="#">회원탈퇴</a>
+						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
+						<a href="#">예약정보 조회</a><br>
+						<a href="#">예약취소</a><br>
+						<a href="#">식당등록</a><br>						
+						<a href="#">회원탈퇴</a>
 					</div>
 					<div class="tab-pane fade" id="business">
-						<a href="#">회원정보수정</a><br> 
-						<a href="#">식당정보확인</a><br> 
-						<div class= 'container pad_0'>
-							<div class= 'col-md-1 pad_0 bbb'>
-								<a class="right-toggle" data-toggle="right" href="#">식당정보
-									수정 <span class="caret"></span>
-								</a>							
+						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
+						<a href="#">식당정보확인</a><br>
+						<a href="#">식당예약조회</a><br>
+						<a href="#">식당예약취소</a><br>
+						<div class='container pad_0'>
+							<div class='col-md-1 pad_0 bbb'>
+								<a class="right-toggle1" data-toggle="right" href="#"> 식당정보수정
+									<span class="caret"></span>
+								</a>
 							</div>
-							<div class="right-menu col-md-2 pad_0">
-								<ul >
+							<div class="right-menu1 eee col-md-2 pad_0">
+								<ul>
 									<li><a href="#" class="pad_0 ccc">메뉴등록</a></li>
 									<li><a href="#" class="pad_0 ccc">메뉴삭제</a></li>
 								</ul>
 							</div>
 						</div>
-						<br> <a href="#">이벤트등록요청</a><br> <a href="#">회원탈퇴</a>
+					 
+						<div class='container pad_0'>
+							<div class='col-md-1 pad_0 bbb'>
+								<a class="right-toggle2" data-toggle="right" href="#"> 이벤트수정
+									<span class="caret"></span>
+								</a>
+							</div>
+							<div class="right-menu2 eee col-md-2 pad_0">
+								<ul>
+									<li><a href="#" class="pad_0 ccc">이벤트등록</a></li>
+									<li><a href="#" class="pad_0 ccc">이벤트삭제</a></li>
+								</ul>
+							</div>
+						</div> 
+						<a href="#">식당탈퇴</a><br> 
+						<a href="#">회원탈퇴</a>
 					</div>
 				</div>
 			</li>
@@ -131,64 +174,90 @@ START MODULE AREA 2: Sub Navigation 1
 	<div style="display: inline-block; float: left;" class="col-md-9">
 	<h2 class="ddd">&nbsp;&nbsp;내정보</h2>
 		
-			<table border="2" width="600px" height="200" class="table">
+			<!-- <table border="2" width="600px" height="200" class="table">
 				 <tbody>
 					<tr>
 						<td class="left_top" colspan="4">
-							<b class="cDg">tjdgus52</b>님의 회원정보입니다.&nbsp;<a href="mypage.php?doc=mb_pass" class="st_bn3 rbn">회원정보수정</a>
+							<b class="cDg">tjdgus52</b>님의 회원정보입니다.
 						</td>
 					</tr>
 					<tr>
-						<td class="left_top">아이디</td>
+						<td class="left_top eee">아이디</td>
 						<td class="right_top">tjdgus52</td>
 
-						<td class="left_top">쿠폰</td>
-						<td class="right_top">0<img src="http://wimg.filekok.com/images/icon/icon_c.gif" alt="쿠폰"/></td>
+						
 					</tr>
 
 					<tr>
-						<td class="left_top">회원상태</td>
+					
+					<td class="left_top eee">성명</td>
+						<td class="right_top">
+							띠로리
+						</td>
+						
+													
+
+
+					</tr>
+
+					<tr>
+						<td class="left_top eee">회원상태</td>
 						<td class="right_top">
 							일반회원
 						<a href="#" onclick="javascript:subSellerTabMenu();" class="st_bn3 fr">
 						<span style="color:#5c68e1;">판매자</span>신청</a></td>
-													
 
-						<td class="left_top">마일리지</td>
-						<td class="right_top">
-							0<img src="http://wimg.filekok.com/images/icon/icon_m.gif" alt="마일리지"/>
-						</td>
-
-					</tr>
-
-					<tr>
-						<td class="left_top">포인트</td>
-						<td class="right_top">
-							<b class="cLr">0</b><img src="http://wimg.filekok.com/images/icon/icon_p.gif" alt="포인트" />
-							<a href="charge.php?doc=point" class="st_bn25 fr"><span class="red1">포인트</span>충전</a>
-						</td>
-
-						<td class="left_top">정액제</td>
-						<td class="right_top" style="margin-left:10px;!impo">
-							<a href="charge.php?doc=fixedcard">정액제 없음	</a>&nbsp;
-							<span id = "ticket"></span>
-						</td>
+						
 
 
 					</tr>
 
 					<tr>
-						<td class="left_top">보너스</td>
+						<td class="left_top eee">보너스</td>
 						<td class="right_top">
 							<b class="cDg">0<img src="http://wimg.filekok.com/images/icon/icon_b.gif" alt="보너스포인트"/>
 						</td>
-						<td class="left_top">보유정액권</td>
-						<td class="right_top">
-						</td>
+						
 					</tr>
 
 				</tbody>
+			</table> -->
+	
+			<table border="2" width="600px" height="200" class="table">
+				  <tbody>
+					<tr >
+						<td class="left_top" colspan="4">
+							<b class="cDg">tjdgus52</b>님의 회원정보입니다.
+						</td>	
+					</tr>
+					<tr>
+						<td class="left_top eee">아이디</td>
+						<td class="right_top">tjdgus52</td>
+					</tr>
+					<tr>
+						<td class="left_top eee">성명</td>
+						<td class="right_top">
+							띠로리
+						</td>
+					</tr>
+					<tr>
+						<td class="left_top eee">회원상태</td>
+						<td class="right_top">
+							일반회원
+						<a href="#" onclick="javascript:subSellerTabMenu();" class="st_bn3 fr">
+						<span style="color:#5c68e1;">판매자</span>신청</a></td>
+						
+					</tr>
+					<tr>
+						<td class="left_top eee">보너스</td>
+						<td class="right_top">
+							<b class="cDg">0<img src="http://wimg.filekok.com/images/icon/icon_b.gif" alt="보너스포인트"/>
+						</td>
+					</tr>
+						
+					        </tbody>
 			</table>
+	
 	
 	
 	<h2 class="ddd">&nbsp;&nbsp;공지사항</h2>

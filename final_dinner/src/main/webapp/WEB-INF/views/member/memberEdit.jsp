@@ -27,7 +27,7 @@
 	<div class="container">
 		<div class="login-body">
 			<div class="login-heading2 w3layouts">
-				<h1>회원가입수정</h1>
+				<h1>회원정보수정</h1>
 
 			</div>
 			<div class="login-info">
