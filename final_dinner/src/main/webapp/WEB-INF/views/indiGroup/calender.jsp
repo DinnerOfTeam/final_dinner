@@ -4,10 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div>
 	<div title= "header">
-		<a title= '이전달 보기' href="<c:url value= '/indiGroup/main.do?year=${today.year }&month=${today.month-1 }&p_date=${today.date }' />" class= 'ajex'><-</a>&nbsp;&nbsp;
+		<a title= '이전달 보기' href="<c:url value= '/indiGroup/main.do?year=${today.year }&month=${today.month-1 }&p_date=${today.date }&groupNo=${param.groupNo }' />" class= 'ajex'><-</a>&nbsp;&nbsp;
 <%-- 							<a href="<c:url value= '#' />" class= 'ajex'><-</a>&nbsp;&nbsp; --%>
 		<i class="fa fa-calendar" aria-hidden="true"> 일정(<fmt:formatDate value="${today }" pattern="yyyy-MM"/>)</i>
-		&nbsp;&nbsp;<a title= '다음달 보기' href="<c:url value= '/indiGroup/main.do?year=${today.year }&month=${today.month+1 }&p_date=${today.date }' />" class= 'ajex'>-></a>&nbsp;&nbsp;
+		&nbsp;&nbsp;<a title= '다음달 보기' href="<c:url value= '/indiGroup/main.do?year=${today.year }&month=${today.month+1 }&p_date=${today.date }&groupNo=${param.groupNo }' />" class= 'ajex'>-></a>&nbsp;&nbsp;
 		<%-- <a href="<c:url value= '#' />" class= 'ajex'>-></a> --%>
 	</div>
 	<table class= 'table table-boardered table-hover'>

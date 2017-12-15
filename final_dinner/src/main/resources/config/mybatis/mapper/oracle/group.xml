@@ -32,4 +32,13 @@
 		</selectKey>
 		insert into group_member values(#{groupMemNo}, #{groupNo}, #{memNo})
 	</insert>
+	
+	<select id="selectMyGroup" resultType="IndigroupVO" parameterType="int">
+		select (select count(*) from group_member where group_no= a.group_no) as num_group_member , a.* 
+        	from group_info_view a where mem_no= #{memNo}
+	</select>
+	
+	<select id="countNumberGroupMember" resultType="int" parameterType="int">
+		select count(*) from group_member where group_no= #{groupNo}
+	</select>
 </mapper>

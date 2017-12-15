@@ -11,8 +11,13 @@ public class ChattingDAOImpl extends SqlSessionDaoSupport
 	private String namespace= "config.chatting";
 
 	@Override
-	public List<ChattingVO> showAll(int groupNo) {
-		return getSqlSession().selectList(namespace+ ".showAll", groupNo);
+	public List<ChattingVO> showAllChat(int groupNo) {
+		return getSqlSession().selectList(namespace+ ".showAllChat", groupNo);
+	}
+
+	@Override
+	public List<ChattingUserVO> showAllUser(int groupNo) {
+		return getSqlSession().selectList(namespace+ ".showAllUser", groupNo);
 	}
 
 }

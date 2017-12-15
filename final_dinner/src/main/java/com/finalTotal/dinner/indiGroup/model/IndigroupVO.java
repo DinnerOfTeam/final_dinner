@@ -7,10 +7,16 @@ public final class IndigroupVO {
 			group_name VARCHAR2(100) NOT NULL,  그룹이름 
 			group_info VARCHAR2(600)  설명 
 		);*/
-	private int groupNo, memNo;
+	private int groupNo, memNo, numGroupMember;
 	private String groupName, groupInfo;
 	public int getGroupNo() {
 		return groupNo;
+	}
+	public int getNumGroupMember() {
+		return numGroupMember;
+	}
+	public void setNumGroupMember(int numGroupMember) {
+		this.numGroupMember = numGroupMember;
 	}
 	public void setGroupNo(int groupNo) {
 		this.groupNo = groupNo;

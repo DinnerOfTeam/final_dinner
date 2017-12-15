@@ -9,4 +9,6 @@ public interface IndiGroupService {
 	public List<IndigroupVO> selectByGroupName(String name);
 	public int regiGroup(GroupRegiVO vo);
 	public int insertGroupMember(GroupMemberVO vo);
+	public List<IndigroupVO> selectMyGroup(int memNo);
+	public int countNumberGroupMember(int groupNo);
 }

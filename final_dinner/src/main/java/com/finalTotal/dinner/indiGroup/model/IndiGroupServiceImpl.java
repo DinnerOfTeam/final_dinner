@@ -34,6 +34,16 @@ public class IndiGroupServiceImpl implements IndiGroupService{
 	public int insertGroupMember(GroupMemberVO vo) {
 		return dao.insertGroupMember(vo);
 	}
+
+	@Override
+	public List<IndigroupVO> selectMyGroup(int memNo) {
+		return dao.selectMyGroup(memNo);
+	}
+
+	@Override
+	public int countNumberGroupMember(int groupNo) {
+		return dao.countNumberGroupMember(groupNo);
+	}
 	
 	
 }
