@@ -2,56 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="inc/top.jsp" %>
 
-<style type="text/css">
-	.food-search-form{
-		padding: 4em 0 0 0;
-	}
-	
-	.food-search-result{
-		padding: 4em 0;
-	}
-	
-	.list-group-item.search-location-tabs{
-		padding: 0;
-	}
-	
-	.list-group-item.search-location-tabs > .tab-content, .list-group-item.search-location-tabs >.location-selected {
-		padding: 10px 15px;
-	}
-	
-	.list-group-item .form-group {
-		margin: 0;
-	}
-	
-	.food-search-form .btn-bottom{
-		text-align: center;
-	}
-	
-	.restaurant-search-inner{
-		width: 100%;
-		background-color: white;
-		margin: 15px 0;
-		box-shadow: 0 0 0.25em 0.0005em #999;
-		overflow: hidden;
-		color: black;
-	}
-	
-	.restaurant-search-inner > *{
-		padding: 0;
-	}
-	
-	.restaurant-search-inner > .restaurant-search-img > img{
-		width: 100%;
-	}
-	
-	.restaurant-search-inner > .restaurant-search-desc, .restaurant-search-inner > .restaurant-search-img{
-		padding: 0.5em;
-	}
-	
-	.restaurant-search-inner > .restaurant-search-desc > *{
-		margin: 0.1em 0 0.25em 0;
-	}
-</style>
+<link href="css/site-search.css" rel="stylesheet" type="text/css" media="all" />
 
 	
 	<!-- search-->
@@ -62,7 +13,7 @@
 					<form class="form-horizontal">
 						<ul class="list-group wow fadeInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 							<li class="list-group-item search-location-tabs">
-								<ul class="nav nav-tabs">
+								<ul class="nav nav-tabs search-tabs search-tabs">
 									<li class="active"><a href="#seoul" data-toggle="tab">서울</a></li>
 									<li class=""><a href="#incheon" data-toggle="tab">인천</a></li>
 									<li class=""><a href="#gyeonggi" data-toggle="tab">경기</a></li>

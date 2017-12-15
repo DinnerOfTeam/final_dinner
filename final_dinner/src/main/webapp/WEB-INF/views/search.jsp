@@ -11,7 +11,7 @@
 				<form class="form-horizontal">
 					<ul class="list-group wow fadeInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
 						<li class="list-group-item search-location-tabs">
-							<ul class="nav nav-pills">
+							<ul class="nav nav-tabs search-tabs">
 								<li class="active"><a href="#seoul" data-toggle="tab">서울</a></li>
 								<li class=""><a href="#incheon" data-toggle="tab">인천</a></li>
 								<li class=""><a href="#gyeonggi" data-toggle="tab">경기</a></li>

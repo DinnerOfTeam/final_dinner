@@ -30,9 +30,18 @@
 		});
 		
 		$('.comments-act > a').click(function(){
+			var width=600;
+			var height=450;
+			
+			var top=($(window).height()/2)-(height/2);
+			var left=($(window).width()/2)-(width/2);
+			
+			
+			
 			event.preventDefault();
 			window.open($(this).attr("href"), 'commentsAct',
-				'width=600px, height=350px, top=0, left=0, location=yes, resizable=yes');
+				'width='+width+'px, height='+height+'px,'
+				+'top='+top+', left='+left+', location=yes, resizable=yes');
 		});
 		
 	});
@@ -86,22 +95,31 @@
 							<c:forEach var="cVO" items="${commentList }">
 								<div class="board-detail-comments-row"
 										style="margin-left: ${(cVO.commentStep-1)*1.5}em;">
-									<div class="board-detail-comments-sub">
-										<div class="col-left col-sm-8">
-											${cVO.commentName}
-											<span><fmt:formatDate value="${cVO.commentRegdate}" pattern="yyyy-MM-dd hh:mm" /></span>
-										</div>
-										<div class="comments-act col-right col-sm-4">
-											<a href="<c:url value='/board/comments/reply.do?boardNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">답글</a>
-											|
-											<a href="<c:url value='/board/comments/edit.do?boardNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">수정</a>
-											|
-											<a href="<c:url value='/board/comments/delete.do?boardNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">삭제</a>
-										</div>
-									</div>
-									<div class="board-detail-comments-contents">
-										${cVO.commentContents}
-									</div>
+									<c:choose>
+										<c:when test="${cVO.commentDelFlag=='N' }">
+											<div class="board-detail-comments-sub">
+												<div class="col-left col-sm-8">
+													${cVO.commentName}
+													<span><fmt:formatDate value="${cVO.commentRegdate}" pattern="yyyy-MM-dd hh:mm" /></span>
+												</div>
+												<div class="comments-act col-right col-sm-4">
+													<a href="<c:url value='/board/comment/reply.do?freeNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">답글</a>
+													|
+													<a href="<c:url value='/board/comment/edit.do?commentNo=${cVO.commentNo}'/>">수정</a>
+													|
+													<a href="<c:url value='/board/comment/delete.do?commentNo=${cVO.commentNo}'/>">삭제</a>
+												</div>
+											</div>
+											<div class="board-detail-comments-contents">
+												${cVO.commentContents}
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="board-detail-comments-del">
+												<p>삭제된 댓글입니다.</p>
+											</div>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</c:forEach>
 						</c:otherwise>

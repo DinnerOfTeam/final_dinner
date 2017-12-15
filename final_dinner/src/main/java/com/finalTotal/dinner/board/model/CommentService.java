@@ -7,7 +7,8 @@ public interface CommentService {
 	public int insertComment(CommentVO vo);
 	public int replyComment(CommentVO vo);
 	public List<CommentVO> selectCommentByFreeNo(int freeNo);
-	public int editComment(int no);
+	public CommentVO selectCommentByCommentNo(int commentNo);
+	public int editComment(CommentVO vo);
 	public int deleteComment(int no);
 	
 }

@@ -21,8 +21,12 @@ public class CommentDAOMyBatis extends SqlSessionDaoSupport implements CommentDA
 		return getSqlSession().selectList(namespace+".selectCommentByFreeNo", freeNo);
 	}
 	
-	public int editComment(int no) {
-		return getSqlSession().update(namespace+".editComment", no);
+	public CommentVO selectCommentByCommentNo(int commentNo) {
+		return getSqlSession().selectOne(namespace+".selectCommentByCommentNo", commentNo);
+	}
+	
+	public int editComment(CommentVO vo) {
+		return getSqlSession().update(namespace+".editComment", vo);
 	}
 	
 	public int deleteComment(int no) {

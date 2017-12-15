@@ -84,8 +84,10 @@ public class BoardCon {
 		vo.setFreeContents(freeContents);
 		
 		for(CommentVO cVo : commentList) {
-			String commentContents=cVo.getCommentContents().replace("\r\n", "<br>");
-			cVo.setCommentContents(commentContents);
+			if(cVo.getCommentDelFlag().equals("N")) {
+				String commentContents=cVo.getCommentContents().replace("\r\n", "<br>");
+				cVo.setCommentContents(commentContents);
+			}
 		}
 		
 		model.addAttribute("vo", vo);
@@ -158,7 +160,8 @@ public class BoardCon {
 		
 		if(vo!=null) {
 			//수정권한 확인
-			errFlag = isEdit(vo, session);
+			Map<String, Object> editMap=isEdit(vo, session);
+			errFlag = (Boolean)editMap.get("errFlag");
 				
 			if(errFlag) {
 				msg="수정권한이 없습니다.";
@@ -194,47 +197,58 @@ public class BoardCon {
 		
 		if(vo!=null) {
 			//수정권한 확인
-			errFlag = isEdit(vo, session);
-			
+			Map<String, Object> editMap=isEdit(vo, session);
+			errFlag = (Boolean)editMap.get("errFlag");
+			boolean isMember=(Boolean)editMap.get("isMember");
+
 			if(errFlag) {
 				msg="수정권한이 없습니다.";
 				url="/board/list.do";
-			}else if(vo.getMemNo()==0
-					&& vo.getFreePwd()!=null && !vo.getFreePwd().isEmpty()
-					&& !vo.getFreePwd().equals(boardVO.getFreePwd())) {
+				back=false;
+			}else if(!isMember) {
 				//비회원글일 경우 비밀번호 체크
-				msg="비밀번호가 일치하지 않습니다.";
-				errFlag=true;
+
+				int memGrade=0;
+				if(editMap.get("memGrade")!=null) {
+					memGrade=(Integer)editMap.get("memGrade");
+				}
+				
+				if(memGrade!=9 && (boardVO.getFreePwd()==null ||
+						!boardVO.getFreePwd().equals(vo.getFreePwd()))) {
+					msg="비밀번호가 일치하지 않습니다.";
+					back=true;
+					errFlag=true;
+				}
 			}
 		}
 		
 		if(!errFlag) {
 			//유효성 검사
-			url="";
-			back=true;
-			if(boardVO.getFreeTitle()==null || boardVO.getFreeTitle().isEmpty()) {
-				msg="제목이 없습니다.";
+			
+			
+			Map<String, Object> vetifi=boardVerifi(boardVO, session);
+			errFlag=(Boolean)vetifi.get("errFlag");
+			
+			if(errFlag) {
+				msg=(String)vetifi.get("msg");
+				url="";
+				back=true;
 			}else {
-				Map<String, Object> vetifi=boardVerifi(boardVO, session);
-				errFlag=(Boolean)vetifi.get("errFlag");
+				if(memId!=null && !memId.isEmpty()){
+					vo.setFreeName(null);
+				}
 				
-				if(errFlag) {
-					msg=(String)vetifi.get("msg");
+				int cnt=boardService.editBoard(boardVO);
+				logger.info("게시판 글수정 처리 결과, cnt={}", cnt);
+				
+				if(cnt>0) {
+					msg="글수정 완료";
+					url="/board/detail.do?no="+boardVO.getFreeNo();
+					back=false;
 				}else {
-					if(memId!=null && !memId.isEmpty()){
-						vo.setFreeName(null);
-					}
-					
-					int cnt=boardService.editBoard(boardVO);
-					logger.info("게시판 글수정 처리 결과, cnt={}", cnt);
-					
-					if(cnt>0) {
-						msg="글수정 완료";
-						url="/board/detail.do?no="+boardVO.getFreeNo();
-						back=false;
-					}else {
-						msg="글수정 실패";
-					}
+					msg="글수정 실패";
+					url="";
+					back=true;
 				}
 			}
 		}
@@ -270,7 +284,8 @@ public class BoardCon {
 		
 		if(vo!=null) {
 			//삭제권한 확인
-			errFlag = isEdit(vo, session);
+			Map<String, Object> editMap=isEdit(vo, session);
+			errFlag = (Boolean)editMap.get("errFlag");
 			
 			if(errFlag) {
 				msg="삭제권한이 없습니다.";
@@ -304,19 +319,25 @@ public class BoardCon {
 		
 		if(vo!=null) {
 			//삭제권한 확인
-			errFlag = isEdit(vo, session);
+			Map<String, Object> editMap=isEdit(vo, session);
+			errFlag = (Boolean)editMap.get("errFlag");
+			boolean isMember=(Boolean)editMap.get("isMember");
 			
 			if(errFlag) {
-				msg="수정권한이 없습니다.";
-			}else if(vo.getMemNo()==0
-					&& vo.getFreePwd()!=null && !vo.getFreePwd().isEmpty()
-					&& !vo.getFreePwd().equals(boardVO.getFreePwd())) {
+				msg="삭제권한이 없습니다.";
+			}else if(!isMember) {
 				//비회원글일 경우 비밀번호 체크
-				msg="비밀번호가 일치하지 않습니다.";
+				int memGrade=0;
+				if(editMap.get("memGrade")!=null) {
+					memGrade=(Integer)editMap.get("memGrade");
+				}
 				
-				url="";
-				back=true;
-				errFlag=true;
+				if(memGrade!=9 && (boardVO.getFreePwd()==null
+						|| !boardVO.getFreePwd().equals(vo.getFreePwd()))) {
+					msg="비밀번호가 일치하지 않습니다.";
+					back=true;
+					errFlag=true;
+				}
 			}
 			
 		}
@@ -342,8 +363,11 @@ public class BoardCon {
 		return "common/message";
 	}
 	
-	private boolean isEdit(BoardVO boardVO, HttpSession session) {
+	//수정/삭제 권한 확인
+	private Map<String, Object> isEdit(BoardVO boardVO, HttpSession session) {
+		Map<String, Object> chkComment=new HashMap<String, Object>();
 		boolean errFlag=true;
+		boolean isMember=false;
 		
 		String memId=(String)session.getAttribute("memId");
 		int memNo=0;
@@ -355,6 +379,10 @@ public class BoardCon {
 		if(memId!=null && !memId.isEmpty()){
 			memberVO=memberService.selectMember(memId);
 		}
+		int memGrade=0;
+		if(memberVO!=null){
+			memGrade=memberVO.getMemGrade();
+		}
 		
 		//글 작성자 회원/비회원 여부 확인
 		if(boardVO.getMemNo()!=0
@@ -362,22 +390,29 @@ public class BoardCon {
 			//회원일때 - 요청자 수정권한 확인(본인, 관리자만 수정가능)
 			if(memId!=null && !memId.isEmpty()) {
 			//요청자 회원 - 정보조회
-				int memGrade=memberVO.getMemGrade();
 				
 				//요청자가 본인이거나 관리자이면 수정 가능
 				if(memGrade==9 || memNo==boardVO.getMemNo()) {
 					errFlag=false;
 				}
 			}
+			isMember=true;
 			
 		}else {
 			//비회원일때 - 수정가능
 			errFlag=false;
+			isMember=false;
 		}
 		
-		return errFlag;
+		
+		chkComment.put("memGrade", memGrade);
+		chkComment.put("isMember", isMember);
+		chkComment.put("errFlag", errFlag);
+		
+		return chkComment;
 	}
 	
+	//유효성검사
 	private Map<String, Object> boardVerifi(BoardVO boardVO, HttpSession session){
 		Map<String, Object> chkBoard=new HashMap<String, Object>();
 		String msg="";
@@ -390,21 +425,32 @@ public class BoardCon {
 			memNo=(Integer)session.getAttribute("memNo");
 		}
 		
-		if(memId!=null && !memId.isEmpty()) {
-			//회원
-			
-			boardVO.setFreeName(memName);
-			boardVO.setMemNo(memNo);
-			boardVO.setFreePwd("");
-			
-		}else {
-			//비회원
-			if(boardVO.getFreeName()==null || boardVO.getFreeName().isEmpty()) {
-				msg="이름이 없습니다";
+		//공통사항
+		if(boardVO.getFreeTitle()==null || boardVO.getFreeTitle().isEmpty()) {
+			msg="제목이 없습니다";
+			errFlag=false;
+		}
+		
+		if(!errFlag) {
+			if(memId!=null && !memId.isEmpty()) {
+				//회원
+				
+				boardVO.setFreeName(memName);
+				boardVO.setMemNo(memNo);
+				boardVO.setFreePwd("");
+				
+				errFlag=false;
+			}else {
+				//비회원
 				errFlag=true;
-			}else if(boardVO.getFreePwd()==null || boardVO.getFreePwd().isEmpty()) {
-				msg="비밀번호가 없습니다";
-				errFlag=true;
+				if(boardVO.getFreeName()==null || boardVO.getFreeName().isEmpty()) {
+					msg="이름이 없습니다";
+					errFlag=true;
+				}else if(boardVO.getFreePwd()==null || boardVO.getFreePwd().isEmpty()) {
+					msg="비밀번호가 없습니다";
+				}else {
+					errFlag=false;
+				}
 			}
 		}
 		

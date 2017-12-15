@@ -24,10 +24,15 @@ public class CommentServiceImpl implements CommentService{
 	public List<CommentVO> selectCommentByFreeNo(int freeNo) {
 		return commentDAO.selectCommentByFreeNo(freeNo);
 	}
+	
+	@Override
+	public CommentVO selectCommentByCommentNo(int commentNo) {
+		return commentDAO.selectCommentByCommentNo(commentNo);
+	}
 
 	@Override
-	public int editComment(int no) {
-		return commentDAO.editComment(no);
+	public int editComment(CommentVO vo) {
+		return commentDAO.editComment(vo);
 	}
 
 	@Override

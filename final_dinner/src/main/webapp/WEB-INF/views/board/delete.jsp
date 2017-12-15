@@ -26,7 +26,7 @@
 	<div class="container">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="board-inner">
-				<form name="frmBoardDelete" method="post" action="#">
+				<form name="frmBoardDelete" method="post" action="<c:url value='/board/delete.do'/>">
 					<input type="hidden" name="freeNo" value="${vo.freeNo }">
 					<div class="form-group">
 						<h3>글 삭제</h3>

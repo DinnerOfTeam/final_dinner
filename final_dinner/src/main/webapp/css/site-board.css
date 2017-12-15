@@ -186,6 +186,7 @@
 
 .board-detail-comments{
 	margin: 0;
+	background-color: #FFF;
 }
 
 .board-detail-comments-list{
@@ -209,6 +210,16 @@
 	padding: 0.75em 0;
 }
 
+.board-detail-comments-del{
+	color: #999;
+	background-color: #F7F7F7;
+	padding: 1em;
+}
+
+.board-detail-comments-del>p{
+	margin: 0;
+}
+
 .board-detail-comments-sub{
 	padding: 0.25em;
 	background-color: #EEE;
@@ -218,7 +229,7 @@
 
 .board-detail-comments-contents{
 	padding : 0.5em;
-	border bottom: #EEE solid 1px;
+	border-bottom: #EEE solid 1px;
 }
 
 .board-comments-form-top>div{
