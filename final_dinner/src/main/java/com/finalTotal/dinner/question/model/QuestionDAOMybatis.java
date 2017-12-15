@@ -25,12 +25,12 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 
 	@Override
 	public int updateReadCount(int no) {
-		return getSqlSession().update(namespace+".updateReadCount");
+		return getSqlSession().update(namespace+".updateReadCount",no);
 	}
 
 	@Override
 	public QuestionVO selectByNo(int no) {
-		return getSqlSession().selectOne(namespace+".selectByNo");
+		return getSqlSession().selectOne(namespace+".selectByNo",no);
 	}
 	
 	

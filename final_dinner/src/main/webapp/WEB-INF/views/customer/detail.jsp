@@ -9,21 +9,28 @@
 </head>
 <body>
 	<h2>글 상세보기</h2>
-	<table>
+	<table border="1">
+		<colgroup>
+				<col style="width:10%;" />
+				<col style="width:10%;" />
+				<col style="width:15%;" />
+				<col style="width:15%;" />
+				<col style="width:10%;" />	
+			</colgroup>
 		<tr>
-			<td>제목</td>
-			<td>${vo.questionTitle }</td>
+			<td colspan="3">제목</td>
+			<td colspan="3">${vo.questionTitle }</td>
 		</tr>
 		<tr>
 			<td>작성자</td>
-			<td>${vo.}</td>
+			<td>${vo.memNo}</td>
 			<td>등록일</td>
 			<td>${vo.questionRegdate}</td>
 			<td>조회수</td>
 			<td>${vo.questionViewCount}</td>
 		</tr>
 		<tr>
-			<td></td>
+			<td colspan="6" height="">${vo.questionContent }</td>
 		</tr>
 	</table>
 </body>

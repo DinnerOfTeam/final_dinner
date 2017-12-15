@@ -32,8 +32,7 @@ public class QuestionCon {
 	
 	@Autowired
 	private QuestionService questionService;
-	
-	
+
 	//글쓰기
 	@RequestMapping(value="/write.do", method=RequestMethod.GET)
 	String write_get() {
@@ -45,21 +44,25 @@ public class QuestionCon {
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
 	String write_post(HttpServletRequest request, @ModelAttribute
 			QuestionVO questionVo, Model model,HttpSession session){
-		logger.info("글쓰기 처리-파라미터");
+		logger.info("글쓰기 처리-파라미터 questionVo={}", questionVo);
+		
+		/*String memId = (String)session.getAttribute("memId");
+		MemberVO vo = memberService.selectMember(memId);
+		int memNo = vo.getMemNo();
+		int memNo = session.getAttribute("memNo");
+		questionVo = vo.getMemNo(memNo);*/
+		//session가져오기
+		
+		int memNo=0;
+		if(session.getAttribute("memNo")!=null)
+		{
+			memNo = (Integer)session.getAttribute("memNo");
+			questionVo.setMemNo(memNo);
+		}
 		
 		int cnt = questionService.insertqna(questionVo);
 		logger.info("글쓰기 결과, cnt={}", cnt);
-		
-		String memId = (String)session.getAttribute("memId");
-		
-		MemberService service = new MemberServiceImpl();
-		MemberVO vo = service.selectMember(memId);
-		int num = vo.getMemNo();
-		/*
-		 1) session id를 가지고 온다
-		 2) 가지고 온 session으로 mem_no를 찾는다
-		 3) insert한다.
-		 */
+
 		
 		String msg="", url="";
 		
@@ -112,7 +115,7 @@ public class QuestionCon {
 		
 		if(no==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
-			model.addAttribute("url", "/board/list.do");
+			model.addAttribute("url", "/customer/list.do");
 			return "common/message";
 		}
 		
@@ -121,28 +124,28 @@ public class QuestionCon {
 		
 		return "redirect:/customer/detail.do?no="+no;
 	}
-	@RequestMapping("/board/detail.do")
+	@RequestMapping("/detail.do")
 	public String detail(@RequestParam(defaultValue="0") int no, 
 			ModelMap model) {
 		logger.info("상세보기 파라미터 no={}", no);
 		
 		if(no==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
-			model.addAttribute("url", "/board/list.do");
+			model.addAttribute("url", "/customer/list.do");
 			return "common/message";
 		}
 		
 		QuestionVO vo =questionService.selectByNo(no);
 		logger.info("상세보기 결과, vo={}", vo);
 		
-		String content=vo.getQuestionViewContent();
+		String content=vo.getQuestionContent();
 		if(content!=null && !content.isEmpty()) {
 			content=content.replace("\r\n", "<br>");
-			vo.setQuestionViewContent(content);
+			vo.setQuestionContent(content);
 		}
 		
 		model.addAttribute("vo", vo);
 		
-		return "board/detail";
+		return "customer/detail";
 	}
 }

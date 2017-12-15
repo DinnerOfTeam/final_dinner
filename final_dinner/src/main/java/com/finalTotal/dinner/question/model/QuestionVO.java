@@ -6,7 +6,7 @@ public class QuestionVO {
 	private int qnaQuestionNo;
 	private int memNo;
 	private String questionTitle;
-	private String questionViewContent;
+	private String questionContent;
 	private int questionViewCount;
 	private Timestamp questionRegdate;
 	private String questionOpen;
@@ -30,11 +30,11 @@ public class QuestionVO {
 	public void setQuestionTitle(String questionTitle) {
 		this.questionTitle = questionTitle;
 	}
-	public String getQuestionViewContent() {
-		return questionViewContent;
+	public String getQuestionContent() {
+		return questionContent;
 	}
-	public void setQuestionViewContent(String questionViewContent) {
-		this.questionViewContent = questionViewContent;
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
 	}
 	public int getQuestionViewCount() {
 		return questionViewCount;
@@ -69,7 +69,7 @@ public class QuestionVO {
 	@Override
 	public String toString() {
 		return "QuestionVO [qnaQuestionNo=" + qnaQuestionNo + ", memNo=" + memNo + ", questionTitle=" + questionTitle
-				+ ", questionViewContent=" + questionViewContent + ", questionViewCount=" + questionViewCount
+				+ ", questionContent=" + questionContent + ", questionViewCount=" + questionViewCount
 				+ ", questionRegdate=" + questionRegdate + ", questionOpen=" + questionOpen + ", questionPwd="
 				+ questionPwd + ", qnaTypeNo=" + qnaTypeNo + "]";
 	}
