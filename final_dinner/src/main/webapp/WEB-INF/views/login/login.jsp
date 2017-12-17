@@ -24,12 +24,15 @@
 .nav-tabs>li {
 	width: 33.3%;
 }
+
+
+
 </style>
 
 
 
 
-<!-- login -->
+ <!-- login -->
 <div class="login">
 	<div class="container">
 		<div class="login-body">
@@ -78,5 +81,7 @@
 	</div>
 </div>
 <!-- //login -->
+
+
 
 <%@include file="../inc/footer.jsp"%>
