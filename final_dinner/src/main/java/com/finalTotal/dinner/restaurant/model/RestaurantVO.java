@@ -3,198 +3,200 @@ package com.finalTotal.dinner.restaurant.model;
 import java.sql.Timestamp;
 
 public class RestaurantVO {
-	private int res_no;	//식당번호
-	private int mem_no;	//회원번호
-	private int food_type_no; //음식종류번호
-	private int res_type_no; //식당 종류번호 
-	private String res_name; //이름
-	private String res_introduce; //소개
-	private String res_work_day; //영업일
-	private String res_work_hour; //영업시간
-	private String thumbnail; //썸네일
-	private int res_grade; //평점
-	private int res_max_person; //최대인원
-	private String res_contact;	//연락처
-	private String res_zipcode; //우편번호
-	private String res_address; //주소
-	private String res_address_detail; //상세주소
-	private Timestamp res_regdate; //등록일
-	private String res_status; //상태
-	
+	private int resNo;	//식당번호(시퀀스)
+	private int memNo;	//회원번호
+	private int foodTypeNno; //음식종류번호
+	private int resTypeNo; //식당 종류번호 
+	private String resName; //식당이름
+	private String resIntroduce; //소개
+	private String resWork_day; //영업일
+	private String resWork_hour; //영업시간
+	private String resThumbnail; //썸네일(이미지 경로)-fileName과 같음
+	private int resGrade; //평점(0.0~5.0) 0.5단위
+	private int resMaxPerson; //최대인원(예약가능한 최대인원)
+	private String resContact;	//연락처
+	private String resZipcode; //우편번호
+	private String resAddress; //주소
+	private String resAddressDetail; //상세주소
+	private Timestamp resRegdate; //등록일
+	private String resStatus; //상태(승인대기중,승인됨,차단됨)
+
 	public RestaurantVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RestaurantVO(int res_no, int mem_no, int food_type_no, int res_type_no, String res_name,
-			String res_introduce, String res_work_day, String res_work_hour, String thumbnail, int res_grade,
-			int res_max_person, String res_contact, String res_zipcode, String res_address, String res_address_detail,
-			Timestamp res_regdate, String res_status) {
+	public RestaurantVO(int resNo, int memNo, int foodTypeNno, int resTypeNo, String resName, String resIntroduce,
+			String resWork_day, String resWork_hour, String resThumbnail, int resGrade, int resMaxPerson,
+			String resContact, String resZipcode, String resAddress, String resAddressDetail, Timestamp resRegdate,
+			String resStatus) {
 		super();
-		this.res_no = res_no;
-		this.mem_no = mem_no;
-		this.food_type_no = food_type_no;
-		this.res_type_no = res_type_no;
-		this.res_name = res_name;
-		this.res_introduce = res_introduce;
-		this.res_work_day = res_work_day;
-		this.res_work_hour = res_work_hour;
-		this.thumbnail = thumbnail;
-		this.res_grade = res_grade;
-		this.res_max_person = res_max_person;
-		this.res_contact = res_contact;
-		this.res_zipcode = res_zipcode;
-		this.res_address = res_address;
-		this.res_address_detail = res_address_detail;
-		this.res_regdate = res_regdate;
-		this.res_status = res_status;
+		this.resNo = resNo;
+		this.memNo = memNo;
+		this.foodTypeNno = foodTypeNno;
+		this.resTypeNo = resTypeNo;
+		this.resName = resName;
+		this.resIntroduce = resIntroduce;
+		this.resWork_day = resWork_day;
+		this.resWork_hour = resWork_hour;
+		this.resThumbnail = resThumbnail;
+		this.resGrade = resGrade;
+		this.resMaxPerson = resMaxPerson;
+		this.resContact = resContact;
+		this.resZipcode = resZipcode;
+		this.resAddress = resAddress;
+		this.resAddressDetail = resAddressDetail;
+		this.resRegdate = resRegdate;
+		this.resStatus = resStatus;
 	}
 
-	public int getRes_no() {
-		return res_no;
+	public int getResNo() {
+		return resNo;
 	}
 
-	public void setRes_no(int res_no) {
-		this.res_no = res_no;
+	public void setResNo(int resNo) {
+		this.resNo = resNo;
 	}
 
-	public int getMem_no() {
-		return mem_no;
+	public int getMemNo() {
+		return memNo;
 	}
 
-	public void setMem_no(int mem_no) {
-		this.mem_no = mem_no;
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
 	}
 
-	public int getFood_type_no() {
-		return food_type_no;
+	public int getFoodTypeNno() {
+		return foodTypeNno;
 	}
 
-	public void setFood_type_no(int food_type_no) {
-		this.food_type_no = food_type_no;
+	public void setFoodTypeNno(int foodTypeNno) {
+		this.foodTypeNno = foodTypeNno;
 	}
 
-	public int getRes_type_no() {
-		return res_type_no;
+	public int getResTypeNo() {
+		return resTypeNo;
 	}
 
-	public void setRes_type_no(int res_type_no) {
-		this.res_type_no = res_type_no;
+	public void setResTypeNo(int resTypeNo) {
+		this.resTypeNo = resTypeNo;
 	}
 
-	public String getRes_name() {
-		return res_name;
+	public String getResName() {
+		return resName;
 	}
 
-	public void setRes_name(String res_name) {
-		this.res_name = res_name;
+	public void setResName(String resName) {
+		this.resName = resName;
 	}
 
-	public String getRes_introduce() {
-		return res_introduce;
+	public String getResIntroduce() {
+		return resIntroduce;
 	}
 
-	public void setRes_introduce(String res_introduce) {
-		this.res_introduce = res_introduce;
+	public void setResIntroduce(String resIntroduce) {
+		this.resIntroduce = resIntroduce;
 	}
 
-	public String getRes_work_day() {
-		return res_work_day;
+	public String getResWork_day() {
+		return resWork_day;
 	}
 
-	public void setRes_work_day(String res_work_day) {
-		this.res_work_day = res_work_day;
+	public void setResWork_day(String resWork_day) {
+		this.resWork_day = resWork_day;
 	}
 
-	public String getRes_work_hour() {
-		return res_work_hour;
+	public String getResWork_hour() {
+		return resWork_hour;
 	}
 
-	public void setRes_work_hour(String res_work_hour) {
-		this.res_work_hour = res_work_hour;
+	public void setResWork_hour(String resWork_hour) {
+		this.resWork_hour = resWork_hour;
 	}
 
-	public String getThumbnail() {
-		return thumbnail;
+	public String getResThumbnail() {
+		return resThumbnail;
 	}
 
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
+	public void setResThumbnail(String resThumbnail) {
+		this.resThumbnail = resThumbnail;
 	}
 
-	public int getRes_grade() {
-		return res_grade;
+	public int getResGrade() {
+		return resGrade;
 	}
 
-	public void setRes_grade(int res_grade) {
-		this.res_grade = res_grade;
+	public void setResGrade(int resGrade) {
+		this.resGrade = resGrade;
 	}
 
-	public int getRes_max_person() {
-		return res_max_person;
+	public int getResMaxPerson() {
+		return resMaxPerson;
 	}
 
-	public void setRes_max_person(int res_max_person) {
-		this.res_max_person = res_max_person;
+	public void setResMaxPerson(int resMaxPerson) {
+		this.resMaxPerson = resMaxPerson;
 	}
 
-	public String getRes_contact() {
-		return res_contact;
+	public String getResContact() {
+		return resContact;
 	}
 
-	public void setRes_contact(String res_contact) {
-		this.res_contact = res_contact;
+	public void setResContact(String resContact) {
+		this.resContact = resContact;
 	}
 
-	public String getRes_zipcode() {
-		return res_zipcode;
+	public String getResZipcode() {
+		return resZipcode;
 	}
 
-	public void setRes_zipcode(String res_zipcode) {
-		this.res_zipcode = res_zipcode;
+	public void setResZipcode(String resZipcode) {
+		this.resZipcode = resZipcode;
 	}
 
-	public String getRes_address() {
-		return res_address;
+	public String getResAddress() {
+		return resAddress;
 	}
 
-	public void setRes_address(String res_address) {
-		this.res_address = res_address;
+	public void setResAddress(String resAddress) {
+		this.resAddress = resAddress;
 	}
 
-	public String getRes_address_detail() {
-		return res_address_detail;
+	public String getResAddressDetail() {
+		return resAddressDetail;
 	}
 
-	public void setRes_address_detail(String res_address_detail) {
-		this.res_address_detail = res_address_detail;
+	public void setResAddressDetail(String resAddressDetail) {
+		this.resAddressDetail = resAddressDetail;
 	}
 
-	public Timestamp getRes_regdate() {
-		return res_regdate;
+	public Timestamp getResRegdate() {
+		return resRegdate;
 	}
 
-	public void setRes_regdate(Timestamp res_regdate) {
-		this.res_regdate = res_regdate;
+	public void setResRegdate(Timestamp resRegdate) {
+		this.resRegdate = resRegdate;
 	}
 
-	public String getRes_status() {
-		return res_status;
+	public String getResStatus() {
+		return resStatus;
 	}
 
-	public void setRes_status(String res_status) {
-		this.res_status = res_status;
+	public void setResStatus(String resStatus) {
+		this.resStatus = resStatus;
 	}
 
 	@Override
 	public String toString() {
-		return "RestaurantVO [res_no=" + res_no + ", mem_no=" + mem_no + ", food_type_no=" + food_type_no
-				+ ", res_type_no=" + res_type_no + ", res_name=" + res_name + ", res_introduce=" + res_introduce
-				+ ", res_work_day=" + res_work_day + ", res_work_hour=" + res_work_hour + ", thumbnail=" + thumbnail
-				+ ", res_grade=" + res_grade + ", res_max_person=" + res_max_person + ", res_contact=" + res_contact
-				+ ", res_zipcode=" + res_zipcode + ", res_address=" + res_address + ", res_address_detail="
-				+ res_address_detail + ", res_regdate=" + res_regdate + ", res_status=" + res_status + "]";
+		return "RestaurantVO [resNo=" + resNo + ", memNo=" + memNo + ", foodTypeNno=" + foodTypeNno + ", resTypeNo="
+				+ resTypeNo + ", resName=" + resName + ", resIntroduce=" + resIntroduce + ", resWork_day=" + resWork_day
+				+ ", resWork_hour=" + resWork_hour + ", resThumbnail=" + resThumbnail + ", resGrade=" + resGrade
+				+ ", resMaxPerson=" + resMaxPerson + ", resContact=" + resContact + ", resZipcode=" + resZipcode
+				+ ", resAddress=" + resAddress + ", resAddressDetail=" + resAddressDetail + ", resRegdate=" + resRegdate
+				+ ", resStatus=" + resStatus + "]";
 	}
+	
+	
 	
 	
 }
