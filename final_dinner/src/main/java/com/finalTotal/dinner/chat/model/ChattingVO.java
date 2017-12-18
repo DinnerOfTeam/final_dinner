@@ -11,13 +11,19 @@ public class ChattingVO {
 			chat_regdate DATE DEFAULT sysdate  작성시간 
 		);*/
 	private int chatNo, groupNo, memNo;
-	private String chatContents;
+	private String chatContents, memName;
 	private Date chatRegdate;
 	public int getChatNo() {
 		return chatNo;
 	}
 	public void setChatNo(int chatNo) {
 		this.chatNo = chatNo;
+	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
 	}
 	public int getGroupNo() {
 		return groupNo;

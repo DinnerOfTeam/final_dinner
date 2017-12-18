@@ -1,0 +1,294 @@
+@charset "UTF-8";
+
+
+.img_size img{
+ width: 100px;
+ height: 70px;
+}
+.img_size a {
+ font-size: 0.8em;
+ color: black;
+}
+.search_form {
+ height: 70px;
+ padding-top: 30px;
+ text-align: center;
+}
+.qna_header {
+ padding-bottom: 15px;
+ border-bottom: 2px solid #353535;
+}
+.th_div {
+ font-weight: bold;
+}
+.font_size14 {
+ font-size: 140%;
+}
+.table_div {
+ border-top: 2px solid #353535;
+ border-bottom: 2px solid #353535;
+}
+.td_hover:hover {
+ background-color: rgb(158, 22, 22);
+ color: white !important;
+}
+.td_div {
+ padding: 0.2em 15px;
+}
+.th_header {
+ padding: 20px;
+}
+.tr_div {
+ border-bottom: 1px solid gray;
+ padding: 10px 0;
+}
+.level {
+    width: 23px;
+    height: 23px;
+    display: inline-block;
+    background-image: url(images/lev.jpg);
+    background-repeat: no-repeat;
+    color: white;
+  font-weight: bold;
+   text-align: center;
+}
+.help img {
+ width: 100%;
+}
+.info img {
+ width: 100%;
+}
+.info p {
+ text-align: center;
+}
+.clear_both {
+ clear: both;
+}
+.overflow {
+ overflow: hidden;
+}
+.pad_t30 {
+ padding-top: 30px;
+}
+.content_detail {
+ padding: 20px;
+ min-height: 300px;
+ max-height: 600px;
+ overflow-y: scroll;
+}
+.text_center {
+ text-align: center;
+}
+.border_both {
+ border-left: 1px solid gray;
+ border-right: 1px solid gray;
+}
+.border_right {
+ border-right: 1px solid gray;
+}
+.boarder_left {
+ border-left: 1px solid gray;
+}
+.page_div {
+ text-align: center;
+}
+.border_fieldset {
+ border: 2px solid #353535;
+ padding: 0 30px;
+}
+.border_fieldset legend {
+ width: auto;
+ border: 0;
+}
+
+.user_none {
+ color: rgba(0, 0, 0, 0.3);
+}
+.chat_time {
+ font-size: 0.7em;
+}
+.pad_both0 {
+ padding-left: 0;
+ padding-right: 0;
+}
+.badge-me {
+ text-align: right;
+}
+.badge-me .badge {
+ background-color: #03a9f4;
+}
+.badge-you .badge {
+ background-color: #ffc107;
+}
+
+
+.site-btn,
+.site-btn-submit {
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: .5em 1em;
+	font-size: 1em;
+	color: #fff;
+}
+
+.site-btn-full{
+	width: 100%;
+}
+
+.site-btn:hover,
+.site-btn-submit:hover {
+	color: #fff;
+}
+
+.site-btn {
+	background: rgb(158, 158, 158);
+	margin: 0;
+}
+
+.site-btn:hover {
+	background: rgb(208, 208, 208);
+}
+
+.site-btn-submit {
+	background: rgb(158, 22, 22);
+	margin: 0;
+}
+
+.site-btn-submit:hover {
+	background: rgb(208, 82, 82);
+}
+
+.form-select:hover {
+    background-color: #F9F9F9;
+}
+
+.form-wrap {
+    padding: 4em 0;
+}
+
+.form-row{
+	margin-bottom: 0;
+}
+
+.form-comp, .form-comp-row, .form-row{
+	overflow: hidden;
+}
+
+.form-static{
+	float: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.form-row, .form-comp-row {
+	margin-right: -15px;
+	margin-left: -15px;
+	overflow: hidden;
+}
+
+.form-heading {
+    background: rgb(158, 22, 22);
+    padding: 3em 0em;
+}
+
+.form-heading h1 {
+    color: #FFFFFF;
+    font-size: 2em;
+    text-align: center;
+}
+
+.form-body {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.form-info {
+    padding: 4em 1.5em 1em;
+    background: #FFFFFF;
+}
+
+.form-info .form-comp, .form-info .form-comp-row {
+	font-size: 1em;
+    color: #A8A8A8;
+    background: #FFFFFF;
+    margin-bottom: 1.5em;
+}
+
+.form-info .form-text, .form-info .form-select,
+.form-info textarea.form-text {
+	font-size: 0.9em;
+    width: 100%;
+    color: #A8A8A8;
+    background: #FFFFFF;
+    margin: 0 0 1.5em 0;
+}
+
+.form-info input.form-text, .form-info .form-select{
+    outline: none;
+    padding: 10px 0px;
+    border: 1px solid #D3D3D3;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.form-info .form-select>option {
+    background-color: #FFF;
+}
+
+.form-info textarea.form-text {
+	width: 100%;
+	padding: 10px;
+	outline: none;
+	border: 1px solid rgb(211, 211, 211);
+	background: rgb(255, 255, 255);
+	min-height: 10em;
+}
+
+.form-simple{
+	
+}
+
+.form-simple .form-comp, .form-simple .form-comp-row {
+	font-size: 1em;
+    color: #111111;
+    margin-bottom: 1.5em;
+}
+
+.form-simple .form-text, .form-simple .form-select,
+.form-simple textarea.form-text {
+	font-size: 0.9em;
+    width: 100%;
+    color: #111111;
+    background: none;
+    margin: 0 0 1.5em 0;
+}
+
+.form-simple input.form-text, .form-simple .form-select,
+.form-simple textarea.form-text {
+    outline: none;
+	padding: 10px 15px 10px 15px;
+	border: 1.5px solid #CBCBCB;
+}
+
+.form-simple textarea.form-text {
+	min-height: 10em;
+    resize: none;
+}
+
+.form-simple .form-group.row{
+	overflow: hidden;
+}
+
+.ali-center, .ali-center{
+	text-align: center;
+}
+
+.ali-left, .ali-left{
+	text-align: left;
+}
+
+.ali-right, .ali-right{
+	text-align: right;
+}

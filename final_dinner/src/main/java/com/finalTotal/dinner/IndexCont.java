@@ -22,5 +22,10 @@ public class IndexCont {
 		
 		return "test"; 
 	}
+	
+	@RequestMapping("/code.do")
+	public void code() {
+		
+	}
 
 }
