@@ -39,6 +39,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </script>	
 <!--animate-->
 <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<link href="${pageContext.request.contextPath }/css/codestyle.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/js/wow.min.js"></script>
 	<script>
 		 new WOW().init();
@@ -155,6 +156,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="<c:url value= '/#'/>">이벤트</a></li>								
 								<li><a href="<c:url value= '/customer/list.do'/>">고객센터</a></li>
 								<li><a href="<c:url value= '/indiGroup/groupMain.do'/>">그룹</a></li>
+								<li><a href="<c:url value= '/code.do'/>">코드</a></li>
 							</ul>	
 							<div class="clearfix"> </div>
 						</div>	
@@ -163,4 +165,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 	</header>
-	<section>
+	<section class= 'row'>
