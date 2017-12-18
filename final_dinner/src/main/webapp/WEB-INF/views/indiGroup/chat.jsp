@@ -47,7 +47,7 @@
 		<i class="fa fa-users" aria-hidden="true">유저 목록</i>
 		<div class= 'div_list'>
 			<c:forEach var="vo" items="${user_list }">
-				<span class= 'user_icon'><i class="fa fa-user-o left_align" aria-hidden="true"> ${vo } </i></span>
+				<span class= 'user_icon'><i class="fa fa-user-o left_align" aria-hidden="true"> ${vo.memName } </i></span>
 			</c:forEach>
 		</div>
 	</div>

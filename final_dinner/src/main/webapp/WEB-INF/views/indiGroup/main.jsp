@@ -30,7 +30,27 @@
 		text-align: left;
 	}
 </style>
+<script type="text/javascript">
+	$(function() {
+		$('select#groupNo').find('option').each(function() {
+			if($(this).val()== '${param.groupNo}') {
+				$(this).prop('selected', true);
+			}
+		});
+		$('form select').change(function() {
+			$('form').submit();
+		});
+	});
+</script>
 	<c:import url="../inc/indigroupSide.jsp" />
+				<form action="<c:url value='/indiGroup/main.do' />" method="post" 
+						name= "groupSelc" id= "groupSelc" style="text-align: right;">
+					<label for= 'groupNo'>그룹변경 :</label> <select name= groupNo id= 'groupNo'>
+						<c:forEach var="vo" items="${list }">
+							<option value="${vo.groupNo }">${vo.groupName }</option>
+						</c:forEach>
+					</select>
+				</form>
 				<div class= 'col-md-8'>
 					<div title="calender">
 						<c:import url="/indiGroup/calender.do" />

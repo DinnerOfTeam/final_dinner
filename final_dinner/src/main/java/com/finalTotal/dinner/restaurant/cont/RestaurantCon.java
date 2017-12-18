@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.finalTotal.dinner.member.cont.LoginCont;
 
@@ -14,11 +15,12 @@ public class RestaurantCon {
 	private static final Logger logger = LoggerFactory.getLogger(LoginCont.class);
 	
 	
-	@RequestMapping("/restaurant.do")
-	public String restaurantJoin() {
+	@RequestMapping(value="/restaurantJoin.do", method=RequestMethod.GET)
+	public void restaurantJoin() {
 		logger.info("식당등록페이지");
+	
 		
-		return "/restaurantJoin";
+
 	}
 	
 }

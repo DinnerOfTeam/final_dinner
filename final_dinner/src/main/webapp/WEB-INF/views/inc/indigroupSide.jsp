@@ -20,7 +20,7 @@
 		<div class= 'container' style= 'text-align:center'>
 			<div class= 'col-md-3'>
 				<ul class= 'nav nav-pills nav-stacked'>
-					<c:if test="${!empty sessionScope.memId }">
+					<c:if test="${!empty sessionScope.memId&& !empty param.groupNo }">
 						<li><a href="<c:url value='/indiGroup/calender.do' />">일정보기</a>
 						<li><a href="<c:url value='/boardReview/main.do?group=' />">후기게시판보기</a>
 						<li><a href="<c:url value='/indiGroup/board.do' />">그룹게시판보기</a>

@@ -15,5 +15,12 @@ public class IndexCont {
 		
 		return "index"; 
 	}
+	
+	@RequestMapping("/test.do")
+	public String test() {
+		logger.info("test page");
+		
+		return "test"; 
+	}
 
 }

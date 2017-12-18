@@ -35,4 +35,14 @@ public class IndiGroupDAOImpl extends SqlSessionDaoSupport
 		return getSqlSession().insert(namespace+ ".insertGroupMember", vo);
 	}
 
+	@Override
+	public List<IndigroupVO> selectMyGroup(int memNo) {
+		return getSqlSession().selectList(namespace+ ".selectMyGroup", memNo);
+	}
+
+	@Override
+	public int countNumberGroupMember(int groupNo) {
+		return getSqlSession().selectOne(namespace+ ".countNumberGroupMember", groupNo);
+	}
+
 }

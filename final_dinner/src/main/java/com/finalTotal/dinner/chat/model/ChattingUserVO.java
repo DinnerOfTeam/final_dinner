@@ -7,12 +7,18 @@ public class ChattingUserVO {
 			chat_user_exist VARCHAR2(1)  로그인여부 
 		);*/
 	private int memNo, groupNo;
-	private String chatUserExist;
+	private String chatUserExist, memName;
 	public int getMemNo() {
 		return memNo;
 	}
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
+	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
 	}
 	public int getGroupNo() {
 		return groupNo;

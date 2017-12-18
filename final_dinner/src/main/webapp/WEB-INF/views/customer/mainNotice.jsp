@@ -19,7 +19,7 @@
 	<div>
 		<p>자주묻는질문 Q&A</p>		
 		<span class='more'>
-			<a href="<c:url value='/board/list.do'/>">
+			<a href="<c:url value='/customer/list.do'/>">
 				<img src
 				="${pageContext.request.contextPath}/images/more.JPG" 
 				alt="더보기 이미지">
@@ -42,7 +42,7 @@
 					<tr>
 						<td>
 							<a href
-						="<c:url value='/board/detail.do?no=${vo.no}'/>">							
+						="<c:url value='/customer/detail.do?no=${vo.no}'/>">							
 							${vo.title}</a>
 						</td>
 					</tr>	

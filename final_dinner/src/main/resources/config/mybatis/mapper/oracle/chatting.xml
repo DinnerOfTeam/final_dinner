@@ -3,7 +3,12 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.chatting">
-	<select id="showAll" parameterType="int" resultType="ChattingVO">
+	<select id="showAllChat" parameterType="int" resultType="ChattingVO">
 		select * from chatting where group_no=#{groupNo} order by chat_no
+	</select>
+	
+	<select id="showAllUser" parameterType="int" resultType="ChattingUserVO">
+		select a.*, (select mem_name from member where mem_no= a.mem_no) as mem_name 
+        	from chatting_user a where chat_user_exist= 'N' and group_no=#{groupNo}
 	</select>
 </mapper>

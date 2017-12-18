@@ -11,7 +11,12 @@ public class ChattingServiceImpl implements ChattingService{
 	private ChattingDAO dao;
 
 	@Override
-	public List<ChattingVO> showAll(int groupNo) {
-		return dao.showAll(groupNo);
+	public List<ChattingVO> showAllChat(int groupNo) {
+		return dao.showAllChat(groupNo);
+	}
+
+	@Override
+	public List<ChattingUserVO> showAllUser(int groupNo) {
+		return dao.showAllUser(groupNo);
 	}
 }

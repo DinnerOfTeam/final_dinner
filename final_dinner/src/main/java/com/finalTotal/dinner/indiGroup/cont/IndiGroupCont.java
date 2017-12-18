@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.board_review.model.Board_reviewVO;
 import com.finalTotal.dinner.chat.model.ChattingService;
+import com.finalTotal.dinner.chat.model.ChattingUserVO;
 import com.finalTotal.dinner.chat.model.ChattingVO;
 import com.finalTotal.dinner.indiGroup.model.GroupMemberVO;
 import com.finalTotal.dinner.indiGroup.model.GroupRegiVO;
@@ -36,12 +38,40 @@ public class IndiGroupCont {
 	private ChattingService chat_service;
 	@Autowired
 	private IndiGroupService group_service;
+	
+	@RequestMapping(value= "/groupMain.do")
+	public String groupMain(HttpSession session, Model model) {
+		if(session.getAttribute("memNo")== null) {
+			session.setAttribute("msg", "로그인이 필요합니다");
+			session.setAttribute("url", "/login/login.do");
+			return "common/message";
+		}
+		int memNo= (Integer)session.getAttribute("memNo");
+		List<IndigroupVO> list= group_service.selectMyGroup(memNo);
+		
+		model.addAttribute("list", list);
+		
+		return "indiGroup/groupMain";
+	}
+	
  
-	@RequestMapping(value= "/main.do", method= RequestMethod.GET)
-	public void main(@RequestParam(required=false, defaultValue= "0") int year,
+	@RequestMapping(value= "/main.do")
+	public String main(@RequestParam(required=false, defaultValue= "0") int year,
 			@RequestParam(required=false, defaultValue= "0") int month,
-			@RequestParam(required=false, defaultValue= "0") int p_date, Model model) {
-		logger.info("indiGroup main page");
+			@RequestParam(required=false, defaultValue= "0") int p_date,
+			@RequestParam(defaultValue= "0") int groupNo,
+			HttpSession session, Model model) {
+		logger.info("indiGroup main page parameter : groupNo={}", groupNo);
+		if(groupNo== 0) {
+			model.addAttribute("msg", "그룹을 선택하셔야합니다.");
+			model.addAttribute("url", "/indiGroup/groupMain.do");
+			
+			return "common/message";
+		}
+		int memNo= (Integer)session.getAttribute("memNo");
+		List<IndigroupVO> list= group_service.selectMyGroup(memNo);
+		
+		model.addAttribute("list", list);
 		Date d= null;
 		if((year* month* p_date)== 0) {
 			d= new Date();
@@ -68,24 +98,27 @@ public class IndiGroupCont {
 		model.addAttribute("date_arr", date_arr);
 		model.addAttribute("work_arr", work_arr);
 		model.addAttribute("today", d);
+		
+		return "indiGroup/main";
 	}
 	
-	@RequestMapping(value= "/calender.do", method= RequestMethod.GET)
+	@RequestMapping(value= "/calender.do")
 	public void calender() {
 		logger.info("indiGroup calender page");
 	}
 	
 	@RequestMapping(value= "/chat.do")
-	public String chat(Model model) {
+	public String chat(@RequestParam(defaultValue= "0") int groupNo, Model model) {
 		logger.info("indiGroup chat page");
+		if(groupNo== 0) {
+			model.addAttribute("msg", "그룹을 선택하셔야합니다.");
+			model.addAttribute("url", "/indiGroup/groupMain.do");
+			
+			return "common/message";
+		}
 		
-		List<ChattingVO> chat_list= chat_service.showAll(1);
-		
-		List<String> user_list= new ArrayList<String>();
-		user_list.add("손성현");
-		user_list.add("최정규");
-		user_list.add("김은영");
-		user_list.add("장요한");
+		List<ChattingVO> chat_list= chat_service.showAllChat(groupNo);
+		List<ChattingUserVO> user_list= chat_service.showAllUser(groupNo);
 		
 		model.addAttribute("chat_list", chat_list);
 		model.addAttribute("user_list", user_list);
