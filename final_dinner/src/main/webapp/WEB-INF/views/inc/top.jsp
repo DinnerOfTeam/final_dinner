@@ -22,8 +22,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="${pageContext.request.contextPath }/css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
 <!-- font -->
-<link href="//fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Dosis:300,400,500,600" rel="stylesheet">
+<!-- <link href="//fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Dosis:300,400,500,600" rel="stylesheet"> -->
 <!-- //font -->
 <script src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/bootstrap.js"></script>

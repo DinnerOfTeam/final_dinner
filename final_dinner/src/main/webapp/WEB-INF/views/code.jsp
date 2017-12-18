@@ -3,7 +3,112 @@
 <%@ include file="inc/top.jsp" %>
 
 	<!-- login -->
-	<div class="login">
+	
+	<div class="form-wrap">
+		<div class="container">
+			<h4>Contact Form</h4>
+			<div class="form-simple">
+				<form action="#" method="post">
+					<input type="text" class="form-text" name="email" placeholder="Name" required="">
+					<input type="text" class="form-text" name="email" placeholder="Email" required="">
+					<input type="password" name="password" class="form-text" placeholder="Password">
+					<input type="password" name="password" class="form-text" placeholder="Confirm Password">
+					
+					<div class="form-row">
+						<div class="col-sm-4">
+							<input type="text" class="form-text" placeholder="Name" required="">
+						</div>
+						<div class="col-sm-4">
+							<input type="email" class="form-text" placeholder="Email" required="">
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-text" placeholder="Telephone" required="">
+						</div>
+					</div>
+					<input type="text" class="form-text" placeholder="Telephone" required="">
+					<textarea placeholder="Message" class="form-text" required=""></textarea>
+					
+					<select class="form-select">
+						<option>111</option>
+						<option>22222</option>
+						<option>3333333</option>
+						<option>44444</option>
+						<option>555</option>
+					</select>
+
+					<div class="form-comp">
+						<label class="checkbox-inline">
+						  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+						</label>
+						<label class="checkbox-inline">
+						  <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+						</label>
+						<label class="checkbox-inline">
+						  <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+						</label>
+					</div>
+						
+					<div class="form-comp">
+						<label class="radio-inline">
+						  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+						</label>
+						<label class="radio-inline">
+						  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+						</label>
+					</div>
+
+					<div class="form-row">
+						<div class="col-xs-3">
+							<select class="form-select">
+								<option>010</option>
+								<option>011</option>
+								<option>012</option>
+								<option>016</option>
+								<option>019</option>
+							</select>
+						</div>
+						<span class="form-txt form-static">-</span>
+						<div class="col-xs-3">
+							<input type="text" class="user form-text">
+						</div>
+						<span class="form-txt form-static">-</span>
+						<div class="col-xs-3">
+							<input type="text" class="user form-text">
+						</div>
+					</div>
+					<div class="form-comp-row">
+						<div class="col-sm-6">
+							<input type="submit" name="Sign In" class="site-btn-submit" value="Sign up">
+						</div>
+						<div class="col-sm-6">
+							<input type="submit" name="cancel" class="site-btn" value="Cancel">
+						</div>
+					</div>
+					
+					<div class="form-comp-row">
+						<div class="col-sm-6">
+							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="Sign up">
+						</div>
+						<div class="col-sm-6">
+							<input type="submit" name="cancel" class="site-btn site-btn-full" value="Cancel">
+						</div>
+					</div>
+
+					<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="Sign up">
+					
+					<div class="signup-text">
+						<a href="login.html">Already have an account? Login here.</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<!-- login -->
+	<div class="form-wrap">
 		<div class="container">
 			<div class="form-body ">
 				<div class="form-heading">
@@ -11,24 +116,34 @@
 				</div>
 				<div class="form-info">
 					<form action="#" method="post">
-						<input type="text" class="user form-text" name="email" placeholder="Name" required="">
-						<input type="text" class="user form-text" name="email" placeholder="Email" required="">
-						<input type="password" name="password" class="lock form-text" placeholder="Password">
-						<input type="password" name="password" class="lock form-text" placeholder="Confirm Password">
-
-						<textarea class="form-area" placeholder="내용"></textarea>
-
+						<input type="text" class="form-text" name="email" placeholder="Name" required="">
+						<input type="text" class="form-text" name="email" placeholder="Email" required="">
+						<input type="password" name="password" class="form-text" placeholder="Password">
+						<input type="password" name="password" class="form-text" placeholder="Confirm Password">
+						
 						<div class="form-row">
-							<select class="form-select">
-								<option>111</option>
-								<option>22222</option>
-								<option>3333333</option>
-								<option>44444</option>
-								<option>555</option>
-							</select>
+							<div class="col-sm-4">
+								<input type="text" class="form-text" placeholder="Name" required="">
+							</div>
+							<div class="col-sm-4">
+								<input type="email" class="form-text" placeholder="Email" required="">
+							</div>
+							<div class="col-sm-4">
+								<input type="text" class="form-text" placeholder="Telephone" required="">
+							</div>
 						</div>
+						<input type="text" class="form-text" placeholder="Telephone" required="">
+						<textarea placeholder="Message" class="form-text" required=""></textarea>
+						
+						<select class="form-select">
+							<option>111</option>
+							<option>22222</option>
+							<option>3333333</option>
+							<option>44444</option>
+							<option>555</option>
+						</select>
 
-						<div class="form-row">
+						<div class="form-comp">
 							<label class="checkbox-inline">
 							  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
 							</label>
@@ -40,7 +155,7 @@
 							</label>
 						</div>
 							
-						<div class="form-row">
+						<div class="form-comp">
 							<label class="radio-inline">
 							  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
 							</label>
@@ -53,7 +168,7 @@
 						</div>
 
 						<div class="form-row">
-							<div class="form-width-30">
+							<div class="col-xs-3">
 								<select class="form-select">
 									<option>010</option>
 									<option>011</option>
@@ -62,22 +177,35 @@
 									<option>019</option>
 								</select>
 							</div>
-							<div class="form-width-5">
-								<span class="form-txt">-</span>
-							</div>
-							<div class="form-width-30">
+							<span class="form-txt form-static">-</span>
+							<div class="col-xs-3">
 								<input type="text" class="user form-text">
 							</div>
-							<div class="form-width-5">
-								<span class="form-txt">-</span>
-							</div>
-							<div class="form-width-30">
+							<span class="form-txt form-static">-</span>
+							<div class="col-xs-3">
 								<input type="text" class="user form-text">
 							</div>
 						</div>
+						<div class="form-comp-row">
+							<div class="col-sm-6">
+								<input type="submit" name="Sign In" class="site-btn-submit" value="Sign up">
+							</div>
+							<div class="col-sm-6">
+								<input type="submit" name="cancel" class="site-btn" value="Cancel">
+							</div>
+						</div>
+						
+						<div class="form-comp-row">
+							<div class="col-sm-6">
+								<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="Sign up">
+							</div>
+							<div class="col-sm-6">
+								<input type="submit" name="cancel" class="site-btn site-btn-full" value="Cancel">
+							</div>
+						</div>
 
-						<input type="submit" name="Sign In" value="Sign up">
-
+						<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="Sign up">
+						
 						<div class="signup-text">
 							<a href="login.html">Already have an account? Login here.</a>
 						</div>
@@ -86,6 +214,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- //login -->
 	<div class="container fadeInUp animated" data-wow-delay=".5s">
 		<form>
@@ -293,7 +422,7 @@
     </fieldset>
     <fieldset class= 'chat_list border_fieldset pad_both0'>
      <legend>채팅목록</legend>
-     <br><p class='badge-me'><p class='badge'>장요한曰 : 하이요~</p><span class='chat_time'>11:58</span></p>
+     <br><input type="hidden" class= 'is_me' value= ''><p class='badge'>장요한曰 : 하이요~</p><span class='chat_time'>11:58</span></p>
      <br><p class= 'badge-you'><p class='badge'>최정규曰 : 안녕안녕!</p><span class='chat_time'>11:59</span></p>
      <br><p class= 'badge-you'><p class='badge'>손성현曰 : 허허허~</p><span class='chat_time'>11:59</span></p>
      <br><p class= 'badge-you'><p class='badge'>김은영曰 : 안녕하세요</p><span class='chat_time'>12:00</span></p>

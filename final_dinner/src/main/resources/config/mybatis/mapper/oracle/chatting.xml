@@ -4,7 +4,8 @@
 
 <mapper namespace="config.chatting">
 	<select id="showAllChat" parameterType="int" resultType="ChattingVO">
-		select * from chatting where group_no=#{groupNo} order by chat_no
+		select a.*, (select mem_name from member where mem_no= a.mem_no) as mem_name
+			from chatting a where group_no=#{groupNo} order by chat_no
 	</select>
 	
 	<select id="showAllUser" parameterType="int" resultType="ChattingUserVO">
