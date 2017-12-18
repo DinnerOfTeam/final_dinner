@@ -10,6 +10,23 @@
 	
 	<select id="showAllUser" parameterType="int" resultType="ChattingUserVO">
 		select a.*, (select mem_name from member where mem_no= a.mem_no) as mem_name 
-        	from chatting_user a where chat_user_exist= 'N' and group_no=#{groupNo}
+        	from chatting_user a where group_no=#{groupNo}
 	</select>
+	
+	<update id="updateUserNone" parameterType="int">
+		update chatting_user set chat_user_exist= 'N' where mem_no= #{memNo}
+	</update>
+	
+	<update id="updateUserExist" parameterType="map">
+		update chatting_user set chat_user_exist= 'Y' 
+			where mem_no= #{memNo} and group_no= #{groupNo}
+	</update>
+	
+	<insert id="addChat" parameterType="ChattingVO">
+		<selectKey order="BEFORE" keyProperty="chatNo" resultType="int">
+			select chatting_seq.nextval from dual
+		</selectKey>
+		insert into chatting(chat_no, group_no, mem_no, chat_contents) 
+			values(#{chatNo}, #{groupNo}, #{memNo}, #{chatContents})
+	</insert>
 </mapper>

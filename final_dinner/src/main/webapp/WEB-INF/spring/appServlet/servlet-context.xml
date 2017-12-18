@@ -29,4 +29,18 @@
 	     <beans:property name="order" value="0" />
 	</beans:bean>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/indiGroup/*"/>
+			<mapping path="/board/*"/>
+			<mapping path="/member/m*"/>
+			<mapping path="/customer/*"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="chattingUserInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
