@@ -35,7 +35,7 @@
 			}
 		});
 		function chat() {
-			/* var mNo = $('#memNo').val();
+			var mNo = $('#memNo').val();
 			var gNo = $('#groupNo').val();
 			var chatCont = $('#chatText').val();
 			
@@ -47,15 +47,8 @@
 					groupNo: gNo,
 					chatContents: chatCont
 				},
-				success: function(result){
-					if(result==1){
- 						Alert('#successMessage', 2000); 
-					}else if(result==0){
- 						Alert('#warningMessage', 2000); 
-					}
-				}
 			});
-			$('#chatText').val(''); */
+			$('#chatText').val('');
 		}
 		$('.chat_list .is_me').each(function() {
 			if($(this).val()== '${sessionScope.memNo}') {
@@ -71,14 +64,17 @@
 		});
  		
 
-/*  		function chatList(type){
+ 		function chatList(type){
+ 			var gNo= '${groupNo}';
  			$.ajax({
  				type: "post",
- 				url: "<c:url value= '/indiGroup/chat.do' />",
+ 				url: "<c:url value= '/indiGroup/chat/chatList.do' />",
  				data:{
- 					listType: chat_list
+ 					cnt: type,
+ 					groupNo: gNo
  				},
  				success: function(data){
+ 					alert(data);
  					if(data=="") return;
  					var parsed = JSON.parse(data);
  					var result = parsed.result;
@@ -89,14 +85,35 @@
  				}
  			});
  		}
- 		function addChat(ele1, ele2, ele3) {
- 			alert(ele1);
+ 		function addChat(userid,chatcontent, chatTime){
+ 			$('#chatlist').append('<div class="row">'+
+ 					'<div class="col-lg-12">'+
+ 					'<div class="media">'+
+ 					'<a class="pull-left" href="#">'+
+ 					'<img class="media-object img-circle" src="images/beb42.jpeg" alt="">'+
+ 					'</a>'+
+ 					'<div class="media-body">'+
+ 					'<h4 class="media-heading">'+
+ 					userid+
+ 					'<span class="small pull-right">'+
+ 					chatTime+
+ 					'</span>'+
+ 					'</h4>'+
+ 					'<p>'+
+ 					chatcontent+
+ 					'</p>'+
+ 					'</div>'+
+ 					'</div>'+
+ 					'</div>'+
+ 					'</div>'+
+ 					'<hr>');
+ 			$('#chatlist').scrollTop($('#chatlist')[0].scrollHeight);
+ 			
  		}
+ 		
  		function getInfinity(){
- 			setInterval(function(){
- 				chatList(lastID);
- 			},500);
- 		} */
+ 			setInterval(function(){chatList(${chat_list.size()});},2000);
+ 		}
 	});
 </script>
 <div class= 'chat'>
@@ -131,12 +148,12 @@
 		</c:forEach>
 	</fieldset>
 	<div class= 'row'>
-		<form action="<c:url value='/indiGroup/chat/chatAdd.do' />" method="post">
+<%-- 		<form action="<c:url value='/indiGroup/chat/chatAdd.do' />" method="post"> --%>
 			<input type="hidden" name= 'groupNo' id= 'groupNo' value="${param.groupNo }" />
 			<input type="hidden" name= 'memNo' id= 'memNo' value="${sessionScope.memNo }" />
 			<div class='col-sm-7'><input type="text" name= 'chatContents' id= 'chatText' /></div>
 			<div class='col-sm-5'><button>전송</button></div>
-		</form>
+<!-- 		</form> -->
 	</div>
 	</div>
 </div>

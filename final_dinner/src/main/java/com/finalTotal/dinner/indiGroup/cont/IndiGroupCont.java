@@ -225,6 +225,17 @@ public class IndiGroupCont {
 		
 		return "redirect:/indiGroup/main.do?groupNo="+ vo.getGroupNo();
 	}
+	@RequestMapping("/chat/chatList.do")
+	public String chatList(@RequestParam int cnt, @RequestParam int groupNo , Model model) {
+		List<ChattingVO> list= chat_service.showAllChat(groupNo);
+		List<ChattingVO> add_list= new ArrayList<ChattingVO>();
+		for(int i= cnt; i< list.size(); i++) {
+			add_list.add(list.get(i));
+		}
+		model.addAttribute("add_list", add_list);
+		
+		return "";
+	}
 	
 	
 	public int getLastDay(int year, int month) {
