@@ -41,7 +41,7 @@ public class CommentCon {
 		
 		String msg="", url="/board/write.do";
 		boolean back=false;
-		boolean errFlag=true;
+		boolean errFlag=false;
 		
 		if(!errFlag) {
 			//유효성검사
@@ -61,6 +61,7 @@ public class CommentCon {
 					if(url==null || url.isEmpty()) {
 						url="/board/detail.do?no="+commentVO.getFreeNo();
 					}
+					
 
 					return "redirect:"+url;
 				}else {

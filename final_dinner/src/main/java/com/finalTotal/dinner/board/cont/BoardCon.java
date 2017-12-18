@@ -1,26 +1,33 @@
 package com.finalTotal.dinner.board.cont;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.finalTotal.dinner.board.model.BoardDataVO;
 import com.finalTotal.dinner.board.model.BoardService;
 import com.finalTotal.dinner.board.model.BoardVO;
 import com.finalTotal.dinner.board.model.CommentService;
 import com.finalTotal.dinner.board.model.CommentVO;
 import com.finalTotal.dinner.board.model.SearchVO;
+import com.finalTotal.dinner.common.FileUtil;
 import com.finalTotal.dinner.common.PagingVO;
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberVO;
@@ -30,6 +37,8 @@ import com.finalTotal.dinner.member.model.MemberVO;
 public class BoardCon {
 	private static final Logger logger=LoggerFactory.getLogger(BoardCon.class);
 	
+	private static final String FILE_INPUT_NAME="boardFile";
+	
 	@Autowired
 	private MemberService memberService;
 	
@@ -38,6 +47,9 @@ public class BoardCon {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private FileUtil fileUtil;
 	
 	@RequestMapping("/list.do")
 	public String list(@ModelAttribute SearchVO searchVO, Model model) {
@@ -102,9 +114,12 @@ public class BoardCon {
 	}
 	
 	@RequestMapping(value="/write.do", method=RequestMethod.POST)
+	@Transactional
 	public String write_post(@ModelAttribute BoardVO boardVO,
-			HttpSession session, Model model) {
+			HttpServletRequest request, Model model) {
 		logger.info("게시판 글쓰기처리, 파라미터 boardVO={}", boardVO);
+		
+		HttpSession session = request.getSession();
 		
 		String msg="제목이 없습니다", url="/board/write.do";
 		boolean back=false;
@@ -127,8 +142,34 @@ public class BoardCon {
 			if(errFlag) {
 				msg=(String)vetifi.get("msg");
 			}else {
+				
+				List<BoardDataVO> dataList=new ArrayList<BoardDataVO>(); 
+				List<Map<String, Object>> fileList=null;
+				
+				try {
+					fileList=fileUtil.fileUploadByKey(request, FILE_INPUT_NAME, FileUtil.FILE_UPLOAD);
+					
+					if(fileList!=null && !fileList.isEmpty()) {
+						BoardDataVO dataVO = new BoardDataVO();
+						for(Map<String, Object> dataMap : fileList) {
+							dataVO.setFreeDataName((String)dataMap.get("filename"));
+							dataVO.setFreeDataOriginalName((String)dataMap.get("originalFilename"));
+							
+							dataList.add(dataVO);
+						}
+						
+					}
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				int cnt=boardService.insertBoard(boardVO);
 				logger.info("게시판 글쓰기처리 결과, cnt={}", cnt);
+				
+				
 				
 				if(cnt>0) {
 					msg="글쓰기 완료";

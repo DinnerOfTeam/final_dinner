@@ -12,6 +12,7 @@
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/site-board.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/codestyle.css" type="text/css" media="all" />
 <!--// css -->
 <!-- font-awesome icons -->
 <link href="${pageContext.request.contextPath }/css/font-awesome.css" rel="stylesheet"> 
@@ -42,37 +43,41 @@
 </script>
 </head>
 <body>
-<div class="site-board">
-	<div class="container">
-		<div class="board-inner">
-			<form name="frmCommentDelete" method="post" action="<c:url value='/board/comment/delete.do'/>">
+	<div class="board-inner">
+		<div class="board-detail-comments-write form-simple">
+			<form name="frmCommentDelete " method="post" action="<c:url value='/board/comment/delete.do'/>">
 				<input type="hidden" name="commentNo" value="${param.commentNo }">
-				<div class="form-group">
-					<h3>댓글 삭제</h3>
-				</div>
 				<c:choose>
 					<c:when test="${!hidePwd}">
-						<div class="form-group">
+						<p class="form-txt form-static">
 							비밀번호를 입력하세요.
-						</div>
-						<div class="form-group">
-							<label for="commentPwd">비밀번호</label>
-							<input type="password" class="form-control" id="commentPwd" name="commentPwd">
-						</div>
+						</p>
+						<label class="sr-only">비밀번호</label>
+						<input type="password" id="commentPwd" name="commentPwd"
+							class="form-text" placeholder="비밀번호">
 					</c:when>
 					<c:otherwise>
-						<div class="form-group">
+						<p class="form-txt form-static">
 							삭제하시겠습니까?
-						</div>
+						</p>
 					</c:otherwise>
 				</c:choose>
-				<div class="col-center form-group">
-					<input type="submit" class="btn btn-danger" value="삭제">
-					<a href="#" class="btn btn-default" id="comment-btn-cancel">취소</a>
+				
+				
+				<div class="form-row">
+					<div class="col-sm-6 form-comp">
+						<input type="submit" name="Sign In"
+							class="site-btn-submit site-btn-full" value="삭제">
+					</div>
+					<div class="col-sm-6">
+						<a href="<c:url value='/board/list.do'/>"
+							class="site-btn site-btn-full">취소</a>
+					</div>
 				</div>
+
 			</form>
 		</div>
 	</div>
-</div>
+		
 </body>
 </html>

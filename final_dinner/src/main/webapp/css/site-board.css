@@ -12,6 +12,14 @@
 	max-width: 970px;
 }
 
+.site-board .form-body{
+	width: 70%;
+}
+
+.site-board textarea.board-write  {
+	height: 15em;
+}
+
 .board-inner{
 	background-color: white;
 	width: 100%;
@@ -184,6 +192,10 @@
 	border-bottom: #DDD solid 1px;
 }
 
+.board-detail-btnwrap {
+	font-size: 0.875em;
+}
+
 .board-detail-comments{
 	margin: 0;
 	background-color: #FFF;
@@ -232,12 +244,13 @@
 	border-bottom: #EEE solid 1px;
 }
 
-.board-comments-form-top>div{
-	padding : 0;
+.board-detail-comments-write {
+	padding: 0.5em;
 }
 
-.board-comment-frm > .form-group{
-	padding: 0 15px;
+.btn-file-add, .btn-file-del{
+	padding: 0.1em;
+	font-size: 0.9em;
 }
 
 @media (min-width: 768px) {

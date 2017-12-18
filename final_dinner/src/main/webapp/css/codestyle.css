@@ -124,12 +124,14 @@
 
 .site-btn,
 .site-btn-submit {
+	display: inline-block;
 	border: none;
 	outline: none;
 	cursor: pointer;
 	padding: .5em 1em;
 	font-size: 1em;
-	color: #fff;
+	color: #fff !important;
+	text-align: center;
 }
 
 .site-btn-full{
@@ -138,7 +140,8 @@
 
 .site-btn:hover,
 .site-btn-submit:hover {
-	color: #fff;
+	color: #fff !important;
+	text-decoration: none;
 }
 
 .site-btn {
@@ -210,7 +213,7 @@
 
 .form-info .form-comp, .form-info .form-comp-row {
 	font-size: 1em;
-    color: #A8A8A8;
+    color: #787878;
     background: #FFFFFF;
     margin-bottom: 1.5em;
 }
@@ -219,7 +222,7 @@
 .form-info textarea.form-text {
 	font-size: 0.9em;
     width: 100%;
-    color: #A8A8A8;
+    color: #787878;
     background: #FFFFFF;
     margin: 0 0 1.5em 0;
 }

@@ -47,7 +47,7 @@
 	});
 </script>
 <div class="site-board-title wow fadeIn animated" data-wow-delay=".5s">
-	<h1 class="col-center">게시판 이름</h1>
+	<h1 class="col-center">게시판</h1>
 </div>
 
 <div class="site-board wow fadeIn animated" data-wow-delay=".5s">
@@ -77,10 +77,10 @@
 			<div class="row board-detail-content">
 				<div class="col-xs-12">${vo.freeContents }</div>
 			</div>
-			<div class="col-left">
-				<a href="<c:url value='/board/edit.do?freeNo=${vo.freeNo }'/>" class="btn btn-default btn-sm">수정</a>
-				<a href="<c:url value='/board/delete.do?freeNo=${vo.freeNo }'/>" class="btn btn-default btn-sm">삭제</a>
-				<a href="<c:url value='/board/list.do'/>" class="btn btn-default btn-sm">목록</a>
+			<div class="col-left board-detail-btnwrap">
+				<a href="<c:url value='/board/edit.do?freeNo=${vo.freeNo }'/>" class="site-btn">수정</a>
+				<a href="<c:url value='/board/delete.do?freeNo=${vo.freeNo }'/>" class="site-btn">삭제</a>
+				<a href="<c:url value='/board/list.do'/>" class="site-btn">목록</a>
 			</div>
 			<div class="row board-detail-comments">
 				<h4>Comments</h4>
@@ -125,31 +125,26 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="board-detail-comments-write">
+				<div class="board-detail-comments-write form-simple">
 					<form class="board-comment-frm" name="frmBoardComment" method="post" action="<c:url value='/board/comment/write.do'/>">
 						<input type="hidden" name="freeNo" value="${vo.freeNo }">
+						
 						<c:if test="${empty sessionScope.memId}">
-							<div class="board-comments-form-top">
-								<div class="col-sm-6 form-group">
-									<label for="commentName" class="col-sm-4 col-md-3">이름</label>
-									<div class="col-sm-8 col-md-9">
-										<input type="text" class="form-control" id="commentName" name="commentName" placeholder="이름">
-									</div>
+							<div class="form-row">
+								<div class="col-sm-6">
+									<label for="commentName" class="sr-only">이름</label>
+									<input type="text" class="form-text"  id="commentName" name="commentName" placeholder="이름" required>
 								</div>
-								<div class="col-sm-6 form-group">
-									<label for="commentPwd" class="col-sm-4 col-md-3">비밀번호</label>
-									<div class="col-sm-8 col-md-9">
-										<input type="password" class="form-control" id="commentPwd" name="commentPwd">
-									</div>
+								<div class="col-sm-6">
+									<label for="commentPwd" class="sr-only">비밀번호</label>
+									<input type="password" class="form-text" id="commentPwd" name="commentPwd" placeholder="비밀번호" required>
 								</div>
 							</div>
 						</c:if>
-						<div class="form-group">
-							<textarea class="form-control" rows="5" id="commentContents" name="commentContents"></textarea>
-						</div>
-						<div class="form-group">
-							<input type="submit" class="btn btn-default btn-block" value="작성">
-						</div>
+						
+						<textarea class="form-text" rows="5" id="commentContents" name="commentContents"></textarea>
+						
+						<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="작성">
 					</form>
 				</div>
 			</div>

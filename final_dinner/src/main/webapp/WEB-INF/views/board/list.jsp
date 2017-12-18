@@ -21,7 +21,7 @@
 </script>
 <c:if test="${empty param.isImport}">
 	<div class="site-board-title wow fadeIn animated" data-wow-delay=".5s">
-		<h1 class="col-center">게시판 이름</h1>
+		<h1 class="col-center">게시판</h1>
 	</div>
 </c:if>
 
@@ -129,8 +129,8 @@
 					</ul>
 				</div>
 				
-				<div class="board-list-sub col-xs-12 col-sm-4 col-sm-offset-8 col-md-1 col-md-offset-11">
-					<a class="btn btn-default btn-block" href="<c:url value='/board/write.do'/>" role="button">
+				<div class="board-list-sub col-xs-12 col-sm-4 col-sm-offset-8 col-md-2 col-md-offset-10">
+					<a class="site-btn-submit site-btn-full" href="<c:url value='/board/write.do'/>" role="button">
 						<i class="fa fa-pencil"></i>&nbsp;
 						글쓰기
 					</a>
@@ -237,22 +237,37 @@
 				</c:if>
 				
 				<!-- 검색폼 -->
-				<div class="board-list-sub">
+				<div class="form-info form-row">
 					<form name="frmBoardSearch" method="get" action="<c:url value='/board/list.do'/>">
-						<div class="board-search-type form-group col-sm-2 col-sm-offset-3">
-							<select class="form-control" name="boardSearchType">
-								<option value="title">제목</option>
-								<option value="contents">내용</option>
-								<option value="name">작성자</option>
+						<div class="col-sm-2 col-sm-offset-2">
+							<select class="form-select" name="type">
+								<option value="title"
+									<c:if test="${searchVO.type=='free_title'}">
+										selected
+									</c:if>
+								>제목</option>
+								<option value="contents"
+									<c:if test="${searchVO.type=='free_contents'}">
+										selected
+									</c:if>
+								>내용</option>
+								<option value="name"
+									<c:if test="${searchVO.type=='free_name'}">
+										selected
+									</c:if>
+								>작성자</option>
 							</select>
 						</div>
-						<div class="board-search-keyword input-group col-sm-4">
-							<input type="text" class="form-control" id="boardSearchKeyword" name="boardSearchKeyword" placeholder="Search" value="${param.keyword }">
-							<span class="input-group-btn">
-								<input type="submit" class="btn btn-default" value="검색">
-							</span>
+						
+						<div class="col-sm-4">
+							<input type="text" class="form-text" id="boardSearchKeyword" name="keyword"
+								placeholder="Search" value="${searchVO.keyword }">
+						</div>
+						<div class="col-sm-2">
+							<input type="submit" class="site-btn-submit site-btn-full" value="검색">
 						</div>
 					</form>
+					
 				</div>
 				
 			</div>

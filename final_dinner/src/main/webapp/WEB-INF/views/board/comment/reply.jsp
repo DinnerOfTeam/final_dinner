@@ -12,6 +12,7 @@
 <!-- css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css" type="text/css" media="all" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/site-board.css" type="text/css" media="all" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/codestyle.css" type="text/css" media="all" />
 <!--// css -->
 <!-- font-awesome icons -->
 <link href="${pageContext.request.contextPath }/css/font-awesome.css" rel="stylesheet"> 
@@ -45,34 +46,34 @@
 </script>
 </head>
 <body>
-<div class="site-board">
-<div class="container">
 	<div class="board-inner">
-		<div class="board-detail-comments-write">
+		
+		<div class="board-detail-comments-write form-simple">
 			<form class="board-comment-frm" name="frmBoardComment" method="post" action="<c:url value='/board/comment/reply.do'/>">
 				<input type="hidden" name="freeNo" value="${param.freeNo }">
 				<input type="hidden" name="commentGroupno" value="${param.commentNo }">
+				
 				<c:if test="${empty sessionScope.memId}">
-					<div class="form-group">
-						<label for="commentName">이름</label>
-						<input type="text" class="form-control"
-							id="commentName" name="commentName" placeholder="이름">
-					</div>
-					<div class="form-group">
-						<label for="commentPwd">비밀번호</label>
-						<input type="password" class="form-control" id="commentPwd" name="commentPwd">
+					<div class="form-row">
+						<div class="col-sm-6">
+							<label for="commentName" class="sr-only">이름</label>
+							<input type="text" class="form-text" 
+								id="commentName" name="commentName" placeholder="이름" required>
+						</div>
+						<div class="col-sm-6">
+							<label for="commentPwd" class="sr-only">비밀번호</label>
+							<input type="password" class="form-text"
+								id="commentPwd" name="commentPwd" placeholder="비밀번호" required>
+						</div>
 					</div>
 				</c:if>
-				<div class="form-group">
-					<textarea class="form-control" rows="5" id="commentContents" name="commentContents"></textarea>
-				</div>
-				<div class="form-group">
-					<input type="submit" class="btn btn-default btn-block" value="작성">
-				</div>
+				
+				<textarea class="form-text" rows="5" id="commentContents" name="commentContents"></textarea>
+				
+				<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="작성">
 			</form>
 		</div>
+		
 	</div>
-</div>
-</div>
 </body>
 </html>

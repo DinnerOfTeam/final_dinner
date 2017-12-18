@@ -11,7 +11,7 @@
 			$(this).parent().parent().remove();
 		});
 		
-		var $fileRow=$('.site-fileup-list').find('.site-fileup-row').clone(true);
+		var $fileRow=$('.site-fileup-list').find('.site-fileup-row').eq(0).clone(true);
 		$('.site-fileup-list').empty();
 		
 		$('.btn-file-add').click(function(){
@@ -37,38 +37,36 @@
 	});
 </script>
 <div class="site-board-title wow fadeIn animated" data-wow-delay=".5s">
-	<h1 class="col-center">게시판 이름</h1>
+	<h1 class="col-center">게시판</h1>
 </div>
 
-<div class="site-board wow fadeIn animated" data-wow-delay=".5s">
-	
+<div class="site-board form-wrap wow fadeIn animated" data-wow-delay=".5s">
 	<div class="container">
-		
-		<div class="col-md-8 col-md-offset-2">
-			<div class="board-inner">
-				<form name="frmBoardWrite" method="post" action="<c:url value='/board/write.do'/>" enctype="multipart/form-data">
-					<div class="form-group">
-						<label for="freeTitle">제목</label>
-						<input type="text" class="form-control" id="freeTitle" name="freeTitle" placeholder="제목">
-					</div>
+		<div class="form-body">
+			<div class="form-heading">
+				<h1>글쓰기</h1>
+			</div>
+			<div class="form-info">
+				<form name="frmBoardWrite" method="post" action="<c:url value='/board/write.do'/>"
+						enctype="multipart/form-data">
+					<label for="freeTitle" class="sr-only">제목</label>
+					<input type="text" class="form-text" id="freeTitle" name="freeTitle" placeholder="제목" required>
+					
 					<c:if test="${empty sessionScope.memId}">
-						<div class="form-group">
-							<label for="freeName">이름</label>
-							<input type="text" class="form-control" id="freeName" name="freeName" placeholder="이름">
-						</div>
-						<div class="form-group">
-							<label for="freePwd">비밀번호</label>
-							<input type="password" class="form-control" id="freePwd" name="freePwd">
-						</div>
+					<label for="freeName" class="sr-only">이름</label>
+					<input type="text" class="form-text" id="freeName" name="freeName" placeholder="이름" required>
+					
+					<label for="freePwd" class="sr-only">비밀번호</label>
+					<input type="password" id="freePwd" name="freePwd" class="form-text" placeholder="비밀번호" required>
 					</c:if>
-					<div class="form-group">
-						<label for="freeContents">내용</label>
-						<textarea class="form-control" rows="10" id="freeContents" name="freeContents"></textarea>
-					</div>
+					
+					<label for="freeContents" class="sr-only">내용</label>
+					<textarea class="form-text board-write " id="freeContents" name="freeContents" placeholder="내용"></textarea>
+					
 					<div class="row form-group">
 						<label class="col-xs-9">첨부파일</label>
 						<div class="col-xs-3">
-							<input type="button" class="btn-file-add btn btn-default btn-xs btn-block" value="추가">
+							<input type="button" class="btn-file-add site-btn-submit btn-block" value="추가">
 						</div>
 						<div class="site-fileup-list">
 							<div class="site-fileup-row">
@@ -76,14 +74,19 @@
 									<input type="file" name="boardFile">
 								</div>
 								<div class="col-xs-3">
-									<input type="button" class="btn-file-del btn btn-danger btn-xs btn-block" value="삭제">
+									<input type="button" class="btn-file-del site-btn btn-block" value="삭제">
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col-center form-group">
-						<input type="submit" class="btn btn-default" value="작성">
-						<a href="<c:url value='/board/list.do'/>" class="btn btn-default">목록</a>
+					
+					<div class="form-row">
+						<div class="col-sm-6">
+							<input type="submit" class="site-btn-submit site-btn-full" value="작성">
+						</div>
+						<div class="col-sm-6">
+							<a href="<c:url value='/board/list.do'/>" class="site-btn site-btn-full">목록</a>
+						</div>
 					</div>
 				</form>
 			</div>

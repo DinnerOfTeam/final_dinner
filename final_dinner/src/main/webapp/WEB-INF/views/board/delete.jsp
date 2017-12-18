@@ -19,43 +19,50 @@
 	});
 </script>
 <div class="site-board-title wow fadeIn animated" data-wow-delay=".5s">
-	<h1 class="col-center">게시판 이름</h1>
+	<h1 class="col-center">게시판</h1>
 </div>
 
-<div class="site-board wow fadeIn animated" data-wow-delay=".5s">
-	<div class="container">
-		<div class="col-md-6 col-md-offset-3">
-			<div class="board-inner">
-				<form name="frmBoardDelete" method="post" action="<c:url value='/board/delete.do'/>">
-					<input type="hidden" name="freeNo" value="${vo.freeNo }">
-					<div class="form-group">
-						<h3>글 삭제</h3>
-					</div>
-					<c:choose>
-						<c:when test="${!hidePwd}">
-							<div class="form-group">
-								비밀번호를 입력하세요.
+<div class="form-wrap wow fadeIn animated" data-wow-delay=".5s">
+		<div class="container">
+			<div class="form-body ">
+				<div class="form-heading">
+					<h1>글 삭제</h1>
+				</div>
+				<div class="form-info">
+					<form name="frmBoardDelete" method="post" action="<c:url value='/board/delete.do'/>">
+						<input type="hidden" name="freeNo" value="${param.freeNo }">
+						<c:choose>
+							<c:when test="${!hidePwd}">
+								<p class="form-txt form-static">
+									비밀번호를 입력하세요.
+								</p>
+								<label for="freePwd" class="sr-only">비밀번호</label>
+								<input type="password" id="freePwd" name="freePwd"
+									class="form-text" placeholder="비밀번호">
+							</c:when>
+							<c:otherwise>
+								<p class="form-txt form-static">
+									삭제하시겠습니까?
+								</p>
+							</c:otherwise>
+						</c:choose>
+						
+						<div class="form-row">
+							<div class="col-sm-6 form-comp">
+								<input type="submit" name="Sign In"
+									class="site-btn-submit site-btn-full" value="삭제">
 							</div>
-							<div class="form-group">
-								<label for="freePwd">비밀번호</label>
-								<input type="password" class="form-control" id="freePwd" name="freePwd">
+							<div class="col-sm-6">
+								<a href="<c:url value='/board/list.do'/>"
+									class="site-btn site-btn-full">취소</a>
 							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="form-group">
-								삭제하시겠습니까?
-							</div>
-						</c:otherwise>
-					</c:choose>
-					<div class="col-center form-group">
-						<input type="submit" class="btn btn-danger" value="삭제">
-						<a href="<c:url value='/board/list.do'/>" class="btn btn-default">취소</a>
-					</div>
-				</form>
+						</div>
+
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 <!--//BoardPage-->
 	
 <%@include file="../inc/footer.jsp" %>
