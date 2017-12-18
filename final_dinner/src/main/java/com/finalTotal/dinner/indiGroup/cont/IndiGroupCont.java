@@ -2,7 +2,9 @@ package com.finalTotal.dinner.indiGroup.cont;
  
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -41,6 +43,7 @@ public class IndiGroupCont {
 	
 	@RequestMapping(value= "/groupMain.do")
 	public String groupMain(HttpSession session, Model model) {
+		logger.info("groupMain page");
 		if(session.getAttribute("memNo")== null) {
 			session.setAttribute("msg", "로그인이 필요합니다");
 			session.setAttribute("url", "/login/login.do");
@@ -108,7 +111,8 @@ public class IndiGroupCont {
 	}
 	
 	@RequestMapping(value= "/chat.do")
-	public String chat(@RequestParam(defaultValue= "0") int groupNo, Model model) {
+	public String chat(@RequestParam(defaultValue= "0") int groupNo, 
+			HttpSession session ,Model model) {
 		logger.info("indiGroup chat page");
 		if(groupNo== 0) {
 			model.addAttribute("msg", "그룹을 선택하셔야합니다.");
@@ -116,6 +120,12 @@ public class IndiGroupCont {
 			
 			return "common/message";
 		}
+		int memNo= (Integer)session.getAttribute("memNo");
+		Map<String, Integer> map= new HashMap<String, Integer>();
+		map.put("memNo", memNo);
+		map.put("groupNo", groupNo);
+		int cnt= chat_service.updateUserExist(map);
+		logger.info("chat 채팅 접속 결과 : cnt={}", cnt);
 		
 		List<ChattingVO> chat_list= chat_service.showAllChat(groupNo);
 		List<ChattingUserVO> user_list= chat_service.showAllUser(groupNo);
@@ -207,6 +217,25 @@ public class IndiGroupCont {
 		model.addAttribute("result", result);
 	}
 	
+	@RequestMapping("/chat/chatAdd.do")
+	public String chatAdd(@ModelAttribute ChattingVO vo, Model model) {
+		logger.info("chat adding parameter : vo= {}", vo);
+		
+		chat_service.addChat(vo);
+		
+		return "redirect:/indiGroup/main.do?groupNo="+ vo.getGroupNo();
+	}
+	@RequestMapping("/chat/chatList.do")
+	public String chatList(@RequestParam int cnt, @RequestParam int groupNo , Model model) {
+		List<ChattingVO> list= chat_service.showAllChat(groupNo);
+		List<ChattingVO> add_list= new ArrayList<ChattingVO>();
+		for(int i= cnt; i< list.size(); i++) {
+			add_list.add(list.get(i));
+		}
+		model.addAttribute("add_list", add_list);
+		
+		return "";
+	}
 	
 	
 	public int getLastDay(int year, int month) {
