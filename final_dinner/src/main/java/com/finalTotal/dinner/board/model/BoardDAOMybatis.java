@@ -6,7 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BoardDAOMyBatis extends SqlSessionDaoSupport implements BoardDAO {
+public class BoardDAOMybatis extends SqlSessionDaoSupport implements BoardDAO {
 	private static String namespace="config.board";
 	
 	public int insertBoard(BoardVO vo) {

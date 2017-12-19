@@ -12,7 +12,7 @@
 		});
 		
 		var $fileRow=$('.site-fileup-list').find('.site-fileup-row').eq(0).clone(true);
-		$('.site-fileup-list').empty();
+		$fileRow.find('input[type=file]').val('');
 		
 		$('.btn-file-add').click(function(){
 			$(this).parent().parent().find('.site-fileup-list').append($fileRow.clone(true));

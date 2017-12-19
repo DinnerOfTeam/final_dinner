@@ -12,7 +12,7 @@ $(function(){
 	});
 	
 	var $fileRow=$('.site-fileup-list').find('.site-fileup-row').eq(0).clone(true);
-	$('.site-fileup-list').empty();
+	$fileRow.find('input[type=file]').val('');
 	
 	$('.btn-file-add').click(function(){
 		$(this).parent().parent().find('.site-fileup-list').append($fileRow.clone(true));
@@ -63,27 +63,19 @@ $(function(){
 					<textarea class="form-text board-write " id="freeContents" name="freeContents"
 						placeholder="내용">${vo.freeContents }</textarea>
 					
-					<div class="form-group">
-						<label>삭제할 파일</label>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="deleteFile" value="파일 번호">
-								file1.dat
-							</label>
+					<c:if test="${!empty fileMap.list }">
+						<div class="form-group">
+							<label>삭제할 파일</label>
+							<c:forEach var="vo" items="${fileMap.list }">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="deleteFile"value="${vo.freeDataNo }">
+										${vo.freeDataOriginalName }
+									</label>
+								</div>
+							</c:forEach>
 						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="deleteFile" value="파일 번호">
-								file2.dat
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" name="deleteFile" value="파일 번호">
-								file3.dat
-							</label>
-						</div>
-					</div>
+					</c:if>
 					
 					<div class="row form-group">
 						<label class="col-xs-9">첨부파일</label>

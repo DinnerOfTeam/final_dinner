@@ -66,17 +66,36 @@
 
 .board-list-row .board-list-title{
 	text-align: left;
-	font-size: 150%;
 	font-weight: bold;
 	padding-bottom: 0.25em;
+}
+
+.board-list-row .board-list-title > p{
+	font-size: 150%;
 }
 
 .board-list-row > a > div{
 	padding: 0;
 }
 
+.board-list-row > a > div > p{
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	float: left;
+}
+
+.board-list-row > a > .board-list-title > p{
+	max-width: 100%;
+}
+
 .board-list-row:hover{
-	background-color: #EEE;
+	background-color: rgb(158, 22, 22);
+}
+
+.board-list-row:hover > a > div{
+	color: white !important;
 }
 
 .board-list-row .board-list-writer, .board-list-row .board-list-date{
@@ -190,6 +209,7 @@
 	padding: 0.75em;
 	margin: 0 0 0.75em 0;
 	border-bottom: #DDD solid 1px;
+	min-height: 10em;
 }
 
 .board-detail-btnwrap {
@@ -253,6 +273,11 @@
 	font-size: 0.9em;
 }
 
+.board-inner .pagination>.active>span{
+	background-color: rgb(158, 22, 22);
+	border: solid 1px rgb(158, 22, 22);
+}
+
 @media (min-width: 768px) {
 	.board-list-row>a{
 		padding: 0.5em 0;
@@ -260,18 +285,35 @@
 	
 	.board-list-row .board-list-title{
 		font-weight: unset;
-		font-size: 100%;
 		padding-bottom: 0;
 	}
 	
-	.board-list-row:hover .board-list-title{
+	.board-list-row .board-list-title > p{
+		font-size: 100%;
+		width: unset;
+	}
+	
+	.board-list-row .board-list-title .label{
+		font-size: 50%;
+		font-weight: bold;
+	}
+	
+	.board-list-row:hover .board-list-title > span,
+	.board-list-row:hover .board-list-title > p{
 		text-decoration: underline;
 	}
 	
 	.board-list-row .board-list-writer, .board-list-row .board-list-date{
-		text-align: center;
 		color: #333;
 		padding-top: 0;
 		font-size: 100%;
+	}
+	
+	.board-list-row .board-list-writer, .board-list-row .board-list-date{
+		text-align: center;
+	}
+	
+	.board-list-row > a > .board-list-title > p{
+		max-width: 70%;
 	}
 }

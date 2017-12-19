@@ -65,14 +65,29 @@
 												<i class="fa fa-arrow-right"></i>
 											</c:when>
 											<c:otherwise>
-												${vo.freeNo }
+												<p>${vo.freeNo }</p>
 											</c:otherwise>
 										</c:choose>
 									</div>
-									<div class="board-list-title col-xs-12 col-sm-6">${vo.freeTitle }</div>
-									<div class="board-list-writer col-xs-4 col-sm-3">${vo.freeName }</div>
+									<div class="board-list-title col-xs-12 col-sm-6">
+										<p>${vo.freeTitle }</p>
+										<c:if test="${vo.commentCount>0 }">
+											<c:if test="${vo.commentCount<1000 }">
+												<span>[${vo.commentCount }]</span>
+											</c:if>
+											<c:if test="${vo.commentCount>=1000 }">
+												<span>[999+]</span>
+											</c:if>
+										</c:if>
+										<c:if test="${vo.fileCount>0 }">
+											<img src="<c:url value='/images/boardFileIcon.png'/>">
+										</c:if>
+											<img src="<c:url value='/images/boardNewIcon.png'/>">
+											
+									</div>
+									<div class="board-list-writer col-xs-4 col-sm-3"><p>${vo.freeName }</p></div>
 									<div class="board-list-date col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
-										<fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd" />
+										<p><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd" /></p>
 									</div>
 								</a>
 							</div>

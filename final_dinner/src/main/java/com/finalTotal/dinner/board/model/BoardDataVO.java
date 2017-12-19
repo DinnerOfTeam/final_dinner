@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class BoardDataVO {
 	/*free_data_no NUMBER NOT NULL,  자료 번호 
 	free_no NUMBER NOT NULL,  게시판번호 
-	free_data_name VARCHAR2(500) NOT NULL,  자료실제이름 
+	free_data_name VARCHAR2(500) NOT NULL,  자료 실제이름 
 	free_data_original_name VARCHAR2(500) NOT NULL,  자료이름 
 	free_data_regdate DATE NOT NULL  등록일 */
 	

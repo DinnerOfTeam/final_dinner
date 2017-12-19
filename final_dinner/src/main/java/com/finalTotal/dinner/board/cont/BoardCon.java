@@ -1,9 +1,9 @@
 package com.finalTotal.dinner.board.cont;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.finalTotal.dinner.board.model.BoardDataService;
 import com.finalTotal.dinner.board.model.BoardDataVO;
 import com.finalTotal.dinner.board.model.BoardService;
 import com.finalTotal.dinner.board.model.BoardVO;
@@ -44,6 +45,9 @@ public class BoardCon {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private BoardDataService boardDataService;
 	
 	@Autowired
 	private CommentService commentService;
@@ -92,6 +96,8 @@ public class BoardCon {
 		List<CommentVO> commentList=commentService.selectCommentByFreeNo(freeNo);
 		logger.info("게시판 상세보기 댓글조회 결과, commentList.size()={}", commentList.size());
 		
+		Map<String, Object> fileMap=boardDataService.selectFileInfoByBoardNo(freeNo);
+		
 		String freeContents=vo.getFreeContents().replace("\r\n", "<br>");
 		vo.setFreeContents(freeContents);
 		
@@ -104,6 +110,7 @@ public class BoardCon {
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("commentList", commentList);
+		model.addAttribute("fileMap", fileMap);
 		
 		return "board/detail";
 	}
@@ -143,22 +150,10 @@ public class BoardCon {
 				msg=(String)vetifi.get("msg");
 			}else {
 				
-				List<BoardDataVO> dataList=new ArrayList<BoardDataVO>(); 
-				List<Map<String, Object>> fileList=null;
+				List<BoardDataVO> dataList=new ArrayList<BoardDataVO>();
 				
 				try {
-					fileList=fileUtil.fileUploadByKey(request, FILE_INPUT_NAME, FileUtil.FILE_UPLOAD);
-					
-					if(fileList!=null && !fileList.isEmpty()) {
-						BoardDataVO dataVO = new BoardDataVO();
-						for(Map<String, Object> dataMap : fileList) {
-							dataVO.setFreeDataName((String)dataMap.get("filename"));
-							dataVO.setFreeDataOriginalName((String)dataMap.get("originalFilename"));
-							
-							dataList.add(dataVO);
-						}
-						
-					}
+					dataList=uploadFile(request);
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -169,12 +164,18 @@ public class BoardCon {
 				int cnt=boardService.insertBoard(boardVO);
 				logger.info("게시판 글쓰기처리 결과, cnt={}", cnt);
 				
-				
-				
 				if(cnt>0) {
+					if(dataList!=null && !dataList.isEmpty()) {
+						cnt=boardDataService.insertFile(dataList, boardVO.getFreeNo());
+						logger.info("게시판 파일정보 등록 결과, cnt={}", cnt);
+					}
 					msg="글쓰기 완료";
 					url="/board/list.do";
 					back=false;
+					
+					if(cnt==0) {
+						msg="글쓰기 완료 - 파일 업로드 실패";
+					}
 				}else {
 					msg="글쓰기 실패";
 				}
@@ -190,11 +191,13 @@ public class BoardCon {
 	
 	@RequestMapping(value="/edit.do", method=RequestMethod.GET)
 	public String edit_get(@RequestParam(defaultValue="0")int freeNo,
-				HttpSession session, Model model) {
+			HttpSession session, Model model) {
 		logger.info("게시판 글수정 화면 표시, 파라미터 freeNo={}", freeNo);
 		
 		BoardVO vo=boardService.selectByNo(freeNo);
 		logger.info("게시판 글수정 화면 결과, vo={}", vo);
+		
+		Map<String, Object> fileMap=boardDataService.selectFileInfoByBoardNo(freeNo);
 		
 		String msg="수정할 글이 없습니다.", url="/board/list.do";
 		boolean errFlag=true;
@@ -215,13 +218,16 @@ public class BoardCon {
 			return "common/message";
 		}
 		model.addAttribute("vo", vo);
+		model.addAttribute("fileMap", fileMap);
 		
 		return "board/edit";
 	}
 	
 	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
 	public String edit_post(@ModelAttribute BoardVO boardVO,
-			HttpSession session, Model model) {
+			@RequestParam int[] deleteFile,
+			HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
 		logger.info("게시판 글수정 처리, 파라미터 boardVO={}", boardVO);
 		
 		BoardVO vo=boardService.selectByNo(boardVO.getFreeNo());
@@ -266,7 +272,6 @@ public class BoardCon {
 		if(!errFlag) {
 			//유효성 검사
 			
-			
 			Map<String, Object> vetifi=boardVerifi(boardVO, session);
 			errFlag=(Boolean)vetifi.get("errFlag");
 			
@@ -279,10 +284,49 @@ public class BoardCon {
 					vo.setFreeName(null);
 				}
 				
+				//파일 업로드
+				List<BoardDataVO> dataList=new ArrayList<BoardDataVO>();
+				
+				try {
+					dataList=uploadFile(request);
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				//DB작업
 				int cnt=boardService.editBoard(boardVO);
 				logger.info("게시판 글수정 처리 결과, cnt={}", cnt);
 				
 				if(cnt>0) {
+					if(dataList!=null && !dataList.isEmpty()) {
+						cnt=boardDataService.insertFile(dataList, boardVO.getFreeNo());
+						logger.info("게시판 파일정보 등록 결과, cnt={}", cnt);
+					}
+					
+					//파일삭제
+					List<BoardDataVO> fileList=new ArrayList<BoardDataVO>();
+					
+					for(int dataNo : deleteFile) {
+						BoardDataVO datavo=boardDataService.selectFileByNo(dataNo);
+						
+						if(datavo!=null) {
+							fileList.add(datavo);
+						}
+					}
+					
+					List<BoardDataVO> delFiles=boardDataService.deleteFiles(fileList, boardVO.getFreeNo());
+					for(BoardDataVO dataVO : delFiles) {
+						File file=new File(fileUtil.getUploadPath(request, FileUtil.FILE_UPLOAD), dataVO.getFreeDataName());
+						
+						if(file.exists()) {
+							boolean bool = file.delete();
+							logger.info("파일 삭제 결과, DataName={}, bool={}", dataVO.getFreeDataName(), bool);
+						}
+					}
+					
 					msg="글수정 완료";
 					url="/board/detail.do?no="+boardVO.getFreeNo();
 					back=false;
@@ -348,7 +392,8 @@ public class BoardCon {
 	
 	@RequestMapping(value="/delete.do", method=RequestMethod.POST)
 	public String delete_post(@ModelAttribute BoardVO boardVO,
-			HttpSession session, Model model) {
+			HttpServletRequest request, Model model) {
+		HttpSession session=request.getSession();
 		logger.info("게시판 글삭제 처리, 파라미터 boardVO={}", boardVO);
 		
 		BoardVO vo=boardService.selectByNo(boardVO.getFreeNo());
@@ -386,8 +431,27 @@ public class BoardCon {
 		if(!errFlag) {
 			url="";
 			back=true;
-			int cnt=boardService.deleteBoard(boardVO.getFreeNo());
+			
+			//파일 삭제
+			Map<String, Object> dataMap=boardDataService.selectFileInfoByBoardNo(boardVO.getFreeNo());
+			List<BoardDataVO> dataList=(List<BoardDataVO>)dataMap.get("list");
+			
+			for(BoardDataVO dataVO : dataList) {
+				File file=new File(fileUtil.getUploadPath(request, FileUtil.FILE_UPLOAD), dataVO.getFreeDataName());
+				
+				if(file.exists()) {
+					boolean bool = file.delete();
+					logger.info("파일 삭제 결과, DataName={}, bool={}", dataVO.getFreeDataName(), bool);
+				}
+			}
+			
+			//DB작업
+			int cnt=boardDataService.deleteFileByBoardNo(boardVO.getFreeNo());
+			logger.info("파일정보 삭제 결과, cnt={}", cnt);
+			
+			cnt=boardService.deleteBoard(boardVO.getFreeNo());
 			logger.info("게시판 글삭제 처리 결과, cnt={}", cnt);
+			
 			
 			if(cnt>0) {
 				msg="글삭제 완료";
@@ -499,6 +563,25 @@ public class BoardCon {
 		chkBoard.put("errFlag", errFlag);
 		
 		return chkBoard;
+	}
+	
+	private List<BoardDataVO> uploadFile(HttpServletRequest request) throws IllegalStateException, IOException {
+		List<BoardDataVO> dataList=new ArrayList<BoardDataVO>();
+		
+		List<Map<String, Object>> fileList=fileUtil.fileUploadByKey(request, FILE_INPUT_NAME, FileUtil.FILE_UPLOAD);
+		
+		if(fileList!=null && !fileList.isEmpty()) {
+			for(Map<String, Object> dataMap : fileList) {
+				BoardDataVO dataVO = new BoardDataVO();
+				dataVO.setFreeDataName((String)dataMap.get("filename"));
+				dataVO.setFreeDataOriginalName((String)dataMap.get("originalFilename"));
+				
+				dataList.add(dataVO);
+			}
+			
+		}
+		
+		return dataList;
 	}
 	
 }

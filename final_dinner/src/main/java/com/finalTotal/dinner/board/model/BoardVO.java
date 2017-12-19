@@ -19,6 +19,9 @@ public class BoardVO {
 	private String freeContents;
 	private Timestamp freeRegdate;
 	
+	private int commentCount;
+	private int fileCount;
+	
 	public int getFreeNo() {
 		return freeNo;
 	}
@@ -61,11 +64,24 @@ public class BoardVO {
 	public void setFreeRegdate(Timestamp freeRegdate) {
 		this.freeRegdate = freeRegdate;
 	}
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+	public int getFileCount() {
+		return fileCount;
+	}
+	public void setFileCount(int fileCount) {
+		this.fileCount = fileCount;
+	}
 	
 	@Override
 	public String toString() {
 		return "BoardVO [freeNo=" + freeNo + ", memNo=" + memNo + ", freeName=" + freeName + ", freePwd=" + freePwd
-				+ ", freeTitle=" + freeTitle + ", freeContents=" + freeContents + ", freeRegdate=" + freeRegdate + "]";
+				+ ", freeTitle=" + freeTitle + ", freeContents=" + freeContents + ", freeRegdate=" + freeRegdate
+				+ ", commentCount=" + commentCount + ", fileCount=" + fileCount + "]";
 	}
 	
 }

@@ -63,16 +63,22 @@
 				<div class="col-right col-xs-6"><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd hh:mm" /></div>
 			</div>
 			<div class="row board-detail-file">
-				<div class="col-right">
-					<a href="#" class="board-detail-file-btn">첨부파일(3)</a>
-					<div class="board-detail-file-list">
-						<ul>
-							<li><a href="#">file1.dat</a></li>
-							<li><a href="#">file2.dat</a></li>
-							<li><a href="#">file3.dat</a></li>
-						</ul>
+				<c:if test="${!empty fileMap.list }">
+					<div class="col-right">
+						<a href="#" class="board-detail-file-btn">첨부파일(${fileMap.cnt })</a>
+						<div class="board-detail-file-list col-left">
+							<ul>
+								<c:forEach var="vo" items="${fileMap.list }">
+									<li>
+										<a href="<c:url value='/board/download.do?fileNo=${vo.freeDataNo }'/>">
+											${vo.freeDataOriginalName }
+										</a>
+									</li>
+								</c:forEach>
+							</ul>
+						</div>
 					</div>
-				</div>
+				</c:if>
 			</div>
 			<div class="row board-detail-content">
 				<div class="col-xs-12">${vo.freeContents }</div>

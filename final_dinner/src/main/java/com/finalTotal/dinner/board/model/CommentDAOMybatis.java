@@ -6,7 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CommentDAOMyBatis extends SqlSessionDaoSupport implements CommentDAO {
+public class CommentDAOMybatis extends SqlSessionDaoSupport implements CommentDAO {
 	private static String namespace="config.comment";
 
 	public int insertComment(CommentVO vo) {
