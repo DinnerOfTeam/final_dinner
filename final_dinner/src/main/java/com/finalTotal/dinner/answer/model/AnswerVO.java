@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 public class AnswerVO {
 		private int qnaAnswerNo;
 		private int qnaQuestionNo;
-		private int memNo;
 		private String answerContent;
 		private Timestamp answerRegdate;
+		
 		public int getQnaAnswerNo() {
 			return qnaAnswerNo;
 		}
@@ -19,12 +19,6 @@ public class AnswerVO {
 		}
 		public void setQnaQuestionNo(int qnaQuestionNo) {
 			this.qnaQuestionNo = qnaQuestionNo;
-		}
-		public int getMemNo() {
-			return memNo;
-		}
-		public void setMemNo(int memNo) {
-			this.memNo = memNo;
 		}
 		public String getAnswerContent() {
 			return answerContent;
@@ -40,7 +34,7 @@ public class AnswerVO {
 		}
 		@Override
 		public String toString() {
-			return "AnswerVO [qnaAnswerNo=" + qnaAnswerNo + ", qnaQuestionNo=" + qnaQuestionNo + ", memNo=" + memNo
+			return "AnswerVO [qnaAnswerNo=" + qnaAnswerNo + ", qnaQuestionNo=" + qnaQuestionNo
 					+ ", answerContent=" + answerContent + ", answerRegdate=" + answerRegdate + "]";
 		}
 }

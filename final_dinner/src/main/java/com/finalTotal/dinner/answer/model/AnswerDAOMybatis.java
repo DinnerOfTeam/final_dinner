@@ -5,5 +5,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AnswerDAOMybatis extends SqlSessionDaoSupport implements AnswerDAO{
+	private String namespace="config.mybatis.mapper.oracle.answer";
 
+	@Override
+	public int insertAnswer(AnswerVO vo) {
+		return getSqlSession().insert(namespace+".insertAnswer", vo);
+	}
+	
 }

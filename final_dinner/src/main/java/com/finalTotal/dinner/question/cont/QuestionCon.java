@@ -100,15 +100,15 @@ public class QuestionCon {
 	public String mainNotice(ModelMap model) {
 		logger.info("자주묻는 질문 조회");
 		
-		List<QuestionVO> list = questionService.mainNotice();
+		/*List<QuestionVO> list = questionService.mainNotice();
 		logger.info("메인 질문  조회 결과, list.size()={}", list.size());
 	
 		model.addAttribute("list", list);
-		
-		return "/mainNotice";
+		*/
+		return "customer/mainNotice";
 	}
 	
-	@RequestMapping("/question/countUpdate.do")
+	@RequestMapping("/countUpdate.do")
 	public String countUpdate(@RequestParam(defaultValue="0") int no,
 			Model model) {
 		logger.info("조회수 증가, 파라미터 no={}", no);
@@ -148,4 +148,5 @@ public class QuestionCon {
 		
 		return "customer/detail";
 	}
+	
 }

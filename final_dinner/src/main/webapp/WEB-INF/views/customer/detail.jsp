@@ -1,38 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h2>글 상세보기</h2>
-	<table border="1">
-		<colgroup>
-				<col style="width:10%;" />
-				<col style="width:10%;" />
-				<col style="width:15%;" />
-				<col style="width:15%;" />
-				<col style="width:10%;" />	
-			</colgroup>
-		<tr>
-			<td colspan="3">제목</td>
-			<td colspan="3">${vo.questionTitle }</td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td>${vo.memNo}</td>
-			<td>등록일</td>
-			<td>${vo.questionRegdate}</td>
-			<td>조회수</td>
-			<td>${vo.questionViewCount}</td>
-		</tr>
-		<tr>
-			<td colspan="6" height="">${vo.questionContent }</td>
-		</tr>
-	</table>
-</body>
-</html>
-<%@ include file="../inc/footer.jsp" %>
+<style>
+	#table{
+		margin-top: 20px;
+	}
+	#btn{
+		text-align: right;
+	}
+	#btn input{
+		margin-top : 20px;
+		margin-right: 20px;
+		background-color: #9D1616;
+		color: white;
+	}
+</style>
+<div class="container fadeInUp animated" data-wow-delay=".5s" id="table">
+	<div class= 'row qna_header'>
+		<div class="img_size col-sm-6">
+			<h1><img src="images/logo.jpg" alt="" />상세보기</h1>
+		</div>
+	</div>
+	<div class= 'row col-sm-12' id="table">
+		<div class= 'table_div col-sm-12'>
+			<div class= 'tr_div row'>
+				<div class="th_div col-sm-2 font_size14 text_center border_both">제목</div>
+				<div class='td_div col-sm-10 border_right'>${vo.questionTitle }</div>
+			</div>
+			<div class= 'tr_div row'>
+				<div class="th_div font_size14 col-sm-2 text_center border_both">작성자</div>
+				<div class='td_div col-sm-3'>${vo.memNo }</div>
+				<div class="th_div font_size14 col-sm-2 text_center border_both">등록일</div>
+				<div class='td_div col-sm-2'>
+				<fmt:formatDate value="${vo.questionRegdate }" 
+					pattern="yyyy-MM-dd"/></div>
+				<div class="th_div font_size14 col-sm-2 text_center border_both">조회수</div>
+				<div class='td_div col-sm-1 border_right'>${vo.questionViewCount}</div>
+			</div>
+			<div class= 'content_detail'>
+				${vo.questionViewCount}
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="container fadeInUp animated" data-wow-delay=".5s" id="table">
+	<div class= 'row col-sm-12'>
+		<div class= 'table_div col-sm-12'>
+			<div class= 'tr_div row'>
+				<div class="th_div col-sm-2 font_size14 text_center border_both">제목</div>
+				<div class='td_div col-sm-10 border_right'>${vo.questionTitle }</div>
+			</div>
+			<div class= 'tr_div row'>
+				<div class="th_div font_size14 col-sm-2 text_center border_both">작성자</div>
+				<div class='td_div col-sm-3'>${vo.memNo }</div>
+				<div class="th_div font_size14 col-sm-2 text_center border_both">등록일</div>
+				<div class='td_div col-sm-2'>
+				<fmt:formatDate value="${vo.questionRegdate }" 
+					pattern="yyyy-MM-dd"/></div>
+				<div class="th_div font_size14 col-sm-2 text_center border_both">조회수</div>
+				<div class='td_div col-sm-1 border_right'>${vo.questionViewCount}</div>
+			</div>
+			<div class= 'content_detail'>
+				${vo.questionViewCount}
+			</div>
+		</div>
+	</div>
+	<div id="btn" >
+	<%-- <input type="Button" value="글쓰기"
+		onclick="location.href='<c:url value="/customer/write.do"/>'" /> --%>
+	<input type="Button" value="글쓰기" class="site-btn-submit"
+		onclick="location.href='<c:url value="/answer/reply.do?no=${vo.qnaQuestionNo}&title=${vo.questionTitle }"/>'" />
+	<input type="Button" value="목록보기" class="site-btn-submit"
+		onclick="location.href='<c:url value="/customer/list.do"/>'" />
+	</div>
+	</div>
+<%@ include file="../inc/footer.jsp" %>    

@@ -2,42 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <%@ include file="tab_menu.jsp" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <style>
-#container	{
-	/*clear: both;*/
-	width:60%;margin: 0 auto;
-	float: right;
-	overflow: auto;
-	background: white;
-	}
 #list tbody tr td a{
 	color: black;
 }
 </style>
-</head>
-<body>
-	<div id="container">
-		<table summary="" border="1" id="list">
-			<colgroup>
-				<col style="width:10%;" />
-				<col style="width:30%;" />
-				<col style="width:15%;" />
-				<col style="width:15%;" />
-				<col style="width:10%;" />	
-			</colgroup>
-			<thead>
-			  <tr>
-			    <th scope="col">번호</th>
-			    <th scope="col">제목</th>
-			    <th scope="col">작성자</th>
-			    <th scope="col">작성일</th>
-			    <th scope="col">조회수</th>
-			  </tr>
+<div class="container fadeInUp animated" data-wow-delay=".5s">
+		<form>
+		<fieldset class='border_fieldset'>
+			<legend>자유게시판</legend>
+		<table class= 'table tb_hover' id="list">
+			<thead class= 'row'>
+			<tr>
+				<th>번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+			</tr>
 			</thead>
 			<tbody>
 				<c:if test="${empty list }">
@@ -51,7 +33,7 @@
 					<td>${vo.qnaQuestionNo }</td>
 						<td style="text-align:left">
 						<a href
-					="<c:url value='/customer/detail.do?no=${vo.qnaQuestionNo}'/>">
+					="<c:url value='/customer/countUpdate.do?no=${vo.qnaQuestionNo}'/>">
 						${vo.questionTitle }
 					</a>
 						</td>
@@ -64,7 +46,26 @@
 				</c:if>
 			</tbody>
 		</table>
+		</fieldset>
+		</form>
+			<div class='page_div'>
+				<ul class= 'pagination'>
+					<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>
+					<li><a>1</a></li>
+					<li><a>2</a></li>
+					<li><a>3</a></li>
+					<li><a aria-label='Next'><i class="fa fa-angle-right"></i></a></li>
+				</ul>
+			</div>
+			<div class= 'search_form'>
+				<label for='search_condition' class= 'sr-only'>검색</label>
+				<select id= 'search_condition' name= 'search_condition'>
+					<option>제목</option>
+					<option>내용</option>
+					<option>작성자</option>
+					<option>작성일</option>
+				</select>
+				<input type='text'><button><span class= 'glyphicon glyphicon-search' /></button>
+			</div>
 	</div>
-</body>
-</html>
 <%@ include file="../inc/footer.jsp" %>

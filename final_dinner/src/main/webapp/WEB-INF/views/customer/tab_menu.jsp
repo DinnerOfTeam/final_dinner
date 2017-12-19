@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <style type="text/css">
 .tab_menu {
     position: relative;
@@ -15,13 +10,11 @@
     
    	/*clear: both;*/
 	width:60%;margin: 0 auto;
-	float: right;
 	overflow: auto;
 	background: white;
 }
-.tab_menu li {
+.tab_menu div {
     float: left;
-    width: 191px;
     height: 40px;
     margin-right: -1px;
     line-height: 38px;
@@ -32,26 +25,22 @@
     font-size: 16px;
     letter-spacing: -1px;
 }
-.tab_menu li a{
+.tab_menu div a{
  	color: black;
 }
 
 </style>
-</head>
-<body>
-	<div class="tab_menu">
-		<li>
+	<div class="tab_menu container">
+		<div class= 'col-sm-3'>
 			<a href="#">전체</a>
-		</li>
-		<li>
+		</div>
+		<div class= 'col-sm-3'>
 			<a href="#">회원문의</a>
-		</li>
-		<li>
+		</div>
+		<div class= 'col-sm-3'>
 			<a href="#">업체문의</a>
-		</li>
-		<li>
+		</div>
+		<div class= 'col-sm-3'>
 			<a href="#">예약문의</a>
-		</li>
+		</div>
 	</div>
-</body>
-</html>
