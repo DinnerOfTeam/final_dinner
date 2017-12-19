@@ -1,48 +1,52 @@
-package com.finalTotal.dinner.restaurant.model;
+package com.finalTotal.dinner.restaurant.general.model;
 
 import java.sql.Timestamp;
 
 public class RestaurantVO {
 	private int resNo;	//식당번호(시퀀스)
 	private int memNo;	//회원번호
-	private int foodTypeNno; //음식종류번호
+	private int foodTypeNo; //음식종류번호
 	private int resTypeNo; //식당 종류번호 
 	private String resName; //식당이름
 	private String resIntroduce; //소개
-	private String resWork_day; //영업일
-	private String resWork_hour; //영업시간
+	private String resWorkDay; //영업일
+	private String resWorkHour; //영업시간
 	private String resThumbnail; //썸네일(이미지 경로)-fileName과 같음
 	private int resGrade; //평점(0.0~5.0) 0.5단위
 	private int resMaxPerson; //최대인원(예약가능한 최대인원)
-	private String resContact;	//연락처
+	private String resContact1;	//연락처1
+	private String resContact2;	//연락처2
+	private String resContact3;	//연락처3
 	private String resZipcode; //우편번호
 	private String resAddress; //주소
 	private String resAddressDetail; //상세주소
 	private Timestamp resRegdate; //등록일
 	private String resStatus; //상태(승인대기중,승인됨,차단됨)
-
+	
 	public RestaurantVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RestaurantVO(int resNo, int memNo, int foodTypeNno, int resTypeNo, String resName, String resIntroduce,
-			String resWork_day, String resWork_hour, String resThumbnail, int resGrade, int resMaxPerson,
-			String resContact, String resZipcode, String resAddress, String resAddressDetail, Timestamp resRegdate,
-			String resStatus) {
+	public RestaurantVO(int resNo, int memNo, int foodTypeNo, int resTypeNo, String resName, String resIntroduce,
+			String resWorkDay, String resWorkHour, String resThumbnail, int resGrade, int resMaxPerson,
+			String resContact1, String resContact2, String resContact3, String resZipcode, String resAddress,
+			String resAddressDetail, Timestamp resRegdate, String resStatus) {
 		super();
 		this.resNo = resNo;
 		this.memNo = memNo;
-		this.foodTypeNno = foodTypeNno;
+		this.foodTypeNo = foodTypeNo;
 		this.resTypeNo = resTypeNo;
 		this.resName = resName;
 		this.resIntroduce = resIntroduce;
-		this.resWork_day = resWork_day;
-		this.resWork_hour = resWork_hour;
+		this.resWorkDay = resWorkDay;
+		this.resWorkHour = resWorkHour;
 		this.resThumbnail = resThumbnail;
 		this.resGrade = resGrade;
 		this.resMaxPerson = resMaxPerson;
-		this.resContact = resContact;
+		this.resContact1 = resContact1;
+		this.resContact2 = resContact2;
+		this.resContact3 = resContact3;
 		this.resZipcode = resZipcode;
 		this.resAddress = resAddress;
 		this.resAddressDetail = resAddressDetail;
@@ -66,12 +70,12 @@ public class RestaurantVO {
 		this.memNo = memNo;
 	}
 
-	public int getFoodTypeNno() {
-		return foodTypeNno;
+	public int getFoodTypeNo() {
+		return foodTypeNo;
 	}
 
-	public void setFoodTypeNno(int foodTypeNno) {
-		this.foodTypeNno = foodTypeNno;
+	public void setFoodTypeNo(int foodTypeNo) {
+		this.foodTypeNo = foodTypeNo;
 	}
 
 	public int getResTypeNo() {
@@ -98,20 +102,20 @@ public class RestaurantVO {
 		this.resIntroduce = resIntroduce;
 	}
 
-	public String getResWork_day() {
-		return resWork_day;
+	public String getResWorkDay() {
+		return resWorkDay;
 	}
 
-	public void setResWork_day(String resWork_day) {
-		this.resWork_day = resWork_day;
+	public void setResWorkDay(String resWorkDay) {
+		this.resWorkDay = resWorkDay;
 	}
 
-	public String getResWork_hour() {
-		return resWork_hour;
+	public String getResWorkHour() {
+		return resWorkHour;
 	}
 
-	public void setResWork_hour(String resWork_hour) {
-		this.resWork_hour = resWork_hour;
+	public void setResWorkHour(String resWorkHour) {
+		this.resWorkHour = resWorkHour;
 	}
 
 	public String getResThumbnail() {
@@ -138,12 +142,28 @@ public class RestaurantVO {
 		this.resMaxPerson = resMaxPerson;
 	}
 
-	public String getResContact() {
-		return resContact;
+	public String getResContact1() {
+		return resContact1;
 	}
 
-	public void setResContact(String resContact) {
-		this.resContact = resContact;
+	public void setResContact1(String resContact1) {
+		this.resContact1 = resContact1;
+	}
+
+	public String getResContact2() {
+		return resContact2;
+	}
+
+	public void setResContact2(String resContact2) {
+		this.resContact2 = resContact2;
+	}
+
+	public String getResContact3() {
+		return resContact3;
+	}
+
+	public void setResContact3(String resContact3) {
+		this.resContact3 = resContact3;
 	}
 
 	public String getResZipcode() {
@@ -188,13 +208,16 @@ public class RestaurantVO {
 
 	@Override
 	public String toString() {
-		return "RestaurantVO [resNo=" + resNo + ", memNo=" + memNo + ", foodTypeNno=" + foodTypeNno + ", resTypeNo="
-				+ resTypeNo + ", resName=" + resName + ", resIntroduce=" + resIntroduce + ", resWork_day=" + resWork_day
-				+ ", resWork_hour=" + resWork_hour + ", resThumbnail=" + resThumbnail + ", resGrade=" + resGrade
-				+ ", resMaxPerson=" + resMaxPerson + ", resContact=" + resContact + ", resZipcode=" + resZipcode
-				+ ", resAddress=" + resAddress + ", resAddressDetail=" + resAddressDetail + ", resRegdate=" + resRegdate
-				+ ", resStatus=" + resStatus + "]";
+		return "RestaurantVO [resNo=" + resNo + ", memNo=" + memNo + ", foodTypeNo=" + foodTypeNo + ", resTypeNo="
+				+ resTypeNo + ", resName=" + resName + ", resIntroduce=" + resIntroduce + ", resWorkDay=" + resWorkDay
+				+ ", resWorkHour=" + resWorkHour + ", resThumbnail=" + resThumbnail + ", resGrade=" + resGrade
+				+ ", resMaxPerson=" + resMaxPerson + ", resContact1=" + resContact1 + ", resContact2=" + resContact2
+				+ ", resContact3=" + resContact3 + ", resZipcode=" + resZipcode + ", resAddress=" + resAddress
+				+ ", resAddressDetail=" + resAddressDetail + ", resRegdate=" + resRegdate + ", resStatus=" + resStatus
+				+ "]";
 	}
+
+	
 	
 	
 	

@@ -25,7 +25,9 @@
 	width: 33.3%;
 }
 
-
+.form-heading{
+		width: 600px;
+	}
 
 </style>
 
@@ -36,8 +38,8 @@
 <div class="login">
 	<div class="container">
 		<div class="login-body">
-			<div class="login-heading w3layouts" align="center">
-				<ul id="myTab" class="nav nav-tabs" role="tablist">
+			<div class="form-heading" align="center">
+				<!-- <ul id="myTab" class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#home"
 						id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
 						aria-expanded="true">일반</a></li>
@@ -45,7 +47,8 @@
 						id="profile-tab" data-toggle="tab" aria-controls="profile">업체</a></li>
 					<li role="presentation"><a href="#profile" role="tab"
 						id="profile-tab" data-toggle="tab" aria-controls="profile">관리자</a></li>
-				</ul>
+				</ul> -->
+				<h1>로그인</h1>
 			</div>
 			<div class="login-info">
 				<form action="<c:url value='/login/login.do'/>" name="frmLogin"
@@ -69,9 +72,9 @@
 						</div>
 						<div class="clearfix"></div>
 					</div>
-					<input type="submit" name="SignIn" id="SignIn" value="로그인">
+					<button id="wr_submit" name="SignIn" id="SignIn" class="site-btn-submit site-btn-full">로그인</button>
 					<div class="signup-text">
-						<a href="<c:url value= '/signup.do'/>">회원가입</a>
+						<a href="<c:url value= '/member/signup.do'/>">회원가입</a>
 					</div>
 
 

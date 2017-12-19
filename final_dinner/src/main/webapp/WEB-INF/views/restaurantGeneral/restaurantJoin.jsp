@@ -54,25 +54,25 @@
 				</div>
 				<div class="form-info">
 					<form action="<c:url value='/restaurant/restaurantJoin.do' />" method="post" >
-						<input type="text" class="form-text" name="email" placeholder="식당번호" required="">
-						<input type="text" class="form-text" name="email" placeholder="회원번호" required="">
-						<input type="text" class="form-text" name="email" placeholder="음식종류번호" required="">
-						<input type="text" class="form-text" name="email" placeholder="식당종류번호" required="">
-						<input type="text" class="form-text" name="email" placeholder="식당이름" required="">
+						<input type="text" class="form-text" name="resNo" placeholder="식당번호" required="">
+						<input type="text" class="form-text" name="memNo" placeholder="회원번호" required="">
+						<input type="text" class="form-text" name="foodTypeNo" placeholder="음식종류번호" required="">
+						<input type="text" class="form-text" name="resTypeNo" placeholder="식당종류번호" required="">
+						<input type="text" class="form-text" name="resName" placeholder="식당이름" required="">
 
-						<textarea placeholder="소개" class="form-text" required=""></textarea>
-						<input type="text" class="form-text" name="email" placeholder="영업일(월~금, 연중무휴, ...)" required="">
-						<input type="text" class="form-text" name="email" placeholder="영업시간" required="">
+						<textarea placeholder="소개" name="resIntroduce" class="form-text" required=""></textarea>
+						<input type="text" class="form-text" name="resWorkDay" placeholder="영업일(월~금, 연중무휴, ...)" required="">
+						<input type="text" class="form-text" name="resWorkHour" placeholder="영업시간" required="">
 						
 						<input type="file" >
 						
 						
-						<input type="text" class="form-text" name="email" placeholder="최대인원" required="">
+						<input type="text" class="form-text" name="resMaxPerson" placeholder="최대인원" required="">
 												
 						
 						<div class="form-row">
 							<div class="col-xs-3">
-								<select class="form-select">
+								<select class="form-select" name="resContact1">
 									<option>010</option>
 									<option>011</option>
 									<option>012</option>
@@ -82,11 +82,11 @@
 							</div>
 							<span class="form-txt form-static">-</span>
 							<div class="col-xs-3">
-								<input type="text" class="user form-text">
+								<input type="text" class="user form-text" name="resContact2">
 							</div>
 							<span class="form-txt form-static">-</span>
 							<div class="col-xs-3">
-								<input type="text" class="user form-text">
+								<input type="text" class="user form-text" name="resContact3">
 							</div>
 						</div>
 						
@@ -94,23 +94,13 @@
 					<!-- 	<input type="text" name="startDay" id="startDay" placeholder="영업일">
 						<button>버튼</button> -->
 						
-						<div class="form-row">
-							<div class="col-sm-4">
-								<input type="text" class="form-text" placeholder="Name" required="">
-							</div>
-							<div class="col-sm-4">
-								<input type="email" class="form-text" placeholder="Email" required="">
-							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-text" placeholder="Telephone" required="">
-							</div>
-						</div>
+					
 						
 						
 						<div >
 							<div class="col-sm-7">
-							<label for='memZipcode' class= 'sr-only'>주소</label>
-							<input type="text" class="form-text bbb"  required="" name="memZipcode"id="memZipcode" ReadOnly title="우편번호">
+							<label for='resZipcode' class= 'sr-only'>주소</label>
+							<input type="text" class="form-text bbb"  required="" name="resZipcode"id="resZipcode" ReadOnly title="우편번호">
 							</div>
 							<div class="col-sm-5">
 							  <input type="Button" value="우편번호 찾기" onclick="sample4_execDaumPostcode()"><br />
@@ -118,12 +108,12 @@
 							
 							<div class="">
 							<span class="sp1"></span> 
-								<input type="text" class="form-text bbb"  required="" name="memAdd"id="memAdd" ReadOnly title="주소">
+								<input type="text" class="form-text bbb"  required="" name="resAddress"id="resAddress" ReadOnly title="주소">
 							</div>
 							
 							<div> 
 								<span class="sp1"></span> 
-								<input type="text" class="form-text"  required="" name="memAddDetail"id="memAddDetail" ReadOnly title="주소">
+								<input type="text" class="form-text"  required="" name="resAddressDetail"id="resAddressDetail" ReadOnly title="주소">
 								<span id="guide" style="color:#999"></span>
 							</div>
 						</div>

@@ -121,16 +121,14 @@ START MODULE AREA 2: Sub Navigation 1
 				<div class="tab-content">
 					<div class="tab-pane fade active in" id="general">
 						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
-						<a href="#">예약정보 조회</a><br>
-						<a href="#">예약취소</a><br>
-						<a href="#">식당등록</a><br>						
+						<a href="/dinner/book/booking.do">예약정보 조회</a><br>
+						<a href="/dinner/restaurant/restaurantJoin.do">식당등록</a><br>						
 						<a href="#">회원탈퇴</a>
 					</div>
 					<div class="tab-pane fade" id="business">
 						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
-						<a href="#">식당정보확인</a><br>
+						<a href="/dinner/restaurantEnterprise/restaurantInformation.do">식당정보확인</a><br>
 						<a href="#">식당예약조회</a><br>
-						<a href="#">식당예약취소</a><br>
 						<div class='container pad_0'>
 							<div class='col-md-1 pad_0 bbb'>
 								<a class="right-toggle1" data-toggle="right" href="#"> 식당정보수정

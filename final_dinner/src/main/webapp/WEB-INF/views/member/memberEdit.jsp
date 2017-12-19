@@ -21,12 +21,17 @@
 	});
 </script>
 
+<style type="text/css">
+	.form-heading{
+		width: 600px;
+	}
+</style>
 
 
 <div class="login">
 	<div class="container">
 		<div class="login-body">
-			<div class="login-heading2 w3layouts">
+			<div class="form-heading">
 				<h1>회원정보수정</h1>
 
 			</div>
@@ -154,8 +159,8 @@
 						</div>
 
 					</fieldset>
-					<input type="text" name="chkId" id="chkId"> <input
-						type="submit" id="wr_submit" value="회원가입수정">
+					<input type="text" name="chkId" id="chkId"> 
+					<button id="wr_submit" class="site-btn-submit site-btn-full">회원정보수정</button>
 					<div class="signup-text">
 						<a href="<c:url value= '/login/login.do'/>">로그인</a>
 					</div>

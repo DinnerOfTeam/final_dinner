@@ -1,33 +1,30 @@
 package com.finalTotal.dinner.book.cont;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.finalTotal.dinner.book.model.BookService;
-import com.finalTotal.dinner.book.model.BookVO;
 
 @Controller
+@RequestMapping("/book")
 public class BWriteCon {
+	
+	private static final Logger logger 
+		= LoggerFactory.getLogger(BWriteCon.class);
+	
 	@Autowired
-	BookService ser;
+	BookService bookService;
 	
-	@RequestMapping(value= "/book/write.do", method= RequestMethod.GET)
+	@RequestMapping(value= "/booking.do", method= RequestMethod.GET)
 	public String writeForm() {
-		System.out.println("writeForm method()");
+		logger.info("예약 정보조회 페이지");
 		
-		return "write";
+		return "book/booking";
 	}
 	
-	@RequestMapping(value= "/book/write.do", method= RequestMethod.POST)
-	public String writeSubmit(@ModelAttribute BookVO vo) {
-		System.out.println("writeSubmit method() paramater : "+ vo);
-		
-		int cnt= ser.insert(vo);
-		System.out.println("입력 결과 : "+ cnt);
-		
-		return "redirect:/book/write.do";
-	}
+	
 }

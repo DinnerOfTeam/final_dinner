@@ -5,8 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BookDAOImpl extends SqlSessionDaoSupport implements BookDAO {
-	@Override
-	public int insert(BookVO vo) {
-		return getSqlSession().insert("config.book.insertBook", vo);
-	}
+	
 }

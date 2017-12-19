@@ -80,9 +80,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('memZipcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('memAdd').value = fullRoadAddr;
-                document.getElementById('memAddDetail').value = data.jibunAddress;
+                document.getElementById('resZipcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('resAddress').value = fullRoadAddr;
+                document.getElementById('resAddressDetail').value = data.jibunAddress;
 
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                 if(data.autoRoadAddress) {
@@ -126,7 +126,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								
 								<c:if test="${!empty sessionScope.memId }">								
 								<li><a href="<c:url value= '/login/logout.do'/>">로그아웃</a>
-								<a href="<c:url value= '/member/memberEdit.do'/>">회원정보수정</a>
 								<a href="<c:url value= '/member/myPage.do'/>">마이페이지</a></li>
 								</c:if>
 							</ul>

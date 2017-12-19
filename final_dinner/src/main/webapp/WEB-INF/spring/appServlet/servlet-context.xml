@@ -33,7 +33,7 @@
 		<interceptor>
 			<mapping path="/indiGroup/*"/>
 			<mapping path="/board/*"/>
-			<mapping path="/member/m*"/>
+			
 			<mapping path="/customer/*"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
