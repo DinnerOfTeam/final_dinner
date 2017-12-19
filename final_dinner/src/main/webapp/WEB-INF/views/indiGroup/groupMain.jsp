@@ -18,7 +18,7 @@
 	$(function() {
 		$('.groupList a').click(function() {
 			var groupNo= $(this).next('input[type=hidden]').val();
-			location.href= "<c:url value='/indiGroup/main.do?groupNo="+ groupNo+ "' />";
+			location.href= "<c:url value='/indiGroup/chat/main.do?groupNo="+ groupNo+ "' />";
 		});
 	});
 </script>

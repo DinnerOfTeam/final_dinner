@@ -20,12 +20,15 @@
 		text-align: left;
 	}
 	.chat_list {
-		max-height: 600px;
+		min-height: 300px;
+		max-height: 500px;
 		overflow-y: scroll; 
 	}
 </style>
 <script type="text/javascript">
 	$(function() {
+		is_me();
+		chat_scroll();
 		$('button').click(chat);
 		$('input').on('keypress', function(e) {
 			if(e.which== 13)
@@ -50,22 +53,23 @@
 			});
 			$('#chatText').val('');
 		}
-		$('.chat_list .is_me').each(function() {
-			if($(this).val()== '${sessionScope.memNo}') {
-				$(this).next('p.badge').addClass('badge-primary');
-			}else {
-				$(this).next('p.badge').addClass('badge-warning');
-			}
-		});
+		function is_me() {
+			$('.chat_list .is_me').each(function() {
+				if($(this).val()== '${sessionScope.memNo}') {
+					$(this).next('p.badge').addClass('badge-primary');
+				}else {
+					$(this).next('p.badge').addClass('badge-warning');
+				}
+			});
+		}
  		$('.chat_user .is_exist').each(function() {
 			if($(this).val()!= 'Y') {
 				$(this).next('i').addClass('user_none');
 			}
 		});
  		
-
- 		function chatList(type){
- 			var gNo= '${groupNo}';
+ 		function chatList(type, gNo){
+/*   			alert(type+ ", "+ gNo); */
  			$.ajax({
  				type: "post",
  				url: "<c:url value= '/indiGroup/chat/chatList.do' />",
@@ -74,46 +78,34 @@
  					groupNo: gNo
  				},
  				success: function(data){
- 					alert(data);
  					if(data=="") return;
- 					var parsed = JSON.parse(data);
- 					var result = parsed.result;
- 					for(var i = 0;i < result.length; i++){
- 						addChat(result[i][0].value, result[i][1].value, result[i][2].value);
- 					}
- 					lastID=Number(parsed.last);
+/*    					alert(data);  */
+ 					$(data).find('list').each(function() {
+ 						var mN= $(this).find('memNo').text();
+ 						var cR= $(this).find('chatRegdate').text();
+ 						var mName= $(this).find('memName').text();
+ 						var cC= $(this).find('chatContents').text();
+/*   						alert('mN1 : '+ mN+ ', cR : '+ cR+ ', mN2 : '+ mName+ ', cC : '+ cC); */
+ 						addChat(mN, cR, mName, cC);
+ 					});
  				}
  			});
  		}
- 		function addChat(userid,chatcontent, chatTime){
- 			$('#chatlist').append('<div class="row">'+
- 					'<div class="col-lg-12">'+
- 					'<div class="media">'+
- 					'<a class="pull-left" href="#">'+
- 					'<img class="media-object img-circle" src="images/beb42.jpeg" alt="">'+
- 					'</a>'+
- 					'<div class="media-body">'+
- 					'<h4 class="media-heading">'+
- 					userid+
- 					'<span class="small pull-right">'+
- 					chatTime+
- 					'</span>'+
- 					'</h4>'+
- 					'<p>'+
- 					chatcontent+
- 					'</p>'+
- 					'</div>'+
- 					'</div>'+
- 					'</div>'+
- 					'</div>'+
- 					'<hr>');
- 			$('#chatlist').scrollTop($('#chatlist')[0].scrollHeight);
- 			
+ 		function addChat(memNo, chatRegdate, memName, chatContents){
+ 			$('fieldset.chat_list').append("<div class='chat_time'>"
+ 					+ "<input type= 'hidden' class= 'is_me' value= '"+ memNo+ "' />"
+ 					+ "<p class='badge'>"+memName + "曰 : "+ chatContents+ "</p>"
+ 					+ chatRegdate+ "</div>");
+ 			is_me();
+ 			chat_scroll();
+ 		}
+ 		function chat_scroll() {
+ 			$('fieldset.chat_list').scrollTop($('fieldset.chat_list').prop('scrollHeight'));
  		}
  		
- 		function getInfinity(){
- 			setInterval(function(){chatList(${chat_list.size()});},2000);
- 		}
+		setInterval(function(){
+			chatList($('.chat_list div.chat_time').length, ${param.groupNo});
+		}, 500);
 	});
 </script>
 <div class= 'chat'>
@@ -144,14 +136,14 @@
 			<p class= 'text_left text_08'><strong>최근 채팅이 없습니다</strong></p>
 		</c:if>
 		<c:forEach var="vo" items="${chat_list }">
-			<div class='chat_time'><input type="hidden" class= 'is_me' value= '${vo.memNo }' /><p class='badge'>${vo.memName }曰 : ${vo.chatContents }</p><fmt:formatDate value="${vo.chatRegdate }" pattern="HH:mm" /> </div>
+			<div class='chat_time'><input type="hidden" class= 'is_me' value= '${vo.memNo }' /><p class='badge'>${vo.memName }曰 : ${vo.chatContents }</p><fmt:formatDate value="${vo.chatRegdate }" pattern="dd-HH:mm" /></div>
 		</c:forEach>
 	</fieldset>
 	<div class= 'row'>
 <%-- 		<form action="<c:url value='/indiGroup/chat/chatAdd.do' />" method="post"> --%>
 			<input type="hidden" name= 'groupNo' id= 'groupNo' value="${param.groupNo }" />
 			<input type="hidden" name= 'memNo' id= 'memNo' value="${sessionScope.memNo }" />
-			<div class='col-sm-7'><input type="text" name= 'chatContents' id= 'chatText' /></div>
+			<div class='col-sm-7'><input type="text" name= 'chatContents' id= 'chatText'  size="15"/></div>
 			<div class='col-sm-5'><button>전송</button></div>
 <!-- 		</form> -->
 	</div>

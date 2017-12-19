@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>
+<%@ include file="../../inc/top.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://use.fontawesome.com/a9eeb9d53e.js"></script>
 <style type="text/css">
@@ -42,8 +42,8 @@
 		});
 	});
 </script>
-	<c:import url="../inc/indigroupSide.jsp" />
-				<form action="<c:url value='/indiGroup/main.do' />" method="post" 
+	<c:import url="../../inc/indigroupSide.jsp" />
+				<form action="<c:url value='/indiGroup/chat/main.do' />" method="post" 
 						name= "groupSelc" id= "groupSelc" style="text-align: right;">
 					<label for= 'groupNo'>그룹변경 :</label> <select name= groupNo id= 'groupNo'>
 						<c:forEach var="vo" items="${list }">
@@ -71,4 +71,4 @@
 		</div>
 	</article>
 
-<%@ include file="../inc/footer.jsp" %>
+<%@ include file="../../inc/footer.jsp" %>

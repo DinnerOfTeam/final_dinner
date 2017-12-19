@@ -13,6 +13,16 @@ public class ChattingVO {
 	private int chatNo, groupNo, memNo;
 	private String chatContents, memName;
 	private Date chatRegdate;
+	
+	public ChattingVO() {
+	}
+	public ChattingVO(int memNo, String chatContents, String memName, Date chatRegdate) {
+		super();
+		this.memNo = memNo;
+		this.chatContents = chatContents;
+		this.memName = memName;
+		this.chatRegdate = chatRegdate;
+	}
 	public int getChatNo() {
 		return chatNo;
 	}

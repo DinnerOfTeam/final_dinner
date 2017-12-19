@@ -36,11 +36,11 @@ public class ChattingUserInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		String uri= request.getRequestURI();
-		log.info("채팅 접속 off");
-		if(uri.indexOf("/main.do")== -1) {
+		if(uri.indexOf("/chat/")== -1) {
 			if(request.getSession().getAttribute("memNo")!= null) {
 				int memNo= (Integer)request.getSession().getAttribute("memNo");
 				chat_service.updateUserNone(memNo);
+				log.info("채팅 접속 off");
 			}
 		}
 		

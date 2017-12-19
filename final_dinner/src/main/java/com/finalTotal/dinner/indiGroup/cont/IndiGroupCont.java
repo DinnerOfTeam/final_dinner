@@ -1,5 +1,8 @@
 package com.finalTotal.dinner.indiGroup.cont;
  
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -58,7 +62,7 @@ public class IndiGroupCont {
 	}
 	
  
-	@RequestMapping(value= "/main.do")
+	@RequestMapping(value= "/chat/main.do")
 	public String main(@RequestParam(required=false, defaultValue= "0") int year,
 			@RequestParam(required=false, defaultValue= "0") int month,
 			@RequestParam(required=false, defaultValue= "0") int p_date,
@@ -102,7 +106,7 @@ public class IndiGroupCont {
 		model.addAttribute("work_arr", work_arr);
 		model.addAttribute("today", d);
 		
-		return "indiGroup/main";
+		return "indiGroup/chat/main";
 	}
 	
 	@RequestMapping(value= "/calender.do")
@@ -223,18 +227,40 @@ public class IndiGroupCont {
 		
 		chat_service.addChat(vo);
 		
-		return "redirect:/indiGroup/main.do?groupNo="+ vo.getGroupNo();
+		return "redirect:/indiGroup/chat/main.do?groupNo="+ vo.getGroupNo();
 	}
 	@RequestMapping("/chat/chatList.do")
-	public String chatList(@RequestParam int cnt, @RequestParam int groupNo , Model model) {
+	public void chatList(@RequestParam int cnt, @RequestParam int groupNo,
+			HttpServletResponse response, Model model) {
+//		logger.info("chat list page parameter : cnt= {}, groupNo= {}", cnt, groupNo);
 		List<ChattingVO> list= chat_service.showAllChat(groupNo);
 		List<ChattingVO> add_list= new ArrayList<ChattingVO>();
-		for(int i= cnt; i< list.size(); i++) {
-			add_list.add(list.get(i));
-		}
-		model.addAttribute("add_list", add_list);
 		
-		return "";
+		for(int i= cnt; i< list.size(); i++) {
+			ChattingVO vo= list.get(i);
+			add_list.add(vo);
+//			logger.info("추가된 채팅 : vo= {}", vo);
+		}
+		
+		SimpleDateFormat sdf= new SimpleDateFormat("dd-HH:mm");
+		try {
+			response.setCharacterEncoding("utf-8");
+			PrintWriter out= response.getWriter();
+			
+			for(ChattingVO vo: add_list) {
+//				logger.info("추가된 채팅 : vo= {}", vo);
+				
+				out.println("<chat><list>");
+				out.println("<memNo>"+ vo.getMemNo()+ "</memNo>");
+				out.println("<memName>"+ vo.getMemName()+ "</memName>");
+				out.println("<chatRegdate>"+ sdf.format(vo.getChatRegdate())+ "</chatRegdate>");
+				out.println("<chatContents>"+ vo.getChatContents()+ "</chatContents>");
+				out.println("</list></chat>");
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
