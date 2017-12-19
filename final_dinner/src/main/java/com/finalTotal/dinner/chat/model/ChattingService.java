@@ -9,4 +9,5 @@ public interface ChattingService {
 	public int updateUserExist(Map<String, Integer> map);
 	public int updateUserNone(int memNo);
 	public int addChat(ChattingVO vo);
+	public int insertChatUser(ChattingUserVO vo);
 }

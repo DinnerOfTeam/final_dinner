@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://use.fontawesome.com/a9eeb9d53e.js"></script>
 <style type="text/css">
 	.table, .table td {
@@ -64,7 +63,7 @@
 				</div>
 				<div class= 'col-md-4'>
 					<div title= 'chatting'>
-						<c:import url="/indiGroup/chat.do" />
+						<c:import url="/indiGroup/chat/chat.do" />
 					</div>
 				</div>
 			</div>

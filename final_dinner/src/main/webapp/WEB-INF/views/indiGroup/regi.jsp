@@ -44,7 +44,7 @@
 								<input type="hidden" value='${vo.groupNo }'>
 								</td>
 								<td>${vo.groupName }</td>
-								<td>${vo.memNo }</td>
+								<td>${vo.memName }</td>
 								<td>${vo.groupInfo }</td>
 							</tr>
 						</c:forEach>

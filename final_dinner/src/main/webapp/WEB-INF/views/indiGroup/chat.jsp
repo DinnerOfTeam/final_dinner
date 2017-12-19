@@ -122,7 +122,7 @@
 	<fieldset class= 'chat_user border_fieldset pad_both0'>
 		<legend><i class="fa fa-users" aria-hidden="true">유저 목록</i></legend>
 		<c:forEach var="vo" items="${user_list }">
-			<span class= 'user_icon'><input type="hidden" class= 'is_exist' value= "${vo.chatUserExist }" /><i class="fa fa-user left_align" aria-hidden="true"> ${vo.memName } </i></span>
+			<span class= 'user_icon'><input type="hidden" class= 'is_exist' value= "${vo.memExist }" /><i class="fa fa-user left_align" aria-hidden="true"> ${vo.memName } </i></span>
 		</c:forEach>
 	</fieldset>
 	<fieldset class= 'chat_list border_fieldset pad_both0'>

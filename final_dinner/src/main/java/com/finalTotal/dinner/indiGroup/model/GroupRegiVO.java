@@ -7,7 +7,14 @@ public class GroupRegiVO {
 			mem_no NUMBER  회원 번호 
 		);*/
 	private int groupRegiNo, groupNo, memNo;
+	private String memName;
 
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
 	public int getGroupRegiNo() {
 		return groupRegiNo;
 	}

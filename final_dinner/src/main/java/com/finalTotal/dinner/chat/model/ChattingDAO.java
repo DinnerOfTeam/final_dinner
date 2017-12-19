@@ -9,4 +9,5 @@ public interface ChattingDAO {
 	public int updateUserNone(int memNo);
 	public int updateUserExist(Map<String, Integer> map);
 	public int addChat(ChattingVO vo);
+	public int insertChatUser(ChattingUserVO vo);
 }

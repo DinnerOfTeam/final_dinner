@@ -8,12 +8,18 @@ public final class IndigroupVO {
 			group_info VARCHAR2(600)  설명 
 		);*/
 	private int groupNo, memNo, numGroupMember;
-	private String groupName, groupInfo;
+	private String groupName, groupInfo, memName;
 	public int getGroupNo() {
 		return groupNo;
 	}
 	public int getNumGroupMember() {
 		return numGroupMember;
+	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
 	}
 	public void setNumGroupMember(int numGroupMember) {
 		this.numGroupMember = numGroupMember;

@@ -11,11 +11,14 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalTotal.dinner.chat.model.ChattingService;
+import com.finalTotal.dinner.indiGroup.model.IndiGroupService;
 
 @Component
 public class ChattingUserInterceptor implements HandlerInterceptor {
+/*	@Autowired
+	private ChattingService chat_service;*/
 	@Autowired
-	private ChattingService chat_service;
+	private IndiGroupService group_service;
 
 	public static final Logger log= LoggerFactory.getLogger(ChattingUserInterceptor.class);
 	
@@ -39,7 +42,7 @@ public class ChattingUserInterceptor implements HandlerInterceptor {
 		if(uri.indexOf("/chat/")== -1) {
 			if(request.getSession().getAttribute("memNo")!= null) {
 				int memNo= (Integer)request.getSession().getAttribute("memNo");
-				chat_service.updateUserNone(memNo);
+				group_service.updateUserNone(memNo);
 				log.info("채팅 접속 off");
 			}
 		}

@@ -29,6 +29,9 @@
 					</c:if>
 						<li><a href="<c:url value='/indiGroup/create.do' />">그룹생성</a>
 						<li><a href="<c:url value='/indiGroup/regi.do' />">그룹가입</a>
+						<c:if test="${isKing== sessionScope.memNo }">
+							<li><a href="<c:url value='/indiGroup/regiOk.do?groupNo=${param.groupNo }' />">가입승인</a>
+						</c:if>
 				</ul>
 			</div>
 			<div class= 'col-md-9'>

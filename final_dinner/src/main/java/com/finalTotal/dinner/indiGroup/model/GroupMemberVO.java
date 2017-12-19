@@ -7,7 +7,20 @@ public class GroupMemberVO {
 			mem_no NUMBER  회원 번호 
 		);*/
 	private int groupMemNo, groupNo, memNo;
+	private String memExist, memName;
 
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+	public String getMemExist() {
+		return memExist;
+	}
+	public void setMemExist(String memExist) {
+		this.memExist = memExist;
+	}
 	public int getGroupMemNo() {
 		return groupMemNo;
 	}

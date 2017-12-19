@@ -36,4 +36,8 @@ public class ChattingDAOImpl extends SqlSessionDaoSupport
 		return getSqlSession().insert(namespace+ ".addChat", vo);
 	}
 
+	@Override
+	public int insertChatUser(ChattingUserVO vo) {
+		return getSqlSession().insert(namespace+ ".insertChatUser", vo);
+	}
 }

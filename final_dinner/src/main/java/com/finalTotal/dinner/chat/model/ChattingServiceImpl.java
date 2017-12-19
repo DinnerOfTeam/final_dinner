@@ -35,4 +35,9 @@ public class ChattingServiceImpl implements ChattingService{
 	public int addChat(ChattingVO vo) {
 		return dao.addChat(vo);
 	}
+
+	@Override
+	public int insertChatUser(ChattingUserVO vo) {
+		return dao.insertChatUser(vo);
+	}
 }
