@@ -6,59 +6,62 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	.tr_div a{
+		color: #353535;
+	}
+</style>
+
+
+
 <title>Insert title here</title>
 </head>
 <body>
 
 <!-- //login -->
 	<div class="container fadeInUp animated" data-wow-delay=".5s">
-		<form action="<c:url value='/restaurantEnterprise/restaurantInformation.do' />" method="post" >
+		<form action="<c:url value='/restaurantEnterprise/restaurantInformation.do' />" method="post" >	
+			
+			
 		<fieldset class='border_fieldset'>
 			<legend>식당정보확인</legend>
-		<table class= 'table tb_hover'>
-			<thead class= 'row'>
-			<tr>
-				<th>예약번호</th>
-				<th>식당이름</th>
-				<th>예약날짜</th>
-				<th>주소(위치)</th>
-				<th>취소</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr>
-				<td>1</td>
-				<td>아웃백</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>				
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>계절밥상</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>빕스</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>장수촌</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>
-			</tr>
-			</tbody>
-		</table>
+			<div class= 'table_div_info col-sm-12'>
+				<div class= 'tr_div row'>
+					<div class= 'col-sm-2 pad_t30'><a>번호</a></div>
+					<div class= 'col-sm-2 pad_t30'><a>이름</a></div>
+					<div class= 'col-sm-2 pad_t30'><a>전화번호</a></div>
+					<div class= 'col-sm-2 pad_t30'><a>주소</a></div>
+					<div class= 'col-sm-2 pad_t30'><a>영업시간</a></div>
+					<div class= 'col-sm-2 pad_t30'><a>영업일</a></div>
+				</div>
+				<div class= 'tr_div row td_hover'>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+				</div>
+				<div class= 'tr_div row td_hover'>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+				</div>
+				<div class= 'tr_div row td_hover'>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>[알집] </div>
+				</div>
+			</div>
 		</fieldset>
-		</form>
-			<div class='page_div'>
+		
+		<div class='page_div'>
 				<ul class= 'pagination'>
 					<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>
 					<li><a>1</a></li>
@@ -78,6 +81,7 @@
 				<input type='text'><button><span class= 'glyphicon glyphicon-search' /></button>
 			</div>
 	</div>
+		</form>
 
 </body>
 </html>
