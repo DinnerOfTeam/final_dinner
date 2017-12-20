@@ -10,8 +10,10 @@
 </head>
 <body>
 
+<%@include file="../inc/mypageSide.jsp" %>
+
 <!-- //login -->
-	<div class="container fadeInUp animated" data-wow-delay=".5s">
+	<div class="row fadeInUp animated" data-wow-delay=".5s">
 		<form action="<c:url value='/book/booking.do' />" method="post" >
 		<fieldset class='border_fieldset'>
 			<legend>예약정보 조회</legend>

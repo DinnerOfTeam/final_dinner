@@ -41,13 +41,15 @@
 	});
 </script> -->
 
+<%@include file="../inc/mypageSide.jsp" %>
+
 
 <title>Insert title here</title>
 </head>
 <body>
 		<!-- login -->
 	<div class="form-wrap">
-		<div class="container">
+		<div class="row">
 			<div class="form-body ">
 				<div class="form-heading">
 					<h1>식당등록</h1>

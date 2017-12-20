@@ -285,12 +285,12 @@ label {
     display: flex;
   }
 }
-input {
+/* input {
   width: 100%;
   max-width: 18rem;
   font-size: 1em;
   font-family: sans-serif;
-}
+} */
 
 textarea {
   width: 100%;

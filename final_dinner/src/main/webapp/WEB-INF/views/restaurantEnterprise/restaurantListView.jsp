@@ -17,6 +17,7 @@
 </style>
 
 
+<%@include file="../inc/mypageSide.jsp" %>
 
 <title>Insert title here</title>
 </head>
@@ -32,64 +33,32 @@
 			<div class= 'table_div_info col-sm-12'>
 				<div class= 'tr_div row'>
 					<div class= 'col-sm-2 pad_t30'><a>번호</a></div>
-					<div class= 'col-sm-2 pad_t30'><a>이름</a></div>
+					<div class= 'col-sm-2 pad_t30'><a>식당 이름</a></div>
 					<div class= 'col-sm-2 pad_t30'><a>전화번호</a></div>
 					<div class= 'col-sm-2 pad_t30'><a>주소</a></div>
 					<div class= 'col-sm-2 pad_t30'><a>영업시간</a></div>
 					<div class= 'col-sm-2 pad_t30'><a>영업일</a></div>
 				</div>
-				<a href="<c:url value='restaurantEnterprise/restaurantInformation.do'/>" class="aaa">
+				
+				<c:forEach var="vo" items="${list }" varStatus="no">
+				<a href="<c:url value='/restaurantEnterprise/restaurantInformation.do'/>" class="aaa">
 				<div class= 'tr_div row td_hover'>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
+					<div class= 'td_div col-sm-2'>${no.count }</div>
+					<div class= 'td_div col-sm-2'>${vo.resName } </div>
+					<div class= 'td_div col-sm-2'>${vo.resContact1}-${vo.resContact2}-${vo.resContact3} </div>
+					<div class= 'td_div col-sm-2'>${vo.resAddress } </div>
+					<div class= 'td_div col-sm-2'>${vo.resWorkHour } </div>
+					<div class= 'td_div col-sm-2'>${vo.resWorkDay } </div>
 				</div>
 				</a>
-				<a href="#" class="aaa">
-				<div class= 'tr_div row td_hover'>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-				</div>
-				</a>
-				<a href="#" class="aaa">
-				<div class= 'tr_div row td_hover'>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-					<div class= 'td_div col-sm-2'>[알집] </div>
-				</div>
-				</a>
+				</c:forEach>
+				
+				
 			</div>
 		</fieldset>
 		
-		<div class='page_div'>
-				<ul class= 'pagination'>
-					<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>
-					<li><a>1</a></li>
-					<li><a>2</a></li>
-					<li><a>3</a></li>
-					<li><a aria-label='Next'><i class="fa fa-angle-right"></i></a></li>
-				</ul>
-			</div>
-			<div class= 'search_form'>
-				<label for='search_condition' class= 'sr-only'>검색</label>
-				<select id= 'search_condition' name= 'search_condition'>
-					<option>제목</option>
-					<option>내용</option>
-					<option>작성자</option>
-					<option>작성일</option>
-				</select>
-				<input type='text'><button><span class= 'glyphicon glyphicon-search' /></button>
-			</div>
+		
+		
 	</div>
 		</form>
 

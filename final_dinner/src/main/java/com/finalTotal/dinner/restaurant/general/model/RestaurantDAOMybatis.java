@@ -1,5 +1,7 @@
 package com.finalTotal.dinner.restaurant.general.model;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +14,13 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
     public int insertRestuarant(RestaurantVO vo) {
         return getSqlSession().insert(namespace+".insertRestuarant", vo);
     }
- 
+
+	@Override
+	public List<RestaurantVO> selectAll(int memNo) {
+		return getSqlSession().selectList(namespace+".selectAll",memNo);
+	}
+
+	
 	
 	
 }

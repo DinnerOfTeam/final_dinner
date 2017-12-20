@@ -17,4 +17,9 @@
 		</insert>
 	
 	
+		<select id="selectAll" parameterType="int" resultType="RestaurantVO">
+			select * from restaurant
+			where mem_no=#{memNo}
+		</select>
+	
 </mapper>

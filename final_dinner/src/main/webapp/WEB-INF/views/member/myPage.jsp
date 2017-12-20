@@ -3,10 +3,7 @@
 
 <%@include file="../inc/top.jsp"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 
 <script
 	src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
@@ -192,9 +189,7 @@ START MODULE AREA 2: Sub Navigation 1
 						<td class="right_top">
 							띠로리
 						</td>
-						
-													
-
+					
 
 					</tr>
 

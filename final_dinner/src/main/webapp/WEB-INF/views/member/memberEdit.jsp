@@ -3,7 +3,6 @@
 
 <%@include file="../inc/top.jsp"%>
 
-<script type="text/javascript" src="<c:url value='/js/member.js'/>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#wr_submit').click(function() {
@@ -27,9 +26,11 @@
 	}
 </style>
 
+<%@include file="../inc/mypageSide.jsp" %>
+
 
 <div class="login">
-	<div class="container">
+	<div class="row">
 		<div class="login-body">
 			<div class="form-heading">
 				<h1>회원정보수정</h1>
@@ -46,12 +47,12 @@
 						<div>
 							<label for="memId" class="lb">회원ID</label> <input type="text"
 								name="memId" id="memId" style="ime-mode: inactive" class="tx"
-								value="${sessionScope.memId}">&nbsp; <input
-								type="button" value="중복확인" id="btnChkId" title="새창열림">
+								value="${sessionScope.memId}">&nbsp; 
+								<input type="button" value="중복확인" id="btnChkId" title="새창열림">
 						</div>
 						<div>
-							<label for="memPwd" class="lb">비밀번호</label> <input
-								type="Password" name="memPwd" id="memPwd" class="tx">
+							<label for="memPwd" class="lb">비밀번호</label> 
+							<input type="Password" name="memPwd" id="memPwd" class="tx">
 						</div>
 						<div>
 							<label for="memPwd2" class="lb">비밀번호 확인</label> <input
@@ -169,6 +170,8 @@
 		</div>
 	</div>
 </div>
+</div>
+</section>
 
 
 

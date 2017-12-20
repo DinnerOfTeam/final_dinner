@@ -26,7 +26,7 @@ public class RestaurantCon {
 	public String restaurantJoin_get() {
 		logger.info("식당등록 페이지");
 		
-		return "restaurant/restaurantJoin";
+		return "restaurantGeneral/restaurantJoin";
 	}
 	
 	

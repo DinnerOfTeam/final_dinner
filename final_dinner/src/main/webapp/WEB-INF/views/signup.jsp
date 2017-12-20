@@ -2,10 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="inc/top.jsp"%>
 
-<style type="text/css">
 
-
-</style>
 
 <script type="text/javascript">
 	$(document)
@@ -88,30 +85,30 @@
 					<fieldset>
 
 						<div>
-							<label for="memId" class="lb">회원ID</label> <input type="text" name="memId"
-								id="memId" style="ime-mode: inactive" class="tx">&nbsp;
+							<label for="memId" class="lb">회원ID</label> 
+							<input type="text" name="memId"	id="memId" style="ime-mode: inactive" class="tx">&nbsp;
 							<input type="button" value="중복확인" id="btnChkId" title="새창열림">
 						</div>
 						<div>
-							<label for="memPwd" class="lb">비밀번호</label> <input type="Password" name="memPwd"
-								id="memPwd" class="tx">
+							<label for="memPwd" class="lb">비밀번호</label> 
+							<input type="Password" name="memPwd"id="memPwd" class="tx">
 						</div>
 						<div>
-							<label for="memPwd2" class="lb">비밀번호 확인</label> <input type="Password"
-								name="memPwd2" id="memPwd2" class="tx">
+							<label for="memPwd2" class="lb">비밀번호 확인</label> 
+							<input type="Password"name="memPwd2" id="memPwd2" class="tx">
 						</div>
 						<div>
-							<label for="memName" class="lb">성명</label> <input type="text" name="memName"
-								id="memName" style="ime-mode: active" class="tx">
+							<label for="memName" class="lb">성명</label> 
+							<input type="text" name="memName"id="memName" style="ime-mode: active" class="tx">
 						</div>
 						<div>
-							<label for="memZipcode" class="lb lb2">주소</label> <input type="text" name="memZipcode"
-								id="memZipcode" ReadOnly title="우편번호" class="tx tx3" >&nbsp;&nbsp;&nbsp; <input
-								type="Button" value="우편번호 찾기" onclick="sample4_execDaumPostcode()"><br />
-							<span class="sp1">&nbsp;</span> <input type="text" name="memAdd"
-								id="memAdd" ReadOnly title="주소" class="tx tx4" ><br /> <span
-								class="sp1">&nbsp;</span> <input type="text"
-								name="memAddDetail" id="memAddDetail" title="상세주소" class="tx4">
+							<label for="memZipcode" class="lb lb2">주소</label> 
+							<input type="text" name="memZipcode"id="memZipcode" ReadOnly title="우편번호" class="tx tx3" >&nbsp;&nbsp;&nbsp; 
+							<input type="Button" value="우편번호 찾기" onclick="sample4_execDaumPostcode()"><br />							
+							<span class="sp1">&nbsp;</span> 							
+							<input type="text" name="memAdd"id="memAdd" ReadOnly title="주소" class="tx tx4" ><br />							
+							<span class="sp1">&nbsp;</span> 							
+							<input type="text" name="memAddDetail" id="memAddDetail" title="상세주소" class="tx4">
 								<span id="guide" style="color:#999"></span>
 						</div>
 						<div>
@@ -123,20 +120,21 @@
 								<option value="017">017</option>
 								<option value="018">018</option>
 								<option value="019">019</option>
-							</select> - <input type="text" name="memTel2" id="memTel2" maxlength="4"
-								title="휴대폰 가운데자리" class="tx tx2">- <input type="text"
-								name="memTel3" id="memTel3" maxlength="4" title="휴대폰 뒷자리" class="tx tx2">
+							</select> 
+							- <input type="text" name="memTel2" id="memTel2" maxlength="4"title="휴대폰 가운데자리" class="tx tx2">
+							- <input type="text" name="memTel3" id="memTel3" maxlength="4" title="휴대폰 뒷자리" class="tx tx2">
 						</div>
 						<div>
-							<label for="memEmail1" class="lb">이메일 주소</label> <input type="text"
-								name="memEmail1" id="memEmail1" title="이메일주소 앞자리" class="tx tx3" >@
+							<label for="memEmail1" class="lb">이메일 주소</label> 
+							<input type="text" name="memEmail1" id="memEmail1" title="이메일주소 앞자리" class="tx tx3" >@
 							<select name="memEmail2" id="memEmail2" title="이메일주소 뒷자리">
 								<option value="naver.com">naver.com</option>
 								<option value="hanmail.net">hanmail.net</option>
 								<option value="nate.com">nate.com</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="etc">직접입력</option>
-							</select> <input type="text" name="memEmail3" id="memEmail3"
+							</select> 
+							<input type="text" name="memEmail3" id="memEmail3"
 								title="직접입력인 경우 이메일주소 뒷자리" style="visibility: hidden" class="tx tx3">
 						</div>
 
