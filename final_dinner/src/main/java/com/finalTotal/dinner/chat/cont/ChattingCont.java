@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalTotal.dinner.chat.model.ChattingService;
 import com.finalTotal.dinner.chat.model.ChattingVO;
@@ -113,20 +114,20 @@ public class ChattingCont {
 		model.addAttribute("chat_list", chat_list);
 		model.addAttribute("user_list", user_list);
 		
-		return "indiGroup/chat";
+		return "indiGroup/chat/chat";
 	}
 	
 	@RequestMapping("/chatAdd.do")
-	public String chatAdd(@ModelAttribute ChattingVO vo, Model model) {
+	@ResponseBody
+	public void chatAdd(@ModelAttribute ChattingVO vo, Model model) {
 		logger.info("chat adding parameter : vo= {}", vo);
 		
 		chat_service.addChat(vo);
-		
-		return "redirect:/indiGroup/chat/main.do?groupNo="+ vo.getGroupNo();
 	}
 	@RequestMapping("/chatList.do")
 	public void chatList(@RequestParam int cnt, @RequestParam int groupNo,
 			HttpServletResponse response, Model model) {
+//		response.setCharacterEncoding("utf-8");
 //		logger.info("chat list page parameter : cnt= {}, groupNo= {}", cnt, groupNo);
 		List<ChattingVO> list= chat_service.showAllChat(groupNo);
 		List<ChattingVO> add_list= new ArrayList<ChattingVO>();
@@ -138,13 +139,21 @@ public class ChattingCont {
 		}
 		
 		SimpleDateFormat sdf= new SimpleDateFormat("dd-HH:mm");
+		String res= "";
+		for(ChattingVO vo: add_list) {
+			res+= "<chat><list>\n<memNo>"+ vo.getMemNo()+ "</memNo>\n";
+			res+= "<memName>"+ vo.getMemName()+ "</memName>\n";
+			res+= "<chatRegdate>"+ sdf.format(vo.getChatRegdate())+ "</chatRegdate>\n";
+			res+= "<chatContents>"+ vo.getChatContents()+ "</chatContents>\n</list></chat>";
+		}
+		
 		try {
 			response.setCharacterEncoding("utf-8");
 			PrintWriter out= response.getWriter();
-			
+
 			for(ChattingVO vo: add_list) {
-//				logger.info("추가된 채팅 : vo= {}", vo);
-				
+				//				logger.info("추가된 채팅 : vo= {}", vo);
+
 				out.println("<chat><list>");
 				out.println("<memNo>"+ vo.getMemNo()+ "</memNo>");
 				out.println("<memName>"+ vo.getMemName()+ "</memName>");
@@ -152,10 +161,11 @@ public class ChattingCont {
 				out.println("<chatContents>"+ vo.getChatContents()+ "</chatContents>");
 				out.println("</list></chat>");
 			}
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	

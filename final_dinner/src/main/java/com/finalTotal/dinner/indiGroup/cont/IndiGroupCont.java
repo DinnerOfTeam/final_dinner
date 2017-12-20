@@ -107,12 +107,12 @@ public class IndiGroupCont {
 		logger.info("group regi page parameter : groupName={}", groupName);
 		
 		if(groupName== null|| groupName.isEmpty()) {
-			return "indiGroup/regi";
+			return "indiGroup/group/regi";
 		}
 		List<IndigroupVO> list= group_service.selectByGroupName(groupName);
 		model.addAttribute("list", list);
 		
-		return "indiGroup/regi";
+		return "indiGroup/group/regi";
 	}
 	
 	@RequestMapping(value= "/create.do", method= RequestMethod.GET)
@@ -150,7 +150,7 @@ public class IndiGroupCont {
 	}
 	
 	@RequestMapping("/regiOk.do")
-	public void groupRegiOk(@ModelAttribute GroupRegiVO vo, 
+	public String groupRegiOk(@ModelAttribute GroupRegiVO vo, 
 			@RequestParam(required= false) String is_ok,
 			Model model) {
 		logger.info("regiOk page parameter : vo={}, is_ok={}", vo, is_ok);
@@ -170,6 +170,10 @@ public class IndiGroupCont {
 		}
 		List<GroupRegiVO> list= group_service.selectRegiList(vo.getGroupNo());
 		model.addAttribute("list", list);
+		IndigroupVO group= group_service.selectByGroupNo(vo.getGroupNo());
+		model.addAttribute("group", group);
+		
+		return "indiGroup/group/regiOk";
 	}
 	
 }

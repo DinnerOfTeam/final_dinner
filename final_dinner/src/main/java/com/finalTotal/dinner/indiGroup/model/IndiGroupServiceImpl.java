@@ -94,6 +94,11 @@ public class IndiGroupServiceImpl implements IndiGroupService{
 	public List<GroupRegiVO> selectRegiList(int groupNo) {
 		return dao.selectRegiList(groupNo);
 	}
+
+	@Override
+	public IndigroupVO selectByGroupNo(int groupNo) {
+		return dao.selectByGroupNo(groupNo);
+	}
 	
 	
 }

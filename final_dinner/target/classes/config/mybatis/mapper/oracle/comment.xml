@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.comment">
+	<insert id="insertComment" parameterType="CommentVO">
+		<selectKey order="BEFORE" resultType="int" keyProperty="commentNo">
+			select board_comment_seq.nextval from dual
+		</selectKey>
+		insert into board_comment(comment_no, mem_no, free_no, comment_name, comment_pwd, comment_contents, comment_groupno)
+		values(#{commentNo}, 
+		<if test="memNo==0">
+			null
+		</if>
+		<if test="memNo>0">
+			#{memNo}
+		</if>
+		, #{freeNo}, #{commentName}, #{commentPwd}, #{commentContents}, null)
+	</insert>
+	
+	<insert id="replyComment" parameterType="CommentVO">
+		<selectKey order="BEFORE" resultType="int" keyProperty="commentNo">
+			select board_comment_seq.nextval from dual
+		</selectKey>
+		insert into board_comment(comment_no, mem_no, free_no, comment_name, comment_pwd, comment_contents, comment_groupno)
+		values(#{commentNo},  
+		<if test="memNo==0">
+			null
+		</if>
+		<if test="memNo>0">
+			#{memNo}
+		</if>
+		, #{freeNo}, #{commentName}, #{commentPwd}, #{commentContents}, #{commentGroupno})
+	</insert>
+	
+	<select id="selectCommentByFreeNo" parameterType="int" resultType="CommentVO">
+		select * 
+		from(
+			SELECT c.*, level as comment_step
+			FROM board_comment c
+			START WITH comment_groupno is null
+			CONNECT BY NOCYCLE PRIOR comment_no = comment_groupno
+		)
+		where free_no=#{freeNo}
+	</select>
+	
+	<select id="selectCommentByCommentNo" parameterType="int" resultType="CommentVO">
+		select * 
+		from board_comment
+		where comment_no=#{freeNo}
+		and comment_del_flag='N'
+	</select>
+	
+	<update id="editComment" parameterType="CommentVO">
+		update board_comment
+		set comment_contents=#{commentContents}
+		<if test="commentName!=null and commentName!=''">
+			,comment_name=#{commentName}
+		</if>
+		where comment_no=#{commentNo}
+		and comment_del_flag='N'
+	</update>
+	
+	<delete id="deleteComment" parameterType="int">
+		update board_comment
+		set mem_no=null, comment_name='deletedComment!', comment_pwd=null,
+			comment_contents=null, comment_del_flag='Y'
+		where comment_no=#{commentNo}
+	</delete>
+	
+</mapper>

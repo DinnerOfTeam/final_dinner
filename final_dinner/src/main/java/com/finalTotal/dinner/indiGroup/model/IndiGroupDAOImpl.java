@@ -86,4 +86,9 @@ public class IndiGroupDAOImpl extends SqlSessionDaoSupport
 		return getSqlSession().selectList(namespace+ ".selectRegiList", groupNo);
 	}
 
+	@Override
+	public IndigroupVO selectByGroupNo(int groupNo) {
+		return getSqlSession().selectOne(namespace+ ".selectByGroupNo", groupNo);
+	}
+
 }

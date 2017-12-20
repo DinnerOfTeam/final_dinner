@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.board">
+	
+	<sql id="searchWhere">
+		<if test="keyword!=null and keyword!=''">
+			where ${type} like '%' || #{keyword} || '%'
+		</if>
+	</sql>
+
+	<insert id="insertBoard" parameterType="BoardVO" >
+		<selectKey order="BEFORE" keyProperty="freeNo" resultType="int">
+			select board_free_seq.nextval from dual
+		</selectKey>
+		insert into board_free(free_no, mem_no, free_name, free_pwd, free_title, free_contents)
+		values(#{freeNo}, 
+		<if test="memNo==0">
+			null
+		</if>
+		<if test="memNo>0">
+			#{memNo}
+		</if>
+		, #{freeName}, #{freePwd}, #{freeTitle}, #{freeContents})
+	</insert>
+	
+	<select id="selectAll" resultType="BoardVO" parameterType="SearchVO" >
+		select c.*
+		from(
+			select rownum as rnum, b.*
+			from(
+				select free.*, dat.file_count, com.comment_count from board_free free
+				left join(
+					select free_no, count(free_no) as file_count
+					from board_free_data
+					group by free_no
+				) dat
+				on free.free_no=dat.free_no
+				left join(
+					select free_no, count(free_no) comment_count
+					from board_comment
+					where comment_del_flag='N'
+					group by free_no
+				) com
+				on free.free_no=com.free_no
+				<include refid="searchWhere"/>
+				order by free.free_no desc
+			)b
+		)c
+		<![CDATA[
+		where c.rnum>#{firstRowNum}
+		and c.rnum<=#{pageSize}+#{firstRowNum}
+		]]>
+	</select>
+	
+	<select id="selectRecordCount" resultType="int" parameterType="SearchVO" >
+		select count(free_no) from board_free
+		<include refid="searchWhere"/>
+	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="BoardVO" >
+		select * from board_free
+		where free_no=#{freeNo}
+	</select>
+	
+	<select id="selectPwdByNo" parameterType="string" resultType="BoardVO" >
+		select free_pwd from board_free
+		where free_no=#{freeNo}
+	</select>
+	
+	<update id="editBoard" parameterType="BoardVO">
+		update board_free
+		set free_title=#{freeTitle}, free_contents=#{freeContents}
+		<if test="freeName!=null and freeName!=''">
+			,free_name=#{freeName}
+		</if>
+		where free_no=#{freeNo}
+	</update>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from board_free
+		where free_no=#{freeNo}
+	</delete>
+	
+	<delete id="deleteCommentByBoardNo" parameterType="int">
+		delete from board_comment
+		where free_no=#{freeNo}
+	</delete>
+	
+</mapper>

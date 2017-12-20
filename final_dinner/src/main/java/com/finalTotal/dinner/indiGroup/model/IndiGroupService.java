@@ -18,4 +18,5 @@ public interface IndiGroupService {
 	public int updateUserExist(Map<String, Integer> map);
 	public IndigroupVO selectByGNtoMN(int groupNo);
 	public List<GroupRegiVO> selectRegiList(int groupNo);
+	public IndigroupVO selectByGroupNo(int groupNo);
 }

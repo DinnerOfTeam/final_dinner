@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../inc/top.jsp" %>
-<c:import url="../inc/indigroupSide.jsp" />
+<%@ include file="../../inc/top.jsp" %>
+<c:import url="../../inc/indigroupSide.jsp" />
 <script type="text/javascript">
 	$(function() {
 		$('.btRegi').click(function() {
@@ -20,7 +20,7 @@
 					<form action="<c:url value= '/indiGroup/regi.do' />" method="post">
 						<fieldset>
 							<input type="text" placeholder="그룹명" id='groupName' 
-									name= 'groupName' size="12"/>
+									name= 'groupName' size="12" value="${param.groupName }"/>
 							<input type="submit" value= '검색' />
 						</fieldset>
 					</form>
@@ -41,8 +41,7 @@
 						<c:forEach var="vo" items="${list }">
 							<tr>
 								<td><button class= 'btRegi'>신청</button>
-								<input type="hidden" value='${vo.groupNo }'>
-								</td>
+								<input type="hidden" value='${vo.groupNo }'></td>
 								<td>${vo.groupName }</td>
 								<td>${vo.memName }</td>
 								<td>${vo.groupInfo }</td>
@@ -53,4 +52,4 @@
 			</div>
 		</div>
 	</article>
-<%@ include file="../inc/footer.jsp" %>
+<%@ include file="../../inc/footer.jsp" %>
