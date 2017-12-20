@@ -13,11 +13,16 @@ public class RestaurantInformationCon {
 	private static final Logger logger
 	= LoggerFactory.getLogger(RestaurantInformationCon.class);
 	
-	@RequestMapping(value="/restaurantInformation.do", method=RequestMethod.GET)
-	public String information() {
-		logger.info("식당 정보확인 페이지");
+	@RequestMapping(value="/restaurantListView.do", method=RequestMethod.GET)
+	public String ListView() {
+		logger.info("식당 정보리스트 페이지");
 		
-		return "restaurantEnterprise/restaurantInformation";
+		return "restaurantEnterprise/restaurantListView";
+	}
+	
+	@RequestMapping("/restaurantInformation.do")
+	public void Information() {
+		logger.info("식당 정보상세 페이지 보여주기");
 	}
 
 }
