@@ -38,6 +38,9 @@
 <script type="text/javascript">
 	$(function() {
 		$('.cal_detail').hide();
+		$('.table_my tr td').each(function() {
+			bring($(this));
+		});
 		$('select#groupNo').find('option').each(function() {
 			if($(this).val()== '${param.groupNo}') {
 				$(this).prop('selected', true);
@@ -47,25 +50,39 @@
 			$('form').submit();
 		});
 		$('.table_my tr td').click(function() {
-			if($(this).is($(this).find('div.cal_detail'))) {
-				$(this).find('div.cal_detail').toggle();
-			}else {
-				var date= $(this).text().trim();
-				alert(date);
-				$.ajax({
-					type: "post",
-					url: "<c:url value= '/indiGroup/calender/search.do' />",
-					data:{
-					},
-					success: function() {
-						
-					},
-					error: function(xhr, sta, err) {
-						alert(sta+ " => "+ err);
-					}
-				});
-			}
+			bring($(this));
+			$(this).find('div.cal_detail').parent().last('&nbsp;').remove();
+			$(this).find('div.cal_detail').toggle();
 		});
+		function bring(ele) {
+			var y= $(ele).find('input[type=hidden]').eq(0).val();
+			var m= $(ele).find('input[type=hidden]').eq(1).val();
+			var d= $(ele).find('input[type=hidden]').eq(2).val();
+			var g= ${param.groupNo};
+/* 			alert(y+ ", "+ m+ ', '+ d+ ', '+ g); */
+			$.ajax({
+				type: "post",
+				url: "<c:url value= '/indiGroup/calender/search.do' />",
+				data:{
+					calYear: y,
+					calMonth: m,
+					calDate: d,
+					groupNo: g,
+				},
+				success: function(res) {
+					if(res== "") return;
+					var data= '';
+					for(var idx in res) {
+						data+= '<p>'+ res[idx].calContents+ '</p>';
+					}
+					$(ele).find('div.cal_detail').html(data);
+					$(ele).find('div.cal_detail').parent().append('&nbsp;');
+				},
+				error: function(xhr, sta, err) {
+					alert(sta+ " => "+ err);
+				}
+			});
+		}
 	});
 </script>
 	<c:import url="../../inc/indigroupSide.jsp" />

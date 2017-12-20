@@ -15,7 +15,7 @@
 		delete from group_calender where cal_no= #{calNo}
 	</delete>
 	
-	<select id="selectCalenderByDay" parameterType="GroupCalenderVO">
+	<select id="selectCalenderByDay" parameterType="GroupCalenderVO" resultType="GroupCalenderVO">
 		select * from group_calender where cal_year= #{calYear} and cal_month= #{calMonth}
 				and cal_date= #{calDate} and group_no= #{groupNo}
 	</select>

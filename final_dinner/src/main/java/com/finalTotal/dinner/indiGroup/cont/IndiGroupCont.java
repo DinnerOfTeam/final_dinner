@@ -64,25 +64,6 @@ public class IndiGroupCont {
 		}else {
 			d= new Date(year, month, p_date);
 		}
-		int startDay= d.getDate()- 7- d.getDay();
-		for(int i= 0; i< date_arr.length; i++) {
-			int date= startDay+ i;
-			if(date< 1) {
-				int beforeLastDay= getLastDay(d.getYear()+ 1900, d.getMonth()- 1);
-				date_arr[i]= date+ beforeLastDay;
-			}else if(date> getLastDay(d.getYear()+ 1900, d.getMonth())) {
-				date_arr[i]= date- getLastDay(d.getYear()+ 1900, d.getMonth());
-			}else {
-				date_arr[i]= date;
-			}
-		}
-		work_arr[04]= "점심약속";
-		work_arr[15]= "점심약속";
-		work_arr[19]= "저녁약속";
-		work_arr[26]= "점심약속";
-		
-		model.addAttribute("date_arr", date_arr);
-		model.addAttribute("work_arr", work_arr);
 		model.addAttribute("today", d);
 		
 		Calendar cal = Calendar.getInstance();

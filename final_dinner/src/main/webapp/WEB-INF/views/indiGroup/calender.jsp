@@ -29,13 +29,23 @@
 		</tr>
 		<c:forEach var="date" items="${date_list }" varStatus="idx">
 			<c:if test="${idx.count% 7== 1 }"><tr></c:if>
-			<td>
+			<td class= 'text_left'>
+				<c:if test="${idx.count% 7== 1 }"><span style="color: red"></c:if>
+				<c:if test="${idx.count% 7== 0 }"><span style="color: blue;"></c:if>
+				<input type="hidden" value="<fmt:formatDate value='${date }' pattern='yyyy'/>" />
+				<input type="hidden" value="<fmt:formatDate value='${date }' pattern='M'/>" />
+				<input type="hidden" value="<fmt:formatDate value='${date }' pattern='d'/>" />
+				<c:if test="${today.date== date.date }"><strong style="color: green"></c:if>
 				<c:if test="${date.date!= 1 }">
 					<fmt:formatDate value="${date }" pattern="d"/>
 				</c:if>
 				<c:if test="${date.date== 1 }">
 					<fmt:formatDate value="${date }" pattern="M/d"/>
 				</c:if>
+				<c:if test="${today.date== date.date }"></strong></c:if>
+				<c:if test="${idx.count% 7== 1 }"></span></c:if>
+				<c:if test="${idx.count% 7== 0 }"></span></c:if>
+				<div style="background-color: green"><div class= 'cal_detail'></div></div>
 			</td>
 			<c:if test="${idx.count% 7== 0 }"></tr></c:if>
 		</c:forEach>

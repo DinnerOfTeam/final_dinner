@@ -61,6 +61,9 @@ public class GroupCalenderVO {
 	public String toString() {
 		return "GroupCalenderVO [calNo=" + calNo + 
 				", groupNo=" + groupNo + 
+				", calYear=" + calYear + 
+				", calMonth=" + calMonth + 
+				", calDate=" + calDate + 
 				", calContents=" + calContents + 
 				", calRegdate=" + calRegdate + "]";
 	}

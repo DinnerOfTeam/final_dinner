@@ -21,7 +21,7 @@ public class GroupCalenderServiceImpl implements GroupCalenderService {
 	}
 
 	@Override
-	public List<GroupCalenderVO> selectCalenderByDay(GroupBoardVO vo) {
+	public List<GroupCalenderVO> selectCalenderByDay(GroupCalenderVO vo) {
 		return dao.selectCalenderByDay(vo);
 	}
 

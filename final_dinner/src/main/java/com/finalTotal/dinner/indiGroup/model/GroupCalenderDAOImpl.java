@@ -21,7 +21,7 @@ public class GroupCalenderDAOImpl extends SqlSessionDaoSupport
 	}
 
 	@Override
-	public List<GroupCalenderVO> selectCalenderByDay(GroupBoardVO vo) {
+	public List<GroupCalenderVO> selectCalenderByDay(GroupCalenderVO vo) {
 		return getSqlSession().selectList(namespace+ ".selectCalenderByDay", vo);
 	}
 }

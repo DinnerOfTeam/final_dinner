@@ -5,5 +5,5 @@ import java.util.List;
 public interface GroupCalenderDAO {
 	public int insertCalender(GroupBoardVO vo);
 	public int deleteCalender(int calNo);
-	public List<GroupCalenderVO> selectCalenderByDay(GroupBoardVO vo);
+	public List<GroupCalenderVO> selectCalenderByDay(GroupCalenderVO vo);
 }
