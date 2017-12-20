@@ -2,7 +2,322 @@
     pageEncoding="UTF-8"%>
 <%@ include file="inc/top.jsp" %>
 
-	<!-- login -->
+	<!-- 상단 타이틀 -->
+	<div class="site-top-title" >		<!-- 색상은 별도의 클래스 or Style태그를 이용해서 변경 -->
+		<div class="container">
+			<h1>상단 타이틀</h1>
+		</div>
+	</div>
+
+	<!-- table (div 버전) -->
+	<div class="table-wrap">
+		<div class="container">
+			<div class="table-box">
+				<div class="table-table table-hover">
+					<div class="table-thead hidden-xs">
+						<div class="col-xs-1">번호</div>
+						<div class="col-xs-6">제목</div>
+						<div class="col-xs-2">작성자</div>
+						<div class="col-xs-2">날짜</div>
+						<div class="col-xs-1">조회수</div>
+					</div>
+					<div class="table-tbody">
+						<div class="table-tr-nodata">
+							<span>글이 없습니다.</span>
+						</div>
+						<div class="table-tr">
+							<a href="#">
+								<div class="table-td table-td-center col-sm-1 hidden-xs">
+									<p>1</p>
+								</div>
+								<div class="table-td table-td-title col-xs-12 col-sm-6">
+									<p>board-td-title (스타일 설정은 부트스트랩 그리드 시스템 이용)</p>
+								</div>
+								<div class="table-td table-td-center table-xs-left table-xs-sub col-xs-4 col-sm-2">
+									<p>col-center</p>
+								</div>
+								<div class="table-td table-td-center table-xs-right table-xs-sub col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
+									<p>2017-01-01</p>
+								</div>
+								<div class="table-td table-td-center col-sm-1 hidden-xs">
+									<p>3</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="table-comp">
+					<!-- 페이징(모바일) -->
+					<div class="table-sub visible-xs">
+						<ul class="pager">
+							<li class="previous disabled">
+								<a href="#">
+									<i class="fa fa-angle-left"></i>&nbsp;
+									이전
+								</a>
+							</li>
+							<li class="current">
+								<span>1</span>
+							</li>
+							<li class="next">
+								<a href="#">
+									다음&nbsp;
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="table-sub col-xs-12 col-sm-4 col-sm-offset-8 col-md-2 col-md-offset-10">
+						<a class="site-btn-submit site-btn-full" href="#" role="button">
+							<i class="fa fa-pencil"></i>&nbsp;
+							글쓰기
+						</a>
+					</div>
+					
+					<!-- 페이징 -->
+					<div class="table-sub col-xs-12 hidden-xs">
+						<ul class="pagination">
+							<li class="disabled">
+								<a href="#" aria-label="First">
+									<i class="fa fa-angle-double-left"></i>
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Previous">
+									<i class="fa fa-angle-left"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									1
+								</a>
+							</li>
+							<li class="active">
+								<a href="#">
+									2
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Next">
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Last">
+									<i class="fa fa-angle-double-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- 검색폼 -->
+					<div class="form-info form-row">
+						<form name="frmBoardSearch" method="get" action="#">
+							<div class="col-sm-2 col-sm-offset-2">
+								<select class="form-select" name="type">
+									<option value="title">제목</option>
+									<option value="contents">내용</option>
+									<option value="name">작성자</option>
+								</select>
+							</div>
+							
+							<div class="col-sm-4">
+								<input type="text" class="form-text" id="boardSearchKeyword" name="keyword"
+									placeholder="Search" value="">
+							</div>
+							<div class="col-sm-2">
+								<input type="submit" class="site-btn-submit site-btn-full" value="검색">
+							</div>
+						</form>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 
+	//기본틀
+	<div class="table-box">
+		<div class="table-table table-hover">		//table-hover : 테이블에 hover효과 적용
+			<div class="table-thead hidden-xs">
+						//hidden-xs : 부트스트랩 그리드 - 모바일 화면에서 숨김
+						//visible-xs : 부트스트랩 그리드 - 모바일 화면에서만 표시
+				<div class="부트스트랩 그리드">번호</div>
+				
+				...
+				
+				<div class="부트스트랩 그리드">조회수</div>
+			</div>
+			<div class="table-tbody">
+				<div class="table-tr-nodata">
+					<span>글이 없습니다.</span>	//데이터없음
+				</div>
+				<div class="table-tr">
+					<a href="#">
+						<div class="table-td table-td-center 부트스트랩 그리드">	//table-td-center : td중앙정렬
+							<p>1</p>												//table-td-left : td왼쪽정렬
+						</div>														//table-td-right : td오른쪽정렬
+						<div class="table-td table-td-title 부트스트랩 그리드">	//table-td-title : 게시판 제목
+							<p>board-td-title (스타일 설정은 부트스트랩 그리드 시스템 이용)</p>
+						</div>
+						<div class="table-td table-td-center table-xs-left table-xs-sub 부트스트랩 그리드">		//table-xs-sub : 모바일 화면에서 작고 연하게 표시
+							<p>col-center</p>
+						</div>
+						<div class="table-td table-td-center table-xs-right table-xs-sub 부트스트랩 그리드">	//table-xs-right : 모바일 화면에서 td왼쪽정렬
+							<p>2017-01-01</p>																	//table-xs-center : 모바일 화면에서 td중앙정렬
+						</div>																					//table-xs-left : 모바일 화면에서 td오른쪽정렬
+						<div class="table-td table-td-center 부트스트랩 그리드"> 
+							<p>3</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="table-comp">		//table-comp : 테이블 아래의 보조내용 전체 (예 : 게시판 아래의 글쓰기, 페이징, 검색폼등...)
+			<div class="table-sub">	//table-sub : 테이블 아래의 보조내용 한줄
+				...
+			</div>
+		</div>
+	</div>
+	 -->
+	
+	<!-- table(table 태그 이용 버전) -->
+	<div class="table-wrap">
+		<div class="container">
+			<div class="table-box">
+				<table class="table-table table-hover">
+					<colgroup>
+						<col class="col-xs-1">
+						<col class="col-xs-6">
+						<col class="col-xs-2">
+						<col class="col-xs-2">
+						<col class="col-xs-1">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>날짜</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="5" class="table-tr-nodata">
+								글이 없습니다.
+							</td>
+						</tr>
+						<tr>
+							<th>1</th>
+							<td>
+								<a href="#">
+									table태그를 이용한 테이블
+								</a>
+							</td>
+							<th>글쓴이</th>
+							<th>2017-01-01</th>
+							<th>5</th>
+						</tr>
+					</tbody>
+				</table>
+				<div class="table-comp">
+					<!-- 페이징(모바일) -->
+					<div class="table-sub visible-xs">
+						<ul class="pager">
+							<li class="previous disabled">
+								<a href="#">
+									<i class="fa fa-angle-left"></i>&nbsp;
+									이전
+								</a>
+							</li>
+							<li class="current">
+								<span>1</span>
+							</li>
+							<li class="next">
+								<a href="#">
+									다음&nbsp;
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="table-sub col-xs-12 col-sm-4 col-sm-offset-8 col-md-2 col-md-offset-10">
+						<a class="site-btn-submit site-btn-full" href="#" role="button">
+							<i class="fa fa-pencil"></i>&nbsp;
+							글쓰기
+						</a>
+					</div>
+					
+					<!-- 페이징 -->
+					<div class="table-sub col-xs-12 hidden-xs">
+						<ul class="pagination">
+							<li class="disabled">
+								<a href="#" aria-label="First">
+									<i class="fa fa-angle-double-left"></i>
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Previous">
+									<i class="fa fa-angle-left"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									1
+								</a>
+							</li>
+							<li class="active">
+								<a href="#">
+									2
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Next">
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Last">
+									<i class="fa fa-angle-double-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- 검색폼 -->
+					<div class="form-info form-row">
+						<form name="frmBoardSearch" method="get" action="#">
+							<div class="col-sm-2 col-sm-offset-2">
+								<select class="form-select" name="type">
+									<option value="title">제목</option>
+									<option value="contents">내용</option>
+									<option value="name">작성자</option>
+								</select>
+							</div>
+							
+							<div class="col-sm-4">
+								<input type="text" class="form-text" id="boardSearchKeyword" name="keyword"
+									placeholder="Search" value="">
+							</div>
+							<div class="col-sm-2">
+								<input type="submit" class="site-btn-submit site-btn-full" value="검색">
+							</div>
+						</form>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- form-simple -->
 	
 	<div class="form-wrap">
 		<div class="container">
@@ -107,7 +422,7 @@
 		</div>
 	</div>
 	
-	<!-- login -->
+	<!-- form-info -->
 	<div class="form-wrap">
 		<div class="container">
 			<div class="form-body ">

@@ -1,6 +1,7 @@
 .site-board-title{
 	padding: 4em 0;
 	background: #DDD;
+	text-align: center;
 }
 
 .site-board{
@@ -274,12 +275,14 @@
 	font-size: 0.9em;
 }
 
-.board-inner .pagination>.active>span{
+.board-inner .pagination>.active>*,
+.board-inner .pagination>.active>*:hover,
+.board-inner .pagination>.active>*:focus{
 	background-color: rgb(158, 22, 22);
 	border: solid 1px rgb(158, 22, 22);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 767px) {
 	.board-list-row>a{
 		padding: 0.5em 0;
 	}

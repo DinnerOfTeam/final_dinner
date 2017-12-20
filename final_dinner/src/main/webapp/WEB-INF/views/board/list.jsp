@@ -95,7 +95,8 @@
 						</c:forEach>
 					</c:if>
 				</div>
-				
+			</div>
+			<div>
 				<!-- 페이징(모바일) -->
 				<div class="visible-xs">
 					<ul class="pager">

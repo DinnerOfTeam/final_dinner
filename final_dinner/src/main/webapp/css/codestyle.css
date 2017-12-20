@@ -299,3 +299,199 @@ textarea.form-text{
 .ali-right, .ali-right{
 	text-align: right;
 }
+
+
+
+.site-top-title{
+	padding: 4em 0;
+	background: #DDD;
+	text-align: center;
+}
+
+
+
+.table-wrap{
+	padding: 2em 0 4em 0;
+	background: #F9F9F9;
+}
+
+.table-box{
+	background-color: white;
+	width: 100%;
+	box-shadow: 0 0 0.25em 0.0005em #999;
+	padding: 0.5em;
+	overflow: hidden;
+   	color: #333;
+}
+   
+.table-box a{
+	color: #333;
+}
+   
+.table-table{
+	background-color: #fff;
+	border-top: 1px solid gray;
+}
+
+table.table-table{
+	width: 100%;
+}
+
+.table-thead, .table-tbody{
+	text-align: center;
+	margin: 0;
+	overflow: hidden;
+}
+
+.table-thead, table.table-table thead tr{
+	font-weight: bold;
+	border-bottom: 1px solid gray;
+}
+
+table.table-table thead th{
+	text-align: center;
+}
+  
+.table-thead:before, .table-tbody:before{
+	display: table;
+	content: " ";
+}
+  
+.table-thead:after, .table-tbody:after{
+	clear: both;
+}
+   
+.table-thead>div, table.table-table thead th, table.table-table tbody tr>*{
+	padding: 0.5em 0;
+}
+
+.table-tr, .table-tr-nodata, table.table-table tbody tr>*{
+	border-bottom: 1px solid lightgray;
+	overflow: hidden;
+}
+
+.table-tr-nodata, td.table-tr-nodata {
+	text-align: center;
+	padding: 2.5em 1em !important;
+}
+
+td.table-tr-nodata, td.table-tr-nodata:hover {
+	background: white;
+	color: #333;
+}
+
+table.table-table tbody th{
+	text-align: center;
+	font-weight: normal;
+}
+
+.table-tr {
+	margin: 0;
+}
+
+.table-tr>a{
+	display: block;
+	overflow: hidden;
+}
+
+.table-tr>a,
+table.table-table.table-hover a{
+	transition: unset;
+	-webkit-transition: unset;
+	-o-transition: unset;
+	-moz-transition: unset;
+	-ms-transition: unset;
+}
+
+.table-table.table-hover .table-tbody .table-tr:hover,
+table.table-table.table-hover tbody tr:hover,
+table.table-table.table-hover tbody tr:hover>* a{
+	background-color: rgb(158, 22, 22);
+	color: white;
+}
+
+.table-table.table-hover .table-tbody .table-tr:hover > *{
+	color: white;
+}
+
+.table-td{
+	padding: 0.75em;
+	display: block;
+	overflow: hidden;
+}
+
+.table-td>p{
+	width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+    margin: 0;
+}
+
+.table-td-title{
+	text-align: left;
+	font-weight: bold;
+	padding-bottom: 0.5em;
+	font-size: 1.5em;
+}
+
+.table-td-left{
+	text-align: left;
+}
+
+.table-td-center{
+	text-align: center;
+}
+
+.table-td-right{
+	text-align: right;
+}
+.table-sub{
+	padding: 0.5em 0;
+	text-align: center;
+}
+
+.table-sub .pagination>.active>*,
+.table-sub .pagination>.active>*:hover,
+.table-sub .pagination>.active>*:focus{
+	background-color: rgb(158, 22, 22);
+	border: solid 1px rgb(158, 22, 22);
+}
+
+@media (max-width: 767px) {
+	.table-xs-left{
+		text-align: left;
+	}
+	
+	.table-xs-center{
+		text-align: center;
+	}
+	
+	.table-xs-right{
+		text-align: right;
+	}
+	
+	.table-xs-sub{
+		font-size: 75%;
+		color: #777;
+	}
+}
+
+@media (min-width: 768px) {
+	.table-td {
+		padding: 0.5em 0;
+	}
+	
+	.table-td-title{
+		font-weight: unset;
+		padding-bottom: 0;
+		font-size: 100%;
+	}
+	
+	.table-table.table-hover .table-tbody .table-tr:hover .table-td-title >p,
+	table.table-table.table-hover tbody tr:hover>* a:hover{
+		text-decoration: underline;
+	}
+	
+}
