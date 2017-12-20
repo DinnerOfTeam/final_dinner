@@ -127,7 +127,7 @@ START MODULE AREA 2: Sub Navigation 1
 					</div>
 					<div class="tab-pane fade" id="business">
 						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
-						<a href="/dinner/restaurantEnterprise/restaurantInformation.do">식당정보확인</a><br>
+						<a href="/dinner/restaurantEnterprise/restaurantListView.do">식당정보확인</a><br>
 						<a href="#">식당예약조회</a><br>
 						<div class='container pad_0'>
 							<div class='col-md-1 pad_0 bbb'>
