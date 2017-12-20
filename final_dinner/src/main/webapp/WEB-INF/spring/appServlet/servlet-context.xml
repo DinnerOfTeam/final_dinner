@@ -32,7 +32,6 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/indiGroup/*"/>
-			<mapping path="/board/*"/>
 			
 			<mapping path="/customer/*"/>
 			<beans:ref bean="loginInterceptor"/>
