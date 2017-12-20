@@ -31,4 +31,11 @@
 	<select id="selectByNo" parameterType="int" resultType="QuestionVO">
 		select * from qna_question where qna_question_no=#{qnaQuestionNo}
 	</select>
+	
+	<select id="selectId" parameterType="int" resultType="QuestionVO">
+		select a.*,
+		(select mem_name from member where mem_no = #{memNo})
+		from QNA_QUESTION a
+	</select>
+	
 </mapper>

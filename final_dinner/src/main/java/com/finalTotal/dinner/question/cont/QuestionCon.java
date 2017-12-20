@@ -86,6 +86,7 @@ public class QuestionCon {
 		//1. 출력하기
 		logger.info("전체조회하기");
 		//2.
+		
 		List<QuestionVO> list = null;
 		list = questionService.selectQnaAll();
 		logger.info("목록 조회 결과,list.size()="+list.size());
