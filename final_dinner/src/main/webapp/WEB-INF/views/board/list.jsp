@@ -55,7 +55,7 @@
 							</c:url>
 							<c:set var="rowClass" value="row board-list-row"/>
 							<c:if test="${!empty param.isImport and vo.freeNo==param.no }">
-								<c:set var="rowClass" value="${rowClass} board-list-sel"/>
+								<c:set var="rowClass" value="${rowClass} board-list-sel" />
 							</c:if>
 							<div class="${rowClass}">
 								<a href="${boardURL}">
@@ -110,9 +110,7 @@
 							</c:when>
 							<c:otherwise>
 								<li class="previous">
-									<a href="<c:url value='${listURL}'>
-												<c:param name="currentPage" value="${searchVO.currentPage-1}" />
-											</c:url>">
+									<a href="${listURL}&currentPage=${searchVO.currentPage-1}">
 										<i class="fa fa-angle-left"></i>&nbsp;
 										이전
 									</a>
@@ -133,9 +131,7 @@
 							</c:when>
 							<c:otherwise>
 								<li class="next">
-									<a href="<c:url value='${listURL}'>
-												<c:param name="currentPage" value="${searchVO.currentPage+1}" />
-											</c:url>">
+									<a href="${listURL}&currentPage=${searchVO.currentPage+1}">
 										다음&nbsp;
 										<i class="fa fa-angle-right"></i>
 									</a>
@@ -159,9 +155,7 @@
 							<c:choose>
 								<c:when test="${searchVO.currentPage>1 }">
 									<li>
-										<a href="<c:url value='${listURL}'>
-													<c:param name="currentPage" value="1" />
-												</c:url>" aria-label="First">
+										<a href="${listURL}&currentPage=1" aria-label="First">
 											<i class="fa fa-angle-double-left"></i>
 										</a>
 									</li>
@@ -177,9 +171,7 @@
 							<c:choose>
 								<c:when test="${searchVO.firstBlockPage>1 }">
 									<li>
-										<a href="<c:url value='${listURL}'>
-													<c:param name="currentPage" value="${searchVO.firstBlockPage-1}" />
-												</c:url>" aria-label="Previous">
+										<a href="${listURL}&currentPage=${searchVO.firstBlockPage-1}" aria-label="Previous">
 											<i class="fa fa-angle-left"></i>
 										</a>
 									</li>
@@ -203,9 +195,7 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-											<a href="<c:url value='${listURL}'>
-														<c:param name="currentPage" value="${i}" />
-													</c:url>">
+											<a href="${listURL}&currentPage=${i}">
 												${i}
 											</a>
 										</li>
@@ -215,9 +205,7 @@
 							<c:choose>
 								<c:when test="${searchVO.lastBlockPage<searchVO.totalPage }">
 									<li>
-										<a href="<c:url value='${listURL}'>
-													<c:param name="currentPage" value="${searchVO.lastBlockPage+1}" />
-												</c:url>" aria-label="Next">
+										<a href="${listURL}&currentPage=${searchVO.lastBlockPage+1}" aria-label="Next">
 											<i class="fa fa-angle-right"></i>
 										</a>
 									</li>
@@ -233,9 +221,7 @@
 							<c:choose>
 								<c:when test="${searchVO.currentPage<searchVO.totalPage }">
 									<li>
-										<a href="<c:url value='${listURL}'>
-													<c:param name="currentPage" value="${searchVO.totalPage}" />
-												</c:url>" aria-label="Last">
+										<a href="${listURL}&currentPage=${searchVO.totalPage}" aria-label="Last">
 											<i class="fa fa-angle-double-right"></i>
 										</a>
 									</li>

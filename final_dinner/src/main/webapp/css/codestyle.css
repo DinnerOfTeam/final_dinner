@@ -188,7 +188,11 @@
 	margin-right: -15px;
 	margin-left: -15px;
 	overflow: hidden;
-	width: 100%;
+	min-width: 100%;
+}
+
+textarea.form-text{
+    resize: vertical;
 }
 
 .form-heading {
@@ -278,7 +282,6 @@
 
 .form-simple textarea.form-text {
 	min-height: 10em;
-    resize: none;
 }
 
 .form-simple .form-group.row{

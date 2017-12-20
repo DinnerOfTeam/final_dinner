@@ -84,6 +84,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	float: left;
+	margin: 0;
 }
 
 .board-list-row > a > .board-list-title > p{
