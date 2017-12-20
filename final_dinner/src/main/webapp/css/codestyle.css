@@ -308,7 +308,20 @@ textarea.form-text{
 	text-align: center;
 }
 
+.site-top-title.site-title-default{
+	background-color: rgb(158, 22, 22);
+	color: white;
+}
 
+.site-top-title.site-title-smooth-blue{
+	background-color: #1994FF;
+	color: white;
+}
+
+.site-top-title.site-title-skyblue{
+	background-color: skyblue;
+	color: white;
+}
 
 .table-wrap{
 	padding: 2em 0 4em 0;
@@ -494,4 +507,18 @@ table.table-table.table-hover tbody tr:hover>* a{
 		text-decoration: underline;
 	}
 	
+}
+
+.shadow-box,
+.shadow-box-fit{
+	background-color: white;
+	width: 100%;
+	box-shadow: 0 0 0.25em 0.0005em #999;
+	overflow: hidden;
+   	color: #333;
+   	margin: 1em 0;
+}
+
+.shadow-box{
+	padding: 0.5em;
 }

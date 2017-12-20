@@ -1,3 +1,7 @@
+a{
+	color: #333;
+}
+
 .search-tabs > li > a{
 	padding: 10px 15px;
 	color: #337ab7;
@@ -19,8 +23,12 @@
 	padding: 0;
 }
 
-.list-group-item.search-location-tabs > .tab-content, .list-group-item.search-location-tabs >.location-selected {
+.tab-content, .location-selected {
 	padding: 10px 15px;
+}
+
+.tab-content{
+	overflow: hidden;
 }
 
 .list-group-item .form-group {
