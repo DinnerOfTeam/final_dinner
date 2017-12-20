@@ -84,8 +84,10 @@
 				<div class="col-xs-12">${vo.freeContents }</div>
 			</div>
 			<div class="col-left board-detail-btnwrap">
+			<c:if test="${memGrade==9 || vo.memNo==0 || (sessionScope.memNo!=0 && sessionScope.memNo==vo.memNo) }">
 				<a href="<c:url value='/board/edit.do?freeNo=${vo.freeNo }'/>" class="site-btn">수정</a>
 				<a href="<c:url value='/board/delete.do?freeNo=${vo.freeNo }'/>" class="site-btn">삭제</a>
+			</c:if>
 				<a href="<c:url value='/board/list.do'/>" class="site-btn">목록</a>
 			</div>
 			<div class="row board-detail-comments">
@@ -110,10 +112,12 @@
 												</div>
 												<div class="comments-act col-right col-sm-4">
 													<a href="<c:url value='/board/comment/reply.do?freeNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">답글</a>
-													|
-													<a href="<c:url value='/board/comment/edit.do?commentNo=${cVO.commentNo}'/>">수정</a>
-													|
-													<a href="<c:url value='/board/comment/delete.do?commentNo=${cVO.commentNo}'/>">삭제</a>
+													<c:if test="${memGrade==9 ||!empty cVO.memNo || sessionScope.memNo==cVO.memNo }">
+														|
+														<a href="<c:url value='/board/comment/edit.do?commentNo=${cVO.commentNo}'/>">수정</a>
+														|
+														<a href="<c:url value='/board/comment/delete.do?commentNo=${cVO.commentNo}'/>">삭제</a>
+													</c:if>
 												</div>
 											</div>
 											<div class="board-detail-comments-contents">

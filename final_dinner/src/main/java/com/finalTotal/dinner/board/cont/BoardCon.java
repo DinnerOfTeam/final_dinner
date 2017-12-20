@@ -81,7 +81,8 @@ public class BoardCon {
 	}
 	
 	@RequestMapping("/detail.do")
-	public String detail(@RequestParam(value="no", defaultValue="0")int freeNo, Model model) {
+	public String detail(@RequestParam(value="no", defaultValue="0")int freeNo,
+			HttpSession session, Model model) {
 		logger.info("게시판 상세보기, 파라미터 freeNo={}", freeNo);
 		
 		BoardVO vo=boardService.selectByNo(freeNo);
@@ -91,6 +92,19 @@ public class BoardCon {
 			model.addAttribute("msg", "글이 없습니다.");
 			model.addAttribute("url", "/board/list.do");
 			return "common/message";
+		}
+		
+		
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		MemberVO memberVO=null;
+		if(memId!=null && !memId.isEmpty()){
+			memberVO=memberService.selectMember(memId);
+		}
+		int memGrade=0;
+		if(memberVO!=null){
+			memGrade=memberVO.getMemGrade();
 		}
 		
 		List<CommentVO> commentList=commentService.selectCommentByFreeNo(freeNo);
@@ -111,6 +125,7 @@ public class BoardCon {
 		model.addAttribute("vo", vo);
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("fileMap", fileMap);
+		model.addAttribute("memGrade", memGrade);
 		
 		return "board/detail";
 	}
@@ -225,7 +240,7 @@ public class BoardCon {
 	
 	@RequestMapping(value="/edit.do", method=RequestMethod.POST)
 	public String edit_post(@ModelAttribute BoardVO boardVO,
-			@RequestParam int[] deleteFile,
+			@RequestParam(required=false) List<Integer> deleteFile,
 			HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		logger.info("게시판 글수정 처리, 파라미터 boardVO={}", boardVO);
@@ -307,23 +322,25 @@ public class BoardCon {
 					}
 					
 					//파일삭제
-					List<BoardDataVO> fileList=new ArrayList<BoardDataVO>();
-					
-					for(int dataNo : deleteFile) {
-						BoardDataVO datavo=boardDataService.selectFileByNo(dataNo);
+					if(deleteFile!=null && !deleteFile.isEmpty()) {
+						List<BoardDataVO> fileList=new ArrayList<BoardDataVO>();
 						
-						if(datavo!=null) {
-							fileList.add(datavo);
+						for(int dataNo : deleteFile) {
+							BoardDataVO datavo=boardDataService.selectFileByNo(dataNo);
+							
+							if(datavo!=null) {
+								fileList.add(datavo);
+							}
 						}
-					}
-					
-					List<BoardDataVO> delFiles=boardDataService.deleteFiles(fileList, boardVO.getFreeNo());
-					for(BoardDataVO dataVO : delFiles) {
-						File file=new File(fileUtil.getUploadPath(request, FileUtil.FILE_UPLOAD), dataVO.getFreeDataName());
 						
-						if(file.exists()) {
-							boolean bool = file.delete();
-							logger.info("파일 삭제 결과, DataName={}, bool={}", dataVO.getFreeDataName(), bool);
+						List<BoardDataVO> delFiles=boardDataService.deleteFiles(fileList, boardVO.getFreeNo());
+						for(BoardDataVO dataVO : delFiles) {
+							File file=new File(fileUtil.getUploadPath(request, FileUtil.FILE_UPLOAD), dataVO.getFreeDataName());
+							
+							if(file.exists()) {
+								boolean bool = file.delete();
+								logger.info("파일 삭제 결과, DataName={}, bool={}", dataVO.getFreeDataName(), bool);
+							}
 						}
 					}
 					
@@ -476,7 +493,7 @@ public class BoardCon {
 		
 		String memId=(String)session.getAttribute("memId");
 		int memNo=0;
-		if(memId!=null && memId.isEmpty()) {
+		if(memId!=null && !memId.isEmpty()) {
 			memNo=(Integer)session.getAttribute("memNo");
 		}
 		
@@ -526,7 +543,7 @@ public class BoardCon {
 		String memId=(String)session.getAttribute("memId");
 		String memName=(String)session.getAttribute("memName");
 		int memNo=0;
-		if(memId!=null && memId.isEmpty()) {
+		if(memId!=null && !memId.isEmpty()) {
 			memNo=(Integer)session.getAttribute("memNo");
 		}
 		

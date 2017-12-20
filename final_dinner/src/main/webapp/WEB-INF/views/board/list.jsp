@@ -35,8 +35,8 @@
 			<div class="board-list">
 				<div class="row board-list-header hidden-xs">
 					<div class="col-xs-1">번호</div>
-					<div class="col-xs-6">제목</div>
-					<div class="col-xs-3">작성자</div>
+					<div class="col-xs-7">제목</div>
+					<div class="col-xs-2">작성자</div>
 					<div class="col-xs-2">날짜</div>
 				</div>
 				<div class="row board-list-body">
@@ -69,7 +69,7 @@
 											</c:otherwise>
 										</c:choose>
 									</div>
-									<div class="board-list-title col-xs-12 col-sm-6">
+									<div class="board-list-title col-xs-12 col-sm-7">
 										<p>${vo.freeTitle }</p>
 										<c:if test="${vo.commentCount>0 }">
 											<c:if test="${vo.commentCount<1000 }">
@@ -82,10 +82,11 @@
 										<c:if test="${vo.fileCount>0 }">
 											<img src="<c:url value='/images/boardFileIcon.png'/>">
 										</c:if>
+										<c:if test="${vo.timePass<24 }">
 											<img src="<c:url value='/images/boardNewIcon.png'/>">
-											
+										</c:if>
 									</div>
-									<div class="board-list-writer col-xs-4 col-sm-3"><p>${vo.freeName }</p></div>
+									<div class="board-list-writer col-xs-4 col-sm-2"><p>${vo.freeName }</p></div>
 									<div class="board-list-date col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
 										<p><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd" /></p>
 									</div>

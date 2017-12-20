@@ -30,7 +30,9 @@
 		from(
 			select rownum as rnum, b.*
 			from(
-				select free.*, dat.file_count, com.comment_count from board_free free
+				select free.*, dat.file_count,
+					com.comment_count, (sysdate-free.free_regdate)*24 as time_pass
+				from board_free free
 				left join(
 					select free_no, count(free_no) as file_count
 					from board_free_data
