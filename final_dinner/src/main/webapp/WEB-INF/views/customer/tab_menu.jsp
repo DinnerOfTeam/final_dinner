@@ -32,15 +32,15 @@
 </style>
 	<div class="tab_menu container">
 		<div class= 'col-sm-3'>
-			<a href="#">전체</a>
+			<a href="<c:url value="/customer/list.do"/>">전체</a>
 		</div>
 		<div class= 'col-sm-3'>
-			<a href="#">회원문의</a>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=1"/>">회원문의</a>
 		</div>
 		<div class= 'col-sm-3'>
-			<a href="#">업체문의</a>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=2"/>">업체문의</a>
 		</div>
 		<div class= 'col-sm-3'>
-			<a href="#">예약문의</a>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=3"/>">예약문의</a>
 		</div>
 	</div>

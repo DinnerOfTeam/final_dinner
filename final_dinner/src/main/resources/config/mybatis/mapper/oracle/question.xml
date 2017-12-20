@@ -11,7 +11,10 @@
 	</insert>
 	
 	<select id="selectQnaAll" resultType="QuestionVO">
-		select * from qna_question
+		select a.*, m.mem_name
+		from qna_question a
+		left join member m on a.mem_no = m.mem_no
+		order by qna_question_no desc
 	</select>
 	
 	<select id="selectMainNotice" resultType="QuestionVO">
@@ -32,10 +35,11 @@
 		select * from qna_question where qna_question_no=#{qnaQuestionNo}
 	</select>
 	
-	<select id="selectId" parameterType="int" resultType="QuestionVO">
-		select a.*,
-		(select mem_name from member where mem_no = #{memNo})
-		from QNA_QUESTION a
+	<select id="selectByType" parameterType="int" resultType="QuestionVO">
+		select a.*, m.mem_name
+		from qna_question a
+		left join member m on a.mem_no = m.mem_no 
+		where qna_type_no=#{qnaTypeNo}
+		order by qna_question_no desc
 	</select>
-	
 </mapper>

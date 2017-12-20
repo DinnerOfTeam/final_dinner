@@ -32,6 +32,10 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 	public QuestionVO selectByNo(int no) {
 		return getSqlSession().selectOne(namespace+".selectByNo",no);
 	}
-	
-	
+
+	@Override
+	public List<QuestionVO> selectByType(int qnaTypeNo) {
+		return getSqlSession().selectList(namespace+".selectByType",qnaTypeNo);
+	}
+
 }

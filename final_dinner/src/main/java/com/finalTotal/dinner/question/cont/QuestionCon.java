@@ -82,11 +82,11 @@ public class QuestionCon {
 	
 	//리스트 출력하기
 	@RequestMapping("/list.do")
-	public String list(Model model) {
+	public String list(@ModelAttribute QuestionVO questionVo,Model model) {
 		//1. 출력하기
 		logger.info("전체조회하기");
 		//2.
-		
+
 		List<QuestionVO> list = null;
 		list = questionService.selectQnaAll();
 		logger.info("목록 조회 결과,list.size()="+list.size());
@@ -148,6 +148,26 @@ public class QuestionCon {
 		model.addAttribute("vo", vo);
 		
 		return "customer/detail";
+	}
+	
+	@RequestMapping("/listByCategory.do")
+	public String listByCg(@RequestParam(defaultValue="0")int qnaTypeNo,
+		Model model) {
+		logger.info("카테고리별 게시글 조회, 파라미터 qnaTypeNo={} ", qnaTypeNo);
+		
+		if(qnaTypeNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/list.do");
+			return "common/message";
+		}
+		
+		List<QuestionVO>list
+		= questionService.selectByType(qnaTypeNo);
+		logger.info("카테고리별 조회 결과, list.size()={}", list.size());
+		
+		model.addAttribute("list", list);
+		
+		return "customer/listByCategory";
 	}
 	
 }

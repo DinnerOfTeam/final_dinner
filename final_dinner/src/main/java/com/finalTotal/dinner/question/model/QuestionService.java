@@ -8,4 +8,5 @@ public interface QuestionService {
 	public List<QuestionVO> mainNotice();
 	public int updateReadCount(int no);
 	public QuestionVO selectByNo(int no);
+	public List<QuestionVO> selectByType(int qnaTypeNo);
 }
