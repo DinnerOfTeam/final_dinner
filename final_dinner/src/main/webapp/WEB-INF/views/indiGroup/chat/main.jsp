@@ -3,15 +3,18 @@
 <%@ include file="../../inc/top.jsp" %>
 <script src="https://use.fontawesome.com/a9eeb9d53e.js"></script>
 <style type="text/css">
-	.table, .table td {
-		border: 1px solid #353535;
-		padding: 15px 0px !important;
-		text-align: center;
+	.table_my {
+		width: 100%;
 	}
-	.table th {
+	.table_my, .table_my td {
+		border: 1px solid #353535;
+		padding: 0 0 15px 0;
+		margin-bottom: 30px;
+	}
+	.table_my th {
 		border-bottom: 1px solid #353535;
 		text-align: center;
-		padding: 5px !important;
+		padding: 15px;
 	}
 	.work {
 		background-color: blue;
@@ -28,9 +31,13 @@
 		float: left;
 		text-align: left;
 	}
+	.text_left {
+		text-align: left;
+	}
 </style>
 <script type="text/javascript">
 	$(function() {
+		$('.cal_detail').hide();
 		$('select#groupNo').find('option').each(function() {
 			if($(this).val()== '${param.groupNo}') {
 				$(this).prop('selected', true);
@@ -38,6 +45,26 @@
 		});
 		$('form select').change(function() {
 			$('form').submit();
+		});
+		$('.table_my tr td').click(function() {
+			if($(this).is($(this).find('div.cal_detail'))) {
+				$(this).find('div.cal_detail').toggle();
+			}else {
+				var date= $(this).text().trim();
+				alert(date);
+				$.ajax({
+					type: "post",
+					url: "<c:url value= '/indiGroup/calender/search.do' />",
+					data:{
+					},
+					success: function() {
+						
+					},
+					error: function(xhr, sta, err) {
+						alert(sta+ " => "+ err);
+					}
+				});
+			}
 		});
 	});
 </script>

@@ -10,9 +10,9 @@
 </style>
 <div title= 'board_review'>
 	<div title= "header">
-		<i class="fa fa-comments-o left_align" aria-hidden="true"> 그룹 후기게시판</i>
+		<i class="fa fa-comments-o left_align" aria-hidden="true"> 그룹게시판</i>
 		<span>
-			<a href= "<c:url value='/board/list.do' />">
+			<a href= "<c:url value='/indiGroup/groupBoard/list.do' />">
 				<img class= 'more_img' alt="더보기 이미지" src="${pageContext.request.contextPath }/images/more.JPG">
 			</a>
 		</span>
@@ -22,7 +22,7 @@
 	</div>
 	
 	<div>
-		<table class= table >
+		<table class= 'table_my' >
 			<c:forEach var="vo" items="${review_list }">
 				<tr>
 					<th>작성자</th>

@@ -25,7 +25,7 @@
 	</div>
 	
 	<div>
-		<table class= 'table'>
+		<table class= 'table_my'>
 			<thead>
 			</thead>
 			<c:forEach var="vo" items="${vote_list }">

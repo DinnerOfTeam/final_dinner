@@ -1,6 +1,7 @@
 package com.finalTotal.dinner.indiGroup.cont;
  
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,8 @@ import com.finalTotal.dinner.vote.model.VoteVO;
 @RequestMapping("/indiGroup")
 public class IndiGroupCont {
 	public static final Logger logger= LoggerFactory.getLogger(IndiGroupCont.class);
+	private int[] date_arr= new int[28];
+	private String[] work_arr= new String[28];
 	
 	@Autowired
 	private IndiGroupService group_service;
@@ -48,8 +51,52 @@ public class IndiGroupCont {
 	}
 	
 	@RequestMapping(value= "/calender.do")
-	public void calender() {
+	public void calender(@RequestParam(required=false, defaultValue= "0") int year,
+			@RequestParam(required=false, defaultValue= "0") int month,
+			@RequestParam(required=false, defaultValue= "0") int p_date,
+			@RequestParam(defaultValue= "0") int groupNo,
+			HttpSession session, Model model) {
 		logger.info("indiGroup calender page");
+		
+		Date d= null;
+		if((year* month* p_date)== 0) {
+			d= new Date();
+		}else {
+			d= new Date(year, month, p_date);
+		}
+		int startDay= d.getDate()- 7- d.getDay();
+		for(int i= 0; i< date_arr.length; i++) {
+			int date= startDay+ i;
+			if(date< 1) {
+				int beforeLastDay= getLastDay(d.getYear()+ 1900, d.getMonth()- 1);
+				date_arr[i]= date+ beforeLastDay;
+			}else if(date> getLastDay(d.getYear()+ 1900, d.getMonth())) {
+				date_arr[i]= date- getLastDay(d.getYear()+ 1900, d.getMonth());
+			}else {
+				date_arr[i]= date;
+			}
+		}
+		work_arr[04]= "점심약속";
+		work_arr[15]= "점심약속";
+		work_arr[19]= "저녁약속";
+		work_arr[26]= "점심약속";
+		
+		model.addAttribute("date_arr", date_arr);
+		model.addAttribute("work_arr", work_arr);
+		model.addAttribute("today", d);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d);
+	    int sub= d.getDay()+ 7;
+	    cal.add(Calendar.DATE, -sub);
+	    
+	    List<Date> date_list= new ArrayList<Date>();
+	    for(int i= 0; i< 28; i++) {
+	    	date_list.add(cal.getTime());
+	    	cal.add(Calendar.DATE, 1);
+	    }
+	    
+	    model.addAttribute("date_list", date_list);
 	}
 	
 	@RequestMapping(value= "/vote.do")
@@ -175,5 +222,29 @@ public class IndiGroupCont {
 		
 		return "indiGroup/group/regiOk";
 	}
+
 	
+	public int getLastDay(int year, int month) {
+		switch(month) {
+			case -1: return 31;
+			case 0: return 31;
+			case 1: return yearcalc(year)?29:28;
+			case 2: return 31;
+			case 3: return 30;
+			case 4: return 31;
+			case 5: return 30;
+			case 6: return 31;
+			case 7: return 31;
+			case 8: return 30;
+			case 9: return 31;
+			case 10: return 30;
+			default: return 31;
+		}
+	}
+	public static boolean yearcalc(int year){
+		if(year%4==0 && (!(year%100==0) && !(year%400==0))){
+			return true;
+		}
+		return false;
+	}
 }

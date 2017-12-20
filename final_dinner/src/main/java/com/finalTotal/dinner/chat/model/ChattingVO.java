@@ -1,5 +1,6 @@
 package com.finalTotal.dinner.chat.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ChattingVO {
@@ -11,8 +12,9 @@ public class ChattingVO {
 			chat_regdate DATE DEFAULT sysdate  작성시간 
 		);*/
 	private int chatNo, groupNo, memNo;
-	private String chatContents, memName;
+	private String chatContents, memName, listRegdate;
 	private Date chatRegdate;
+	private SimpleDateFormat sdf;
 	
 	public ChattingVO() {
 	}
@@ -22,6 +24,14 @@ public class ChattingVO {
 		this.chatContents = chatContents;
 		this.memName = memName;
 		this.chatRegdate = chatRegdate;
+	}
+	
+	public String getListRegdate() {
+		sdf= new SimpleDateFormat("dd-HH:mm");
+		return sdf.format(chatRegdate);
+	}
+	public void setListRegdate(String listRegdate) {
+		this.listRegdate = listRegdate;
 	}
 	public int getChatNo() {
 		return chatNo;

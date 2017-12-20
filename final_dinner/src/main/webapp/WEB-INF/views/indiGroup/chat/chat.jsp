@@ -77,17 +77,26 @@
  					cnt: type,
  					groupNo: gNo
  				},
+ 				dataType: "json",
  				success: function(data){
  					if(data=="") return;
-/*    					alert(data);  */
- 					$(data).find('list').each(function() {
+ /* 					$(data).find('list').each(function() {
  						var mN= $(this).find('memNo').text();
  						var cR= $(this).find('chatRegdate').text();
  						var mName= $(this).find('memName').text();
  						var cC= $(this).find('chatContents').text();
-/*   						alert('mN1 : '+ mN+ ', cR : '+ cR+ ', mN2 : '+ mName+ ', cC : '+ cC); */
  						addChat(mN, cR, mName, cC);
- 					});
+ 					}); */
+ 					for(var idx in data) {
+ 						var mN1= data[idx].memNo;
+ 						var cR= data[idx].listRegdate;
+ 						var mN2= data[idx].memName;
+ 						var cC= data[idx].chatContents;
+ 						addChat(mN1, cR, mN2, cC);
+ 					};
+ 				},
+ 				error: function(xhr, status, error) {
+ 					alert(status+ "=>"+ error);
  				}
  			});
  		}
@@ -136,7 +145,9 @@
 			<p class= 'text_left text_08'><strong>최근 채팅이 없습니다</strong></p>
 		</c:if>
 		<c:forEach var="vo" items="${chat_list }">
-			<div class='chat_time'><input type="hidden" class= 'is_me' value= '${vo.memNo }' /><p class='badge'>${vo.memName }曰 : ${vo.chatContents }</p><fmt:formatDate value="${vo.chatRegdate }" pattern="dd-HH:mm" /></div>
+			<div class='chat_time'><input type="hidden" class= 'is_me' value= '${vo.memNo }' />
+				<p class='badge'>${vo.memName }曰 : ${vo.chatContents }</p>
+				<fmt:formatDate value="${vo.chatRegdate }" pattern= 'dd-HH:mm' /></div>
 		</c:forEach>
 	</fieldset>
 	<div class= 'row'>
