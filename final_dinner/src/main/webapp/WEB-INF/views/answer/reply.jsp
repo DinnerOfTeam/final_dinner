@@ -14,9 +14,14 @@
 						<input type="text" class="form-text" name="title" value="Re: ${param.title}">
 						
 						<textarea name="answerContent" placeholder="내용을 입력하세요" class="form-text" required=""></textarea>
-
-						<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="답변달기">
-
+						<div class="form-row">
+						<div class="col-sm-6">
+							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="답변달기">
+						</div>
+						<div class="col-sm-6">
+							<a href="<c:url value='/board/list.do'/>" class="site-btn site-btn-full">목록</a>
+						</div>
+					</div>
 					</form>
 				</div>
 			</div>

@@ -5,12 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.answer.model.AnswerService;
 import com.finalTotal.dinner.answer.model.AnswerVO;
+import com.finalTotal.dinner.question.model.QuestionService;
+import com.finalTotal.dinner.question.model.QuestionVO;
 
 @Controller
 @RequestMapping("/answer")
@@ -49,6 +53,8 @@ public class AnswerCont {
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
+		
 		return "common/message";
 	}
+	
 }

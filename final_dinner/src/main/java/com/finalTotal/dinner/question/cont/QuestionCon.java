@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.finalTotal.dinner.answer.model.AnswerService;
+import com.finalTotal.dinner.answer.model.AnswerVO;
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberServiceImpl;
 import com.finalTotal.dinner.member.model.MemberVO;
@@ -32,6 +34,9 @@ public class QuestionCon {
 	
 	@Autowired
 	private QuestionService questionService;
+	
+	@Autowired
+	private AnswerService answerService;
 
 	//글쓰기
 	@RequestMapping(value="/write.do", method=RequestMethod.GET)
@@ -68,7 +73,7 @@ public class QuestionCon {
 		
 		if(cnt>0) {
 			msg="글쓰기 처리완료";
-			url="/list.do";
+			url="list.do";
 		}else {
 			msg="글쓰기 실패";
 			url="/write.do";
@@ -137,15 +142,34 @@ public class QuestionCon {
 		}
 		
 		QuestionVO vo =questionService.selectByNo(no);
-		logger.info("상세보기 결과, vo={}", vo);
+		logger.info("Question 상세보기 결과, vo={}", vo);
+		AnswerVO av = answerService.selectByNo(no);
+		logger.info("Answer 상세보기 결과, av={}", av);
 		
-		String content=vo.getQuestionContent();
-		if(content!=null && !content.isEmpty()) {
+		/*String content=vo.getQuestionContent();
+		String content2 = av.getAnswerContent();
+		if(content!=null && !content.isEmpty()&&content2!=null&&!content2.isEmpty()) {
+			content=content.replace("\r\n", "<br>");
+			vo.setQuestionContent(content);
+			
+			content2=content2.replace("\r\n", "<br>");
+			av.setAnswerContent(content2);
+		}*/
+		String content=null;
+		String content2=null;
+		if(vo!=null) {
+			content=vo.getQuestionContent();
 			content=content.replace("\r\n", "<br>");
 			vo.setQuestionContent(content);
 		}
+		if(av!=null) {
+			content2=av.getAnswerContent();
+			content2=content2.replace("\r\n", "<br>");
+			av.setAnswerContent(content2);
+		}
 		
 		model.addAttribute("vo", vo);
+		model.addAttribute("av", av);
 		
 		return "customer/detail";
 	}

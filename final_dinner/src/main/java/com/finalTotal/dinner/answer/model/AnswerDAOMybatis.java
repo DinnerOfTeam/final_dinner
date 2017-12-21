@@ -13,4 +13,11 @@ public class AnswerDAOMybatis extends SqlSessionDaoSupport implements AnswerDAO{
 		return getSqlSession().insert(namespace+".insertAnswer", vo);
 	}
 	
+	
+	
+	@Override
+	public AnswerVO selectByNo(int no) {
+		return getSqlSession().selectOne(namespace+".selectByNo", no);
+	}
+	
 }
