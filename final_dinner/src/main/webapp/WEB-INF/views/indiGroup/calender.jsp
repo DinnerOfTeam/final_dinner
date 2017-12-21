@@ -2,13 +2,72 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 	.cal_detail {
 		position: absolute;
 		background-color: white;
 	}
+	.table_cal {
+		width: 100%;
+	}
+	.table_cal, .table_cal td {
+		border: 1px solid #353535;
+		padding: 0 0 15px 0;
+		margin-bottom: 30px;
+	}
+	.table_cal td {
+		max-width: 55px;
+	}
+	.table_cal th {
+		border-bottom: 1px solid #353535;
+		text-align: center;
+		padding: 15px;
+	}
 
 </style>
+<script type="text/javascript">
+	$(function() {
+
+		$('.cal_detail').hide();
+		$('.table_cal tr td').each(function() {
+			bring($(this));
+		});
+		$('.table_cal tr td').click(function() {
+			bring($(this));
+			$(this).find('div.cal_detail').toggle();
+		});
+		function bring(ele) {
+			var y= $(ele).find('input[type=hidden]').eq(0).val();
+			var m= $(ele).find('input[type=hidden]').eq(1).val();
+			var d= $(ele).find('input[type=hidden]').eq(2).val();
+			var g= ${param.groupNo};
+/* 			alert(y+ ", "+ m+ ', '+ d+ ', '+ g); */
+			$.ajax({
+				type: "post",
+				url: "<c:url value= '/indiGroup/calender/search.do' />",
+				data:{
+					calYear: y,
+					calMonth: m,
+					calDate: d,
+					groupNo: g,
+				},
+				success: function(res) {
+					if(res== "") return;
+					var data= '';
+					for(var idx in res) {
+						data+= '<p>'+ res[idx].calContents+ '</p>';
+					}
+					$(ele).find('div.cal_detail').html(data);
+					$(ele).find('div.cal_detail').after('<span>&nbsp;</span>');
+				},
+				error: function(xhr, sta, err) {
+					alert(sta+ " => "+ err);
+				}
+			});
+		}
+	});
+</script>
 <div>
 	<div title= "header">
 		<a title= '이전달 보기' href="<c:url value= '/indiGroup/chat/main.do?year=${today.year }&month=${today.month-1 }&p_date=${today.date }&groupNo=${param.groupNo }' />" class= 'ajex'><-</a>&nbsp;&nbsp;
@@ -17,7 +76,7 @@
 		&nbsp;&nbsp;<a title= '다음달 보기' href="<c:url value= '/indiGroup/chat/main.do?year=${today.year }&month=${today.month+1 }&p_date=${today.date }&groupNo=${param.groupNo }' />" class= 'ajex'>-></a>&nbsp;&nbsp;
 		<%-- <a href="<c:url value= '#' />" class= 'ajex'>-></a> --%>
 	</div>
-	<table class= 'table_my table-boardered table-hover'>
+	<table class= 'table_cal table-boardered table-hover'>
 		<tr>
 			<th title= 'sunday' class= 'col-md-1'>일</th>
 			<th title= 'monday' class= 'col-md-1'>월</th>
