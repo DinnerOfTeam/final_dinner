@@ -40,7 +40,7 @@ $(function(){
 	<div class="container">
 		<div class="form-body">
 			<div class="form-heading">
-				<h1>글쓰기</h1>
+				<h1>글수정</h1>
 			</div>
 			<div class="form-info">
 				<form name="frmBoardWrite" method="post" action="<c:url value='/board/edit.do'/>"

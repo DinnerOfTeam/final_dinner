@@ -80,13 +80,20 @@
 											</c:if>
 										</c:if>
 										<c:if test="${vo.fileCount>0 }">
-											<img src="<c:url value='/images/boardFileIcon.png'/>">
+											&nbsp;<img src="${pageContext.request.contextPath }/images/boardFileIcon.png" alt="첨부파일">
 										</c:if>
 										<c:if test="${vo.timePass<24 }">
-											<img src="<c:url value='/images/boardNewIcon.png'/>">
+											&nbsp;<img src="${pageContext.request.contextPath }/images/boardNewIcon.png" alt="24시간 이내에 작성">
 										</c:if>
 									</div>
-									<div class="board-list-writer col-xs-4 col-sm-2"><p>${vo.freeName }</p></div>
+									<div class="board-list-writer col-xs-4 col-sm-2">
+										<p>
+											<c:if test="${vo.memNo!=0 }">
+												<img src="${pageContext.request.contextPath }/images/boardMemberIcon.png" alt="회원 작성">&nbsp;
+											</c:if>
+											${vo.freeName }
+										</p>
+									</div>
 									<div class="board-list-date col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
 										<p><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd" /></p>
 									</div>

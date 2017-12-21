@@ -198,6 +198,7 @@
 	padding: 0.5em;
 	border: 1px solid #AAA;
 	background-color: white;
+	z-index: 100;
 }
 
 .board-detail-file-list > ul{

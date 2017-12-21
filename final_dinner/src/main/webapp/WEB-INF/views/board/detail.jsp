@@ -59,7 +59,12 @@
 				<h3 class="col-left col-xs-12 col-sm-8">${vo.freeTitle }</h3>
 			</div>
 			<div class="row board-detail-sub">
-				<div class="col-left col-xs-6">${vo.freeName }</div>
+				<div class="col-left col-xs-6">
+					<c:if test="${vo.memNo!=0 }">
+						<img src="${pageContext.request.contextPath }/images/boardMemberIcon.png" alt="회원 작성">&nbsp;
+					</c:if>
+					${vo.freeName }
+				</div>
 				<div class="col-right col-xs-6"><fmt:formatDate value="${vo.freeRegdate }" pattern="yyyy-MM-dd hh:mm" /></div>
 			</div>
 			<div class="row board-detail-file">
@@ -107,6 +112,9 @@
 										<c:when test="${cVO.commentDelFlag=='N' }">
 											<div class="board-detail-comments-sub">
 												<div class="col-left col-sm-8">
+													<c:if test="${cVO.memNo!=0 }">
+														<img src="${pageContext.request.contextPath }/images/boardMemberIconMini.png" alt="회원 작성 댓글">&nbsp;
+													</c:if>
 													${cVO.commentName}
 													<span><fmt:formatDate value="${cVO.commentRegdate}" pattern="yyyy-MM-dd hh:mm" /></span>
 												</div>
