@@ -90,8 +90,8 @@ public class ChattingCont {
 	@ResponseBody
 	public void chatAdd(@ModelAttribute ChattingVO vo, Model model) {
 		logger.info("chat adding parameter : vo= {}", vo);
-		
-		chat_service.addChat(vo);
+		if(vo.getChatContents()!= null && !vo.getChatContents().isEmpty())
+			chat_service.addChat(vo);
 	}
 	
 	@RequestMapping("/chatList.do")
