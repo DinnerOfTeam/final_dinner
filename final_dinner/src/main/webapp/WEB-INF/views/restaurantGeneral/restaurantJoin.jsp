@@ -66,7 +66,7 @@
 						<input type="text" class="form-text" name="resWorkDay" placeholder="영업일(월~금, 연중무휴, ...)" required="">
 						<input type="text" class="form-text" name="resWorkHour" placeholder="영업시간" required="">
 						
-						<input type="file" >
+						<input type ="file" name="imageUpload" id="imageUpload">
 						
 						
 						<input type="text" class="form-text" name="resMaxPerson" placeholder="최대인원" required="">

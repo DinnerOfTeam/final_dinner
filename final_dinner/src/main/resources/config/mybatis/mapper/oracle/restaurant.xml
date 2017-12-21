@@ -21,5 +21,10 @@
 			select * from restaurant
 			where mem_no=#{memNo}
 		</select>
+		
+		<select id="selectByNo" parameterType="int" resultType="RestaurantVO">
+			select * from restaurant
+			where res_no=#{resNo}
+		</select>
 	
 </mapper>

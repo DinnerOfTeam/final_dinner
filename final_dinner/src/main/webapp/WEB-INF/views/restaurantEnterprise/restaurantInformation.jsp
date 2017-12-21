@@ -28,14 +28,14 @@
 	
 	<!-- //login -->
 	<div class="row fadeInUp animated" data-wow-delay=".5s">
-		<form>
+		<form action="<c:url value='/restaurantEnterprise/restaurantInformation.do' />"  method="post">
 		<fieldset class='border_fieldset'>
 			<legend>식당정보</legend>
 		<table class= 'table tb_hover'>
-			
+		
 			<ul class="info_list">
 		<li>
-			<h3>장 스테이크</h3>
+			<h3>${vo.resName }</h3>
 			<hr class="aaa">
 			
 		</li>
@@ -52,29 +52,29 @@
 		<br>
 		<li>
 			<div class="name col-md-3">전화번호</div>
-			<div class="text col-md-9">02-548-9621</div>
+			<div class="text col-md-9">${vo.resContact1}-${vo.resContact2}-${vo.resContact3}</div>
 		</li>
 		<li>
 			<div class="name col-md-3">주소</div>
-			<div class="text col-md-9">서울시 강남구 신사동 644-18 2층</div>
+			<div class="text col-md-9">${vo.resAddress }</div>
 		</li>
 		<li>
 			<div class="name col-md-3">영업시간</div>
-			<div class="text col-md-9">월~토 12:00~15:00 (L.O 14:00), 18:00~22:30 (L.O
-				21:00) 일 12:00~15:00 (L.O 14:00), 18:00~22:00 (L.O 21:00)</div>
+			<div class="text col-md-9">${vo.resWorkHour }</div>
 		</li>
 		<li>
-			<div class="name col-md-3">휴무일</div>
-			<div class="text col-md-9">명절당일</div>
+			<div class="name col-md-3">영업일</div>
+			<div class="text col-md-9">${vo.resWorkDay }</div>
 		</li>
 
 		<li>
-			<div class="name col-md-3">예산(2인 기준)</div>
-			<div class="text col-md-9">5-10만원</div>
+			<div class="name col-md-3">식당 사진</div>
+			<div class="text col-md-9">
+				
+			</div>
 		</li>
 		
 	</ul>
-			
 		</table>
 		</fieldset>
 		</form>

@@ -15,9 +15,9 @@ import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
 @Controller
 @RequestMapping("/restaurant")
-public class RestaurantCon {
+public class RestaurantCont {
 	
-	private static final Logger logger = LoggerFactory.getLogger(RestaurantCon.class);
+	private static final Logger logger = LoggerFactory.getLogger(RestaurantCont.class);
 
 	@Autowired
 	private RestaurantService restaurantService;
