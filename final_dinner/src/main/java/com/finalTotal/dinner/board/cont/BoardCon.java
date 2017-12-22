@@ -110,8 +110,8 @@ public class BoardCon {
 		
 		Map<String, Object> fileMap=boardDataService.selectFileInfoByBoardNo(freeNo);
 		
-		String freeContents=vo.getFreeContents().replace("\r\n", "<br>");
-		vo.setFreeContents(freeContents);
+		/*String freeContents=vo.getFreeContents().replace("\r\n", "<br>");
+		vo.setFreeContents(freeContents);*/
 		
 		for(CommentVO cVo : commentList) {
 			if(cVo.getCommentDelFlag().equals("N")) {

@@ -87,7 +87,7 @@
 				</c:if>
 			</div>
 			<div class="row board-detail-content">
-				<div class="col-xs-12">${vo.freeContents }</div>
+				${vo.freeContents }
 			</div>
 			<div class="col-left board-detail-btnwrap">
 			<c:if test="${memGrade==9 || vo.memNo==0 || (sessionScope.memNo!=0 && sessionScope.memNo==vo.memNo) }">
