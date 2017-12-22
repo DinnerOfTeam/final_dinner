@@ -47,8 +47,23 @@ public class RestaurantInformationCon {
 	}
 	
 	@RequestMapping("/restaurantInformation.do")
-	public String Information() {
-		logger.info("식당 정보상세 페이지 보여주기");
+	public String Information(@RequestParam int resNo, Model model) {
+		logger.info("식당 정보상세 페이지 보여주기 파라미터 resNo={}",resNo);
+		
+		if(resNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다");
+			model.addAttribute("url", "/restaurantEnterprise/restaurantInformation.do");
+			
+			return "common/message";			
+		}
+		
+		RestaurantVO vo = restaurantService.selectByNo(resNo);
+		logger.info("상세보기 결과, vo={}",vo);
+		
+		model.addAttribute("vo", vo);
+		
+		
+		
 		return "restaurantEnterprise/restaurantInformation";
 	}
 	

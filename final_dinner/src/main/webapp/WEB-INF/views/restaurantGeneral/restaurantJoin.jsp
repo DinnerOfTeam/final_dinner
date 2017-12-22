@@ -50,12 +50,13 @@
 		<!-- login -->
 	<div class="form-wrap">
 		<div class="row">
-			<div class="form-body ">
+			<div class="form-body " style="width: 75%;">
 				<div class="form-heading">
 					<h1>식당등록</h1>
 				</div>
 				<div class="form-info">
-					<form action="<c:url value='/restaurant/restaurantJoin.do' />" method="post" >
+					<form action="<c:url value='/restaurant/restaurantJoin.do' />" method="post"
+						enctype="multipart/form-data" >
 						<input type="text" class="form-text" name="resNo" placeholder="식당번호" required="">
 						<input type="text" class="form-text" name="memNo" placeholder="회원번호" required="">
 						<input type="text" class="form-text" name="foodTypeNo" placeholder="음식종류번호" required="">
@@ -66,7 +67,7 @@
 						<input type="text" class="form-text" name="resWorkDay" placeholder="영업일(월~금, 연중무휴, ...)" required="">
 						<input type="text" class="form-text" name="resWorkHour" placeholder="영업시간" required="">
 						
-						<input type="file" >
+						<input type ="file" name="imageUpload" id="imageUpload" required="">
 						
 						
 						<input type="text" class="form-text" name="resMaxPerson" placeholder="최대인원" required="">

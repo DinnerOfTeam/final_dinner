@@ -8,11 +8,11 @@
 			select restaurant_seq.nextval from dual
 		</selectKey>	
 			insert into restaurant(res_no,mem_no,food_type_no,res_type_no,res_name,
-				res_introduce,res_work_day,res_work_hour,
+				res_introduce,res_work_day,res_work_hour,res_thumbnail,
 				res_max_person,res_contact1,res_contact2,res_contact3,res_zipcode,res_address,res_address_detail)
 				
 			values(#{resNo},#{memNo},#{foodTypeNo},#{resTypeNo},#{resName},
-				#{resIntroduce},#{resWorkDay},#{resWorkHour},
+				#{resIntroduce},#{resWorkDay},#{resWorkHour},#{resThumbnail},
 				#{resMaxPerson},#{resContact1},#{resContact2},#{resContact3},#{resZipcode},#{resAddress},#{resAddressDetail})
 		</insert>
 	
@@ -20,6 +20,11 @@
 		<select id="selectAll" parameterType="int" resultType="RestaurantVO">
 			select * from restaurant
 			where mem_no=#{memNo}
+		</select>
+		
+		<select id="selectByNo" parameterType="int" resultType="RestaurantVO">
+			select * from restaurant
+			where res_no=#{resNo}
 		</select>
 	
 </mapper>

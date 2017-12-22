@@ -32,7 +32,7 @@
 			from(
 				select free.*, dat.file_count,
 					com.comment_count, (sysdate-free.free_regdate)*24 as time_pass
-				from board_free free
+				from view_board_free_mem free
 				left join(
 					select free_no, count(free_no) as file_count
 					from board_free_data
@@ -57,26 +57,23 @@
 	</select>
 	
 	<select id="selectRecordCount" resultType="int" parameterType="SearchVO" >
-		select count(free_no) from board_free
+		select count(*) from view_board_free_mem
 		<include refid="searchWhere"/>
 	</select>
 	
 	<select id="selectByNo" parameterType="int" resultType="BoardVO" >
-		select * from board_free
+		select * from view_board_free_mem
 		where free_no=#{freeNo}
 	</select>
 	
 	<select id="selectPwdByNo" parameterType="string" resultType="BoardVO" >
-		select free_pwd from board_free
+		select free_pwd from view_board_free_mem
 		where free_no=#{freeNo}
 	</select>
 	
 	<update id="editBoard" parameterType="BoardVO">
 		update board_free
 		set free_title=#{freeTitle}, free_contents=#{freeContents}
-		<if test="freeName!=null and freeName!=''">
-			,free_name=#{freeName}
-		</if>
 		where free_no=#{freeNo}
 	</update>
 	

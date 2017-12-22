@@ -37,7 +37,14 @@
 		select * 
 		from(
 			SELECT c.*, level as comment_step
-			FROM board_comment c
+			FROM (
+				select bc.comment_no, bc.mem_no, bc.free_no, 
+				nvl2(bc.mem_no, mem.mem_name, bc.comment_name) as comment_name,
+				bc.comment_pwd, bc.comment_contents, bc.comment_regdate, bc.comment_groupno, bc.comment_del_flag
+				from board_comment bc
+				left join member mem
+				on bc.mem_no=mem.mem_no
+			) c
 			START WITH comment_groupno is null
 			CONNECT BY NOCYCLE PRIOR comment_no = comment_groupno
 		)
@@ -54,9 +61,6 @@
 	<update id="editComment" parameterType="CommentVO">
 		update board_comment
 		set comment_contents=#{commentContents}
-		<if test="commentName!=null and commentName!=''">
-			,comment_name=#{commentName}
-		</if>
 		where comment_no=#{commentNo}
 		and comment_del_flag='N'
 	</update>

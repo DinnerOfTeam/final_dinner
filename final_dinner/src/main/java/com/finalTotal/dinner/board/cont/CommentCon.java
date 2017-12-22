@@ -429,7 +429,7 @@ public class CommentCon {
 		String memId=(String)session.getAttribute("memId");
 		String memName=(String)session.getAttribute("memName");
 		int memNo=0;
-		if(memId!=null && memId.isEmpty()) {
+		if(memId!=null && !memId.isEmpty()) {
 			memNo=(Integer)session.getAttribute("memNo");
 		}
 		

@@ -9,4 +9,8 @@
 		insert into qna_answer(qna_answer_no, qna_question_no, answer_content)
 		values(#{qnaAnswerNo}, #{qnaQuestionNo}, #{answerContent})
 	</insert>
+	
+	<select id="selectByNo" parameterType="int" resultType="AnswerVO">
+		select * from qna_answer where qna_answer_no=#{qnaAnswerNo}
+	</select>
 </mapper>

@@ -41,7 +41,7 @@
 				</div>
 				
 				<c:forEach var="vo" items="${list }" varStatus="no">
-				<a href="<c:url value='/restaurantEnterprise/restaurantInformation.do'/>" class="aaa">
+				<a href="<c:url value='/restaurantEnterprise/restaurantInformation.do?resNo=${vo.resNo }'/>" class="aaa">
 				<div class= 'tr_div row td_hover'>
 					<div class= 'td_div col-sm-2'>${no.count }</div>
 					<div class= 'td_div col-sm-2'>${vo.resName } </div>

@@ -2,70 +2,147 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
 <%@ include file="tab_menu.jsp" %>
-<style>
-#list tbody tr td a{
-	color: black;
-}
-</style>
-<div class="container fadeInUp animated" data-wow-delay=".5s">
-		<form>
-		<fieldset class='border_fieldset'>
-			<legend>자유게시판</legend>
-		<table class= 'table tb_hover' id="list">
-			<thead class= 'row'>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-			</thead>
-			<tbody>
-				<c:if test="${empty list }">
-					<tr>
-						<td colspan="5">해당하는 데이터가 없습니다.
-					</tr>
-				</c:if>
-				<c:if test="${!empty list}">
-					<c:forEach var="vo" items="${list }">
-						<tr style="text-align:center">
-					<td>${vo.qnaQuestionNo }</td>
-						<td style="text-align:left">
-						<a href
-					="<c:url value='/customer/countUpdate.do?no=${vo.qnaQuestionNo}'/>">
-						${vo.questionTitle }
-					</a>
-						</td>
-						<td>${vo.memName}</td>
-						<td><fmt:formatDate value="${vo.questionRegdate }"
-							pattern="yyyy-MM-dd"/></td>
-						<td>${vo.questionViewCount }</td>
-						</tr>
-					</c:forEach>
-				</c:if>
-			</tbody>
-		</table>
-		</fieldset>
-		</form>
-			<div class='page_div'>
-				<ul class= 'pagination'>
-					<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>
-					<li><a>1</a></li>
-					<li><a>2</a></li>
-					<li><a>3</a></li>
-					<li><a aria-label='Next'><i class="fa fa-angle-right"></i></a></li>
-				</ul>
+	<div class="table-wrap">
+		<div class="container">
+			<div class="table-box">
+				<div class="table-table table-hover">
+					<div class="table-thead hidden-xs">
+						<div class="col-xs-1">번호</div>
+						<div class="col-xs-6">제목</div>
+						<div class="col-xs-2">작성자</div>
+						<div class="col-xs-2">작성일</div>
+						<div class="col-xs-1">조회수</div>
+					</div>
+					<div class="table-tbody">
+						<c:if test="${empty list }">
+						<div class="table-tr-nodata">
+							<span>글이 없습니다.</span>
+						</div>
+						</c:if>
+						<c:if test="${!empty list }">
+							<c:forEach var="vo" items="${list }">
+						<div class="table-tr">
+							<a href="<c:url value='/customer/countUpdate.do?no=${vo.qnaQuestionNo}'/>">
+								<div class="table-td table-td-center col-sm-1 hidden-xs">
+									<p>${vo.qnaQuestionNo }</p>
+								</div>
+								<div class="table-td table-td-title col-xs-12 col-sm-6">
+									<c:if test="${vo.questionOpen==1 }">
+									<p>${vo.questionTitle }</p>
+									</c:if>
+									<c:if test="${vo.questionOpen==2 }">
+									<p color="#BDBDBD">※비밀글 입니다.※</p>
+									</c:if>
+									<c:if test="${empty vo.questionOpen }">
+										<p>${vo.questionTitle }</p>
+									</c:if>
+								</div>
+								<div class="table-td table-td-center table-xs-left table-xs-sub col-xs-4 col-sm-2">
+									<p>${vo.memName}</p>
+								</div>
+								<div class="table-td table-td-center table-xs-right table-xs-sub col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
+									<p><fmt:formatDate value="${vo.questionRegdate }"
+							pattern="yyyy-MM-dd"/></p>
+								</div>
+								<div class="table-td table-td-center col-sm-1 hidden-xs">
+									<p>${vo.questionViewCount }</p>
+								</div>
+							</a>
+						</div>
+							</c:forEach>
+						</c:if>
+					</div>
+				</div>
+				<div class="table-comp">
+					<!-- 페이징(모바일) -->
+					<div class="table-sub visible-xs">
+						<ul class="pager">
+							<li class="previous disabled">
+								<a href="#">
+									<i class="fa fa-angle-left"></i>&nbsp;
+									이전
+								</a>
+							</li>
+							<li class="current">
+								<span>1</span>
+							</li>
+							<li class="next">
+								<a href="#">
+									다음&nbsp;
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="table-sub col-xs-12 col-sm-4 col-sm-offset-8 col-md-2 col-md-offset-10">
+						<a class="site-btn-submit site-btn-full" href="write.do" role="button">
+							<i class="fa fa-pencil"></i>&nbsp;
+							글쓰기
+						</a>
+					</div>
+					
+					<!-- 페이징 -->
+					<div class="table-sub col-xs-12 hidden-xs">
+						<ul class="pagination">
+							<li class="disabled">
+								<a href="#" aria-label="First">
+									<i class="fa fa-angle-double-left"></i>
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Previous">
+									<i class="fa fa-angle-left"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									1
+								</a>
+							</li>
+							<li class="active">
+								<a href="#">
+									2
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Next">
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+							<li class="disabled">
+								<a href="#" aria-label="Last">
+									<i class="fa fa-angle-double-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- 검색폼 -->
+					<div class="form-info form-row">
+						<form name="frmBoardSearch" method="get" action="#">
+							<div class="col-sm-2 col-sm-offset-2">
+								<select class="form-select" name="type">
+									<option value="title">제목</option>
+									<option value="contents">내용</option>
+									<option value="name">작성자</option>
+								</select>
+							</div>
+							
+							<div class="col-sm-4">
+								<input type="text" class="form-text" id="boardSearchKeyword" name="keyword"
+									placeholder="Search" value="">
+							</div>
+							<div class="col-sm-2">
+								<input type="submit" class="site-btn-submit site-btn-full" value="검색">
+							</div>
+						</form>
+						
+					</div>
+					
+				</div>
 			</div>
-			<div class= 'search_form'>
-				<label for='search_condition' class= 'sr-only'>검색</label>
-				<select id= 'search_condition' name= 'search_condition'>
-					<option>제목</option>
-					<option>내용</option>
-					<option>작성자</option>
-					<option>작성일</option>
-				</select>
-				<input type='text'><button><span class= 'glyphicon glyphicon-search' /></button>
-			</div>
+		</div>
 	</div>
+	
 <%@ include file="../inc/footer.jsp" %>

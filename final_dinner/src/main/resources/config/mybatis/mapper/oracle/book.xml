@@ -2,9 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="config.book">
-	<insert id="insertBook" parameterType="BookVO" >
-		insert into book(no, price, title, publisher)
-				values(book_seq.nextval, #{price}, #{title}, #{publisher})
-	</insert>
+<mapper namespace="config.mybatis.mapper.oracle.book">
+	
+	
+	
+	<delete id="deleteBook" parameterType="int">
+		delete from book where book_no=#{bookNo}
+	</delete>
+	
+	<select id="selectByAdd" parameterType="int" resultType="BookVO">
+		select b.*,(select res_address from restaurant where res_no=b.res_no) as res_address,
+					(select res_name from restaurant where res_no=b.res_no) as res_name 
+			from book b
+			where mem_no=#{memNo}
+	</select>
+
 </mapper>

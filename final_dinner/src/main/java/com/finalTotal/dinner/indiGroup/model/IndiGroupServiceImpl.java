@@ -24,8 +24,8 @@ public class IndiGroupServiceImpl implements IndiGroupService{
 	}
 
 	@Override
-	public List<IndigroupVO> selectByGroupName(String name) {
-		return dao.selectByGroupName(name);
+	public List<IndigroupVO> selectByGroupName(Map<String, Object> map) {
+		return dao.selectByGroupName(map);
 	}
 
 	@Override
@@ -39,13 +39,16 @@ public class IndiGroupServiceImpl implements IndiGroupService{
 		int cnt= 0;
 		try {
 			cnt= dao.insertGroupMember(vo);
+			System.out.println("그룹 멤버 vo="+ vo+ ", 가입 결과 : "+ cnt);
 			if(cnt> 0) {
 				GroupRegiVO vo2= new GroupRegiVO();
 				vo2.setGroupNo(vo.getGroupNo());
 				vo2.setMemNo(vo.getMemNo());
 				cnt= dao.checkGroup(vo2);
+				System.out.println("가입신청 여부 확인 : "+ cnt);
 				if(cnt> 0) {
 					cnt= dao.cancelGroup(vo2);
+					System.out.println("가입신청 삭제 확인 : "+ cnt);
 				}
 			}
 		}catch(RuntimeException e) {

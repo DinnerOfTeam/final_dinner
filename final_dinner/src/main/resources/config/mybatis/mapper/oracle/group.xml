@@ -15,9 +15,10 @@
 		select count(*) from indigroup where group_name= #{groupName}
 	</select>
 	
-	<select id="selectByGroupName" parameterType="String" resultType="IndigroupVO">
+	<select id="selectByGroupName" parameterType="Map" resultType="IndigroupVO">
 		select a.*, (select mem_name from member where mem_no= a.mem_no) as mem_name
 			from indigroup a where group_name like '%'|| #{groupName}|| '%'
+			and group_no not in (select group_no from group_member where mem_no= #{memNo})
 	</select>
 	
 	<insert id="regiGroup" parameterType="GroupRegiVO">

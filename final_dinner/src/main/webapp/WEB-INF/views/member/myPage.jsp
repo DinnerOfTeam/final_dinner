@@ -220,12 +220,12 @@ START MODULE AREA 2: Sub Navigation 1
 				  <tbody>
 					<tr >
 						<td class="left_top" colspan="4">
-							<b class="cDg">tjdgus52</b>님의 회원정보입니다.
+							<b class="cDg">sss</b>님의 회원정보입니다.
 						</td>	
 					</tr>
 					<tr>
 						<td class="left_top eee">아이디</td>
-						<td class="right_top">tjdgus52</td>
+						<td class="right_top">sss</td>
 					</tr>
 					<tr>
 						<td class="left_top eee">성명</td>
@@ -242,9 +242,9 @@ START MODULE AREA 2: Sub Navigation 1
 						
 					</tr>
 					<tr>
-						<td class="left_top eee">보너스</td>
+						<td class="left_top eee">마일리지</td>
 						<td class="right_top">
-							<b class="cDg">0<img src="http://wimg.filekok.com/images/icon/icon_b.gif" alt="보너스포인트"/>
+							<b class="cDg">0<img src="http://wimg.filekok.com/images/icon/icon_m.gif" alt="보너스포인트"/>
 						</td>
 					</tr>
 						

@@ -13,5 +13,10 @@ public class AnswerServiceImpl implements AnswerService{
 	public int insertAnswer(AnswerVO vo) {
 		return answerDao.insertAnswer(vo);
 	}
-	
+
+	@Override
+	public AnswerVO selectByNo(int no) {
+		// TODO Auto-generated method stub
+		return answerDao.selectByNo(no);
+	}
 }

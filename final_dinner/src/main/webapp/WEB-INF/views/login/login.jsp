@@ -67,9 +67,7 @@
 									<span></span>아이디 기억하기</label></li>
 							</ul>
 						</div>
-						<div class="forgot">
-							<a href="#">비밀번호 찾기</a>
-						</div>
+						
 						<div class="clearfix"></div>
 					</div>
 					<button id="wr_submit" name="SignIn" id="SignIn" class="site-btn-submit site-btn-full">로그인</button>

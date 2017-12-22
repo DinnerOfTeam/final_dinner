@@ -2,11 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 	.cal_detail {
-		position: absolute;
-		background-color: white;
+		position: relative;
+		background-color: green;
+		font-size: 0.7em;
+		font-weight: bold;
+		color: white;
+	}
+	.green {
+		color: green;
 	}
 	.table_cal {
 		width: 100%;
@@ -28,14 +33,62 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-
-		$('.cal_detail').hide();
-		$('.table_cal tr td').each(function() {
-			bring($(this));
-		});
+		function take() {
+			$('.table_cal tr td').each(function() {
+				bring($(this));
+			});
+		}
+		take();
+/* 		$('.table_cal tr td div').click(function() {
+ 			$(this).find('div.cal_detail').toggleClass('green'); */
+/*    			event.stopPropagation(); */
+/* 		}); */
+		
 		$('.table_cal tr td').click(function() {
-			bring($(this));
-			$(this).find('div.cal_detail').toggle();
+			var y= $(this).find('input[type=hidden]').eq(0).val(); 
+			var m= $(this).find('input[type=hidden]').eq(1).val(); 
+			var h= $(this).find('input[type=hidden]').eq(2).val();
+			var div= '<label><span>'+ y+ '</span> - <span>'+ m+ '</span> - <span>'+ h+ '</span></label><br>';
+			div+= '<input type="text" placeholder="일정을 작성하세요" />';
+			$('#modal-body').html(div);
+		})
+		$('#cal_add').click(function() {
+			var y, m, d;
+			$('#modal-body').find('span').each(function(idx) {
+				if(idx== 0) {
+					y= $(this).text();
+				}else if(idx== 1) {
+					m= $(this).text();
+				}else if(idx== 2) {
+					d= $(this).text();
+				}
+			});
+			var c= $('#modal-body').find('input').val();
+			if(confirm(y+ '년 '+ m+ '월 '+ d+ '일 예약 내용 : '+ c+ '이 맞습니까?')) {
+				if(c== ''|| c== null) {
+					alert('일정을 입력하세요');
+					$('#modal-body').find('input').focus();
+				}else {
+					$.ajax({
+						type: "post",
+						url: "<c:url value= '/indiGroup/calender/appAdd.do' />",
+						data:{
+							calYear: y,
+							calMonth: m,
+							calDate: d,
+							groupNo: ${param.groupNo},
+							calContents: c,
+						},
+						success: function() {
+							take();
+							$('#modal_close').click();
+						},
+						error: function(xhr, sta, err) {
+							alert(sta+ " => "+ err);
+						}
+					});
+				}
+			}
 		});
 		function bring(ele) {
 			var y= $(ele).find('input[type=hidden]').eq(0).val();
@@ -59,7 +112,6 @@
 						data+= '<p>'+ res[idx].calContents+ '</p>';
 					}
 					$(ele).find('div.cal_detail').html(data);
-					$(ele).find('div.cal_detail').after('<span>&nbsp;</span>');
 				},
 				error: function(xhr, sta, err) {
 					alert(sta+ " => "+ err);
@@ -88,20 +140,20 @@
 		</tr>
 		<c:forEach var="date" items="${date_list }" varStatus="idx">
 			<c:if test="${idx.count% 7== 1 }"><tr></c:if>
-			<td class= 'text_left'>
+			<td class= 'text_left' data-toggle="modal" data-target="#myModal">
 				<c:if test="${idx.count% 7== 1 }"><span style="color: red"></c:if>
 				<c:if test="${idx.count% 7== 0 }"><span style="color: blue;"></c:if>
 				<input type="hidden" value="<fmt:formatDate value='${date }' pattern='yyyy'/>" />
 				<input type="hidden" value="<fmt:formatDate value='${date }' pattern='M'/>" />
 				<input type="hidden" value="<fmt:formatDate value='${date }' pattern='d'/>" />
-				<c:if test="${today.date== date.date }"><strong style="color: green"></c:if>
+				<c:if test="${today.date== date.date }"><span class="badge badge-danger"></c:if>
 				<c:if test="${date.date!= 1 }">
 					<fmt:formatDate value="${date }" pattern="d"/>
 				</c:if>
 				<c:if test="${date.date== 1 }">
 					<fmt:formatDate value="${date }" pattern="M/d"/>
 				</c:if>
-				<c:if test="${today.date== date.date }"></strong></c:if>
+				<c:if test="${today.date== date.date }"></span></c:if>
 				<c:if test="${idx.count% 7== 1 }"></span></c:if>
 				<c:if test="${idx.count% 7== 0 }"></span></c:if>
 				<div style="background-color: green"><div class= 'cal_detail'></div></div>
@@ -109,4 +161,5 @@
 			<c:if test="${idx.count% 7== 0 }"></tr></c:if>
 		</c:forEach>
 	</table>
+	
 </div>

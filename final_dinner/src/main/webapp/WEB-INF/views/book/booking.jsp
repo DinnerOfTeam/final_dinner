@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../inc/top.jsp" %>    
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,13 +16,12 @@
 
 <!-- //login -->
 	<div class="row fadeInUp animated" data-wow-delay=".5s">
-		<form action="<c:url value='/book/booking.do' />" method="post" >
 		<fieldset class='border_fieldset'>
 			<legend>예약정보 조회</legend>
 		<table class= 'table tb_hover'>
 			<thead class= 'row'>
 			<tr>
-				<th>예약번호</th>
+				<th>번호</th>
 				<th>식당이름</th>
 				<th>예약날짜</th>
 				<th>주소(위치)</th>
@@ -28,38 +29,32 @@
 			</tr>
 			</thead>
 			<tbody>
+			<form action="<c:url value='/book/booking.do' />" method="post">
+			<c:forEach var="vo" items="${list }" varStatus="no">
 			<tr>
-				<td>1</td>
-				<td>아웃백</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>				
+				<td>${vo.resNo }</td>
+				<td>${vo.resName }</td>
+				<td><fmt:formatDate value="${vo.bookDate }" 
+						pattern="yyyy-MM-dd"/>
+				</td>
+				<td>${vo.resAddress }</td>
+				
+				<c:if test="${vo.bookDate > vo.bookRegdate }">				
+				<td><input type="submit" name="cancel" class="site-btn" value="취소하기">
+					<input type="hidden" value="${vo.bookNo }" name="bookNo">
+					
+				 </td>
+				</c:if>
+				<c:if test="${vo.bookDate < vo.bookRegdate }">
+				<td><input type="hidden" name="cancel" class="site-btn" value="취소하기"></td>
+				</c:if>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td>계절밥상</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>빕스</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>장수촌</td>
-				<td>2017-12-16</td>
-				<td>장요한</td>
-				<td><input type="submit" name="cancel" class="site-btn" value="취소하기"></td>
-			</tr>
+			</c:forEach>
+			</form>
+			
 			</tbody>
 		</table>
 		</fieldset>
-		</form>
 			<div class='page_div'>
 				<ul class= 'pagination'>
 					<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>

@@ -61,7 +61,7 @@
 						<div>
 							<label for="memName" class="lb">성명</label> <input type="text"
 								name="memName" id="memName" style="ime-mode: active" class="tx"
-								value="${vo.memName}">
+								value="${vo.memName}" readonly="readonly">
 						</div>
 						<div>
 							<label for="memZipcode" class="lb lb2">주소</label> <input

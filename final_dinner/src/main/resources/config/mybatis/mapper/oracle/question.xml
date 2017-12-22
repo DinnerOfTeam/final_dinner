@@ -32,7 +32,10 @@
 	</update>
 	
 	<select id="selectByNo" parameterType="int" resultType="QuestionVO">
-		select * from qna_question where qna_question_no=#{qnaQuestionNo}
+		select a.*, m.mem_name
+		from qna_question a
+		left join member m on a.mem_no = m.mem_no
+		where qna_question_no=#{qnaQuestionNo}
 	</select>
 	
 	<select id="selectByType" parameterType="int" resultType="QuestionVO">

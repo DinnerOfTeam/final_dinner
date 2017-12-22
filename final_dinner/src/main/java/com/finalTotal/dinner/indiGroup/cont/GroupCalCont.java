@@ -30,5 +30,14 @@ public class GroupCalCont {
 		
 		return list;
 	}
+	
+	@RequestMapping("/appAdd.do")
+	@ResponseBody
+	public void appointAdd(@ModelAttribute GroupCalenderVO vo) {
+		log.info("search page parameter : vo={}", vo);
+		
+		int cnt= service.insertCalender(vo);
+		log.info("일정 입력 결과 : cnt={}", cnt);
+	}
 
 }

@@ -22,8 +22,8 @@ public class IndiGroupDAOImpl extends SqlSessionDaoSupport
 	}
 
 	@Override
-	public List<IndigroupVO> selectByGroupName(String name) {
-		return getSqlSession().selectList(namespace+ ".selectByGroupName", name);
+	public List<IndigroupVO> selectByGroupName(Map<String, Object> map) {
+		return getSqlSession().selectList(namespace+ ".selectByGroupName", map);
 	}
 
 	@Override

@@ -18,6 +18,10 @@
 	border-top: 1px solid #0c0c0c;
 	}
 	
+	.ddd{
+		margin: auto;
+	}
+
 
 </style>
 
@@ -28,14 +32,14 @@
 	
 	<!-- //login -->
 	<div class="row fadeInUp animated" data-wow-delay=".5s">
-		<form>
+		<form action="<c:url value='/restaurantEnterprise/restaurantInformation.do' />"  method="post">
 		<fieldset class='border_fieldset'>
 			<legend>식당정보</legend>
 		<table class= 'table tb_hover'>
-			
+		
 			<ul class="info_list">
 		<li>
-			<h3>장 스테이크</h3>
+			<h3>${vo.resName }</h3>
 			<hr class="aaa">
 			
 		</li>
@@ -52,32 +56,73 @@
 		<br>
 		<li>
 			<div class="name col-md-3">전화번호</div>
-			<div class="text col-md-9">02-548-9621</div>
+			<div class="text col-md-9">${vo.resContact1}-${vo.resContact2}-${vo.resContact3}</div>
 		</li>
 		<li>
 			<div class="name col-md-3">주소</div>
-			<div class="text col-md-9">서울시 강남구 신사동 644-18 2층</div>
+			<div class="text col-md-9">${vo.resAddress }</div>
 		</li>
 		<li>
 			<div class="name col-md-3">영업시간</div>
-			<div class="text col-md-9">월~토 12:00~15:00 (L.O 14:00), 18:00~22:30 (L.O
-				21:00) 일 12:00~15:00 (L.O 14:00), 18:00~22:00 (L.O 21:00)</div>
+			<div class="text col-md-9">${vo.resWorkHour }</div>
 		</li>
 		<li>
-			<div class="name col-md-3">휴무일</div>
-			<div class="text col-md-9">명절당일</div>
+			<div class="name col-md-3">영업일</div>
+			<div class="text col-md-9">${vo.resWorkDay }</div>
 		</li>
 
 		<li>
-			<div class="name col-md-3">예산(2인 기준)</div>
-			<div class="text col-md-9">5-10만원</div>
+			<div class="name col-md-3">식당 사진</div>
+			<div class="text col-md-9">
+				<%-- <img src="<c:url value='/upfiles/upl_images/${vo.resThumbnail}'/>"
+		 		border="0" width="200"> --%>
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox" >
+    <div class="item active">
+      <img src="<c:url value='/upfiles/upl_images/${vo.resThumbnail}'/>" 
+     	 alt="..." border="0" width="300" class="ddd">
+     
+    </div>
+    <div class="item">
+      <img src="<c:url value='/upfiles/upl_images/${vo.resThumbnail}'/>" 
+     	 alt="..." border="0" width="300" class="ddd" >
+      
+    </div>
+    
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+			</div>
 		</li>
 		
 	</ul>
-			
+	
+	
+	
 		</table>
 		</fieldset>
 		</form>
+		
+		
+		
+		
 			<div class='page_div'>
 				<ul class= 'pagination'>
 					<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>
