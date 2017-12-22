@@ -7,11 +7,17 @@
 	$(function(){
 		var arrLoc=[];
 		
-		function getLocLabel(idx, value){
-			return $("<span class='label label-info food-search-loc-label' data-loc-idx='"+ idx +"'>"
-					+ value +
-					"<button type='button' class='close food-search-loc-del' aria-label='delete'>"
-					+"<span aria-hidden='true'>×</span></button></span>");
+		var locationValue=$("#search_hidden_loc").val();
+		if(locationValue!=""){
+			arrLoc=locationValue.split(",");
+		}
+		reDrawLocation();
+		
+		var $searchLocLabel=$("<span class='label label-primary food-search-loc-label'></span>");
+		var $searchLocDel=$("<button type='button' class='close food-search-loc-del' aria-label='delete'><span aria-hidden='true'>×</span></button>");
+		
+		function getLocLabel(value){
+			return $searchLocLabel.clone().text(value).append($searchLocDel.clone());
 		}
 		
 		function reDrawLocation(){
@@ -24,15 +30,15 @@
 			
 			for(var i=0, len=local_arrLoc.length; i<len; i++){
 				var locVal=local_arrLoc[i];
-				$locLabel=local_getLocLabel(i, locVal);
+				$locLabel=local_getLocLabel(locVal);
 				
 				$("#search-location-view").append($locLabel);
 			}
 			
 		}
 		
-		$(document).on("click", ".food-search-loc-label > .food-search-loc-del", function(){
-			var idx=$(this).parent().data("loc-idx");
+		$(document).on("click", "#search-location-view > .food-search-loc-label > .food-search-loc-del", function(){
+			var idx=$(this).parent().index()
 			arrLoc.splice(idx, 1);
 			
 			reDrawLocation();
@@ -55,7 +61,6 @@
 		
 		$("form[name=searchFrm]").submit(function(){
 			reDrawLocation();
-			
 		});
 	});
 </script>
@@ -260,7 +265,7 @@
 			
 			<div class="shadow-box wow fadeIn animated" data-wow-delay=".5s">
 				<div class="form-simple">
-					<form action="#" method="post" name="searchFrm">
+					<form action="#" method="post" name="searchFrm" id="search-food">
 					
 						<div class="form-comp">
 							<span class="form-static">
@@ -272,7 +277,7 @@
 							</span>
 							<span id="search-location-view" class="form-static"></span>
 						</div>
-					
+						
 						<input type="hidden" name="location" id="search_hidden_loc">
 						<input type="text" class="form-text" name="email" placeholder="식당명">
 						<input type="text" class="form-text" name="email" placeholder="인원">
