@@ -66,8 +66,6 @@
 						<label for="freeContents" class="sr-only">내용</label>
 						<textarea class="form-text board-write " id="freeContents" name="freeContents" placeholder="내용"></textarea>
 						<script>
-							// Replace the <textarea id="editor1"> with a CKEditor
-							// instance, using default configuration.
 							CKEDITOR.replace('freeContents', {
 								width:'100%',
 								height:'35em',

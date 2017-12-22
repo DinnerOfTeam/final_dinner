@@ -66,8 +66,6 @@ $(function(){
 						<textarea class="form-text board-write " id="freeContents" name="freeContents"
 							placeholder="내용">${vo.freeContents }</textarea>
 						<script>
-							// Replace the <textarea id="editor1"> with a CKEditor
-							// instance, using default configuration.
 							CKEDITOR.replace('freeContents', {
 								width:'100%',
 								height:'35em',

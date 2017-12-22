@@ -522,3 +522,7 @@ table.table-table.table-hover tbody tr:hover>* a{
 .shadow-box{
 	padding: 0.5em;
 }
+
+.site-content-wrap{
+	padding: 4em 0;
+}
