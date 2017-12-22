@@ -15,6 +15,7 @@
 	}
 	.user_icon {
 		overflow: hidden;
+		display: inline-block;
 	}
 	.text_left {
 		text-align: left;

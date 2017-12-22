@@ -40,9 +40,10 @@
 		}
 		take();
 /* 		$('.table_cal tr td div').click(function() {
- 			$(this).find('div.cal_detail').toggleClass('green');
-   			event.stopPropagation();
-		}); */
+ 			$(this).find('div.cal_detail').toggleClass('green'); */
+/*    			event.stopPropagation(); */
+/* 		}); */
+		
 		$('.table_cal tr td').click(function() {
 			var y= $(this).find('input[type=hidden]').eq(0).val(); 
 			var m= $(this).find('input[type=hidden]').eq(1).val(); 
@@ -50,7 +51,7 @@
 			var div= '<label><span>'+ y+ '</span> - <span>'+ m+ '</span> - <span>'+ h+ '</span></label><br>';
 			div+= '<input type="text" placeholder="일정을 작성하세요" />';
 			$('#modal-body').html(div);
-		});
+		})
 		$('#cal_add').click(function() {
 			var y, m, d;
 			$('#modal-body').find('span').each(function(idx) {
