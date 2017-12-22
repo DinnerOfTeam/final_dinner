@@ -32,7 +32,7 @@ public class FileUtil {
 	@Resource(name="fileUploadProperties")
 	private Properties fileProperties;
 	
-	public Map<String, List<Map<String, Object>>> fileUpload(HttpServletRequest request, int uploadGb) throws IllegalStateException, IOException {
+	/*public Map<String, List<Map<String, Object>>> fileUpload(HttpServletRequest request, int uploadGb) throws IllegalStateException, IOException {
 		//파일 업로드 처리
 		MultipartHttpServletRequest multipartRequest
 			=(MultipartHttpServletRequest) request;
@@ -52,6 +52,54 @@ public class FileUtil {
 		}
 		
 		return resultMap;
+	}*/
+	
+	public List<Map<String, Object>> fileupload(HttpServletRequest request,
+			int uploadGb) 
+			throws IllegalStateException, IOException {
+		//파일업로드 처리
+		MultipartHttpServletRequest multipartRequest 
+			= (MultipartHttpServletRequest) request;
+		
+		Map<String, MultipartFile> fileMap
+			=multipartRequest.getFileMap();
+		
+		//file정보 결과를 저장할 list
+		List<Map<String, Object>> list
+			=new ArrayList<Map<String,Object>>();
+		
+		Iterator<String> iter = fileMap.keySet().iterator();
+		while(iter.hasNext()) {
+			String key =iter.next();
+			MultipartFile tempFile =fileMap.get(key);
+			//=> 업로드된 파일을 임시파일 형태로 제공
+
+			//업로드 된경우
+			if(!tempFile.isEmpty()) {
+				String ofileName=tempFile.getOriginalFilename();
+				//unique한 파일명 구하기
+				String fileName=getUniqueFileName(ofileName);
+				
+				long fileSize=tempFile.getSize();
+				
+				//업로드 처리
+				String uploadPath= getUploadPath(request, uploadGb);
+				
+				File file = new File(uploadPath, fileName);
+				tempFile.transferTo(file);
+
+				//결과 저장
+				Map<String, Object> resultMap
+				= new HashMap<String, Object>();
+				resultMap.put("originalFilename", ofileName);
+				resultMap.put("filename", fileName);
+				resultMap.put("fileSize", fileSize);
+				
+				list.add(resultMap);
+			}
+		}//while		
+		
+		return list;
 	}
 	
 	public List<Map<String, Object>> fileUploadByKey(HttpServletRequest request, String key , int uploadGb) throws IllegalStateException, IOException {
@@ -74,6 +122,8 @@ public class FileUtil {
 				String fileName=getUniqueFileName(ofileName);
 				
 				long fileSize=tempFile.getSize();
+				
+				
 				
 				//업로드 처리
 				String uploadPath= getUploadPath(request, uploadGb);
