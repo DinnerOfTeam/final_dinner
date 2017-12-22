@@ -38,8 +38,6 @@ import com.finalTotal.dinner.member.model.MemberVO;
 public class BoardCon {
 	private static final Logger logger=LoggerFactory.getLogger(BoardCon.class);
 	
-	private static final String FILE_INPUT_NAME="boardFile";
-	
 	@Autowired
 	private MemberService memberService;
 	
@@ -112,8 +110,8 @@ public class BoardCon {
 		
 		Map<String, Object> fileMap=boardDataService.selectFileInfoByBoardNo(freeNo);
 		
-		String freeContents=vo.getFreeContents().replace("\r\n", "<br>");
-		vo.setFreeContents(freeContents);
+		/*String freeContents=vo.getFreeContents().replace("\r\n", "<br>");
+		vo.setFreeContents(freeContents);*/
 		
 		for(CommentVO cVo : commentList) {
 			if(cVo.getCommentDelFlag().equals("N")) {
@@ -585,7 +583,7 @@ public class BoardCon {
 	private List<BoardDataVO> uploadFile(HttpServletRequest request) throws IllegalStateException, IOException {
 		List<BoardDataVO> dataList=new ArrayList<BoardDataVO>();
 		
-		List<Map<String, Object>> fileList=fileUtil.fileUploadByKey(request, FILE_INPUT_NAME, FileUtil.FILE_UPLOAD);
+		List<Map<String, Object>> fileList=fileUtil.fileUploadByKey(request, "boardFile", FileUtil.FILE_UPLOAD);
 		
 		if(fileList!=null && !fileList.isEmpty()) {
 			for(Map<String, Object> dataMap : fileList) {
