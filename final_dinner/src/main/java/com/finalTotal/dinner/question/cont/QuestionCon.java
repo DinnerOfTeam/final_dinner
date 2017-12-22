@@ -194,4 +194,53 @@ public class QuestionCon {
 		return "customer/listByCategory";
 	}
 	
+	@RequestMapping(value="/edit.do",method=RequestMethod.GET)
+	public String edit_get(@RequestParam(defaultValue="0")int no,
+				ModelMap model) {
+		logger.info("수정화면 조회 파라미터 no={}", no);
+		
+		if(no==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/customer/list.do");
+			return "common/message";
+		}
+		
+		QuestionVO vo = questionService.selectByNo(no);
+		logger.info("수정화면 조회 결과, vo={}", vo);
+		
+		model.addAttribute("vo", vo);
+		
+		return "customer/edit";
+	}
+	
+	@RequestMapping(value="/edit.do",method=RequestMethod.POST)
+	public String edit_post(@ModelAttribute QuestionVO questionVo,
+			Model model) {
+		logger.info("글 수정 처리 - 파라미터, vo={}", questionVo);
+		
+		String msg="";
+		String url="/customer/edit.do?no="+questionVo.getQnaQuestionNo();
+		boolean back=true;
+		boolean close=false;
+		int cnt = questionService.updateQna(questionVo);
+		logger.info("글수정 결과, cnt={}", cnt);
+		
+		if(cnt>0) {
+			msg="글수정되었습니다.";
+			url="/customer/detail.do?no="+questionVo.getQnaQuestionNo();
+			back=false;
+			close=true;
+		}else {
+			msg="글수정 실패";
+			close=false;
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url", url);
+		model.addAttribute("back", back);
+		model.addAttribute("close",close);
+		return "common/msgPopup";
+	}
+	
+	
 }

@@ -45,4 +45,14 @@
 		where qna_type_no=#{qnaTypeNo}
 		order by qna_question_no desc
 	</select>
+	
+	<update id="updateQna" parameterType="QuestionVO">
+		update qna_question
+			set question_title=#{questionTitle}, question_content=#{questionContent}
+		where qna_question_no = #{qnaQuestionNo}
+	</update>
+	
+	<delete id="deleteQna" parameterType="int">
+		delete from qna_question where qna_question_no=#{qnaQuestionNo}
+	</delete>
 </mapper>

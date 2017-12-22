@@ -7,10 +7,14 @@
 			<h1><a href="index.html" ><img src="../images/logo.jpg" alt="" />고객센터</a></h1>
 		</div>
 		<div class= 'col-sm-1'>&nbsp;</div>
+		<form name="frmQnaSearch" method="get" action="<c:url value='/customer/list.do'/>">
 		<div class= 'col-sm-5 search_form'>
 			<label for='searchQna'>FAQ 통합검색</label>
-			<input type='text'><button><span class= 'glyphicon glyphicon-search' /></button>
+			<input type='text' name="searchKeyword" title="검색어 입력"
+				value="${SearchVO.keyword }">
+			<button type="submit"><span class= 'glyphicon glyphicon-search' /></button>
 		</div>
+		</form>
 		</div>
 	<div class= 'row col-sm-7'>
 		<div class= 'table_div_info col-sm-12'>
@@ -58,5 +62,5 @@
 			</div>
 		</div>		
 	</div>
-	</div>
+</div>
 <%@ include file="../inc/footer.jsp" %>
