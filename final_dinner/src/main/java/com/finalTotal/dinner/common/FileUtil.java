@@ -27,12 +27,13 @@ public class FileUtil {
 	
 	//파일업로드 경로 관련 함수
 	public static final int FILE_UPLOAD=1;	//자료실 업로드인 경우
-	public static final int IMAGE_UPLOAD=2;	//상품등록시 이미지 업로드인 경우
+	public static final int IMAGE_UPLOAD=2;	//이미지 업로드인 경우
+	public static final int CKEDITOR_UPLOAD=3;	//CKEDITOR를 통한 업로드인 경우
 	
 	@Resource(name="fileUploadProperties")
 	private Properties fileProperties;
 	
-	public Map<String, List<Map<String, Object>>> fileUpload(HttpServletRequest request, int uploadGb) throws IllegalStateException, IOException {
+	/*public Map<String, List<Map<String, Object>>> fileUpload(HttpServletRequest request, int uploadGb) throws IllegalStateException, IOException {
 		//파일 업로드 처리
 		MultipartHttpServletRequest multipartRequest
 			=(MultipartHttpServletRequest) request;
@@ -52,6 +53,54 @@ public class FileUtil {
 		}
 		
 		return resultMap;
+	}*/
+	
+	public List<Map<String, Object>> fileupload(HttpServletRequest request,
+			int uploadGb) 
+			throws IllegalStateException, IOException {
+		//파일업로드 처리
+		MultipartHttpServletRequest multipartRequest 
+			= (MultipartHttpServletRequest) request;
+		
+		Map<String, MultipartFile> fileMap
+			=multipartRequest.getFileMap();
+		
+		//file정보 결과를 저장할 list
+		List<Map<String, Object>> list
+			=new ArrayList<Map<String,Object>>();
+		
+		Iterator<String> iter = fileMap.keySet().iterator();
+		while(iter.hasNext()) {
+			String key =iter.next();
+			MultipartFile tempFile =fileMap.get(key);
+			//=> 업로드된 파일을 임시파일 형태로 제공
+
+			//업로드 된경우
+			if(!tempFile.isEmpty()) {
+				String ofileName=tempFile.getOriginalFilename();
+				//unique한 파일명 구하기
+				String fileName=getUniqueFileName(ofileName);
+				
+				long fileSize=tempFile.getSize();
+				
+				//업로드 처리
+				String uploadPath= getUploadPath(request, uploadGb);
+				
+				File file = new File(uploadPath, fileName);
+				tempFile.transferTo(file);
+
+				//결과 저장
+				Map<String, Object> resultMap
+				= new HashMap<String, Object>();
+				resultMap.put("originalFilename", ofileName);
+				resultMap.put("filename", fileName);
+				resultMap.put("fileSize", fileSize);
+				
+				list.add(resultMap);
+			}
+		}//while		
+		
+		return list;
 	}
 	
 	public List<Map<String, Object>> fileUploadByKey(HttpServletRequest request, String key , int uploadGb) throws IllegalStateException, IOException {
@@ -74,6 +123,8 @@ public class FileUtil {
 				String fileName=getUniqueFileName(ofileName);
 				
 				long fileSize=tempFile.getSize();
+				
+				
 				
 				//업로드 처리
 				String uploadPath= getUploadPath(request, uploadGb);
@@ -104,6 +155,8 @@ public class FileUtil {
 				upPath=fileProperties.getProperty("file.upload.path.test");
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath=fileProperties.getProperty("imageFile.upload.path.test");
+			}else if(uploadGb==CKEDITOR_UPLOAD) {
+				upPath=fileProperties.getProperty("ckeditor.upload.path.test");
 			}
 			Logger.info("test경로:"+ upPath);
 		}else {
@@ -112,6 +165,8 @@ public class FileUtil {
 				upPath=fileProperties.getProperty("file.upload.path");
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath=fileProperties.getProperty("imageFile.upload.path");
+			}else if(uploadGb==CKEDITOR_UPLOAD) {
+				upPath=fileProperties.getProperty("ckeditor.upload.path");
 			}
 			Logger.info("배포시경로:"+ upPath);
 			

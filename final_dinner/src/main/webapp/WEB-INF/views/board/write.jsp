@@ -5,6 +5,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--Board-page -->
 <link href="<c:url value='/css/site-board.css'/>" rel="stylesheet" type="text/css" media="all" />
+<script src="<c:url value='/ckeditor/ckeditor.js'/>"></script>
+
 <script type="text/javascript">
 	$(function(){
 		$('.btn-file-del').click(function(){
@@ -60,8 +62,17 @@
 					<input type="password" id="freePwd" name="freePwd" class="form-text" placeholder="비밀번호" required>
 					</c:if>
 					
-					<label for="freeContents" class="sr-only">내용</label>
-					<textarea class="form-text board-write " id="freeContents" name="freeContents" placeholder="내용"></textarea>
+					<div class="form-group">
+						<label for="freeContents" class="sr-only">내용</label>
+						<textarea class="form-text board-write " id="freeContents" name="freeContents" placeholder="내용"></textarea>
+						<script>
+							CKEDITOR.replace('freeContents', {
+								width:'100%',
+								height:'35em',
+								filebrowserImageUploadUrl: '${pageContext.request.contextPath}/ckeditor/upload.do'
+							});
+						</script>
+					</div>
 					
 					<div class="row form-group">
 						<label class="col-xs-9">첨부파일</label>

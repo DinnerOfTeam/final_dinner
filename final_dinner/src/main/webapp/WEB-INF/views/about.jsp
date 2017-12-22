@@ -2,6 +2,69 @@
     pageEncoding="UTF-8"%>
 <%@include file="inc/top.jsp" %>
 
+<script type="text/javascript">
+
+	$(function(){
+		var arrLoc=[];
+		
+		var locationValue=$("#search_hidden_loc").val();
+		if(locationValue!=""){
+			arrLoc=locationValue.split(",");
+		}
+		reDrawLocation();
+		
+		var $searchLocLabel=$("<span class='label label-primary food-search-loc-label'></span>");
+		var $searchLocDel=$("<button type='button' class='close food-search-loc-del' aria-label='delete'><span aria-hidden='true'>×</span></button>");
+		
+		function getLocLabel(value){
+			return $searchLocLabel.clone().text(value).append($searchLocDel.clone());
+		}
+		
+		function reDrawLocation(){
+			var local_arrLoc=arrLoc, local_getLocLabel=getLocLabel;
+			
+			var	hidden_loc_var=local_arrLoc.join(",");
+			$("#search_hidden_loc").val(hidden_loc_var);
+			
+			$("#search-location-view").empty();
+			
+			for(var i=0, len=local_arrLoc.length; i<len; i++){
+				var locVal=local_arrLoc[i];
+				$locLabel=local_getLocLabel(locVal);
+				
+				$("#search-location-view").append($locLabel);
+			}
+			
+		}
+		
+		$(document).on("click", "#search-location-view > .food-search-loc-label > .food-search-loc-del", function(){
+			var idx=$(this).parent().index()
+			arrLoc.splice(idx, 1);
+			
+			reDrawLocation();
+		});
+		
+		$(document).on("click", "#form_location_clear", function(){
+			arrLoc=[];
+			
+			reDrawLocation();
+		});
+		
+		$(document).on("click", ".search-tab-content .row > div > a", function(){
+			event.preventDefault();
+			
+			var locationValue=$(this).data("loc");
+			arrLoc.push(locationValue);
+			
+			reDrawLocation();
+		});
+		
+		$("form[name=searchFrm]").submit(function(){
+			reDrawLocation();
+		});
+	});
+</script>
+
 <link href="css/site-search.css" rel="stylesheet" type="text/css" media="all" />
 
 	<div class="site-top-title site-title-default" >
@@ -14,186 +77,186 @@
 	<div class="search">
 		<div class="container">
 			<div class="shadow-box-fit wow fadeIn animated" data-wow-delay=".5s">
-				<ul class="nav nav-tabs search-tabs search-tabs">
+				<ul class="nav nav-pills search-tabs">
 					<li class="active"><a href="#seoul" data-toggle="tab">서울</a></li>
 					<li class=""><a href="#incheon" data-toggle="tab">인천</a></li>
 					<li class=""><a href="#gyeonggi" data-toggle="tab">경기</a></li>
 				</ul>
-				<div class="tab-content">
+				<div class="search-tab-content tab-content">
 					<div class="tab-pane fade active in" id="seoul">
 						<div class="row">
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="구로">구로</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="구로">구로</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="금천">금천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="금천">금천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강남">강남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강남">강남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="여의도">여의도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="여의도">여의도</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="용산">용산</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="용산">용산</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="구로">구로</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="구로">구로</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="금천">금천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="금천">금천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강남">강남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강남">강남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="여의도">여의도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="여의도">여의도</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="용산">용산</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="용산">용산</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="구로">구로</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="구로">구로</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="금천">금천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="금천">금천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강남">강남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강남">강남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="여의도">여의도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="여의도">여의도</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="용산">용산</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="용산">용산</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="구로">구로</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="구로">구로</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="금천">금천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="금천">금천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강남">강남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강남">강남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="여의도">여의도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="여의도">여의도</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="용산">용산</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="용산">용산</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="구로">구로</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="구로">구로</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="금천">금천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="금천">금천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강남">강남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강남">강남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="여의도">여의도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="여의도">여의도</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="용산">용산</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="용산">용산</a>
 							</div>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="incheon">
 						<div class="row">
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="부평구">부평구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="부평구">부평구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="남동구">남동구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="남동구">남동구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="서구">서구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="서구">서구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="연수구">연수구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="연수구">연수구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강화도">강화도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강화도">강화도</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="부평구">부평구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="부평구">부평구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="남동구">남동구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="남동구">남동구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="서구">서구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="서구">서구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="연수구">연수구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="연수구">연수구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강화도">강화도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강화도">강화도</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="부평구">부평구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="부평구">부평구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="남동구">남동구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="남동구">남동구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="서구">서구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="서구">서구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="연수구">연수구</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="연수구">연수구</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="강화도">강화도</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="강화도">강화도</a>
 							</div>
 						</div>
 					</div>
 					<div class="tab-pane fade" id="gyeonggi">
 						<div class="row">
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="부천">부천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="부천">부천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="시흥">시흥</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="시흥">시흥</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="성남">성남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="성남">성남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="고양">고양</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="고양">고양</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="의정부">의정부</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="의정부">의정부</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="부천">부천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="부천">부천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="시흥">시흥</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="시흥">시흥</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="성남">성남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="성남">성남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="고양">고양</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="고양">고양</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="의정부">의정부</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="의정부">의정부</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="부천">부천</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="부천">부천</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="시흥">시흥</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="시흥">시흥</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="성남">성남</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="성남">성남</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="고양">고양</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="고양">고양</a>
 							</div>
-							<div class="col-sm-3 col-md-2">
-								<a href="#" data-value="의정부">의정부</a>
+							<div class="col-xs-6 col-sm-3 col-md-2">
+								<a href="#" data-loc="의정부">의정부</a>
 							</div>
 						</div>
 					</div>
@@ -202,100 +265,24 @@
 			
 			<div class="shadow-box wow fadeIn animated" data-wow-delay=".5s">
 				<div class="form-simple">
-					<form action="#" method="post">
-						<input type="text" class="form-text" name="email" placeholder="Name" required="">
-						<input type="text" class="form-text" name="email" placeholder="Email" required="">
-						<input type="password" name="password" class="form-text" placeholder="Password">
-						<input type="password" name="password" class="form-text" placeholder="Confirm Password">
-						
-						<div class="form-row">
-							<div class="col-sm-4">
-								<input type="text" class="form-text" placeholder="Name" required="">
-							</div>
-							<div class="col-sm-4">
-								<input type="email" class="form-text" placeholder="Email" required="">
-							</div>
-							<div class="col-sm-4">
-								<input type="text" class="form-text" placeholder="Telephone" required="">
-							</div>
-						</div>
-						<input type="text" class="form-text" placeholder="Telephone" required="">
-						<textarea placeholder="Message" class="form-text" required=""></textarea>
-						
-						<select class="form-select">
-							<option>111</option>
-							<option>22222</option>
-							<option>3333333</option>
-							<option>44444</option>
-							<option>555</option>
-						</select>
-	
+					<form action="#" method="post" name="searchFrm" id="search-food">
+					
 						<div class="form-comp">
-							<label class="checkbox-inline">
-							  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-							</label>
-							<label class="checkbox-inline">
-							  <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-							</label>
-							<label class="checkbox-inline">
-							  <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-							</label>
-						</div>
-							
-						<div class="form-comp">
-							<label class="radio-inline">
-							  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
-							</label>
-							<label class="radio-inline">
-							  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
-							</label>
-							<label class="radio-inline">
-							  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
-							</label>
-						</div>
-	
-						<div class="form-row">
-							<div class="col-xs-3">
-								<select class="form-select">
-									<option>010</option>
-									<option>011</option>
-									<option>012</option>
-									<option>016</option>
-									<option>019</option>
-								</select>
-							</div>
-							<span class="form-txt form-static">-</span>
-							<div class="col-xs-3">
-								<input type="text" class="user form-text">
-							</div>
-							<span class="form-txt form-static">-</span>
-							<div class="col-xs-3">
-								<input type="text" class="user form-text">
-							</div>
-						</div>
-						<div class="form-comp-row">
-							<div class="col-sm-6">
-								<input type="submit" name="Sign In" class="site-btn-submit" value="Sign up">
-							</div>
-							<div class="col-sm-6">
-								<input type="submit" name="cancel" class="site-btn" value="Cancel">
-							</div>
+							<span class="form-static">
+								<span class="form-txt">지역</span>
+								<button type="button" class="btn btn-danger btn-xs" id="form_location_clear">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									모두 지우기
+								</button>
+							</span>
+							<span id="search-location-view" class="form-static"></span>
 						</div>
 						
-						<div class="form-comp-row">
-							<div class="col-sm-6">
-								<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="Sign up">
-							</div>
-							<div class="col-sm-6">
-								<input type="submit" name="cancel" class="site-btn site-btn-full" value="Cancel">
-							</div>
-						</div>
-	
-						<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="Sign up">
+						<input type="hidden" name="location" id="search_hidden_loc">
+						<input type="text" class="form-text" name="email" placeholder="식당명">
+						<input type="text" class="form-text" name="email" placeholder="인원">
 						
-						<div class="signup-text">
-							<a href="login.html">Already have an account? Login here.</a>
-						</div>
+						<input type="submit" class="site-btn-submit site-btn-full" value="검색">
 					</form>
 				</div>
 			</div>

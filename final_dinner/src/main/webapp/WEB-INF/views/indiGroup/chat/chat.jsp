@@ -15,6 +15,7 @@
 	}
 	.user_icon {
 		overflow: hidden;
+		display: inline-block;
 	}
 	.text_left {
 		text-align: left;
@@ -29,13 +30,10 @@
 	$(function() {
 		is_me();
 		chat_scroll();
-		$('button').click(chat);
+		$('button#chat_add').click(chat);
 		$('input').on('keypress', function(e) {
 			if(e.which== 13)
 				chat();
-			else {
-				
-			}
 		});
 		function chat() {
 			var mNo = $('#memNo').val();
@@ -155,7 +153,7 @@
 			<input type="hidden" name= 'groupNo' id= 'groupNo' value="${param.groupNo }" />
 			<input type="hidden" name= 'memNo' id= 'memNo' value="${sessionScope.memNo }" />
 			<div class='col-sm-7'><input type="text" name= 'chatContents' id= 'chatText'  size="15"/></div>
-			<div class='col-sm-5'><button>전송</button></div>
+			<div class='col-sm-5'><button id= 'chat_add'>전송</button></div>
 <!-- 		</form> -->
 	</div>
 	</div>

@@ -2,13 +2,78 @@ a{
 	color: #333;
 }
 
+.search-tabs{
+	background-color: lightgray;
+}
+
+.search-tab-content{
+	min-height: 7em;
+}
+
+.search-tab-content .row > div > a{
+	display: block;
+	padding: 0.5em;
+}
+
+.search-tab-content .row > div > a:hover,
+.search-tab-content .row > div > a:focus{
+	text-decoration: none;
+}
+
+.search-tab-content .row > div > a:hover{
+	color: #FFF;
+	background-color: rgb(158, 22, 22);
+}
+
+.search-tab-content .row > div > a:focus{
+	color: none;
+}
+
 .search-tabs > li > a{
 	padding: 10px 15px;
 	color: #337ab7;
+	background-color: #FFF;
+	border-radius: 0;
 }
 
-.search-tabs > li.active > a{
-	color: #555;
+.nav-pills.search-tabs > li {
+	margin: 0;
+}
+
+.nav-pills.search-tabs > li.active > a,
+.nav-pills.search-tabs > li.active > a:hover,
+.nav-pills.search-tabs > li.active > a:focus{
+	color: #FFF;
+	background-color: rgb(158, 22, 22);
+}
+
+#form_location_clear{
+	margin: 0.35em 0;
+}
+
+#search-location-view{
+	margin-left: 0.125em;
+	overflow: hidden;
+	font-size: 1.25em;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	user-select:none;
+}
+.food-search-loc-label{
+	font-weight: bold !important;
+	display: inline-block;
+	margin: 0 0.25em;
+	
+}
+
+.food-search-loc-label > .food-search-loc-del{
+	font-size: 1em;
+	color: white;
+	filter: alpha(opacity=100);
+	opacity: unset;
+	outline: none;
 }
 
 .food-search-form{
@@ -46,6 +111,10 @@ a{
 	box-shadow: 0 0 0.25em 0.0005em #999;
 	overflow: hidden;
 	color: black;
+}
+
+.restaurant-search-inner:hover{
+	background-color: #EEE;
 }
 
 .restaurant-search-inner > *{

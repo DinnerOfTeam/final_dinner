@@ -11,7 +11,7 @@ public class GroupCalenderDAOImpl extends SqlSessionDaoSupport
 	private String namespace= "config.groupCalender";
 
 	@Override
-	public int insertCalender(GroupBoardVO vo) {
+	public int insertCalender(GroupCalenderVO vo) {
 		return getSqlSession().insert(namespace+ ".insertCalender", vo);
 	}
 

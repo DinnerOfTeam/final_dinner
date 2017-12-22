@@ -11,7 +11,7 @@ public class GroupCalenderServiceImpl implements GroupCalenderService {
 	private GroupCalenderDAO dao;
 
 	@Override
-	public int insertCalender(GroupBoardVO vo) {
+	public int insertCalender(GroupCalenderVO vo) {
 		return dao.insertCalender(vo);
 	}
 

@@ -7,7 +7,7 @@ public interface IndigroupDAO {
 
 	public int createGroup(IndigroupVO vo);
 	public int checkGroupName(String name);
-	public List<IndigroupVO> selectByGroupName(String name);
+	public List<IndigroupVO> selectByGroupName(Map<String, Object> map);
 	public int regiGroup(GroupRegiVO vo);
 	public int cancelGroup(GroupRegiVO vo);
 	public int insertGroupMember(GroupMemberVO vo);

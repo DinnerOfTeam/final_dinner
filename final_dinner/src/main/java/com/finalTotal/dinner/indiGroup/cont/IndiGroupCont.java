@@ -3,7 +3,9 @@ package com.finalTotal.dinner.indiGroup.cont;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -131,13 +133,17 @@ public class IndiGroupCont {
 	}
 	
 	@RequestMapping("/regi.do")
-	public String groupRegi_submit(@RequestParam(required=false) String groupName, Model model) {
+	public String groupRegi_submit(@RequestParam(required=false) String groupName,
+			HttpSession session, Model model) {
 		logger.info("group regi page parameter : groupName={}", groupName);
 		
 		if(groupName== null|| groupName.isEmpty()) {
 			return "indiGroup/group/regi";
 		}
-		List<IndigroupVO> list= group_service.selectByGroupName(groupName);
+		Map<String, Object> map= new HashMap<String, Object>();
+		map.put("groupName", groupName);
+		map.put("memNo", (Integer)session.getAttribute("memNo"));
+		List<IndigroupVO> list= group_service.selectByGroupName(map);
 		model.addAttribute("list", list);
 		
 		return "indiGroup/group/regi";
@@ -177,31 +183,53 @@ public class IndiGroupCont {
 		model.addAttribute("result", result);
 	}
 	
-	@RequestMapping("/regiOk.do")
+	@RequestMapping(value= "/regiOk.do", method= RequestMethod.GET)
 	public String groupRegiOk(@ModelAttribute GroupRegiVO vo, 
-			@RequestParam(required= false) String is_ok,
 			Model model) {
-		logger.info("regiOk page parameter : vo={}, is_ok={}", vo, is_ok);
+		logger.info("regiOk page parameter : vo={}", vo);
 		
-		int cnt= 0;
-		if(is_ok!= null&& is_ok.isEmpty()) {
-			if(is_ok.equals("Y")) {
-				GroupMemberVO vo2= new GroupMemberVO();
-				vo2.setGroupNo(vo.getGroupNo());
-				vo2.setMemNo(vo.getMemNo());
-				cnt= group_service.insertGroupMember(vo2);
-				logger.info("그룹 가입 결과 : cnt={}", cnt);
-			}else if(is_ok.equals("N")) {
-				group_service.cancelGroup(vo);
-				logger.info("그룹 반려 결과 : cnt={}", cnt);
-			}
-		}
 		List<GroupRegiVO> list= group_service.selectRegiList(vo.getGroupNo());
 		model.addAttribute("list", list);
 		IndigroupVO group= group_service.selectByGroupNo(vo.getGroupNo());
 		model.addAttribute("group", group);
 		
 		return "indiGroup/group/regiOk";
+	}
+	
+	@RequestMapping(value= "/regiOk.do", method= RequestMethod.POST)
+	public String groupRegiSubmit(@ModelAttribute GroupRegiVO vo,
+			@RequestParam String is_ok,
+			Model model) {
+		logger.info("regiOk submit parameter : vo={}, is_ok={}", vo, is_ok);
+		
+		int cnt= 0;
+		String msg= "", url= "/indiGroup/regiOk.do?groupNo="+ vo.getGroupNo();
+		if(is_ok!= null&& !is_ok.isEmpty()) {
+			if(is_ok.equalsIgnoreCase("Y")) {
+				GroupMemberVO vo2= new GroupMemberVO();
+				vo2.setGroupNo(vo.getGroupNo());
+				vo2.setMemNo(vo.getMemNo());
+				cnt= group_service.insertGroupMember(vo2);
+//				logger.info("그룹 가입 결과 : cnt={}", cnt);
+				if(cnt> 0) {
+					msg= "그룹 가입 성공";
+				}else {
+					msg= "그룹 가입 실패";
+				}
+			}else if(is_ok.equalsIgnoreCase("N")) {
+				cnt= group_service.cancelGroup(vo);
+//				logger.info("그룹 반려 결과 : cnt={}", cnt);
+				if(cnt> 0) {
+					msg= "그룹 반려 성공";
+				}else {
+					msg= "그룹 반려 실패";
+				}
+			}
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 
 	
