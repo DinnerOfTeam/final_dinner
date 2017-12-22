@@ -5,6 +5,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!--Board-page -->
 <link href="<c:url value='/css/site-board.css'/>" rel="stylesheet" type="text/css" media="all" />
+
 <script type="text/javascript">
 	$(function(){
 		$('.board-detail-file-list').hide();
@@ -86,7 +87,7 @@
 				</c:if>
 			</div>
 			<div class="row board-detail-content">
-				<div class="col-xs-12">${vo.freeContents }</div>
+				${vo.freeContents }
 			</div>
 			<div class="col-left board-detail-btnwrap">
 			<c:if test="${memGrade==9 || vo.memNo==0 || (sessionScope.memNo!=0 && sessionScope.memNo==vo.memNo) }">

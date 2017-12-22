@@ -27,7 +27,8 @@ public class FileUtil {
 	
 	//파일업로드 경로 관련 함수
 	public static final int FILE_UPLOAD=1;	//자료실 업로드인 경우
-	public static final int IMAGE_UPLOAD=2;	//상품등록시 이미지 업로드인 경우
+	public static final int IMAGE_UPLOAD=2;	//이미지 업로드인 경우
+	public static final int CKEDITOR_UPLOAD=3;	//CKEDITOR를 통한 업로드인 경우
 	
 	@Resource(name="fileUploadProperties")
 	private Properties fileProperties;
@@ -154,6 +155,8 @@ public class FileUtil {
 				upPath=fileProperties.getProperty("file.upload.path.test");
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath=fileProperties.getProperty("imageFile.upload.path.test");
+			}else if(uploadGb==CKEDITOR_UPLOAD) {
+				upPath=fileProperties.getProperty("ckeditor.upload.path.test");
 			}
 			Logger.info("test경로:"+ upPath);
 		}else {
@@ -162,6 +165,8 @@ public class FileUtil {
 				upPath=fileProperties.getProperty("file.upload.path");
 			}else if(uploadGb==IMAGE_UPLOAD) {
 				upPath=fileProperties.getProperty("imageFile.upload.path");
+			}else if(uploadGb==CKEDITOR_UPLOAD) {
+				upPath=fileProperties.getProperty("ckeditor.upload.path");
 			}
 			Logger.info("배포시경로:"+ upPath);
 			
