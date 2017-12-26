@@ -68,5 +68,13 @@ public class RestaurantInformationCon {
 	}
 	
 	
+	@RequestMapping("/restaurantBookList.do")
+	public String BookList(HttpSession session, Model model) {
+		logger.info("식당 예약 조회페이지 ");
+	
+		
+		return "restaurantEnterprise/restaurantBookList";
+	}
+	
 
 }

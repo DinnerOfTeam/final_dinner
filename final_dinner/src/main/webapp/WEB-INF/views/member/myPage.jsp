@@ -3,93 +3,6 @@
 
 <%@include file="../inc/top.jsp"%>
 
-
-
-<script
-	src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
-<link href="${pageContext.request.contextPath }/css/modules.css"
-	rel="StyleSheet" type="text/css">
-<link href="${pageContext.request.contextPath }/css/style.min.css"
-	rel="StyleSheet" type="text/css">
-
-<style type="text/css">
-a {
-	color: #353535;
-}
-
-.nav-tabs2 li a {
-	font-size: 85%;
-}
-
-.nav-tabs2 li {
-	width: 50%;
-}
-
-.aaa{
-	padding: 3px;
-}
-.pad_0 {
-	padding: 0px !important;
-}
-
-.bbb{
-	width: 12%;
-}
-
-.ccc{
-	padding: 0px !important;
-	font-size: 15px !important;
-}
-
-.ddd{
-	margin-bottom: 10px;
-}
-
-.eee{
-	
-	width: 200px;
-}
-
-
-
-
-</style>
-<script type="text/javascript">
-	$(function() {
-		$('.right-menu1').hide();
-		$('.right-toggle1').click(function() {
-			$('.right-menu1').toggle();
-		});
-	
-		$('.right-menu2').hide();
-		$('.right-toggle2').click(function() {
-			$('.right-menu2').toggle();
-		});
-	
-		$('.eee').find('li').hover(function(){
-			$(this).css('background', 'gray');
-		}, function(){
-			$(this).css('background', '');
-		});
-	});
-	
-	
-	
-</script>
-
-<title>Insert title here</title>
-<body>
-
-
-	<header class="MOD_HEADER1">
-	<div data-layout="_r">
-		<div data-layout="al16 de10" class="MOD_HEADER1_Title"></div>
-		<div data-layout="al16 de6" class="MOD_HEADER1_Details">
-			<!-- Search -->
-			<form name="Header1" action="" method=""></form>
-		</div>
-	</div>
-	</header>
 	<!--
 END MODULE AREA 1: Header 1
 -->
@@ -97,7 +10,10 @@ END MODULE AREA 1: Header 1
 	<!--
 START MODULE AREA 2: Sub Navigation 1
 -->
-	<section class="MOD_SUBNAVIGATION1 container">
+
+
+<%@include file="../inc/mypageSide.jsp" %>
+<!-- 	<section class="MOD_SUBNAVIGATION1 container">
 	<div style="display: inline-block; float: left;" class="col-md-3">
 		
 		<div data-layout="al16 al-o2 de-o1 de6 ec4">
@@ -157,14 +73,14 @@ START MODULE AREA 2: Sub Navigation 1
 						<a href="#">회원탈퇴</a>
 					</div>
 				</div>
-			</li>
+			</li> 
 
 
 
 			</nav>
 		</div>
 		
-	</div>
+	</div>-->
 	
 	<div style="display: inline-block; float: left;" class="col-md-9">
 	<h2 class="ddd">&nbsp;&nbsp;내정보</h2>
@@ -220,17 +136,17 @@ START MODULE AREA 2: Sub Navigation 1
 				  <tbody>
 					<tr >
 						<td class="left_top" colspan="4">
-							<b class="cDg">sss</b>님의 회원정보입니다.
+							<b class="cDg">${vo.memId }</b>님의 회원정보입니다.
 						</td>	
 					</tr>
 					<tr>
 						<td class="left_top eee">아이디</td>
-						<td class="right_top">sss</td>
+						<td class="right_top">${vo.memId }</td>
 					</tr>
 					<tr>
 						<td class="left_top eee">성명</td>
 						<td class="right_top">
-							띠로리
+							${vo.memName }
 						</td>
 					</tr>
 					<tr>

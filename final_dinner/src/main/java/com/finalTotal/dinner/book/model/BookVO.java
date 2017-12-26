@@ -1,13 +1,13 @@
 package com.finalTotal.dinner.book.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class BookVO {
 	private int bookNo;	//예약번호
 	private int memNo;	//회원번호
 	private int resNo;	//식당번호
-	private Timestamp bookDate;	//예약날짜
-	private Timestamp bookRegdate; //예약등록날짜
+	private Date bookDate;	//예약날짜
+	private Date bookRegdate; //예약등록날짜
 	private int bookNum;  //인원수
 	private String bookCheck; //승인여부
 	private String resAddress; //예약정보 볼때 필요한 식당 주소
@@ -18,8 +18,8 @@ public class BookVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public BookVO(int bookNo, int memNo, int resNo, Timestamp bookDate, Timestamp bookRegdate, int bookNum,
-			String bookCheck, String resAddress, String resName) {
+	public BookVO(int bookNo, int memNo, int resNo, Date bookDate, Date bookRegdate, int bookNum, String bookCheck,
+			String resAddress, String resName) {
 		super();
 		this.bookNo = bookNo;
 		this.memNo = memNo;
@@ -56,19 +56,19 @@ public class BookVO {
 		this.resNo = resNo;
 	}
 
-	public Timestamp getBookDate() {
+	public Date getBookDate() {
 		return bookDate;
 	}
 
-	public void setBookDate(Timestamp bookDate) {
+	public void setBookDate(Date bookDate) {
 		this.bookDate = bookDate;
 	}
 
-	public Timestamp getBookRegdate() {
+	public Date getBookRegdate() {
 		return bookRegdate;
 	}
 
-	public void setBookRegdate(Timestamp bookRegdate) {
+	public void setBookRegdate(Date bookRegdate) {
 		this.bookRegdate = bookRegdate;
 	}
 
@@ -110,6 +110,8 @@ public class BookVO {
 				+ ", bookRegdate=" + bookRegdate + ", bookNum=" + bookNum + ", bookCheck=" + bookCheck + ", resAddress="
 				+ resAddress + ", resName=" + resName + "]";
 	}
+
+	
 
 	
 

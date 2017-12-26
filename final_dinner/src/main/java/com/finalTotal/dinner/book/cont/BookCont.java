@@ -62,6 +62,13 @@ public class BookCont {
 		
 	}
 	
+	@RequestMapping("/map.do")
+	public String test() {
+		logger.info("test page");
+		
+		return "book/map"; 
+	}
+	
 	
 	
 	
