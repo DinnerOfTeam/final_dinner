@@ -1,5 +1,7 @@
 package com.finalTotal.dinner.member.model;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -31,5 +33,10 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	
 	public int updateMember(MemberVO vo) {
 		return getSqlSession().update(namespace+".updateMember", vo);
+	}
+
+	@Override
+	public List<MemberVO> showAll() {
+		return getSqlSession().selectList(namespace+ ".showAll");
 	}
 }

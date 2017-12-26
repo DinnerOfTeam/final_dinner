@@ -1,6 +1,6 @@
 package com.finalTotal.dinner.member.model;
 
-import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +54,11 @@ public class MemberServiceImpl implements MemberService{
 	
 	public int updateMember(MemberVO vo){
 		return memberDao.updateMember(vo);
+	}
+
+	@Override
+	public List<MemberVO> showAll() {
+		return memberDao.showAll();
 	}
 	
 }
