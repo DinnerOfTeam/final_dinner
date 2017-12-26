@@ -1,5 +1,6 @@
 package com.finalTotal.dinner.member.model;
 
+import java.util.List;
 
 public interface MemberService {
 		//아이디 중복검사시 사용하는 상수
@@ -22,7 +23,7 @@ public interface MemberService {
 	
 	public int updateMember(MemberVO vo);
 	
-	
+	public List<MemberVO> showAll();
 	
 	
 }

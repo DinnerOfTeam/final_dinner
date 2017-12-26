@@ -37,6 +37,10 @@
 		where mem_Id=#{memId}
 	</update>
 	
+	<select id="showAll" resultType="MemberVO">
+		select * from member
+	</select>
+	
 	
 </mapper>
 
