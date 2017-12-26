@@ -6,12 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/board")
-public class AdminBoardCont {
-	public static final Logger log= LoggerFactory.getLogger(AdminBoardCont.class);
+@RequestMapping("/admin/restaurant")
+public class AdminRestaurantCont {
+	public static final Logger log= LoggerFactory.getLogger(AdminBookCont.class);
 	
-	@RequestMapping("/Aboard.do")
-	public void boardList() {
+	@RequestMapping("/Ares.do")
+	public void resList() {
 		
 	}
 
