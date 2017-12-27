@@ -48,6 +48,7 @@ public class EventController {
 			logger.info("이벤트 목록 개수 조회 결과, count={}", count);
 			
 			pagingVO.setTotalRecord(count);
+			pagingVO.setPageSize(5);
 			
 			
 			pagingVO.getTotalPage();

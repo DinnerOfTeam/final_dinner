@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/jquery-ui.min.event.css">
 <style type="text/css">
 	
 	#event_list tbody td{
@@ -11,9 +12,15 @@
 	#event_list tbody td>img{
 		width: 100%;
 	}
-		
+	
+	#eventDatePick{
+		padding: 0;
+	}
+	
 	#eventDatePick > *{
 		margin: 0 auto;
+		width: 100%;
+		border: none;
 	}
 	
 	.event_date{
@@ -45,19 +52,21 @@
 		}
 	}
 </style>
+
 <script type="text/javascript">
 	$(function(){
+
+		var $formEvent=$("form[name=eventForm]");
+		var $eventDate=$("#eventDate");
+		var $eventPaging=$("#event_paging");
+		var $eventPage=$("#eventPaging");
 		
 		function setDateField(dateText){
 			var arrDate=dateText.split('-');
 			$('#eventYear').text(arrDate[0]);
 			$('#eventMonth').text(arrDate[1]);
 			$('#eventDay').text(arrDate[2]);
-			$('#eventDate').val(dateText);
-		}
-		
-		function makeEventList(resource){
-			
+			$eventDate.val(dateText);
 		}
 		
 		var $tableTr=$('<tr></tr>');
@@ -67,12 +76,9 @@
 				"colspan" : "2"
 		});
 		
-		function loadEventData(currPage){
-			var page=currPage || 1;
+		function loadEventData(){
 			var $eventList=$('#event_list>tbody');
-			var $eventPaging=$('#event_paging > div');
 			$eventList.empty();
-			$eventPaging.empty();
 			$trError=$tableTr.clone()
 					.append($emptyTd.clone().text("오류가 발생했습니다"));
 			$eventList.append($tableTr.clone()
@@ -81,15 +87,12 @@
 			$.ajax({
 				url: "<c:url value='/event/getEventList.do'/>",
 				method: "post",
-				data: { 
-					"eventDate" : $("#eventDate").val() ,
-					"page" : page ,
-				},
+				data: $formEvent.serialize(),
 				dataType: "json",
 				success: function(res){
-					console.log(res);
 					
 					$eventList.empty();
+					$eventPaging.empty();
 					
 					if(res.status=="success"){
 						if(res.list.length!=0){
@@ -107,7 +110,7 @@
 								var eventNo=oneEvent.eventNo;
 								var eventTitle=oneEvent.eventTitle;
 								var eventThumb="${pageContext.request.contextPath }"+
-									(oneEvent.eventThumb? "/upfiles/upl_images/"+oneEvent.eventThumb : "/images/noThumb250x150.gif" );
+									(oneEvent.eventThumb? "/upfiles/upl_images/"+oneEvent.eventThumb : "/images/noImages.png" );
 								var eventStartDate=new Date(oneEvent.eventStartDate);
 								var eventEndDate=new Date(oneEvent.eventEndDate);
 								var eventIsEnd=(oneEvent.eventIsEnd=='Y') || (eventEndDate<nowDate);
@@ -130,16 +133,117 @@
 								eTitle.append($("<a>"+ eventTitle +"</a>")
 										.attr("href", "<c:url value='/event/eventDetail.do?eventNo="+ eventNo +"'/>"));
 								if(eventIsEnd){
-									eTitle.append("<span class='label label-danger'>종료</span>");
+									eTitle.append("&nbsp;<span class='label label-danger'>종료</span>");
 								}else{
-									eTitle.append("<span class='label label-primary'>진행중</span>");
+									if(nowDate<eventStartDate){
+										eTitle.append("&nbsp;<span class='label label-default'>준비중</span>");
+									}else{
+										eTitle.append("&nbsp;<span class='label label-primary'>진행중</span>");
+									}
 								}
 								eTitle.append("<p class='event_date'>"+ startDate +"~"+ endDate +"</p>");
 								
 								eRow.append(eThumb).append(eTitle);
 								
 								$eventList.append(eRow);
+								
 							}
+							
+							//페이징
+							var pageinfo=res.paging;
+							
+							var i_next=$('<i class="fa fa-angle-right"></i>');
+							var i_prev=$('<i class="fa fa-angle-left"></i>');
+							
+							var btn=$('<li><a href="#"></a></li>');
+							var btn_disabled=$('<li class="disabled"><span></span></li>');
+							
+							//모바일 페이징
+							var m_pagerwrap=$('<div class="table-sub visible-xs"></div>');
+							var m_pager=$('<ul class="pager"></ul>');
+							
+							//페이징
+							var pagerwrap=$('<div class="table-sub col-xs-12 hidden-xs"></div>');
+							var pager=$('<ul class="pagination"></ul>');
+							
+							var p_prev_m, p_first;
+							if(pageinfo.currentPage<=1){
+								p_prev_m=btn_disabled.clone();
+								p_prev_m.find('span').text(" 이전").prepend(i_prev.clone());
+								
+								p_first=btn_disabled.clone();
+								p_first.find('span').html('<i class="fa fa-angle-double-left"></i>');
+							}else{
+								p_prev_m=btn.clone();
+								p_prev_m.find('a').data("page", pageinfo.currentPage-1).text(" 이전").prepend(i_prev.clone());
+								
+								p_first=btn.clone();
+								p_first.find('a').data("page", 1).html('<i class="fa fa-angle-double-left"></i>');
+							}
+							
+							m_pager.append(p_prev_m.addClass("previous"));
+							pager.append(p_first);
+							
+							var p_prev;
+							if(pageinfo.firstBlockPage<=1){
+								p_prev=btn_disabled.clone();
+								p_prev.find('span').html(i_prev.clone());
+							}else{
+								p_prev=btn.clone();
+								p_prev.find('a').data("page", pageinfo.firstBlockPage-1).html(i_prev.clone());
+							}
+							
+							pager.append(p_prev);
+							
+							m_pager.append('<li class="current"><span>'+ pageinfo.currentPage +'</span></li>');
+							
+							for(var i=pageinfo.firstBlockPage; i<=pageinfo.lastBlockPage; i++){
+								var pageList;
+								
+								if(i==pageinfo.currentPage){
+									pageList=btn_disabled.clone().attr("class", "active");
+									pageList.find('span').text(i);
+								}else{
+									pageList=btn.clone();
+									pageList.find('a').text(i).data("page", i);
+								}
+								pager.append(pageList);
+								
+							}
+							
+							var p_next;
+							if(pageinfo.lastBlockPage>=pageinfo.totalPage){
+								p_next=btn_disabled.clone();
+								p_next.find('span').html(i_next.clone());
+							}else{
+								p_next=btn.clone();
+								p_next.find('a').data("page", pageinfo.lastBlockPage+1).html(i_next.clone());
+							}
+							
+							pager.append(p_next);
+							
+							var p_next_m, p_last;
+							if(pageinfo.currentPage>=pageinfo.totalPage){
+								p_next_m=btn_disabled.clone();
+								p_next_m.find('span').text("다음 ").append(i_next.clone());
+								
+								p_last=btn_disabled.clone();
+								p_last.find('span').html('<i class="fa fa-angle-double-right"></i>');
+							}else{
+								p_next_m=btn.clone();
+								p_next_m.find('a').data("page", pageinfo.currentPage+1).text("다음 ").append(i_next.clone());
+								
+								p_last=btn.clone();
+								p_last.find('a').data("page", pageinfo.lastBlockPage).html('<i class="fa fa-angle-double-right"></i>');
+							}
+							
+							m_pager.append(p_next_m.addClass("next"));
+							pager.append(p_last);
+							
+							$eventPaging
+								.append(m_pagerwrap.append(m_pager))
+								.append(pagerwrap.append(pager));
+							
 						}else{
 							$eventList.append($tableTr.clone()
 									.append($emptyTd.clone().text("해당날짜에 진행중인 이벤트가 없습니다")));
@@ -149,6 +253,7 @@
 					}
 				},
 				error: function(xhr, status, error){
+					$eventList.empty();
 					$eventList.append($trError);
 				}
 			});
@@ -181,8 +286,15 @@
 			dateFormat: 'yy-mm-dd',
 			onSelect:function(dateText, inst) {
 				setDateField(dateText);
+				$eventPage.val(1);
 				loadEventData();
 			}
+		});
+		
+		$(document).on("click", "#event_paging li>a", function(){
+			event.preventDefault();
+			$eventPage.val($(this).data("page"));
+			loadEventData();
 		});
 		
 	});
@@ -205,11 +317,15 @@
 		<div class="col-sm-7 col-sm-pull-5 col-md-8 col-md-pull-4">
 			<div>
 				<div class="shadow-box">
+					<form name="eventForm"
+							action="<c:url value='/event/getEventList.do'/>" method="post">
+						<input type="hidden" name="eventDate" id="eventDate">
+						<input type="hidden" name="page" id="eventPaging" value="1">
+					</form>
 					<span id="eventYear"></span>년
 					<span id="eventMonth"></span>월
 					<span id="eventDay"></span>일
 				</div>
-				<input type="hidden" name="eventDate" id="eventDate">
 			</div>
 			<div>
 				<div class="table-box">
