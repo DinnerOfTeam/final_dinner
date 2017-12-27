@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.finalTotal.dinner.member.model.MemberListVO;
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberVO;
 
@@ -30,8 +29,10 @@ public class AdminMemberCont {
 		model.addAttribute("mem_list", list);
 	}
 
-	@RequestMapping("/AEditting.do")
-	public void editting(@ModelAttribute MemberListVO voList) {
-		log.info("edtting parameter : voList= {}", voList);
+	@RequestMapping("/AmemberEdit.do")
+	public String editting(@ModelAttribute MemberVO vo) {
+		log.info("edtting parameter : vo= {}", vo);
+		
+		return "redirect:/admin/main.do";
 	}
 }
