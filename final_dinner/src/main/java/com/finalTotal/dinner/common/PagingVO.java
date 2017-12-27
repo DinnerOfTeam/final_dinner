@@ -39,7 +39,7 @@ public class PagingVO {
 	private int lastBlockPage;	//현재 블록의 마지막 페이지
 	
 	public int getTotalPage() {
-		totalPage=(int)Math.ceil(totalRecord/(float)blockSize);
+		totalPage=(int)Math.ceil(totalRecord/(float)pageSize);
 		return totalPage;
 	}
 	public int getFirstRowNum() {

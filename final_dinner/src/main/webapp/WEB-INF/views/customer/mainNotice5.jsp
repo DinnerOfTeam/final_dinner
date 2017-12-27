@@ -32,25 +32,26 @@
 			</div>
 			<c:if test="${!empty list}">
 				<c:forEach var="vo" items="${list }" varStatus="i">
+				<div class="table-tr">
 			<div class= 'tr_div row td_hover'>
 			<a href="<c:url value='/customer/countUpdate.do?no=${vo.qnaQuestionNo}'/>">
-				<div class= 'td_div col-sm-3'><span class= 'level'>${i.count}</span>
+				<div class= 'td_div col-sm-3'><span class= 'level'>${i.count}</span></div>
 				<c:if test="${vo.qnaTypeNo==1}">
-					로그인 문의
+					<div class= 'td_div col-sm-9'>로그인 문의</div>
 				</c:if>
 				<c:if test="${vo.qnaTypeNo==2}">
-					회원문의
+					<div class= 'td_div col-sm-9'>회원문의</div>
 				</c:if>
 				<c:if test="${vo.qnaTypeNo==3}">
-					업체문의
+					<div class= 'td_div col-sm-9'>업체문의</div>
 				</c:if>
 				<c:if test="${vo.qnaTypeNo==4}">
-					예약문의
+					<div class= 'td_div col-sm-9'>예약문의</div>
 				</c:if>
-				</div>
 				<div class= 'td_div col-sm-9'>${vo.questionTitle }</div>
 			</a>
 			</div>
+				</div>
 					</c:forEach>
 				<%-- </c:forEach> --%>
 			</c:if>

@@ -9,5 +9,6 @@ public interface QuestionService {
 	public int updateReadCount(int no);
 	public QuestionVO selectByNo(int no);
 	public List<QuestionVO> selectByType(int qnaTypeNo);
-	
+	public int updateQna(QuestionVO vo);
+	public int deleteQna(int no);
 }
