@@ -2,6 +2,8 @@ package com.finalTotal.dinner.board.model;
 
 import java.util.List;
 
+import com.finalTotal.dinner.common.SearchVO;
+
 public interface BoardService {
 	
 	public int insertBoard(BoardVO vo);

@@ -42,6 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" media="all">
 <link href="${pageContext.request.contextPath }/css/codestyle.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/js/wow.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/admin/member.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
@@ -53,6 +54,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		display: inline-block;
 		margin-bottom: 0;
 	}
+	form#ad_log {
+		float: right;
+	}
+	form#ad_log label {
+		font-size: 0.8em;
+		color: white;
+	}
+	form#ad_log input {
+		color: black;
+	}
 </style>
 <title>DOT 관리자 페이지</title>
 </head>
@@ -63,9 +74,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="top-header-info">
 					<div class="top-header-right">
 						<div class="top-header-right-info">
+							<c:if test="${empty sessionScope.memId }">
+							<form id= 'ad_log' action="<c:url value= '/admin/login/login.do'/>" method="post" >
+								<label>아이디 : <input type="text" name= 'memId' size="5"></label>
+								<label>비밀번호 : <input type="text" name= 'memPwd' size="8"></label>
+							</form>
+							</c:if>
 							<ul>
 								<c:if test="${empty sessionScope.memId }">
-								<li><a href="<c:url value= '/login/login.do'/>">로그인</a></li>
+								<li><a href="<c:url value= '#'/>">로그인</a></li>
 								<li><a href="<c:url value= '/member/signup.do'/>">회원가입</a></li>
 								</c:if>
 								
@@ -84,32 +101,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 			<ul class="nav-pills admin-tabs">
-				<li class="active"><a href="#seoul" data-toggle="tab">서울</a></li>
-				<li class=""><a href="#incheon" data-toggle="tab">인천</a></li>
-				<li class=""><a href="#gyeonggi" data-toggle="tab">경기</a></li>
+				<li class=""><a href="#AMember" data-toggle="tab">회원관리</a></li>
+				<li class=""><a href="#ABoard" data-toggle="tab">게시판관리</a></li>
+				<li class=""><a href="#ABook" data-toggle="tab">예약관리</a></li>
+				<li class="active"><a href="#ARes" data-toggle="tab">업체관리</a></li>
 			</ul>
 		</div>
-		<div class="shadow-box-fit wow fadeIn animated" data-wow-delay=".5s">
+		<div class="fadeIn animated" data-wow-delay=".5s">
 			<div class="search-tab-content tab-content">
-				<div class="tab-pane fade active in" id="seoul">
-					<div class="row">
-						<div class="col-xs-6 col-sm-3 col-md-2">
-							<a href="#" data-loc="구로">구로</a>
-						</div>
+				<div class="tab-pane fade" id="AMember">
+					<div class="container" title="회원">
+						<c:import url="/admin/member/Amember.do"></c:import>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="incheon">
-					<div class="row">
-						<div class="col-xs-6 col-sm-3 col-md-2">
-							<a href="#" data-loc="부평구">부평구</a>
-						</div>
+				<div class="tab-pane fade" id="ABoard">
+					<div class="container" title="게시판">
+						<c:import url="/admin/board/Aboard.do"></c:import>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="gyeonggi">
-					<div class="row">
-						<div class="col-xs-6 col-sm-3 col-md-2">
-							<a href="#" data-loc="부천">부천</a>
-						</div>
+				<div class="tab-pane fade" id="ABook">
+					<div class="container" title="예약">
+						<c:import url="/admin/book/Abook.do"></c:import>
+					</div>
+				</div>
+				<div class="tab-pane fade active in" id="ARes">
+					<div class="container" title="업체">
+						<c:import url="/admin/restaurant/Ares.do"></c:import>
 					</div>
 				</div>
 			</div>

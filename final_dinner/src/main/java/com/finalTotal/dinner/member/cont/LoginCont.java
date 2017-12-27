@@ -92,7 +92,9 @@ public class LoginCont {
 	public String logout(HttpSession session, Model model) {
 		logger.info("로그아웃 처리");
 		
-		session.invalidate();//세션의 모든 속성을 삭제
+		//session.invalidate();//세션의 모든 속성을 삭제
+		session.removeAttribute("memId");
+		session.removeAttribute("memName");
 		
 		String  msg="로그아웃되었습니다", url="/index.do";
 		

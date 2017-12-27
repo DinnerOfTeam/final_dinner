@@ -33,6 +33,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+/* 		$('div.modal').modal(); */
 		function take() {
 			$('.table_cal tr td').each(function() {
 				bring($(this));
@@ -140,7 +141,7 @@
 		</tr>
 		<c:forEach var="date" items="${date_list }" varStatus="idx">
 			<c:if test="${idx.count% 7== 1 }"><tr></c:if>
-			<td class= 'text_left' data-toggle="modal" data-target="#myModal">
+			<td class= 'text_left'>
 				<c:if test="${idx.count% 7== 1 }"><span style="color: red"></c:if>
 				<c:if test="${idx.count% 7== 0 }"><span style="color: blue;"></c:if>
 				<input type="hidden" value="<fmt:formatDate value='${date }' pattern='yyyy'/>" />

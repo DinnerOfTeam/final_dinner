@@ -27,9 +27,9 @@ import com.finalTotal.dinner.board.model.BoardService;
 import com.finalTotal.dinner.board.model.BoardVO;
 import com.finalTotal.dinner.board.model.CommentService;
 import com.finalTotal.dinner.board.model.CommentVO;
-import com.finalTotal.dinner.board.model.SearchVO;
 import com.finalTotal.dinner.common.FileUtil;
 import com.finalTotal.dinner.common.PagingVO;
+import com.finalTotal.dinner.common.SearchVO;
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberVO;
 

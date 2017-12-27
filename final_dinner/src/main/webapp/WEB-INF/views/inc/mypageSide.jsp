@@ -92,7 +92,7 @@ a {
 		
 		<div data-layout="al16 al-o2 de-o1 de6 ec4">
 			<nav class="MOD_SUBNAVIGATION1_Menu" >
-			<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs">sss님</p>
+			<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs">???</p>
 			<ul>
 				<li><a href="/dinner/member/memberEdit.do">회원정보 수정</a></li>
 				<li><a href="#">회원탈퇴</a></li>
@@ -115,7 +115,7 @@ a {
 					<div class="tab-pane fade" id="business">
 						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
 						<a href="/dinner/restaurantEnterprise/restaurantListView.do">식당정보확인</a><br>
-						<a href="#">식당예약조회</a><br>
+						<a href="/dinner/restaurantEnterprise/restaurantBookList.do">식당예약조회</a><br>
 						<div class='container pad_0'>
 							<div class='col-md-1 pad_0 bbb'>
 								<a class="right-toggle1" data-toggle="right" href="#"> 식당정보수정
@@ -124,7 +124,7 @@ a {
 							</div>
 							<div class="right-menu1 eee col-md-2 pad_0">
 								<ul>
-									<li><a href="#" class="pad_0 ccc">메뉴등록</a></li>
+									<li><a href="/dinner/restaurantEnterprise/foodWrite.do" class="pad_0 ccc">메뉴등록</a></li>
 									<li><a href="#" class="pad_0 ccc">메뉴삭제</a></li>
 								</ul>
 							</div>

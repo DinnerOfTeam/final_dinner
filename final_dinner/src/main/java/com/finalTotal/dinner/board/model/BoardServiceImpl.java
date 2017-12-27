@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.finalTotal.dinner.common.SearchVO;
+
 @Service
 public class BoardServiceImpl implements BoardService{
 	private static final Logger logger=LoggerFactory.getLogger(BoardServiceImpl.class);
