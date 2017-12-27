@@ -1,5 +1,6 @@
 package com.finalTotal.dinner.member.model;
 
+import java.util.List;
 
 public interface MemberDAO {
 	
@@ -14,4 +15,6 @@ public interface MemberDAO {
 	public int insertMember(MemberVO vo);
 	
 	public int updateMember(MemberVO vo);
+	
+	public List<MemberVO> showAll();
 }

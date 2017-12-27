@@ -1,6 +1,6 @@
 package com.finalTotal.dinner.restaurant.general.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class RestaurantVO {
 	private int resNo;	//식당번호(시퀀스)
@@ -20,7 +20,7 @@ public class RestaurantVO {
 	private String resZipcode; //우편번호
 	private String resAddress; //주소
 	private String resAddressDetail; //상세주소
-	private Timestamp resRegdate; //등록일
+	private Date resRegdate; //등록일
 	private String resStatus; //상태(승인대기중,승인됨,차단됨)
 	
 	public RestaurantVO() {
@@ -31,7 +31,7 @@ public class RestaurantVO {
 	public RestaurantVO(int resNo, int memNo, int foodTypeNo, int resTypeNo, String resName, String resIntroduce,
 			String resWorkDay, String resWorkHour, String resThumbnail, int resGrade, int resMaxPerson,
 			String resContact1, String resContact2, String resContact3, String resZipcode, String resAddress,
-			String resAddressDetail, Timestamp resRegdate, String resStatus) {
+			String resAddressDetail, Date resRegdate, String resStatus) {
 		super();
 		this.resNo = resNo;
 		this.memNo = memNo;
@@ -190,11 +190,11 @@ public class RestaurantVO {
 		this.resAddressDetail = resAddressDetail;
 	}
 
-	public Timestamp getResRegdate() {
+	public Date getResRegdate() {
 		return resRegdate;
 	}
 
-	public void setResRegdate(Timestamp resRegdate) {
+	public void setResRegdate(Date resRegdate) {
 		this.resRegdate = resRegdate;
 	}
 
@@ -217,6 +217,7 @@ public class RestaurantVO {
 				+ "]";
 	}
 
+	
 	
 	
 	

@@ -11,7 +11,7 @@ public class AdminBoardCont {
 	public static final Logger log= LoggerFactory.getLogger(AdminBoardCont.class);
 	
 	@RequestMapping("/Aboard.do")
-	public void main() {
+	public void boardList() {
 		
 	}
 

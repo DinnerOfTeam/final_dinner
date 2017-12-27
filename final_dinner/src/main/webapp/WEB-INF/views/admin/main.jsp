@@ -42,6 +42,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" media="all">
 <link href="${pageContext.request.contextPath }/css/codestyle.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/js/wow.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/admin/member.js"></script>
 	<script>
 		 new WOW().init();
 	</script>
@@ -100,14 +101,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 			<ul class="nav-pills admin-tabs">
-				<li class="active"><a href="#AMember" data-toggle="tab">회원관리</a></li>
+				<li class=""><a href="#AMember" data-toggle="tab">회원관리</a></li>
 				<li class=""><a href="#ABoard" data-toggle="tab">게시판관리</a></li>
 				<li class=""><a href="#ABook" data-toggle="tab">예약관리</a></li>
+				<li class="active"><a href="#ARes" data-toggle="tab">업체관리</a></li>
 			</ul>
 		</div>
 		<div class="fadeIn animated" data-wow-delay=".5s">
 			<div class="search-tab-content tab-content">
-				<div class="tab-pane fade active in" id="AMember">
+				<div class="tab-pane fade" id="AMember">
 					<div class="container" title="회원">
 						<c:import url="/admin/member/Amember.do"></c:import>
 					</div>
@@ -120,6 +122,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="tab-pane fade" id="ABook">
 					<div class="container" title="예약">
 						<c:import url="/admin/book/Abook.do"></c:import>
+					</div>
+				</div>
+				<div class="tab-pane fade active in" id="ARes">
+					<div class="container" title="업체">
+						<c:import url="/admin/restaurant/Ares.do"></c:import>
 					</div>
 				</div>
 			</div>

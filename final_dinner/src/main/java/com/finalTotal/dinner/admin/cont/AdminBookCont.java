@@ -11,7 +11,7 @@ public class AdminBookCont {
 	public static final Logger log= LoggerFactory.getLogger(AdminBookCont.class);
 	
 	@RequestMapping("/Abook.do")
-	public void main() {
+	public void bookList() {
 		
 	}
 
