@@ -38,4 +38,15 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 		return getSqlSession().selectList(namespace+".selectByType",qnaTypeNo);
 	}
 
+	@Override
+	public int updateQna(QuestionVO vo) {
+		return getSqlSession().update(namespace+".updateQna",vo);
+	}
+
+	@Override
+	public int deleteQna(int no) {
+		return getSqlSession().delete(namespace+".deleteQna",no);
+	}
+	
+	
 }
