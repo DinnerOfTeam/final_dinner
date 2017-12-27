@@ -1,129 +1,73 @@
 package com.finalTotal.dinner.question.model;
 
-
-/**
- * 검색 정보를 담고있는 Bean
- * 페이징 처리 관련 변수 포함
-*/
-
 public class SearchVO {
-	/** 검색조건 */
-	private String searchCondition = "";
+	private String keyword="";		//검색어
+	private String type="free_title";		//검색종류(name, title, content)
+	private int currentPage=1;	//현재페이지
+	private int firstRowNum;	//현재 페이지의 첫번째글의 rownum
+	private int pageSize;		//한페이지내의 글개수
+	private int firstBlockPage;	//현재 블록의 첫번째 페이지
+	private int lastBlockPage;	//현재 블록의 마지막 페이지
+	private int totalPage;		//최대 페이지 수
 	
-	/** 검색키워드 */
-	private String searchKeyword = "";
-    
-	/** 검색 사용여부 */
-	private String searchUseYn = "";
-	
-	/** 현재 페이지 */
-	private int currentPage = 1;
-	
-    
-    /**블럭당 보여질 페이지 수,  페이지 사이즈 */
-    private int blockSize; // properties에서 설정
-    
-    /** 시작 인덱스 */
-    private int firstRecordIndex = 1;
-    
-    /** 끝 인덱스 */
-    private int lastRecordIndex = 1;
-    
-    /**페이지 별 레코드 갯수 (pageSize) */
-    private int recordCountPerPage; 
-    
-   /**
-     * 검색 조건을  설정한다.
-     * @param bean 검색조건
-     */
-    public void setSearchVO(SearchVO bean){
-    	this.currentPage = bean.currentPage;
-    	this.searchCondition = bean.getSearchCondition();
-    	this.searchKeyword = bean.getSearchKeyword();
-    	this.searchUseYn = bean.getSearchUseYn();
-    	this.blockSize = bean.blockSize;
-    	this.firstRecordIndex = bean.firstRecordIndex;
-    	this.lastRecordIndex = bean.lastRecordIndex;
-    	this.recordCountPerPage = bean.recordCountPerPage;
-    }
-
-    public String getSearchCondition() {
-    	return searchCondition;
-    }
-
-    public void setSearchCondition(String searchCondition) {
-    	this.searchCondition = searchCondition;
-    }
-
-    public String getSearchKeyword() {
-    	return searchKeyword;
-    }
-
-    public void setSearchKeyword(String searchKeyword) {
-    	this.searchKeyword = searchKeyword;
-    }
-
-    public String getSearchUseYn() {
-    	return searchUseYn;
-    }
-
-    public void setSearchUseYn(String searchUseYn) {
-    	this.searchUseYn = searchUseYn;
-    }
-
-    public int getCurrentPage() {
-    	return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-    	this.currentPage = currentPage;
-    }
-
-    public int getBlockSize() {
-    	return blockSize;
-    }
-
-    public void setBlockSize(int blockSize) {
-    	this.blockSize = blockSize;
-    }
-
-    public int getFirstRecordIndex() {
-    	return firstRecordIndex;
-    }
-
-    public void setFirstRecordIndex(int firstRecordIndex) {
-    	this.firstRecordIndex = firstRecordIndex;
-    }
-
-    public int getLastRecordIndex() {
-    	return lastRecordIndex;
-    }
-
-    public void setLastRecordIndex(int lastRecordIndex) {
-    	this.lastRecordIndex = lastRecordIndex;
-    }
-
-    
-	public int getRecordCountPerPage() {
-		return recordCountPerPage;
+	public String getKeyword() {
+		return keyword;
 	}
-
-	public void setRecordCountPerPage(int recordCountPerPage) {
-		this.recordCountPerPage = recordCountPerPage;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
-
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		if("title".equals(type)
+				|| "contents".equals(type)
+				|| "name".equals(type)) {
+			this.type = "free_"+type;
+		}
+	}
+	public int getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+	public int getFirstRowNum() {
+		return firstRowNum;
+	}
+	public void setFirstRowNum(int firstRowNum) {
+		this.firstRowNum = firstRowNum;
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public int getFirstBlockPage() {
+		return firstBlockPage;
+	}
+	public void setFirstBlockPage(int firstBlockPage) {
+		this.firstBlockPage = firstBlockPage;
+	}
+	public int getLastBlockPage() {
+		return lastBlockPage;
+	}
+	public void setLastBlockPage(int lastBlockPage) {
+		this.lastBlockPage = lastBlockPage;
+	}
+	public int getTotalPage() {
+		return totalPage;
+	}
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+	}
+	
 	@Override
 	public String toString() {
-		return "SearchVO [searchCondition=" + searchCondition
-				+ ", searchKeyword=" + searchKeyword + ", searchUseYn="
-				+ searchUseYn + ", currentPage=" + currentPage
-				+ ", blockSize=" + blockSize + ", firstRecordIndex="
-				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex
-				+ ", recordCountPerPage=" + recordCountPerPage + "]";
+		return "SearchVO [keyword=" + keyword + ", type=" + type + ", currentPage=" + currentPage + ", firstRowNum="
+				+ firstRowNum + ", pageSize=" + pageSize + ", firstBlockPage=" + firstBlockPage + ", lastBlockPage="
+				+ lastBlockPage + ", totalPage=" + totalPage + "]";
 	}
-
-	
-
 	
 }
- 

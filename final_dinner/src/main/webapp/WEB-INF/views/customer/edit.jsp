@@ -18,6 +18,7 @@
 					<h1>수정하기</h1>
 				</div>
 				<div class="form-info">
+				
 					<form method="post"
 					action="<c:url value='/customer/edit.do'/>" onsubmit="return send(this)">
 						<input type="hidden" name="qnaQuestionNo" value="${param.no}"/>

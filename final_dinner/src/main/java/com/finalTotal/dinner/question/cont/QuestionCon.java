@@ -106,11 +106,11 @@ public class QuestionCon {
 	public String mainNotice(ModelMap model) {
 		logger.info("자주묻는 질문 조회");
 		
-		/*List<QuestionVO> list = questionService.mainNotice();
+		List<QuestionVO> list = questionService.mainNotice();
 		logger.info("메인 질문  조회 결과, list.size()={}", list.size());
 	
 		model.addAttribute("list", list);
-		*/
+		
 		return "customer/mainNotice";
 	}
 	
