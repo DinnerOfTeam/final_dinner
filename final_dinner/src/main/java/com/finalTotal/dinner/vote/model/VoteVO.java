@@ -1,5 +1,6 @@
 package com.finalTotal.dinner.vote.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class VoteVO {
@@ -17,6 +18,7 @@ public class VoteVO {
 	private int voteNo, memNo, groupNo;
 	private String voteTitle, voteDesc, voteIsEnd, voteMultiSel;
 	private Date voteRegdate, voteEndDate;
+	private String endDate;
 	public int getVoteNo() {
 		return voteNo;
 	}
@@ -59,6 +61,7 @@ public class VoteVO {
 	public void setVoteMultiSel(String voteMultiSel) {
 		this.voteMultiSel = voteMultiSel;
 	}
+	
 	public Date getVoteRegdate() {
 		return voteRegdate;
 	}
@@ -71,17 +74,17 @@ public class VoteVO {
 	public void setVoteEndDate(Date voteEndDate) {
 		this.voteEndDate = voteEndDate;
 	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 	@Override
 	public String toString() {
-		return "VoteVO [voteNo=" + voteNo + 
-				", memNo=" + memNo + 
-				", groupNo=" + groupNo + 
-				", voteTitle=" + voteTitle + 
-				", voteDesc=" + voteDesc + 
-				", voteIsEnd=" + voteIsEnd + 
-				", voteMultiSel=" + voteMultiSel + 
-				", voteRegdate=" + voteRegdate + 
-				", voteEndDate=" + voteEndDate + "]";
+		return "VoteVO [voteNo=" + voteNo + ", memNo=" + memNo + ", groupNo=" + groupNo + ", voteTitle=" + voteTitle
+				+ ", voteDesc=" + voteDesc + ", voteIsEnd=" + voteIsEnd + ", voteMultiSel=" + voteMultiSel
+				+ ", voteRegdate=" + voteRegdate + ", voteEndDate=" + voteEndDate + ", endDate=" + endDate + "]";
 	}
 	
 }
