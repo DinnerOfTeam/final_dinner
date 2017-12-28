@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%@include file="../inc/top.jsp"%>
- 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>식당 위치보기</title>
 <style>
       #map {
         width: 100%;
@@ -66,9 +65,14 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: new google.maps.LatLng(-33.91722, 151.23064),
-          mapTypeId: 'roadmap'
+          zoom: 15,
+          <c:if test= "${empty param.wi}" >
+          	center: new google.maps.LatLng(37.5340340823926, 126.90188414338486),
+          </c:if>
+          <c:if test= "${!empty param.wi}" >
+          	center: new google.maps.LatLng(${param.wi }, ${param.ky }),
+          </c:if>
+          mapTypeId: 'roadmap',
         });
 
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
@@ -86,7 +90,7 @@
 
         var features = [
           {
-            position: new google.maps.LatLng(-33.91721, 151.22630),
+            position: new google.maps.LatLng(37.5340340823926, 126.90188414338486),
             type: 'info'
           }, {
             position: new google.maps.LatLng(-33.91539, 151.22820),

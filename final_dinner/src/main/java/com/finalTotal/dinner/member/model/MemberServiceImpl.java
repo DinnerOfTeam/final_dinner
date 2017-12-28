@@ -60,6 +60,16 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> showAll() {
 		return memberDao.showAll();
 	}
+
+	@Override
+	public int updateMemberByAdmin(MemberVO vo) {
+		return memberDao.updateMemberByAdmin(vo);
+	}
+
+	@Override
+	public int insertMemberByAdmin(MemberVO vo) {
+		return memberDao.insertMemberByAdmin(vo);
+	}
 	
 }
 

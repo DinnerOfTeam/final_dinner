@@ -20,8 +20,10 @@ public interface MemberService {
 	public int duplicatedmemId(String memId);
 	
 	public int insertMember(MemberVO vo);
+	public int insertMemberByAdmin(MemberVO vo);
 	
 	public int updateMember(MemberVO vo);
+	public int updateMemberByAdmin(MemberVO vo);
 	
 	public List<MemberVO> showAll();
 	
