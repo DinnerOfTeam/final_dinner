@@ -3,6 +3,29 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.addr">
+	<resultMap type="AddrVO" id="addrResultMap">
+		<association property="sidoVO" column="sidoNo" javaType="SidoVO">
+			<id property="sidoNo" column="sido_no" jdbcType="BIGINT"/>
+			<result property="sidoName" column="sido_name" jdbcType="VARCHAR"/>
+		</association>
+		<collection property="sigunguList" column="sidoNo"
+				javaType="ArrayList" ofType="SigunguVO" select="selectSigungu">
+		</collection>
+	</resultMap>
+
+	<select id="selectSigungu" parameterType="int" resultType="SigunguVO">
+		select * from addr_sigungu
+		where sido_no=#{sidoNo}
+	</select>
+	
+	<select id="selectSido" resultType="SidoVO">
+		select * from addr_sido
+	</select>
+	
+	<select id="selectAddr" resultMap="addrResultMap">
+		select * from addr_sido
+	</select>
+	
 	<select id="allSido" resultType="AddrVO">
 		select * from addr_sido
 	</select>

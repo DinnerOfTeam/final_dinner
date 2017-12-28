@@ -36,7 +36,7 @@
 </style>
 
 <script type="text/javascript">
-    $(function(){
+   /*  $(function(){
         //전역변수
         var obj = [];              
         //스마트에디터 프레임생성
@@ -60,7 +60,7 @@
             //폼 submit
             $("#insertBoardFrm").submit();
         });
-    });
+    }); */
 </script>
 
 
@@ -70,74 +70,64 @@
 </head>
 <body>
 
-	<!-- form-info -->
+	
+					<!-- 	<textarea name="editor" id="editor"
+							style="width: 700px; height: 400px;"></textarea> -->
+		
+ 	<!-- login -->
 	<div class="form-wrap">
 		<div class="row">
-			<div class="form-body" style="width: 90%;">
+			<div class="form-body " style="width: 75%;">
 				<div class="form-heading">
 					<h1>메뉴등록</h1>
 				</div>
 				<div class="form-info">
+					<form action="<c:url value='/restaurantEnterprise/foodWrite.do' />" method="post"
+						enctype="multipart/form-data" >
+						
+						<div class="col-xs-4">
+								<select class="form-select" name="foodContact1">
+									<option>메뉴등록</option>
+									<option>면류</option>
+									<option>밥류</option>
+									<option>탕류</option>
+									<option>음료</option>
+								</select>
+							</div>
+						
+						
+						<input type="text" class="form-text" name="foodItemName" placeholder="이름" required="">
+						
+						<input type="text" class="form-text" name="foodItemPrice" placeholder="가격" required="">
+						
+						<textarea placeholder="설명" name="foodItemDesc" class="form-text" required=""></textarea>
+						
+						
+						
+						<input type ="file" name="imageUpload" id="imageUpload" >
+						
 					
-						<form action="<c:url value='/restaurantEnterprise/foodWrite.do' />" method="post" id="insertBoardFrm"
-						enctype="multipart/form-data">
-
-						<select class="form-select aaa">
-							<option>음식종류</option>
-							<option>한식</option>
-							<option>중식</option>
-							<option>양식</option>
-							<option>분식</option>
-						</select> 
-						<br>
-						<select class="form-select aaa">
-							<option>메뉴종류</option>
-							<option>22222</option>
-							<option>3333333</option>
-							<option>44444</option>
-							<option>555</option>
-						</select> 
 						
-						<br>
-						<input type="text" class="form-text iii" name="email" placeholder="식당이름" required=""> 
-						
-						<input type="password" name="password" class="form-text iii" placeholder="비밀번호"> 
-						
-						<input type="password" name="password" class="form-text iii" placeholder="비밀번호 확인">
-
-				
-
-
-				
-						<textarea name="editor" id="editor"
-							style="width: 700px; height: 400px;"></textarea>
-					
-
-
-
-
-					<div class="form-comp-row bbb">
-						<div class="col-sm-6 i">
-							<input type="submit" name="Sign In" class="site-btn-submit"
-								id="insertBoard" value="등록">
+						<div class="form-comp-row">
+							<div class="col-sm-6 i">
+								<input type="submit" name="Sign In" class="site-btn-submit" value="등록">
+							</div>
+							<div class="col-sm-6 ii">
+								<input type="submit" name="cancel" class="site-btn" value="취소">
+							</div>
 						</div>
-						<div class="col-sm-6 ii">
-							<input type="submit" name="cancel" class="site-btn" value="취소">
+						
+						
+
+						
+						<div class="signup-text">
+							<a href="login.html">Already have an account? Login here.</a>
 						</div>
-					</div>
-
-
 					</form>
-
-
-
-
-
 				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
 

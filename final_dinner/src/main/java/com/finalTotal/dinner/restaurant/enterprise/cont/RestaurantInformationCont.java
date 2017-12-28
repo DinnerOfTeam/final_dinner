@@ -19,10 +19,10 @@ import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
 @Controller
 @RequestMapping("/restaurantEnterprise")
-public class RestaurantInformationCon {
+public class RestaurantInformationCont {
 	
 	private static final Logger logger
-	= LoggerFactory.getLogger(RestaurantInformationCon.class);
+	= LoggerFactory.getLogger(RestaurantInformationCont.class);
 	
 	@Autowired
 	private RestaurantService restaurantService;
@@ -68,13 +68,6 @@ public class RestaurantInformationCon {
 	}
 	
 	
-	@RequestMapping("/restaurantBookList.do")
-	public String BookList(HttpSession session, Model model) {
-		logger.info("식당 예약 조회페이지 ");
-	
-		
-		return "restaurantEnterprise/restaurantBookList";
-	}
 	
 
 }
