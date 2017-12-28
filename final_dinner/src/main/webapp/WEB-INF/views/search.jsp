@@ -2,204 +2,314 @@
     pageEncoding="UTF-8"%>
 <%@include file="inc/top.jsp" %>
 
-<!-- search-->
+<script type="text/javascript">
+
+	$(function(){
+		var arrLoc=[];
+		
+		var locationValue=$("#search_hidden_loc").val();
+		if(locationValue!=""){
+			arrLoc=locationValue.split(",");
+		}
+		reDrawLocation();
+		
+		var $searchLocLabel=$("<span class='label label-primary food-search-loc-label'></span>");
+		var $searchLocDel=$("<button type='button' class='close food-search-loc-del' aria-label='delete'><span aria-hidden='true'>×</span></button>");
+		
+		function getLocLabel(value){
+			return $searchLocLabel.clone().text(value).append($searchLocDel.clone());
+		}
+		
+		function reDrawLocation(){
+			var local_arrLoc=arrLoc, local_getLocLabel=getLocLabel;
+			
+			var	hidden_loc_var=local_arrLoc.join(",");
+			$("#search_hidden_loc").val(hidden_loc_var);
+			
+			$("#search-location-view").empty();
+			
+			for(var i=0, len=local_arrLoc.length; i<len; i++){
+				var locVal=local_arrLoc[i];
+				$locLabel=local_getLocLabel(locVal);
+				
+				$("#search-location-view").append($locLabel);
+			}
+			
+		}
+		
+		$(document).on("click", "#search-location-view > .food-search-loc-label > .food-search-loc-del", function(){
+			var idx=$(this).parent().index()
+			arrLoc.splice(idx, 1);
+			
+			reDrawLocation();
+		});
+		
+		$(document).on("click", "#form_location_clear", function(){
+			arrLoc=[];
+			
+			reDrawLocation();
+		});
+		
+		$(document).on("click", ".search-tab-content .row > div > a", function(){
+			event.preventDefault();
+			
+			var locationValue=$(this).data("sido") +"-"+ $(this).data("loc");
+			arrLoc.push(locationValue);
+			
+			reDrawLocation();
+		});
+		
+		$("form[name=searchFrm]").submit(function(){
+			reDrawLocation();
+		});
+		
+		var sigunguCache=new Array();
+		
+		$('#search-select-sido').change(function(){
+			var sidoVal=$('#search-select-sido > option:selected');
+			var sidoData=sidoVal.data("sido");
+			sidoVal=sidoVal.val();
+			
+			if(sidoVal>0){
+				var $row=$('<div></div>').attr('class', 'row');
+				var $sigungu=$('<div></div>').attr('class', 'col-xs-6 col-sm-3 col-md-2');
+				var $sigunguAnchor=$('<a href="#"></a>');
+				var $siList=$('#search-list-sigungu');
+				
+				function createSigunguList(data , res){
+					var $rowClone=$row.clone();
+					
+					for(var i=0, len=res.length; i<len; i++){
+						var resSigungu=res[i];
+						$rowClone.append(
+							$sigungu.clone().html(
+								$sigunguAnchor.clone()
+									.text(resSigungu.sigunguName)
+									.data('loc', resSigungu.sigunguName)
+									.data('sido', data)
+							)
+						);
+					}
+					
+					$siList.html($rowClone);
+					
+					
+				}
+				
+				if(sidoData in sigunguCache){
+					createSigunguList(sidoData ,sigunguCache[sidoData]);
+				}else{
+					$.ajax({
+						url: '<c:url value="/addr/getSigungu.do"/>',
+						data: 'sidoNo='+sidoVal,
+						dataType: 'json',
+						success: function(res){
+							createSigunguList(sidoData ,res);
+							
+							sigunguCache[sidoData]=res;
+						},
+						error:function(xhr, status, msg){
+							$siList.html("<p>에러가 발생했습니다</p>");
+						}
+					});
+				}
+				
+			}
+		});
+	});
+</script>
+
 <link href="css/site-search.css" rel="stylesheet" type="text/css" media="all" />
-<div class="search">
-	<div class="food-search-form">
+
+	<div class="site-top-title site-title-default" >
 		<div class="container">
-			<div>
-				<form class="form-horizontal">
-					<ul class="list-group wow fadeInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-						<li class="list-group-item search-location-tabs">
-							<ul class="nav nav-tabs search-tabs">
-								<li class="active"><a href="#seoul" data-toggle="tab">서울</a></li>
-								<li class=""><a href="#incheon" data-toggle="tab">인천</a></li>
-								<li class=""><a href="#gyeonggi" data-toggle="tab">경기</a></li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane fade active in" id="seoul">
-									<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-								</div>
-								<div class="tab-pane fade" id="incheon">
-									<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-								</div>
-								<div class="tab-pane fade" id="gyeonggi">
-									<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-								</div>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<div class="form-group">
-								<label for="search-location" class="col-sm-2 control-label">텍스트 필드</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="search-location" placeholder="텍스트 필드">
-								</div>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<div class="form-group">
-								<label for="search-location" class="col-sm-2 control-label">텍스트 필드2</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="search-location" placeholder="텍스트 필드2">
-								</div>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<div class="form-group">
-								<span class="col-sm-2 control-label">체크 박스</span>
-								<div class="col-sm-10">
-									<label class="checkbox-inline">
-										<input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-									</label>
-									<label class="checkbox-inline">
-										<input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-									</label>
-									<label class="checkbox-inline">
-										<input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-									</label>
-								</div>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<div class="form-group">
-								<span class="col-sm-2 control-label">라디오 박스</span>
-								<div class="col-sm-10">
-									<label class="radio-inline">
-										<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
-									</label>
-									<label class="radio-inline">
-										<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
-									</label>
-									<label class="radio-inline">
-										<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
-									</label>
-								</div>
-							</div>
-						</li>
-						<li class="list-group-item btn-bottom">
-							<div class="form-group">
-								<input class="btn btn-primary" type="submit" value="검색">
-								<input class="btn btn-default" type="reset" value="리셋">
-							</div>
-						</li>
-					</ul>
-				</form>
-			</div>
-			
-			
+			<h1>통합 검색</h1>
 		</div>
 	</div>
-	<div class="food-search-result wow fadeInUp animated"
-				data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
-		<div class="container">
-			<div class="restaurant-search-result col-xs-12 col-sm-4">
-				<a href="#">
-					<div class="restaurant-search-inner">
-						<div class="restaurant-search-img col-xs-4 col-sm-12">
-							<img src="http://placehold.it/150x150"/>
-						</div>
-						<div class="restaurant-search-desc col-xs-8 col-sm-12">
-							<h3>식당1 이름</h3>
-							<h4>평점 : 3.5/5</h4>
-							<p>설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="restaurant-search-result col-xs-12 col-sm-4">
-				<a href="#">
-					<div class="restaurant-search-inner">
-						<div class="restaurant-search-img col-xs-4 col-sm-12">
-							<img src="http://placehold.it/150x150"/>
-						</div>
-						<div class="restaurant-search-desc col-xs-8 col-sm-12">
-							<h3>식당2 이름</h3>
-							<h4>평점 : 2.5/5</h4>
-							<p>설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="restaurant-search-result col-xs-12 col-sm-4">
-				<a href="#">
-					<div class="restaurant-search-inner">
-						<div class="restaurant-search-img col-xs-4 col-sm-12">
-							<img src="http://placehold.it/150x150"/>
-						</div>
-						<div class="restaurant-search-desc col-xs-8 col-sm-12">
-							<h3>식당3 이름</h3>
-							<h4>평점 : 5/5</h4>
-							<p>설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="restaurant-search-result col-xs-12 col-sm-4">
-				<a href="#">
-					<div class="restaurant-search-inner">
-						<div class="restaurant-search-img col-xs-4 col-sm-12">
-							<img src="http://placehold.it/150x150"/>
-						</div>
-						<div class="restaurant-search-desc col-xs-8 col-sm-12">
-							<h3>식당4 이름</h3>
-							<h4>평점 : 1.5/5</h4>
-							<p>설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="restaurant-search-result col-xs-12 col-sm-4">
-				<a href="#">
-					<div class="restaurant-search-inner">
-						<div class="restaurant-search-img col-xs-4 col-sm-12">
-							<img src="http://placehold.it/150x150"/>
-						</div>
-						<div class="restaurant-search-desc col-xs-8 col-sm-12">
-							<h3>식당5 이름</h3>
-							<h4>평점 : 2.5/5</h4>
-							<p>설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="restaurant-search-result col-xs-12 col-sm-4">
-				<a href="#">
-					<div class="restaurant-search-inner">
-						<div class="restaurant-search-img col-xs-4 col-sm-12">
-							<img src="http://placehold.it/150x150"/>
-						</div>
-						<div class="restaurant-search-desc col-xs-8 col-sm-12">
-							<h3>식당6 이름</h3>
-							<h4>평점 : 3.5/5</h4>
-							<p>설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-			<div class="restaurant-search-result col-xs-12 col-sm-4">
-				<a href="#">
-					<div class="restaurant-search-inner">
-						<div class="restaurant-search-img col-xs-4 col-sm-12">
-							<img src="http://placehold.it/150x150"/>
-						</div>
-						<div class="restaurant-search-desc col-xs-8 col-sm-12">
-							<h3>식당7 이름</h3>
-							<h4>평점 : 0.5/5</h4>
-							<p>설명</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			
-		</div>
-	</div>
-</div>
-<!-- //search -->
 	
+	<!-- search-->
+	<div class="search">
+		<div class="container">
+			<div class="shadow-box-fit wow fadeIn animated" data-wow-delay=".5s">
+				<c:if test="${empty sidoList }">
+					<p>현재 지역 검색을 이용할 수 없습니다.</p>
+				</c:if>
+				<c:if test="${!empty sidoList }">
+					<%-- <ul class="nav nav-pills search-tabs">
+						<c:forEach var="addr" items="${addrList }">
+							<li><a href="#sido-no-${addr.sidoVO.sidoNo }" data-toggle="tab">${addr.sidoVO.sidoName }</a></li>
+						</c:forEach>
+					</ul> --%>
+					<div class="form-simple">
+						<select class="form-select" id="search-select-sido">
+							<option value="0">시/도 선택</option>
+							<c:forEach var="sido" items="${sidoList }">
+								<option value="${sido.sidoNo }"
+									data-sido="${sido.sidoName }">
+									${sido.sidoName }
+								</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="search-tab-content" id="search-list-sigungu"></div>
+					
+					<%-- <div class="search-tab-content tab-content">
+						<c:forEach var="addr" items="${addrList }">
+							<div class="tab-pane fade active in" id="sido-no-${addr.sidoVO.sidoNo }">
+								<div class="row">
+									<c:forEach var="sigungu" items="${addr.sigunguList }">
+										<div class="col-xs-6 col-sm-3 col-md-2">
+											<a href="#" data-loc="${sigungu.sigunguName }">${sigungu.sigunguName }</a>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</c:forEach>
+					</div> --%>
+				</c:if>
+				
+			</div>
+			
+			<div class="shadow-box wow fadeIn animated" data-wow-delay=".5s">
+				<div class="form-simple">
+					<form action="#" method="post" name="searchFrm" id="search-food">
+					
+						<div class="form-comp">
+							<span class="form-static">
+								<span class="form-txt">지역</span>
+								<button type="button" class="btn btn-danger btn-xs" id="form_location_clear">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									모두 지우기
+								</button>
+							</span>
+							<span id="search-location-view" class="form-static"></span>
+						</div>
+						
+						<input type="hidden" name="location" id="search_hidden_loc">
+						<input type="text" class="form-text" name="email" placeholder="식당명">
+						<input type="text" class="form-text" name="email" placeholder="인원">
+						
+						<input type="submit" class="site-btn-submit site-btn-full" value="검색">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="food-search-result wow fadeIn animated" data-wow-delay=".5s">
+			<div class="container">
+				<div class="restaurant-search-result col-xs-12 col-sm-4">
+					<a href="#">
+						<div class="restaurant-search-inner">
+							<div class="restaurant-search-img col-xs-4 col-sm-12">
+								<img src="http://placehold.it/150x150"/>
+							</div>
+							<div class="restaurant-search-desc col-xs-8 col-sm-12">
+								<h2>식당1 이름</h2>
+								<h4>평점 : 3.5/5</h4>
+								<p>설명</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="restaurant-search-result col-xs-12 col-sm-4">
+					<a href="#">
+						<div class="restaurant-search-inner">
+							<div class="restaurant-search-img col-xs-4 col-sm-12">
+								<img src="http://placehold.it/150x150"/>
+							</div>
+							<div class="restaurant-search-desc col-xs-8 col-sm-12">
+								<h2>식당2 이름</h2>
+								<h4>평점 : 2.5/5</h4>
+								<p>설명</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="restaurant-search-result col-xs-12 col-sm-4">
+					<a href="#">
+						<div class="restaurant-search-inner">
+							<div class="restaurant-search-img col-xs-4 col-sm-12">
+								<img src="http://placehold.it/150x150"/>
+							</div>
+							<div class="restaurant-search-desc col-xs-8 col-sm-12">
+								<h2>식당3 이름</h2>
+								<h4>평점 : 5/5</h4>
+								<p>설명</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="restaurant-search-result col-xs-12 col-sm-4">
+					<a href="#">
+						<div class="restaurant-search-inner">
+							<div class="restaurant-search-img col-xs-4 col-sm-12">
+								<img src="http://placehold.it/150x150"/>
+							</div>
+							<div class="restaurant-search-desc col-xs-8 col-sm-12">
+								<h2>식당4 이름</h2>
+								<h4>평점 : 1.5/5</h4>
+								<p>설명</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="restaurant-search-result col-xs-12 col-sm-4">
+					<a href="#">
+						<div class="restaurant-search-inner">
+							<div class="restaurant-search-img col-xs-4 col-sm-12">
+								<img src="http://placehold.it/150x150"/>
+							</div>
+							<div class="restaurant-search-desc col-xs-8 col-sm-12">
+								<h2>식당5 이름</h2>
+								<h4>평점 : 2.5/5</h4>
+								<p>설명</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="restaurant-search-result col-xs-12 col-sm-4">
+					<a href="#">
+						<div class="restaurant-search-inner">
+							<div class="restaurant-search-img col-xs-4 col-sm-12">
+								<img src="http://placehold.it/150x150"/>
+							</div>
+							<div class="restaurant-search-desc col-xs-8 col-sm-12">
+								<h2>식당6 이름</h2>
+								<h4>평점 : 3.5/5</h4>
+								<p>설명</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+				<div class="restaurant-search-result col-xs-12 col-sm-4">
+					<a href="#">
+						<div class="restaurant-search-inner">
+							<div class="restaurant-search-img col-xs-4 col-sm-12">
+								<img src="http://placehold.it/150x150"/>
+							</div>
+							<div class="restaurant-search-desc col-xs-8 col-sm-12">
+								<h2>식당7 이름</h2>
+								<h4>평점 : 0.5/5</h4>
+								<p>설명</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- //search -->
+
+
+
+
+
+
+
 <%@include file="inc/footer.jsp" %>

@@ -15,6 +15,16 @@
 		color: white;
 	}
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+	$('#edit').click(function(){
+		window.open("/dinner/customer/edit.do?no=${vo.qnaQuestionNo}",'',
+			'left=0,top=0,width=450,height=500,locations=yes,resizable=yes');
+	});
+		
+	});
+
+</script>
 <div class="container fadeInUp animated" data-wow-delay=".5s" id="table">
 	<div class= 'row qna_header'>
 		<div class="img_size col-sm-6">
@@ -26,11 +36,13 @@
 		<div class= 'table_div col-sm-12'>
 			<div class= 'tr_div row'>
 				<div class="th_div col-sm-2 font_size14 text_center border_both">제목</div>
-				<div class='td_div col-sm-10 border_right'>${vo.questionTitle }</div>
+				<div class='td_div col-sm-10 border_right' id="title">${vo.questionTitle }</div>
 			</div>
 			<div class= 'tr_div row'>
 				<div class="th_div font_size14 col-sm-2 text_center border_both">작성자</div>
-				<div class='td_div col-sm-3'>${vo.memName }</div>
+				<div class='td_div col-sm-3'>${vo.memName }
+				<input type="button" value="수정" id="edit"></div>
+				
 				<div class="th_div font_size14 col-sm-2 text_center border_both">등록일</div>
 				<div class='td_div col-sm-2'>
 				<fmt:formatDate value="${vo.questionRegdate }" 
@@ -38,7 +50,7 @@
 				<div class="th_div font_size14 col-sm-2 text_center border_both">조회수</div>
 				<div class='td_div col-sm-1 border_right'>${vo.questionViewCount}</div>
 			</div>
-			<div class= 'content_detail'>
+			<div class= 'content_detail' id="content">
 				${vo.questionContent}
 			</div>
 		</div>

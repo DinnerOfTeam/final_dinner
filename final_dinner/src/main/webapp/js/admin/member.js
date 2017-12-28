@@ -5,6 +5,27 @@ $(function() {
 		if(inEl.is(':disabled')) {
 			inEl.prop('disabled', '');
 		}else {
+			$.ajax({
+				type: "post",
+				url: "<c:url value= '/admin/member/AmemberEdit.do' />",
+				data: {
+					memNo: $(inEl).eq(0).val(),
+					memId: $(inEl).eq(2).val(),
+					memName: $(inEl).eq(3).val(),
+					memEmail1: $(inEl).eq(4).val(),
+					memEmail2: $(inEl).eq(5).val(),
+					memTel1: $(inEl).eq(6).val(),
+					memTel2: $(inEl).eq(7).val(),
+					memTel3: $(inEl).eq(8).val(),
+					memGrade: $(inEl).eq(9).val(),
+				},
+				success: function(res) {
+					alert('성공'+ res);
+				},
+				error: function(xhr, sta, err) {
+					alert(sta+ ' => '+ err);
+				},
+			});
 			inEl.prop('disabled', 'disabled');
 		}
 		return false;
