@@ -115,7 +115,7 @@ a {
 					<div class="tab-pane fade" id="business">
 						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
 						<a href="/dinner/restaurantEnterprise/restaurantListView.do">식당정보확인</a><br>
-						<a href="/dinner/restaurantEnterprise/restaurantBookList.do">식당예약조회</a><br>
+						<a href="/dinner/book/restaurantBookList.do">식당예약조회</a><br>
 						<div class='container pad_0'>
 							<div class='col-md-1 pad_0 bbb'>
 								<a class="right-toggle1" data-toggle="right" href="#"> 식당정보수정
@@ -125,7 +125,7 @@ a {
 							<div class="right-menu1 eee col-md-2 pad_0">
 								<ul>
 									<li><a href="/dinner/restaurantEnterprise/foodWrite.do" class="pad_0 ccc">메뉴등록</a></li>
-									<li><a href="#" class="pad_0 ccc">메뉴삭제</a></li>
+									<li><a href="/dinner/restaurantEnterprise/menuDelete.do" class="pad_0 ccc">메뉴삭제</a></li>
 								</ul>
 							</div>
 						</div>

@@ -19,5 +19,10 @@ public class BookDAOMybatis extends SqlSessionDaoSupport implements BookDAO {
 	public int deleteBook(int bookNo) {
 		return getSqlSession().delete(namespace+".deleteBook",bookNo);
 	}
+
+	@Override
+	public List<BookVO> selectAll(int memNo) {
+		return getSqlSession().selectList(namespace+".selectAll",memNo);
+	}
 	
 }

@@ -62,12 +62,32 @@ public class BookCont {
 		
 	}
 	
+	@RequestMapping("/restaurantBookList.do")
+	public String BookList(HttpSession session, Model model) {
+		logger.info("식당 예약 조회페이지 ");
+	
+		int memNo = (Integer)session.getAttribute("memNo");
+		logger.info("memNo",memNo);
+		
+		List<BookVO> list = bookService.selectAll(memNo);
+		logger.info("식당 예약조회 결과, list.size()={}");
+		
+		model.addAttribute("list",list);
+		
+		return "book/restaurantBookList";
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("/map.do")
 	public String test() {
 		logger.info("test page");
 		
 		return "book/map"; 
 	}
+	
 	
 	
 	

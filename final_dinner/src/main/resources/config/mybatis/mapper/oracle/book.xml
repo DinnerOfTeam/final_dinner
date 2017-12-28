@@ -16,5 +16,10 @@
 			from book b
 			where mem_no=#{memNo}
 	</select>
+	
+	<select id="selectAll" parameterType="int" resultType="BookVO">
+			select * from book
+			where mem_no=#{memNo}
+	</select>
 
 </mapper>
