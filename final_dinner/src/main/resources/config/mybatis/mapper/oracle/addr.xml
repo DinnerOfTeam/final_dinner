@@ -31,10 +31,6 @@
 	</select>
 	
 	<select id="allSigungu" resultType="AddrVO">
-		select * from addr_sigungu
-	</select>
-	
-	<select id="selectSigungu" resultType="AddrVO" parameterType="int">
 		select * from addr_sigungu where sido_no= #{sidoNo }
 	</select>
 	

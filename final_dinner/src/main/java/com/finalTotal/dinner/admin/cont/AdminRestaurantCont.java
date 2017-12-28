@@ -1,9 +1,7 @@
 package com.finalTotal.dinner.admin.cont;
 
 import java.util.List;
-import java.util.Map;
 
-import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
