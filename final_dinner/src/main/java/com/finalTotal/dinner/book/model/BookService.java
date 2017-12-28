@@ -8,4 +8,5 @@ public interface BookService {
 	
 	public List<BookVO> selectByAdd(int memNo);
 	public int deleteBook(int bookNo);
+	public List<BookVO> selectAll(int memNo);
 }

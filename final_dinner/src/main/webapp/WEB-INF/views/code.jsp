@@ -8,7 +8,205 @@
 			<h1>상단 타이틀</h1>
 		</div>
 	</div>
-
+	
+	<!-- 메뉴 추가 -->
+	<script type="text/javascript">
+		$(function(){
+			$(document).on("click", ".food-item-box .food-item-del", function(){
+				if($('form[name=addFoodItem]>div.food-item-list>div.food-item-box').length>1){
+					$(this).closest('div.food-item-box').remove();
+				}
+			});
+			
+			var foodItemBox=$("form[name=addFoodItem]>div.food-item-box").eq(0).detach();
+			
+			$(document).on("click", "form[name=addFoodItem] .food-item-add", function(){
+				$('form[name=addFoodItem]>div.food-item-list').append(foodItemBox.clone());
+			});
+			
+			$('form[name=addFoodItem]>div.food-item-list').append(foodItemBox.clone());
+			
+			$('form[name=addFoodItem]').submit(function(){
+				if($('form[name=addFoodItem]>div.food-item-list>div.food-item-box').length<=0){
+					$(this).find('.food-item-add').click();
+					return false;
+				}
+				
+				if($(this).find('#foodMenuNo').val()==0){
+					alert("메뉴 종류를 선택하세요");
+					$(this).find('#foodMenuNo').focus();
+					return false;
+				}
+				
+				var errFlag=true;
+				$(this).find('.food-item-name').each(function(index, element){
+					if($(element).val()==""){
+						alert("메뉴명을 입력하세요");
+						$(element).focus();
+						errFlag=false;
+						return false;
+					}
+				});
+				
+				if(errFlag){
+					$(this).find('.food-item-price').each(function(index, element){
+						if($(element).val()==""){
+							alert("가격을 입력하세요");
+							$(element).focus();
+							errFlag=false;
+							return false;
+						}
+					});
+				}
+				
+				return errFlag;
+			});
+			
+		});
+	</script>
+	<div class="site-container-wrap">
+		<div class="container">
+			<div class="form-simple">
+				<form action="#" method="post" name="addFoodItem">
+					<div class="shadow-box">
+						<div class="form-row">
+							<div class="col-xs-6 col-sm-10">
+								<h3>메뉴 추가</h3>
+							</div>
+							<div class="col-xs-6 col-sm-2">
+								<input type="button"
+									class="site-btn-submit site-btn-full food-item-add" value="추가">
+							</div>
+						</div>
+						
+						<label for="foodMenuNo">메뉴 종류</label>
+						<select class="form-select"
+								name="foodMenuNo" id="foodMenuNo">
+							<option value="0">메뉴 종류</option>
+							<option value="1">식사</option>
+							<option value="2">면류</option>
+							<option value="3">김밥</option>
+							<option value="4">튀김류</option>
+							<option value="5">분식</option>
+						</select>
+						
+					</div>
+					
+					<div class="shadow-box food-item-box">
+						<div class="row">
+							<div class="col-sm-2 col-sm-push-10 form-comp">
+								<input type="button"
+									class="site-btn site-btn-full food-item-del" value="제거">
+							</div>
+							<div class="col-sm-10 col-sm-pull-2">
+								<input type="text" class="form-text food-item-name" placeholder="메뉴명" name="foodItemName">
+							</div>
+						</div>
+						<input type="text" class="form-text food-item-price" placeholder="가격" name="foodItemPrice">
+						<textarea placeholder="설명" class="form-text food-item-desc" name="foodItemDesc"></textarea>
+					</div>
+					
+					<div class="food-item-list">
+						
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6 form-comp">
+							<input type="submit" class="site-btn-submit site-btn-full" value="등록">
+						</div>
+						<div class="col-sm-6 form-comp">
+							<a href="#" class="site-btn site-btn-full">취소</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 메뉴종류 추가 -->
+	<script type="text/javascript">
+		$(function(){
+			$(document).on("click", ".food-menu-box .food-menu-del", function(){
+				if($('form[name=addFoodMenu]>div.food-menu-list>div.food-menu-box').length>1){
+					$(this).closest('div.food-menu-box').remove();
+				}
+			});
+			
+			var foodMenuBox=$("form[name=addFoodMenu]>div.food-menu-box").eq(0).detach();
+			
+			$(document).on("click", "form[name=addFoodMenu] .food-menu-add", function(){
+				$('form[name=addFoodMenu]>div.food-menu-list').append(foodMenuBox.clone());
+			});
+			
+			$('form[name=addFoodMenu]>div.food-menu-list').append(foodMenuBox.clone());
+			
+			$('form[name=addFoodMenu]').submit(function(){
+				if($('form[name=addFoodMenu]>div.food-menu-list>div.food-menu-box').length<=0){
+					$(this).find('.food-menu-add').click();
+					return false;
+				}
+				
+				var errFlag=true;
+				$(this).find('.food-menu-name').each(function(index, element){
+					if($(element).val()==""){
+						alert("메뉴명을 입력하세요");
+						$(element).focus();
+						errFlag=false;
+						return false;
+					}
+				});
+				
+				return errFlag;
+			});
+			
+		});
+	</script>
+	
+	<div class="site-container-wrap">
+		<div class="container">
+			<div class="form-simple">
+				<form action="#" method="post" name="addFoodMenu">
+					<div class="shadow-box">
+						<div class="form-row">
+							<div class="col-xs-6 col-sm-10">
+								<h3>메뉴 종류 추가</h3>
+							</div>
+							<div class="col-xs-6 col-sm-2">
+								<input type="button" class="site-btn-submit site-btn-full food-menu-add" value="추가">
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="shadow-box food-menu-box">
+						<div class="row">
+							<div class="col-sm-2 col-sm-push-10 form-comp">
+								<input type="button" class="site-btn site-btn-full food-menu-del" value="제거">
+							</div>
+							<div class="col-sm-10 col-sm-pull-2">
+								<input type="text" class="form-text food-menu-name" placeholder="종류명" name="foodMenuName">
+							</div>
+						</div>
+						<textarea placeholder="설명" class="form-text food-menu-desc" name="foodMenuDesc"></textarea>
+					</div>
+					
+					<div class="food-menu-list">
+						
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6 form-comp">
+							<input type="submit" class="site-btn-submit site-btn-full" value="등록">
+						</div>
+						<div class="col-sm-6 form-comp">
+							<a href="#" class="site-btn site-btn-full">취소</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 	<!-- table (div 버전) -->
 	<div class="table-wrap">
 		<div class="container">

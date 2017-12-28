@@ -26,10 +26,15 @@
 		from(
 			select rownum as rnum, e.*
 			from(
-				select * from site_event
+				select * from site_event 
 				where event_start_date<=#{keyword}
 				and event_end_date>=#{keyword}
-				order by event_no desc
+				order by (
+					case when event_end_date<trunc(sysdate) then 0
+						 when event_start_date>trunc(sysdate) then 1
+						 else 2
+					end
+				) desc, event_no desc
 			)e
 		)f
 		where f.rnum>#{firstRowNum}

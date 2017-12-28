@@ -270,7 +270,7 @@
 
 
 <div id="scheduler_here" class="dhx_cal_container" style='width:900px; height:700px;'>
-	<form action="<c:url value='/restaurantEnterprise/restaurantBookList.do' />" method="get">
+	<form action="<c:url value='/book/restaurantBookList.do' />" method="get">
 		<div class="dhx_cal_navline">
 			<div class="dhx_cal_prev_button">&nbsp;</div>
 			<div class="dhx_cal_next_button">&nbsp;</div>

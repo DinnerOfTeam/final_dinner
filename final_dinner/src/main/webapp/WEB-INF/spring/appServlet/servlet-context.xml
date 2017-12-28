@@ -29,7 +29,7 @@
 	     <beans:property name="order" value="0" />
 	</beans:bean>
 	
-	<interceptors>
+<!-- 	<interceptors>
 		<interceptor>
 			<mapping path="/indiGroup/*"/>
 			
@@ -40,6 +40,6 @@
 			<mapping path="/**"/>
 			<beans:ref bean="chattingUserInterceptor"/>
 		</interceptor>
-	</interceptors>
+	</interceptors> -->
 	
 </beans:beans>

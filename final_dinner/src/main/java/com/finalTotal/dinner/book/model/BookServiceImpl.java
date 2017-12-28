@@ -21,5 +21,10 @@ public class BookServiceImpl implements BookService {
 	public int deleteBook(int bookNo) {
 		return bookDao.deleteBook(bookNo);
 	}
+
+	@Override
+	public List<BookVO> selectAll(int memNo) {
+		return bookDao.selectAll(memNo);
+	}
 	
 }
