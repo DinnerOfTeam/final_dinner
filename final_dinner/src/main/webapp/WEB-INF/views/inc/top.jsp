@@ -158,7 +158,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
 								<li><a href="<c:url value= '/intro/intro.do' />" class="active">브랜드소개</a></li>
-								<li><a href="<c:url value= '/about.do'/>">통합검색</a></li>
+								<li><a href="<c:url value= '/search.do'/>">통합검색</a></li>
 								<li><a href="<c:url value= '/board/list.do'/>">게시판</a></li>
 								<li><a href="<c:url value= '/event/eventList.do'/>">이벤트</a></li>								
 								<li><a href="<c:url value= '/customer/mainNotice.do'/>">고객센터</a></li>

@@ -63,7 +63,7 @@ public class SearchVO {
 	public String toString() {
 		return "SearchVO [keyword=" + keyword + ", type=" + type + ", currentPage=" + currentPage + ", firstRowNum="
 				+ firstRowNum + ", pageSize=" + pageSize + ", firstBlockPage=" + firstBlockPage + ", lastBlockPage="
-				+ lastBlockPage + ", totalPage=" + totalPage + "] ";
+				+ lastBlockPage + ", totalPage=" + totalPage + "]";
 	}
 	
 }
