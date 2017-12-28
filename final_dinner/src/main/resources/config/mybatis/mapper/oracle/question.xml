@@ -26,7 +26,7 @@
 	
 	<select id="selectMainNotice" resultType="QuestionVO">
 		select *
-		from (select * from qna_question order by qna_question_no desc)
+		from (select * from qna_question order by question_view_count desc)
 		<![CDATA[
 			where rownum<=10
 		]]>

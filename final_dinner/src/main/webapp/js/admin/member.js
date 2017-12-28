@@ -7,20 +7,21 @@ $(function() {
 		}else {
 			$.ajax({
 				type: "post",
-				url: "<c:url value= '/admin/member/AmemberEdit.do' />",
+				url: "/dinner/admin/member/AmemberEdit.do",
 				data: {
 					memNo: $(inEl).eq(0).val(),
 					memId: $(inEl).eq(2).val(),
-					memName: $(inEl).eq(3).val(),
-					memEmail1: $(inEl).eq(4).val(),
-					memEmail2: $(inEl).eq(5).val(),
-					memTel1: $(inEl).eq(6).val(),
-					memTel2: $(inEl).eq(7).val(),
-					memTel3: $(inEl).eq(8).val(),
-					memGrade: $(inEl).eq(9).val(),
+					memPwd: $(inEl).eq(3).val(),
+					memName: $(inEl).eq(4).val(),
+					memEmail1: $(inEl).eq(5).val(),
+					memEmail2: $(inEl).eq(6).val(),
+					memTel1: $(inEl).eq(7).val(),
+					memTel2: $(inEl).eq(8).val(),
+					memTel3: $(inEl).eq(9).val(),
+					memGrade: $(inEl).eq(10).val(),
 				},
 				success: function(res) {
-					alert('성공'+ res);
+					console.log(res);
 				},
 				error: function(xhr, sta, err) {
 					alert(sta+ ' => '+ err);
@@ -49,33 +50,33 @@ $(function() {
 	
 	$.addMember= function(idx) {
 		var count= 0;
-		$('table').find('tr').each(function() {
+		$('#mytable').find('tr').each(function() {
 			count+= 1;
 		});
 		
 		var trEl= $('<tr></tr>');
 		var tdEl1= $('<td></td>');
-		var inEl1= $('<input id="items.['+ count+ '].memNo" type="hidden"/>'+
-				'<input type="text" value="'+ count+ '" size="2"> '+
-				'<input id="items.['+ count+ '].memId" size="4"/>');
+		var inEl1= $('<input id="items['+ count+ '].memNo" type="hidden" value= "0"/>'+
+				'<input type="hidden" value="'+ count+ '" size="2"> '+
+				'<input id="items['+ count+ '].memId" size="4"/>');
 		tdEl1.append(inEl1);
 		var tdEl2= $('<td></td>');
-		var inEl2= $('<input id="items.['+ count+ '].memPwd" size="3"/>');
+		var inEl2= $('<input id="items['+ count+ '].memPwd" size="3"/>');
 		tdEl2.append(inEl2);
 		var tdEl3= $('<td></td>');
-		var inEl3= $('<input id= "items.['+ count+ '].memName" size="8"/>');
+		var inEl3= $('<input id= "items['+ count+ '].memName" size="8"/>');
 		tdEl3.append(inEl3);
 		var tdEl4= $('<td></td>');
-		var inEl4= $('<input id= "items.['+ count+ '].memEmail1" size="8"/>@ '+
-				'<input id= "items.['+ count+ '].memEmail2" size="12"/>');
+		var inEl4= $('<input id= "items['+ count+ '].memEmail1" size="8"/>@ '+
+				'<input id= "items['+ count+ '].memEmail2" size="12"/>');
 		tdEl4.append(inEl4);
 		var tdEl5= $('<td></td>');
 		var inEl5= $('<input id= "items.['+ count+ '].memTel1" size="3"/>- '+
-				'<input id= "items.['+ count+ '].memTel2" size="4"/>- '+
-				'<input id= "items.['+ count+ '].memTel3" size="4"/>');
+				'<input id= "items['+ count+ '].memTel2" size="4"/>- '+
+				'<input id= "items['+ count+ '].memTel3" size="4"/>');
 		tdEl5.append(inEl5);
 		var tdEl6= $('<td></td>');
-		var inEl6= $('<input id= "items.['+ count+ '].memGrade" size="1"/>');
+		var inEl6= $('<input id= "items['+ count+ '].memGrade" size="1"/>');
 		tdEl6.append(inEl6);
 		var tdEl7= $('<td></td>');
 		var inEl7= $('<button class="btn btn-primary" onclick="$.editMember('+ count+ ')">Edit</button> '+ 

@@ -24,6 +24,16 @@ public class AddrDAOMybatis extends SqlSessionDaoSupport implements AddrDAO{
 		return getSqlSession().selectList(namespace+".selectAddr");
 	}
 
+	@Override
+	public List<SidoVO> allSido() {
+		return getSqlSession().selectList(namespace+".allSido");
+	}
+
+	@Override
+	public List<SigunguVO> allSigungu(int sidoNo) {
+		return getSqlSession().selectList(namespace+".allSigungu", sidoNo);
+	}
+
 	
 
 }

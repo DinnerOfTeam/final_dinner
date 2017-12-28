@@ -26,4 +26,12 @@
 		select * from addr_sido
 	</select>
 	
+	<select id="allSido" resultType="AddrVO">
+		select * from addr_sido
+	</select>
+	
+	<select id="allSigungu" resultType="AddrVO">
+		select * from addr_sigungu where sido_no= #{sidoNo }
+	</select>
+	
 </mapper>

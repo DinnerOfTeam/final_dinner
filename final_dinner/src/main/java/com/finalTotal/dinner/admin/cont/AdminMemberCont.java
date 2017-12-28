@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberVO;
@@ -19,7 +20,7 @@ public class AdminMemberCont {
 	public static final Logger log= LoggerFactory.getLogger(AdminMemberCont.class);
 	
 	@Autowired
-	MemberService mem_ser;
+	private MemberService mem_ser;
 	
 	@RequestMapping("/Amember.do")
 	public void memList(Model model) {
@@ -30,9 +31,18 @@ public class AdminMemberCont {
 	}
 
 	@RequestMapping("/AmemberEdit.do")
-	public String editting(@ModelAttribute MemberVO vo) {
+	@ResponseBody
+	public int editting(@ModelAttribute MemberVO vo) {
 		log.info("edtting parameter : vo= {}", vo);
 		
-		return "redirect:/admin/main.do";
+		MemberVO existVo= mem_ser.selectMember(vo.getMemId());
+		int cnt= 0;
+		if(existVo== null) {
+			cnt= mem_ser.insertMemberByAdmin(vo);
+		}else {
+			cnt= mem_ser.updateMemberByAdmin(vo);
+		}
+		
+		return cnt;
 	}
 }
