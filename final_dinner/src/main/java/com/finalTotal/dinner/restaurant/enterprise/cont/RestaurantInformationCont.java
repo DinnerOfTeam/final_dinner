@@ -47,17 +47,17 @@ public class RestaurantInformationCont {
 	}
 	
 	@RequestMapping("/restaurantInformation.do")
-	public String Information(@RequestParam int resNo, Model model) {
+	public String Information(@RequestParam String resNo, Model model) {
 		logger.info("식당 정보상세 페이지 보여주기 파라미터 resNo={}",resNo);
 		
-		if(resNo==0) {
-			model.addAttribute("msg", "잘못된 url입니다");
-			model.addAttribute("url", "/restaurantEnterprise/restaurantInformation.do");
+		if(resNo==null || resNo.equals("null") ) {
+			model.addAttribute("msg", "식당 등록을 하셔야 합니다");
+			model.addAttribute("url", "/member/myPage.do");
 			
 			return "common/message";			
 		}
 		
-		RestaurantVO vo = restaurantService.selectByNo(resNo);
+		RestaurantVO vo = restaurantService.selectByNo((Integer.parseInt(resNo)));
 		logger.info("상세보기 결과, vo={}",vo);
 		
 		model.addAttribute("vo", vo);

@@ -27,5 +27,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return restaurantDao.selectByNo(resNo);
 	}
 
+	@Override
+	public String selectRes(int memNo) {
+		return restaurantDao.selectRes(memNo);
+	}
+
 
 }

@@ -26,5 +26,10 @@
 			select * from restaurant
 			where res_no=#{resNo}
 		</select>
+		
+		<select id="selectRes" parameterType="int" resultType="string">
+			select res_no from restaurant
+			where mem_no=#{memNo}
+		</select>
 	
 </mapper>

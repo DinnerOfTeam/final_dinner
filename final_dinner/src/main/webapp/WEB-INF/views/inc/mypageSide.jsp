@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
     <script
 	src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
@@ -113,8 +113,15 @@ a {
 						<a href="#">회원탈퇴</a>
 					</div>
 					<div class="tab-pane fade" id="business">
-						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
-						<a href="/dinner/restaurantEnterprise/restaurantListView.do">식당정보확인</a><br>
+						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br>
+						
+						<c:if test="${sessionScope.resNo!=null }">
+							<a href="/dinner/restaurantEnterprise/restaurantInformation.do?resNo=${sessionScope.resNo }">식당정보확인</a><br>
+						</c:if>
+						<c:if test="${ sessionScope.resNo==null }">
+							식당정보확인<br>
+						</c:if>
+						
 						<a href="/dinner/book/restaurantBookList.do">식당예약조회</a><br>
 						<div class='container pad_0'>
 							<div class='col-md-1 pad_0 bbb'>
