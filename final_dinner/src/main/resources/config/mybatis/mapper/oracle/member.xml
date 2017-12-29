@@ -29,12 +29,30 @@
 			#{memEmail1}, #{memEmail2})
 	</insert>
 	
+	<insert id="insertMemberByAdmin" parameterType="MemberVO">
+		<selectKey  keyProperty="memNo" resultType="int" order="BEFORE">
+			select member_seq.nextval from dual
+		</selectKey>
+		insert into member(mem_No, mem_Id, mem_Pwd, mem_Name,
+			mem_Tel1, mem_Tel2, mem_Tel3, mem_Email1, mem_Email2)
+		values(#{memNo}, #{memId}, #{memPwd}, #{memName},
+			#{memTel1}, #{memTel2}, #{memTel3}, #{memEmail1}, #{memEmail2})
+	</insert>
+	
 	<update id="updateMember" parameterType="MemberVO">
 		update member set
 		mem_Zipcode=#{memZipcode}, mem_Add=#{memAdd}, mem_Add_Detail=#{memAddDetail}, 
 		mem_Tel1=#{memTel1}, mem_Tel2=#{memTel2}, mem_Tel3=#{memTel3},
 		mem_Email1=#{memEmail1}, mem_Email2=#{memEmail2}
 		where mem_Id=#{memId}
+	</update>
+	
+	<update id="updateMemberByAdmin" parameterType="MemberVO">
+		update member set
+				mem_Tel1=#{memTel1}, mem_Tel2=#{memTel2}, mem_Tel3=#{memTel3},
+				mem_Email1=#{memEmail1}, mem_Email2=#{memEmail2},
+				mem_Name= #{memName}, mem_pwd= #{memPwd}, mem_grade= #{memGrade}
+			where mem_Id=#{memId}
 	</update>
 	
 	<select id="showAll" resultType="MemberVO">

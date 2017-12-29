@@ -25,5 +25,15 @@ public class AddrServiceImpl implements AddrService{
 	public List<AddrVO> selectAddr() {
 		return addrDAO.selectAddr();
 	}
+
+	@Override
+	public List<SidoVO> allSido() {
+		return addrDAO.allSido();
+	}
+
+	@Override
+	public List<SigunguVO> allSigungu(int sidoNo) {
+		return addrDAO.allSigungu(sidoNo);
+	}
 	
 }

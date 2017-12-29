@@ -91,8 +91,9 @@
 						);
 					}
 					
-					$siList.html($rowClone);
-					
+					if(res.length>0){
+						$siList.html($rowClone);
+					}
 					
 				}
 				
