@@ -53,7 +53,7 @@
 								<td>${vo.resAddress }
 								<input type="button" 
 								style="background-image: url('<c:url value="/images/Marker_26px.png"/>'); width:30px;"
-									onclick="openMap('${vo.resAddress }')" />   
+									onclick="openMap('${vo.resAddressDetail }')" />   
 								
 							
 								</td>

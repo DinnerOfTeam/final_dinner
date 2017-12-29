@@ -25,7 +25,7 @@ public class AdminRestaurantCont {
 	
 	@RequestMapping("/Ares.do")
 	public void resList(Model model) {
-		List<SidoVO> sido_list= addr_ser.allSido();
+		List<SidoVO> sido_list= addr_ser.selectSido();
 		
 		model.addAttribute("sido_list", sido_list);
 		log.info("sido 검색 결과 list.size()= {}", sido_list.size());
@@ -42,14 +42,8 @@ public class AdminRestaurantCont {
 		log.info("변경후 Akey={}", Akey);
 		String[] temp= Akey.split(" ");
 		String Bkey= "";
-		if(temp.length> 4) {
-			for(int i=0 ; i< 4; i++) {
-				Bkey+= temp[i];
-			}
-		}else {
-			for(int i=0 ; i< temp.length; i++) {
-				Bkey+= temp[i];
-			}
+		for(int i=0 ; i< temp.length; i++) {
+			Bkey+= temp[i];
 		}
 		log.info("변경후 Bkey={}", Bkey);
 		model.addAttribute("key", Bkey);
@@ -58,7 +52,7 @@ public class AdminRestaurantCont {
 	@RequestMapping("/getSigungu.do")
 	@ResponseBody
 	public List<SigunguVO> getSigungu(@RequestParam int sidoNo) {
-		List<SigunguVO> sigungu_list= addr_ser.allSigungu(sidoNo);
+		List<SigunguVO> sigungu_list= addr_ser.selectSigungu(sidoNo);
 		
 		return sigungu_list;
 	}
