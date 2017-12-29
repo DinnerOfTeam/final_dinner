@@ -7,12 +7,6 @@
 	$(function(){
 		var arrLoc=[];
 		
-		var locationValue=$("#search_hidden_loc").val();
-		if(locationValue!=""){
-			arrLoc=locationValue.split(",");
-		}
-		reDrawLocation();
-		
 		var $searchLocLabel=$("<span class='label label-primary food-search-loc-label'></span>");
 		var $searchLocDel=$("<button type='button' class='close food-search-loc-del' aria-label='delete'><span aria-hidden='true'>×</span></button>");
 		
@@ -117,6 +111,13 @@
 				
 			}
 		});
+		
+
+		var locationValue=$("#search_hidden_loc").val();
+		if(locationValue!=""){
+			arrLoc=locationValue.split(",");
+		}
+		reDrawLocation();
 	});
 </script>
 
@@ -173,7 +174,7 @@
 			
 			<div class="shadow-box wow fadeIn animated" data-wow-delay=".5s">
 				<div class="form-simple">
-					<form action="#" method="post" name="searchFrm" id="search-food">
+					<form action="<c:url value='/search.do'/>" method="get" name="searchFrm" id="search-food">
 					
 						<div class="form-comp">
 							<span class="form-static">
@@ -186,10 +187,8 @@
 							<span id="search-location-view" class="form-static"></span>
 						</div>
 						
-						<input type="hidden" name="location" id="search_hidden_loc">
-						<input type="text" class="form-text" name="email" placeholder="식당명">
-						<input type="text" class="form-text" name="email" placeholder="인원">
-						
+						<input type="hidden" name="location" id="search_hidden_loc" value="${param.location }">
+						<input type="text" class="form-text" name="keyword" placeholder="식당명" value="${param.keyword }">
 						<input type="submit" class="site-btn-submit site-btn-full" value="검색">
 					</form>
 				</div>
@@ -197,111 +196,49 @@
 		</div>
 		<div class="food-search-result wow fadeIn animated" data-wow-delay=".5s">
 			<div class="container">
-				<div class="restaurant-search-result col-xs-12 col-sm-4">
-					<a href="#">
-						<div class="restaurant-search-inner">
-							<div class="restaurant-search-img col-xs-4 col-sm-12">
-								<img src="http://placehold.it/150x150"/>
-							</div>
-							<div class="restaurant-search-desc col-xs-8 col-sm-12">
-								<h2>식당1 이름</h2>
-								<h4>평점 : 3.5/5</h4>
-								<p>설명</p>
-							</div>
-						</div>
-					</a>
-				</div>
+				<div class="row">
 				
-				<div class="restaurant-search-result col-xs-12 col-sm-4">
-					<a href="#">
-						<div class="restaurant-search-inner">
-							<div class="restaurant-search-img col-xs-4 col-sm-12">
-								<img src="http://placehold.it/150x150"/>
-							</div>
-							<div class="restaurant-search-desc col-xs-8 col-sm-12">
-								<h2>식당2 이름</h2>
-								<h4>평점 : 2.5/5</h4>
-								<p>설명</p>
-							</div>
+					<c:if test="${empty list }">
+						<div class="shadow-box ali-center">
+							<p>검색결과가 없습니다</p>
 						</div>
-					</a>
+					</c:if>
+					<c:if test="${!empty list }">
+						<c:forEach var="resItem" items="${list }">
+							<div class="restaurant-search-result col-xs-12 col-sm-4">
+								<!-- <a href="#"> -->
+									<div class="restaurant-search-inner">
+										<div class="restaurant-search-img col-xs-4 col-sm-12">
+											<c:if test="${empty resItem.resThumbnail }">
+												<img src="${pageContext.request.contextPath }/images/noImages1x1.png""/>
+											</c:if>
+											<c:if test="${!empty resItem.resThumbnail }">
+												<img src="${pageContext.request.contextPath }/upfiles/upl_images/${resItem.resThumbnail}"/>
+											</c:if>
+										</div>
+										<div class="restaurant-search-desc col-xs-8 col-sm-12">
+											<h2>${resItem.resName }</h2>
+											<h4>평점 : ${resItem.resGrade }/5</h4><%-- 별점표시로 변경예정 --%>
+											<p>영업일 : ${resItem.resWorkDay }</p>
+										</div>
+										<div class="restaurant-search-overlay">
+											<div class="restaurant-overlay-btn">
+												<div class="col-md-6">
+													<a href="#" class="site-btn-submit site-btn-full">예약</a>
+												</div>
+												<div class="col-md-6">
+													<a href="#" class="site-btn site-btn-full">상세보기</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								<!-- </a> -->
+							</div>
+						</c:forEach>
+					</c:if>
+					
+					
 				</div>
-				
-				<div class="restaurant-search-result col-xs-12 col-sm-4">
-					<a href="#">
-						<div class="restaurant-search-inner">
-							<div class="restaurant-search-img col-xs-4 col-sm-12">
-								<img src="http://placehold.it/150x150"/>
-							</div>
-							<div class="restaurant-search-desc col-xs-8 col-sm-12">
-								<h2>식당3 이름</h2>
-								<h4>평점 : 5/5</h4>
-								<p>설명</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="restaurant-search-result col-xs-12 col-sm-4">
-					<a href="#">
-						<div class="restaurant-search-inner">
-							<div class="restaurant-search-img col-xs-4 col-sm-12">
-								<img src="http://placehold.it/150x150"/>
-							</div>
-							<div class="restaurant-search-desc col-xs-8 col-sm-12">
-								<h2>식당4 이름</h2>
-								<h4>평점 : 1.5/5</h4>
-								<p>설명</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="restaurant-search-result col-xs-12 col-sm-4">
-					<a href="#">
-						<div class="restaurant-search-inner">
-							<div class="restaurant-search-img col-xs-4 col-sm-12">
-								<img src="http://placehold.it/150x150"/>
-							</div>
-							<div class="restaurant-search-desc col-xs-8 col-sm-12">
-								<h2>식당5 이름</h2>
-								<h4>평점 : 2.5/5</h4>
-								<p>설명</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="restaurant-search-result col-xs-12 col-sm-4">
-					<a href="#">
-						<div class="restaurant-search-inner">
-							<div class="restaurant-search-img col-xs-4 col-sm-12">
-								<img src="http://placehold.it/150x150"/>
-							</div>
-							<div class="restaurant-search-desc col-xs-8 col-sm-12">
-								<h2>식당6 이름</h2>
-								<h4>평점 : 3.5/5</h4>
-								<p>설명</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-				<div class="restaurant-search-result col-xs-12 col-sm-4">
-					<a href="#">
-						<div class="restaurant-search-inner">
-							<div class="restaurant-search-img col-xs-4 col-sm-12">
-								<img src="http://placehold.it/150x150"/>
-							</div>
-							<div class="restaurant-search-desc col-xs-8 col-sm-12">
-								<h2>식당7 이름</h2>
-								<h4>평점 : 0.5/5</h4>
-								<p>설명</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				
 			</div>
 		</div>
 	</div>

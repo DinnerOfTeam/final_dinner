@@ -1,5 +1,8 @@
 package com.finalTotal.dinner.vote.cont;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.vote.model.VoteService;
 import com.finalTotal.dinner.vote.model.VoteVO;
+import com.finalTotal.dinner.vote.model.Vote_ItemVO;
 
 @Controller
 @RequestMapping("/indiGroup/vote")
@@ -31,7 +36,8 @@ public class VoteCont {
 	}
 	
 	@RequestMapping(value="/voteReg.do", method=RequestMethod.POST)
-	String write_post(HttpServletRequest request, Model model, @ModelAttribute VoteVO voteVO, HttpSession session) {
+	String write_post(HttpServletRequest request, Model model, @ModelAttribute VoteVO voteVO, 
+			HttpSession session, @RequestParam String[] itemArr ) {
 		logger.info("투표등록 처리-파라미터 voteVo={}", voteVO);
 		
 		int memNo=0;
@@ -40,8 +46,17 @@ public class VoteCont {
 			memNo = (Integer)session.getAttribute("memNo");
 			voteVO.setMemNo(memNo);
 		}
+		List<Vote_ItemVO> list = new ArrayList<Vote_ItemVO>();
 		
-		int cnt = voteService.insertVote(voteVO);
+		for(int i=0; i<itemArr.length; i++) {
+			Vote_ItemVO itemVo= new Vote_ItemVO();
+			String itemname = itemArr[i];
+			itemVo.setItemTitle(itemname);
+		
+			list.add(itemVo);
+		}
+		
+		int cnt = voteService.insertVote(voteVO, list);
 		logger.info("투표등록 결과, cnt={}", cnt);
 		
 		String msg="", url="";

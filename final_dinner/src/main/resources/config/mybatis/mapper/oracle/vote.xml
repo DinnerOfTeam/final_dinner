@@ -4,7 +4,7 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.vote">
 	<insert id="insertVote" parameterType="VoteVO">
-		<selectKey resultType="int" keyProperty="voteNo">
+		<selectKey resultType="int" keyProperty="voteNo" order="BEFORE">
 			select vote_seq.nextval from dual
 		</selectKey>
 		insert into vote(vote_no, mem_no,group_no,vote_title, vote_desc, vote_end_date)
@@ -12,7 +12,7 @@
 	</insert>
 	
 	<insert id="insertItem" parameterType="Vote_ItemVO">
-		<selectKey resultType="int" keyProperty="voteItemNo">
+		<selectKey resultType="int" keyProperty="voteItemNo" order="BEFORE">
 			select vote_item_seq.nextval from dual
 		</selectKey>
 		insert into vote_item(vote_item_no, vote_no,item_title)
