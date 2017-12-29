@@ -12,4 +12,12 @@ public class VoteDAOMybatis extends SqlSessionDaoSupport implements VoteDAO{
 	public int insertVote(VoteVO vo) {
 		return getSqlSession().insert(namespace+".insertVote",vo);
 	}
+
+	@Override
+	public int insertItem(Vote_ItemVO vo) {
+		// TODO Auto-generated method stub
+		return getSqlSession().insert(namespace+".insertItem", vo);
+	}
+	
+	
 }

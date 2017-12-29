@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.finalTotal.dinner.restaurant.search.model.RestaruntSearchVO;
+
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
@@ -14,7 +16,6 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public int insertRestuarant(RestaurantVO vo) {
         return restaurantDao.insertRestuarant(vo);
-        
     }
 
 	@Override
@@ -30,6 +31,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public String selectRes(int memNo) {
 		return restaurantDao.selectRes(memNo);
+	}
+	
+	public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO) {
+		return restaurantDao.searchRestarunt(searchVO);
+	}
+
+	@Override
+	public int countRestarunt(RestaruntSearchVO searchVO) {
+		return restaurantDao.countRestarunt(searchVO);
 	}
 
 

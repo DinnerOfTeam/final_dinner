@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.finalTotal.dinner.restaurant.search.model.RestaruntSearchVO;
+
 @Repository
 public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements RestaurantDAO{
 
@@ -26,8 +28,20 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 	}
 
 	@Override
+
 	public String selectRes(int memNo) {
 		return getSqlSession().selectOne(namespace+".selectRes",memNo);
+	
+	}
+
+	public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO) {
+		return getSqlSession().selectList(namespace+".searchRestarunt", searchVO);
+	}
+
+	@Override
+	public int countRestarunt(RestaruntSearchVO searchVO) {
+		return getSqlSession().selectOne(namespace+".countRestarunt", searchVO);
+
 	}
 
 	
