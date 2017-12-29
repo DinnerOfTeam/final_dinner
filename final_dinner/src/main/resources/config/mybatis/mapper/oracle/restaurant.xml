@@ -3,6 +3,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="config.mybatis.mapper.oracle.restaurant">
+		<sql id="searchWhere">
+			<where>
+				<if test="keyword!=null and keyword!=''">
+					res_name like '%' || #{keyword} || '%'
+				</if>
+				<if test="locationList!=null">
+					<foreach collection="locationList" item="loc" open="and " separator=" or ">
+						res_address like '%' || #{loc.sido} || '%' || #{loc.sigungu} || '%'
+					</foreach>
+				</if>
+				<if test="resTypeNo!=0">
+					and res_type_no=#{resTypeNo}
+				</if>
+			</where>
+		</sql>
+
 		<insert id="insertRestuarant" parameterType="RestaurantVO">
 			<selectKey  keyProperty="resNo" resultType="int" order="BEFORE">
 				select restaurant_seq.nextval from dual
@@ -25,6 +41,30 @@
 		<select id="selectByNo" parameterType="int" resultType="RestaurantVO">
 			select * from restaurant
 			where res_no=#{resNo}
+		</select>
+		
+		<select id="searchRestarunt" resultType="RestaurantVO" parameterType="RestaruntSearchVO" >
+			select c.*
+			from(
+				select rownum as rnum, b.*
+				from(
+					select *
+					from restaurant
+					<include refid="searchWhere"/>
+					order by res_no desc
+				)b
+			)c
+			<![CDATA[
+			where c.rnum>#{firstRowNum}
+			and c.rnum<=#{pageSize}+#{firstRowNum}
+			]]>
+		</select>
+		
+		<select id="countRestarunt" resultType="int" parameterType="RestaruntSearchVO" >
+			select count(*)
+			from restaurant
+			<include refid="searchWhere"/>
+			order by res_no desc
 		</select>
 	
 </mapper>
