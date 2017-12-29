@@ -26,5 +26,9 @@
 			select * from restaurant
 			where res_no=#{resNo}
 		</select>
+		
+		<select id="all" resultType="RestaurantVO">
+			select * from restaurant
+		</select>
 	
 </mapper>

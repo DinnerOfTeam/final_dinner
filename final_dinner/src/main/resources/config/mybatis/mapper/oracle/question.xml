@@ -5,7 +5,7 @@
 
 	<sql id="searchWhere">
 		<if test="keyword!=null and keyword!=''">
-			where ${type} like '%' || #{keyword} || '%'
+			where question_${type} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
 	
@@ -62,4 +62,20 @@
 	<delete id="deleteQna" parameterType="int">
 		delete from qna_question where qna_question_no=#{qnaQuestionNo}
 	</delete>
+	
+	<select id="searchAll" parameterType="SearchVO" resultType="QuestionVO">
+		select * from
+		(select b.*, rownum as rsnum from
+		    (select a.*, m.mem_name
+		        from qna_question a
+		        left join member m on a.mem_no = m.mem_no
+				<include refid="searchWhere"/>
+		        order by qna_question_no desc) b)
+		    where rsnum between #{firstRowNum}+ 1 and #{firstRowNum}+ #{pageSize};
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		select count(*) from qna_question
+		<include refid="searchWhere"/>
+	</select>
 </mapper>

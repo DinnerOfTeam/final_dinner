@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.answer.model.AnswerService;
 import com.finalTotal.dinner.answer.model.AnswerVO;
+import com.finalTotal.dinner.common.SearchVO;
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberServiceImpl;
 import com.finalTotal.dinner.member.model.MemberVO;
@@ -99,6 +100,21 @@ public class QuestionCon {
 		model.addAttribute("list", list);
 		
 		return "customer/list";
+	}
+	
+	//리스트 출력하기
+	@RequestMapping("/list2.do")
+	public String list2(@ModelAttribute SearchVO searchVo, Model model) {
+		//1. 출력하기
+		logger.info("전체조회하기 parameter : searchVo={}", searchVo);
+		//2.
+		
+		List<QuestionVO> list= questionService.searchAll(searchVo);
+		logger.info("목록 조회 결과,list.size()="+list.size());
+		
+		model.addAttribute("list", list);
+		
+		return "customer/list2";
 	}
 	
 	//공지사항 10개 띄우기

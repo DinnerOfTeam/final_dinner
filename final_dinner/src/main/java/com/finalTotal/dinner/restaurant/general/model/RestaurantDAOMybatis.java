@@ -25,6 +25,11 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 		return getSqlSession().selectOne(namespace+".selectByNo", resNo);
 	}
 
+	@Override
+	public List<RestaurantVO> all() {
+		return getSqlSession().selectList(namespace+".all");
+	}
+
 	
 	
 	

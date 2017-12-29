@@ -6,7 +6,7 @@
 	
 	<sql id="searchWhere">
 		<if test="keyword!=null and keyword!=''">
-			where ${type} like '%' || #{keyword} || '%'
+			where free_${type} like '%' || #{keyword} || '%'
 		</if>
 	</sql>
 
