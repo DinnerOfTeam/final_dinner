@@ -100,6 +100,44 @@
 			};
 			var map= new daum.maps.Map(container, options);
 		});
+		
+		$('#seachMap2').click(function() {
+			var add1= $('#addr_sido2 :selected').text();
+			var add2= $('#addr_sigungu2 :selected').text();
+
+			var mapContainer = document.getElementById('seachedMap2'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			        level: 6 // 지도의 확대 레벨
+			    };  
+
+			// 지도를 생성합니다    
+			var map = new daum.maps.Map(mapContainer, mapOption); 
+
+			// 장소 검색 객체를 생성합니다
+			var ps = new daum.maps.services.Places(); 
+
+			// 키워드로 장소를 검색합니다
+			ps.keywordSearch(add1+ add2, placesSearchCB); 
+
+			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+			function placesSearchCB (data, status, pagination) {
+			    if (status === daum.maps.services.Status.OK) {
+
+			        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+			        // LatLngBounds 객체에 좌표를 추가합니다
+			        var bounds = new daum.maps.LatLngBounds();
+
+			        for (var i=0; i<data.length; i++) {
+			            bounds.extend(new daum.maps.LatLng(data[i].y, data[i].x));
+			        }       
+
+			        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+			        map.setBounds(bounds);
+			    } 
+			}
+		});
+		
 		$('#addr_sido').change(function() {
 			$('#addr_sigungu').find('option').each(function() {
 				if($(this).val()!= 0) {
@@ -122,6 +160,35 @@
 						addEl.append(wi);
 						addEl.append(ky);
 						$('#addr_sigungu').append(addEl);
+					}
+				},
+				error: function(xhr, sta, err) {
+					alert(sta+ ' => '+ err);
+				},
+			});
+		});
+		$('#addr_sido2').change(function() {
+			$('#addr_sigungu2').find('option').each(function() {
+				if($(this).val()!= 0) {
+					$(this).remove();
+				}
+			});
+			var no= $('#addr_sido2').val();
+			$.ajax({
+				type: "post",
+				url: "/dinner/admin/restaurant/getSigungu.do",
+				data: {
+					sidoNo: no,
+				},
+				success: function(res) {
+					console.log(res);
+					for(var i in res) {
+						var wi= $('<input type="hidden" value="'+res[i].addrWi + '" />');
+						var ky= $('<input type="hidden" value="'+res[i].addrKy + '" />');
+						var addEl= $('<option value="'+ res[i].sigunguNo+ '">'+ res[i].sigunguName+ '</option>');
+						addEl.append(wi);
+						addEl.append(ky);
+						$('#addr_sigungu2').append(addEl);
 					}
 				},
 				error: function(xhr, sta, err) {
@@ -158,6 +225,26 @@
 	</select>
 	<button id="searchMap">지도 보기</button>
 	<div id= 'seachedMap' style="width: 300px; height: 300px;"></div>
+</div>
+
+<div>
+	<h2>지도 위치 변경해서 띄우기2</h2>
+	<label for="addr_sido2">시도</label>
+	<select id="addr_sido2">
+		<option value="0">시도를 선택하세요</option>
+		<c:forEach var= "vo" items= "${sido_list }">
+			<option value="${vo.sidoNo }">${vo.sidoName }</option>
+		</c:forEach>
+	</select>
+	<label for="addr_sigungu2">시군구</label>
+	<select id="addr_sigungu2">
+		<option value="0">시군구를 선택하세요</option>
+		<c:forEach var= "vo" items= "${sigungu_list }">
+			<option value="${vo.sigunguNo }">${vo.sigunguName }</option>
+		</c:forEach>
+	</select>
+	<button id="seachMap2">지도 보기2</button>
+	<div id= 'seachedMap2' style="width: 300px; height: 300px;"></div>
 </div>
 
 <div>

@@ -11,6 +11,7 @@ public class BookVO {
 	private int bookNum;  //인원수
 	private String bookCheck; //승인여부
 	private String resAddress; //예약정보 볼때 필요한 식당 주소
+	private String resAddressDetail; //예약정보 볼때 필요한 식당 상세주소
 	private String resName;
 	
 	public BookVO() {
@@ -94,6 +95,14 @@ public class BookVO {
 
 	public void setResAddress(String resAddress) {
 		this.resAddress = resAddress;
+	}
+
+	public String getResAddressDetail() {
+		return resAddressDetail;
+	}
+
+	public void setResAddressDetail(String resAddressDetail) {
+		this.resAddressDetail = resAddressDetail;
 	}
 
 	public String getResName() {
