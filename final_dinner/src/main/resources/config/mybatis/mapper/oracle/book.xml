@@ -30,8 +30,12 @@
 			     , A.BOOK_DATE
 			     , A.BOOK_NUM
 			     , A.BOOK_CHECK
+			     , A.BOOK_TIME
 			     , B.MEM_NAME
 			     , B.MEM_TEL1
+			     , B.MEM_TEL2
+			     , B.MEM_TEL3
+			     
 			  FROM BOOK A
 		INNER JOIN MEMBER B
 		        ON (A.MEM_NO = B.MEM_NO)

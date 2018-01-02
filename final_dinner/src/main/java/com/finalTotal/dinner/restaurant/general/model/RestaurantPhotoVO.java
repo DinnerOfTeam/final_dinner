@@ -3,13 +3,13 @@ package com.finalTotal.dinner.restaurant.general.model;
 import java.sql.Timestamp;
 
 public class RestaurantPhotoVO {
-	private int resPhotoNo;
-	private int resNo;
-	private String resPhotoName;
-	private String photoOriginalName;
-	private String resPhotoTitle;
-	private String resPhotoDesc;
-	private Timestamp resPhotoRegdate;
+	private int resPhotoNo; //식당사진번호
+	private int resNo;	//식당번호
+	private String resPhotoName; //사진이름
+	private String photoOriginalName; //사진실제이름
+	private String resPhotoTitle; //이미지제목
+	private String resPhotoDesc; //이미지설명
+	private Timestamp resPhotoRegdate; //등록일
 	
 	public RestaurantPhotoVO() {
 		super();

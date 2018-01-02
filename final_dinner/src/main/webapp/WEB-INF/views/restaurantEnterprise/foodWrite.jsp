@@ -199,6 +199,11 @@
 							</div>
 						</div>
 						
+						
+						
+					</div>
+					
+					<div class="shadow-box food-item-box">
 						<label for="foodMenuNo">메뉴 종류</label>
 						<select class="form-select"
 								name="foodMenuNo" id="foodMenuNo">
@@ -208,11 +213,8 @@
 							<option value="3">김밥</option>
 							<option value="4">튀김류</option>
 							<option value="5">분식</option>
+							<option value="6">기타</option>
 						</select>
-						
-					</div>
-					
-					<div class="shadow-box food-item-box">
 						<div class="row">
 							<div class="col-sm-2 col-sm-push-10 form-comp">
 								<input type="button"

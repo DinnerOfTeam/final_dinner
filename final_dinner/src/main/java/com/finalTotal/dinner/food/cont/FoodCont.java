@@ -12,9 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.food.model.FoodItemVO;
+import com.finalTotal.dinner.food.model.FoodItemVO2;
 import com.finalTotal.dinner.food.model.FoodMenuService;
 
 
@@ -39,16 +39,35 @@ public class FoodCont {
 	
 	
 	@RequestMapping(value="/foodWrite.do", method=RequestMethod.POST )
-	public String foodWirte(HttpSession session , @ModelAttribute FoodItemVO vo, Model model) {
-		logger.info("메뉴 등록 페이지");
+	public String foodWirte(HttpSession session , @ModelAttribute FoodItemVO2 vo2, Model model) {
+		logger.info("메뉴 등록 페이지 파라미터 vo={}",vo2);
 		
+		String[] foodMenuNoarr = vo2.getFoodMenuNo().split(",");
+		String[] foodItemNamearr = vo2.getFoodItemName().split(",");
+		String[] foodItemDescarr = vo2.getFoodItemDesc().split(",");
+		String[] foodItemPricearr = vo2.getFoodItemPrice().split(",");
 	
-		int cnt = foodMenuService.insertFoodMenu(vo);
-		logger.info("메뉴 등록 결과, cnt={}",cnt);
+		int cnt = 0;
+		for (int i = 0; i < foodMenuNoarr.length; i++) {
+			FoodItemVO vo = new FoodItemVO();
+			vo.setFoodMenuNo(Integer.parseInt(foodMenuNoarr[i]));
+			vo.setFoodItemName(foodItemNamearr[i]);	
+			if(i<foodItemDescarr.length) {
+				vo.setFoodItemDesc(foodItemDescarr[i]);
+			}else {
+				vo.setFoodItemDesc("");
+			}
+			vo.setFoodItemPrice(Integer.parseInt(foodItemPricearr[i]));
+			
+			cnt += foodMenuService.insertFoodMenu(vo);
+			logger.info("메뉴 등록 결과, cnt={}",cnt);
+		}
+		
+		
 		
 		String msg = "", url="";
 		
-		if(cnt>0) {
+		if(cnt==foodMenuNoarr.length) {
 			msg="메뉴 등록되었습니다";
 			url="/member/myPage.do";
 		}else {

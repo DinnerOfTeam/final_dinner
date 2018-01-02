@@ -75,7 +75,7 @@ public class RestaurantInformationCont {
 	@RequestMapping(value="/restaurantOut.do", method=RequestMethod.GET)
 	public void restaurantOut_get(HttpSession session) {
 		
-		String resNo = (String)session.getAttribute("resNo");
+		int resNo = (Integer) session.getAttribute("resNo");
 		logger.info("식당 탈퇴 페이지 보여주기, 파라미터 resNo={}", resNo);
 	}
 	

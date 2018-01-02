@@ -52,7 +52,7 @@ action="<c:url value='/restaurantEnterprise/menuDelete.do'/>"
 					</c:forEach>
 						</select>
 			</div>
-		
+			<hr>
 	        <div>           
 	        	<span class="sp">메뉴를 삭제하시겠습니까?</span>                        
 	        </div>

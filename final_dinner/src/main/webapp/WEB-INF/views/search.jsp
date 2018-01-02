@@ -210,7 +210,7 @@
 									<div class="restaurant-search-inner">
 										<div class="restaurant-search-img col-xs-4 col-sm-12">
 											<c:if test="${empty resItem.resThumbnail }">
-												<img src="${pageContext.request.contextPath }/images/noImages1x1.png""/>
+												<img src="${pageContext.request.contextPath }/images/noImages1x1.png"/>
 											</c:if>
 											<c:if test="${!empty resItem.resThumbnail }">
 												<img src="${pageContext.request.contextPath }/upfiles/upl_images/${resItem.resThumbnail}"/>
