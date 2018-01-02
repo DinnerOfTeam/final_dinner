@@ -30,5 +30,10 @@ public class BookDAOMybatis extends SqlSessionDaoSupport implements BookDAO {
 	public List<Map<String,Object>> selectReservedMember(int memNo) {
 		return getSqlSession().selectList(namespace+".selectReservedMember",memNo);
 	}
+
+	@Override
+	public List<Map<String, Object>> adminSelectDay(Map<String, Object> map) {
+		return getSqlSession().selectList(namespace+".adminSelectDay",map);
+	}
 	
 }

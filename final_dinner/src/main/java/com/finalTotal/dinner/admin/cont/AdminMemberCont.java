@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalTotal.dinner.member.model.MemberService;
@@ -27,7 +28,22 @@ public class AdminMemberCont {
 		log.info("admin member page");
 		
 		List<MemberVO> list= mem_ser.showAll();
+		log.info("회원 리스트 결과 size={}", list.size());
 		model.addAttribute("mem_list", list);
+	}
+	
+	@RequestMapping("/Amember2.do")
+	public void memList2(@RequestParam(required= false) String s_currentPage, Model model) {
+		log.info("admin member page parameter : curPage={}", s_currentPage);
+		
+		int currentPage= 1;
+		if(s_currentPage!= null&& !s_currentPage.isEmpty()) {
+			currentPage= Integer.parseInt(s_currentPage);
+		}
+		List<MemberVO> list= mem_ser.showAll2(currentPage);
+		log.info("회원 리스트 결과 size={}", list.size());
+		model.addAttribute("mem_list", list);
+		model.addAttribute("totalRecord", mem_ser.showAll().size());
 	}
 
 	@RequestMapping("/AmemberEdit.do")

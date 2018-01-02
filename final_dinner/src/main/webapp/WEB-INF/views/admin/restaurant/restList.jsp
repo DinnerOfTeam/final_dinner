@@ -21,7 +21,8 @@
 }
 
 .restaurant-search-inner > .restaurant-search-img > img{
-	width: 100%;
+	width: 20vw;
+	height: 20vw;
 }
 
 .restaurant-search-inner > .restaurant-search-desc, .restaurant-search-inner > .restaurant-search-img{
@@ -44,7 +45,7 @@ img.res_thum {
 				<div class="restaurant-search-inner">
 					<div class="restaurant-search-img col-xs-4 col-sm-12">
 						<c:if test="${empty vo.resThumbnail }">
-						<img src="http://placehold.it/150x150"/>
+						<img class= 'res_thum' src="http://placehold.it/150x150"/>
 						</c:if>
 						<c:if test="${!empty vo.resThumbnail }">
 						<img class= 'res_thum' src="<c:url value='/upfiles/upl_images/${vo.resThumbnail }' />"/>
@@ -53,6 +54,9 @@ img.res_thum {
 					<div class="restaurant-search-desc col-xs-8 col-sm-12">
 						<h2>${vo.resName }</h2>
 						<h4>평점 : ${vo.resGrade }/5</h4>
+					</div>
+					<div class= 'col-sm-12 visible-xs'>
+						${vo.resIntroduce }
 					</div>
 				</div>
 			</a>

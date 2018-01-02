@@ -11,4 +11,5 @@ public interface BookService {
 	public int deleteBook(int bookNo);
 	public List<BookVO> selectAll(int memNo);
 	public List<Map<String,Object>> selectReservedMember(int memNo);
+	public List<Map<String,Object>> adminSelectDay(Map<String, Object> map);
 }

@@ -71,21 +71,41 @@
 					<!-- 페이징(모바일) -->
 					<div class="table-sub visible-xs">
 						<ul class="pager">
-							<li class="previous disabled">
-								<a href="#">
-									<i class="fa fa-angle-left"></i>&nbsp;
-									이전
-								</a>
-							</li>
+							<c:if test="${searchVO.currentPage== 1 }">
+								<li class="previous disabled">
+									<a>
+										<i class="fa fa-angle-left"></i>&nbsp;
+										이전
+									</a>
+								</li>
+							</c:if>
+							<c:if test="${searchVO.currentPage!= 1 }">
+								<li class="previous">
+									<a href="#" onclick="goPage(${searchVO.currentPage- 1 })">
+										<i class="fa fa-angle-left"></i>&nbsp;
+										이전
+									</a>
+								</li>
+							</c:if>
 							<li class="current">
-								<span>1</span>
+								<span>${searchVO.currentPage }</span>
 							</li>
-							<li class="next">
-								<a href="#">
-									다음&nbsp;
-									<i class="fa fa-angle-right"></i>
-								</a>
-							</li>
+							<c:if test="${searchVO.currentPage== searchVO.totalPage }">
+								<li class="next disabled">
+									<a>
+										<i class="fa fa-angle-right"></i>
+										다음&nbsp;
+									</a>
+								</li>
+							</c:if>
+							<c:if test="${searchVO.currentPage!= searchVO.totalPage }">
+								<li class="next">
+									<a href="#" onclick="goPage(${searchVO.currentPage+ 1 })">
+										<i class="fa fa-angle-right"></i>&nbsp;
+										다음&nbsp;
+									</a>
+								</li>
+							</c:if>
 						</ul>
 					</div>
 					

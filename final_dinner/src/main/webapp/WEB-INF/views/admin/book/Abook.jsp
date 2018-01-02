@@ -18,7 +18,7 @@
 		var options = {
 			title: 'Company Performance',
 			curveType: 'function',
-			legend: { position: 'bottom' }
+			legend: { position: 'right' }
 		};
 	
 		var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
@@ -27,3 +27,9 @@
 	}
 </script>
 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+<div>
+<%-- 	<c:forEach var= 'map' items= "${list }">
+		<p>map['BOOK_DATE']</p>
+		<p>map['COUNT']</p>
+	</c:forEach> --%>
+</div>

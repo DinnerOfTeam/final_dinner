@@ -42,7 +42,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" media="all">
 <link href="${pageContext.request.contextPath }/css/codestyle.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/js/wow.min.js"></script>
-<script src="${pageContext.request.contextPath }/js/admin/member.js"></script>
 	<script>
 		 new WOW().init();
 	</script>

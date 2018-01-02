@@ -54,4 +54,8 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	public int memberOut(String memId) {
 		return getSqlSession().delete(namespace+".memberOut",memId);
 	}
+	@Override
+	public List<MemberVO> showAll2(int currentPage) {
+		return getSqlSession().selectList(namespace+ ".showAll2", currentPage);
+	}
 }

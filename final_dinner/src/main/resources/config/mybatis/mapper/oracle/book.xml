@@ -5,7 +5,6 @@
 <mapper namespace="config.mybatis.mapper.oracle.book">
 	
 	
-	
 	<delete id="deleteBook" parameterType="int">
 		delete from book where book_no=#{bookNo}
 	</delete>
@@ -40,6 +39,13 @@
 		INNER JOIN MEMBER B
 		        ON (A.MEM_NO = B.MEM_NO)
 		     WHERE RES_NO = (SELECT RES_NO FROM RESTAURANT WHERE MEM_NO = #{memNo})
+	</select>
+	
+	<select id="adminSelectDay" resultType="Map" parameterType="Map">
+		select trunc(book_date) as book_date, count(*) as count from book
+			where book_date between #{startDay} and #{endDay}
+	        group by trunc(book_date)
+	        order by trunc(book_date)
 	</select>
 
 </mapper>

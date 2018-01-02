@@ -74,6 +74,11 @@ public class MemberServiceImpl implements MemberService{
 	public int memberOut(String memId) {
 		return memberDao.memberOut(memId);
 	}
+
+	@Override
+	public List<MemberVO> showAll2(int currentPage) {
+		return memberDao.showAll2(currentPage);
+	}
 	
 }
 

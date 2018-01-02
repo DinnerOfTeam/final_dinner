@@ -26,28 +26,28 @@ public class AnswerCont {
 	private AnswerService answerService;
 	
 	//답변달기
-	@RequestMapping(value="/reply.do", method=RequestMethod.GET)
+/*	@RequestMapping(value="/reply.do", method=RequestMethod.GET)
 	String reply_get() {
 		logger.info("답변달기 화면 보여주기");
 		
 		return "answer/reply";
-	}
+	}*/
 	
-	@RequestMapping(value="/reply.do", method=RequestMethod.POST)
+	@RequestMapping("/reply.do")
 	String reply_post(@ModelAttribute AnswerVO answerVo, Model model) {
 		logger.info("답변달기 처리 - 파라미터 answerVo={}", answerVo);
 		
 		int cnt = answerService.insertAnswer(answerVo);
 		logger.info("답변달기 결과, cnt={}", cnt);
 		
-		String msg="", url="";
+		String msg="", url="/admin/main.do";
 		
 		if(cnt>0) {
 			msg="답변등록 처리완료";
-			url="/customer/detail.do";
+//			url="/customer/detail.do";
 		}else {
 			msg="답변등록 실패";
-			url="/reply.do";
+//			url="/reply.do";
 		}
 		
 		model.addAttribute("msg", msg);

@@ -32,5 +32,10 @@ public class BookServiceImpl implements BookService {
 	public List<Map<String,Object>> selectReservedMember(int memNo) {
 		return bookDao.selectReservedMember(memNo);
 	}
+
+	@Override
+	public List<Map<String, Object>> adminSelectDay(Map<String, Object> map) {
+		return bookDao.adminSelectDay(map);
+	}
 	
 }

@@ -20,7 +20,7 @@ import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 @Controller
 @RequestMapping("/admin/restaurant")
 public class AdminRestaurantCont {
-	public static final Logger log= LoggerFactory.getLogger(AdminBookCont.class);
+	public static final Logger log= LoggerFactory.getLogger(AdminRestaurantCont.class);
 	
 	@Autowired
 	private AddrService addr_ser;
@@ -35,6 +35,8 @@ public class AdminRestaurantCont {
 		model.addAttribute("sido_list", sido_list);
 		log.info("sido 검색 결과 list.size()= {}", sido_list.size());
 		
+		List<RestaurantVO> res_list= res_ser.all();
+		model.addAttribute("res_list", res_list);
 	}
 	
 	@RequestMapping("/Ares2.do")
