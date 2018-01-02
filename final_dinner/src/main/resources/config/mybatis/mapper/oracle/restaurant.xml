@@ -43,6 +43,15 @@
 			where res_no=#{resNo}
 		</select>
 		
+		<select id="all" resultType="RestaurantVO">
+			select * from restaurant
+		</select>
+		
+		<select id="selectRes" parameterType="int" resultType="string">
+			select res_no from restaurant
+			where mem_no=#{memNo}
+		</select>
+			
 		<select id="searchRestarunt" resultType="RestaurantVO" parameterType="RestaruntSearchVO" >
 			select c.*
 			from(
@@ -67,11 +76,23 @@
 			order by res_no desc
 		</select>
 		
+<<<<<<< HEAD
 		<select id="selectNoByMemId" parameterType="String" resultType="int">
 			select r.res_no from restaurant r
 			join member m
 			on r.mem_no=m.mem_no
 			where m.mem_id=#{memId}
 		</select>
+=======
+		<delete id="restaurantOut" parameterType="string">
+			delete from restaurant
+			where res_no=#{resNo}
+		</delete>
+		
+		
+		
+		
+		
+>>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
 	
 </mapper>

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.finalTotal.dinner.addr.model.AddrService;
 import com.finalTotal.dinner.addr.model.SidoVO;
 import com.finalTotal.dinner.addr.model.SigunguVO;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
 @Controller
 @RequestMapping("/admin/restaurant")
@@ -22,6 +24,9 @@ public class AdminRestaurantCont {
 	
 	@Autowired
 	private AddrService addr_ser;
+	
+	@Autowired
+	private RestaurantService res_ser;
 	
 	@RequestMapping("/Ares.do")
 	public void resList(Model model) {
@@ -55,6 +60,15 @@ public class AdminRestaurantCont {
 		List<SigunguVO> sigungu_list= addr_ser.selectSigungu(sidoNo);
 		
 		return sigungu_list;
+	}
+	
+	@RequestMapping("/ArestList.do")
+	public String restList(Model model) {
+		List<RestaurantVO> list= res_ser.all();
+		
+		model.addAttribute("list", list);
+		
+		return "admin/restaurant/restList";
 	}
 
 }

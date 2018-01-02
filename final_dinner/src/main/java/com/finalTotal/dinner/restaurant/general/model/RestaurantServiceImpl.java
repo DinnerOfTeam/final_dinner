@@ -29,6 +29,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
+	public List<RestaurantVO> all() {
+		return restaurantDao.all();
+	}
+	
+	@Override
+	public String selectRes(int memNo) {
+		return restaurantDao.selectRes(memNo);
+	}
+	
+	@Override
 	public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO) {
 		return restaurantDao.searchRestarunt(searchVO);
 	}
@@ -39,8 +49,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<Integer> selectNoByMemId(String memId) {
 		return restaurantDao.selectNoByMemId(memId);
+=======
+	public int restaurantOut(String resNo) {
+		return restaurantDao.restaurantOut(resNo);
+				
+>>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
 	}
 
 

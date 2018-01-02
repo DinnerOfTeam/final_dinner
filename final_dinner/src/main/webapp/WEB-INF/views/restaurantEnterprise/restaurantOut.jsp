@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@include file="../inc/top.jsp"%>   
- 
+<%@include file="../inc/top.jsp"%>     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,23 +30,23 @@
 	});
 	
 </script>
-
 </head>
 <body>
 
+
 <article class="simpleForm">
 	<form name="frmOut" method="post" 
-		action="<c:url value='/member/memberOut.do'/>"	>
+		action="<c:url value='/restaurantEnterprise/restaurantOut.do'/>"	>
 		<fieldset>
-			<legend>회원 탈퇴</legend>
-			<p class="p">회원탈퇴하시겠습니까?</p>
+			<legend>식당 탈퇴</legend>
+			<p class="p">식당을 탈퇴하시겠습니까?</p>
 			
 			<div>
 				<label for="memPwd" >비밀번호 </label>
 				<input type="password" name="memPwd" id="memPwd">
 			</div>
 			<div class="align_center">
-				<input type="submit" value="회원탈퇴">
+				<input type="submit" value="식당탈퇴">
 				<input type="reset" value="취소">
 			</div>		
 		</fieldset>
@@ -56,7 +55,6 @@
 
 </body>
 </html>
-
 
 
 <%@include file="../inc/footer.jsp"%>

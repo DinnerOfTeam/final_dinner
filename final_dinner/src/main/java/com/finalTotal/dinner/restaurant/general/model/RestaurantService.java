@@ -8,7 +8,13 @@ public interface RestaurantService {
     public int insertRestuarant(RestaurantVO vo);
     public List<RestaurantVO> selectAll(int memNo);
     public RestaurantVO selectByNo(int resNo);
+    public List<RestaurantVO> all();
+    public String selectRes(int memNo);
     public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO);
     public int countRestarunt(RestaruntSearchVO searchVO);
+<<<<<<< HEAD
     public List<Integer> selectNoByMemId(String memId);
+=======
+    public int restaurantOut(String resNo);
+>>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
 }

@@ -8,4 +8,5 @@ public interface FoodMenuDAO {
 	public int insertFoodMenu(FoodItemVO vo);	
 	public List<FoodItemVO> selectAll(int foodItemNo);
 	public int deleteMenu(int foodItemNo);
+	public int selectAll2(int memNo);
 }

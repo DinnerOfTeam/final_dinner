@@ -2,21 +2,22 @@ package com.finalTotal.dinner.food.model;
 
 import java.util.Date;
 
-public class FoodItemVO {
+public class FoodItemVO2 {
 	
 	private int foodItemNo;	//메뉴내용번호
-	private int foodMenuNo;	//메뉴종류번호
+	private String foodMenuNo;	//메뉴종류번호
 	private String foodItemName; //이름	
 	private String foodItemDesc; //설명
-	private int foodItemPrice; 	//가격
+	private String foodItemPrice; 	//가격
 	private Date foodItemRegdate; //등록일
 	
-	public FoodItemVO() {
+	public FoodItemVO2() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public FoodItemVO(int foodItemNo, int foodMenuNo, String foodItemName, String foodItemDesc, int foodItemPrice,
-			Date foodItemRegdate) {
+	public FoodItemVO2(int foodItemNo, String foodMenuNo, String foodItemName, String foodItemDesc,
+			String foodItemPrice, Date foodItemRegdate) {
 		super();
 		this.foodItemNo = foodItemNo;
 		this.foodMenuNo = foodMenuNo;
@@ -34,11 +35,11 @@ public class FoodItemVO {
 		this.foodItemNo = foodItemNo;
 	}
 
-	public int getFoodMenuNo() {
+	public String getFoodMenuNo() {
 		return foodMenuNo;
 	}
 
-	public void setFoodMenuNo(int foodMenuNo) {
+	public void setFoodMenuNo(String foodMenuNo) {
 		this.foodMenuNo = foodMenuNo;
 	}
 
@@ -58,11 +59,11 @@ public class FoodItemVO {
 		this.foodItemDesc = foodItemDesc;
 	}
 
-	public int getFoodItemPrice() {
+	public String getFoodItemPrice() {
 		return foodItemPrice;
 	}
 
-	public void setFoodItemPrice(int foodItemPrice) {
+	public void setFoodItemPrice(String foodItemPrice) {
 		this.foodItemPrice = foodItemPrice;
 	}
 
@@ -76,10 +77,11 @@ public class FoodItemVO {
 
 	@Override
 	public String toString() {
-		return "FoodItemVO [foodItemNo=" + foodItemNo + ", foodMenuNo=" + foodMenuNo + ", foodItemName=" + foodItemName
+		return "FoodItemVO2 [foodItemNo=" + foodItemNo + ", foodMenuNo=" + foodMenuNo + ", foodItemName=" + foodItemName
 				+ ", foodItemDesc=" + foodItemDesc + ", foodItemPrice=" + foodItemPrice + ", foodItemRegdate="
 				+ foodItemRegdate + "]";
 	}
+	
 	
 	
 }

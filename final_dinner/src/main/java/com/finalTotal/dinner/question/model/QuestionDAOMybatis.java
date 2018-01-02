@@ -5,6 +5,8 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.finalTotal.dinner.common.SearchVO;
+
 @Repository
 public class QuestionDAOMybatis extends SqlSessionDaoSupport implements QuestionDAO{
 	private String namespace="config.mybatis.mapper.oracle.question";
@@ -46,6 +48,21 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 	@Override
 	public int deleteQna(int no) {
 		return getSqlSession().delete(namespace+".deleteQna",no);
+	}
+
+	@Override
+	public List<QuestionVO> searchAll(SearchVO vo) {
+		return getSqlSession().selectList(namespace+ ".searchAll", vo);
+	}
+
+	@Override
+	public int getTotal(SearchVO vo) {
+		return getSqlSession().selectOne(namespace+ ".getTotal", vo);
+	}
+
+	@Override
+	public List<QuestionVO> adminSelectAll() {
+		return getSqlSession().selectList(namespace+ ".adminSelectAll");
 	}
 	
 	

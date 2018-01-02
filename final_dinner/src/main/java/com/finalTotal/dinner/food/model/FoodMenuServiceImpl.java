@@ -27,4 +27,9 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 		return foodMenuDao.selectAll(foodItemNo);
 	}
 
+	@Override
+	public int selectAll2(int memNo) {
+		return foodMenuDao.selectAll2(memNo);
+	}
+
 }

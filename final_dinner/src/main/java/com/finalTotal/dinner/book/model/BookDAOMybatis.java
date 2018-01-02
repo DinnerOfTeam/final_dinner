@@ -1,6 +1,7 @@
 package com.finalTotal.dinner.book.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,11 @@ public class BookDAOMybatis extends SqlSessionDaoSupport implements BookDAO {
 	@Override
 	public List<BookVO> selectAll(int memNo) {
 		return getSqlSession().selectList(namespace+".selectAll",memNo);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectReservedMember(int memNo) {
+		return getSqlSession().selectList(namespace+".selectReservedMember",memNo);
 	}
 	
 }

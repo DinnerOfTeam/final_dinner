@@ -121,18 +121,6 @@
 		</form>
 		
 		
-		
-		
-			<div class='page_div'>
-				<ul class= 'pagination'>
-					<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>
-					<li><a>1</a></li>
-					<li><a>2</a></li>
-					<li><a>3</a></li>
-					<li><a aria-label='Next'><i class="fa fa-angle-right"></i></a></li>
-				</ul>
-			</div>
-			
 	</div>
 
 

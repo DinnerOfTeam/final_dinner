@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberVO;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
 
 @Controller
 @RequestMapping("/login")
@@ -27,6 +28,8 @@ public class LoginCont {
 	@Autowired
 	private MemberService memberService;
 	
+
+	
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public void login_get() {
 		logger.info("로그인 화면 보여주기");
@@ -34,7 +37,7 @@ public class LoginCont {
 	}
 	
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public String login_post(@ModelAttribute MemberVO vo,
+	public String login_post(@ModelAttribute MemberVO vo, 
 			@RequestParam(required=false)String chkSaveId,
 			HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) {
@@ -47,11 +50,14 @@ public class LoginCont {
 			vo = memberService.selectMember(vo.getMemId());
 			logger.info("로그인 결과 : vo={}", vo);
 			
+			
 			//[1]  성공한 경우에만 세션에 저장
 			HttpSession session = request.getSession();
 			session.setAttribute("memId", vo.getMemId());
 			session.setAttribute("memName", vo.getMemName());
 			session.setAttribute("memNo", vo.getMemNo());
+			
+			
 			
 			//[2]쿠키에 저장
 			Cookie ck = new Cookie("ck_memId", vo.getMemId());

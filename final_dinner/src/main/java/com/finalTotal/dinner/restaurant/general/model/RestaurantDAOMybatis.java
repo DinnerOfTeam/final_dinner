@@ -28,6 +28,16 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 	}
 
 	@Override
+	public List<RestaurantVO> all() {
+		return getSqlSession().selectList(namespace+".all");
+	}
+	
+	@Override
+	public String selectRes(int memNo) {
+		return getSqlSession().selectOne(namespace+".selectRes",memNo);
+	}
+
+	@Override
 	public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO) {
 		return getSqlSession().selectList(namespace+".searchRestarunt", searchVO);
 	}
@@ -38,8 +48,13 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<Integer> selectNoByMemId(String memId) {
 		return getSqlSession().selectList(namespace+".selectNoByMemId", memId);
+=======
+	public int restaurantOut(String resNo) {
+		return getSqlSession().delete(namespace+".restaurantOut",resNo);
+>>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
 	}
 
 	

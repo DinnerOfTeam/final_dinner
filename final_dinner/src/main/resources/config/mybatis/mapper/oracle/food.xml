@@ -7,8 +7,7 @@
 	<insert id="insertFoodMenu" parameterType="FoodItemVO">
 			<selectKey  keyProperty="foodItemNo" resultType="int" order="BEFORE">
 				select food_item_seq.nextval from dual
-			</selectKey>	
-				
+			</selectKey>				
 				insert into food_item(food_item_no, food_menu_no, food_item_name, food_item_desc, food_item_price)
 				values(#{foodItemNo}, #{foodMenuNo},#{foodItemName},#{foodItemDesc},#{foodItemPrice})
 		</insert>
@@ -17,6 +16,10 @@
 	<select id="selectAll" parameterType="int" resultType="FoodItemVO">
 			select * from food_item
 			where food_menu_no in (select food_menu_no from food_menu where res_no = #{resNo})
+	</select>
+	
+	<select id="selectAll2" parameterType="int" resultType="int">
+			select res_no from restaurant where mem_no = #{memNo}
 	</select>
 	
 	

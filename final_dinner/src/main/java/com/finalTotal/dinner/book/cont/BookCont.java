@@ -1,9 +1,11 @@
 package com.finalTotal.dinner.book.cont;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +71,8 @@ public class BookCont {
 		int memNo = (Integer)session.getAttribute("memNo");
 		logger.info("memNo",memNo);
 		
-		List<BookVO> list = bookService.selectAll(memNo);
+		// memNo에 해당하는 업체에 예약된 손님 가져오기
+		List<Map<String,Object>> list = bookService.selectReservedMember(memNo);
 		logger.info("식당 예약조회 결과, list.size()={}");
 		
 		model.addAttribute("list",list);

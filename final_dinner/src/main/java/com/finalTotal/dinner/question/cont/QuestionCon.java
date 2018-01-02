@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.answer.model.AnswerService;
 import com.finalTotal.dinner.answer.model.AnswerVO;
+import com.finalTotal.dinner.common.PagingVO;
+import com.finalTotal.dinner.common.SearchVO;
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberServiceImpl;
 import com.finalTotal.dinner.member.model.MemberVO;
@@ -86,7 +88,7 @@ public class QuestionCon {
 	}
 	
 	//리스트 출력하기
-	@RequestMapping("/list.do")
+	@RequestMapping("/list2.do")
 	public String list(@ModelAttribute QuestionVO questionVo,Model model) {
 		//1. 출력하기
 		logger.info("전체조회하기");
@@ -98,6 +100,34 @@ public class QuestionCon {
 		
 		model.addAttribute("list", list);
 		
+		return "customer/list2";
+	}
+	
+	//리스트 출력하기
+	@RequestMapping("/list.do")
+	public String list2(@ModelAttribute SearchVO searchVo, Model model) {
+		//1. 출력하기
+		logger.info("전체조회하기 parameter : searchVo={}", searchVo);
+		//2.
+		
+		int totalRecord= questionService.getTotal(searchVo);
+		PagingVO pageVo= new PagingVO();
+		pageVo.setCurrentPage(searchVo.getCurrentPage());
+		pageVo.setTotalRecord(totalRecord);
+		pageVo.setBlockSize(10);
+		pageVo.setPageSize(10);
+		
+		searchVo.setPageSize(pageVo.getPageSize());
+		searchVo.setTotalPage(pageVo.getTotalPage());
+		searchVo.setFirstRowNum(pageVo.getFirstRowNum());
+		searchVo.setFirstBlockPage(pageVo.getFirstBlockPage());
+		searchVo.setLastBlockPage(pageVo.getLastBlockPage());
+		List<QuestionVO> list= questionService.searchAll(searchVo);
+		logger.info("목록 조회 결과,list.size()="+list.size());
+				
+		model.addAttribute("list", list);
+		model.addAttribute("page", pageVo);
+		
 		return "customer/list";
 	}
 	
@@ -107,7 +137,7 @@ public class QuestionCon {
 		logger.info("자주묻는 질문 조회");
 		
 		List<QuestionVO> list = questionService.mainNotice();
-		logger.info("메인 질문  조회 결과, list.size()={}", list.size());
+		logger.info("메인 질문 조회 결과, list.size()={}", list.size());
 	
 		model.addAttribute("list", list);
 		
@@ -143,8 +173,8 @@ public class QuestionCon {
 		
 		QuestionVO vo =questionService.selectByNo(no);
 		logger.info("Question 상세보기 결과, vo={}", vo);
-		AnswerVO av = answerService.selectByNo(no);
-		logger.info("Answer 상세보기 결과, av={}", av);
+		List<AnswerVO> av_list = answerService.selectByQuestionNo(no);
+		logger.info("Answer 상세보기 결과, av_list.size()={}", av_list.size());
 		
 		/*String content=vo.getQuestionContent();
 		String content2 = av.getAnswerContent();
@@ -162,14 +192,16 @@ public class QuestionCon {
 			content=content.replace("\r\n", "<br>");
 			vo.setQuestionContent(content);
 		}
-		if(av!=null) {
-			content2=av.getAnswerContent();
-			content2=content2.replace("\r\n", "<br>");
-			av.setAnswerContent(content2);
+		if(av_list!=null) {
+			for(AnswerVO av: av_list) {
+				content2=av.getAnswerContent();
+				content2=content2.replace("\r\n", "<br>");
+				av.setAnswerContent(content2);
+			}
 		}
 		
 		model.addAttribute("vo", vo);
-		model.addAttribute("av", av);
+		model.addAttribute("av_list", av_list);
 		
 		return "customer/detail";
 	}

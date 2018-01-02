@@ -19,4 +19,6 @@ public interface MemberDAO {
 	public int updateMemberByAdmin(MemberVO vo);
 	
 	public List<MemberVO> showAll();
+	
+	public int memberOut(String memId);
 }
