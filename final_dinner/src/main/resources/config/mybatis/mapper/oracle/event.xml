@@ -6,9 +6,8 @@
 	
 	<insert id="insertEvent" parameterType="EventVO">
 		<selectKey order="BEFORE" resultType="int" keyProperty="eventNo">
-			select site_event_seq.nextval from dual;
+			select site_event_seq.nextval from dual
 		</selectKey>
-	
 		insert into site_event(event_no, res_no, event_title, event_content, event_thumb, event_start_date, event_end_date)
 		values(#{eventNo}, 
 			<if test="resNo==0">
@@ -17,7 +16,7 @@
 			<if test="resNo>0">
 				#{resNo},
 			</if>
-		 #{eventTitle}, #{eventContent}, #{eventThumb}, #{eventStartDate}, #{eventEndDate})
+		#{eventTitle}, #{eventContent}, #{eventThumb}, #{eventStartStr}, #{eventEndStr})
 	</insert>
 	
 	<select id="selectEventByDate" parameterType="SearchVO" resultType="EventVO">
@@ -29,8 +28,9 @@
 				select * from site_event 
 				where event_start_date<=#{keyword}
 				and event_end_date>=#{keyword}
+				and event_approve='Y'
 				order by (
-					case when event_end_date<trunc(sysdate) then 0
+					case when event_end_date<trunc(sysdate) or event_is_end='Y' then 0
 						 when event_start_date>trunc(sysdate) then 1
 						 else 2
 					end
@@ -47,8 +47,64 @@
 		select count(*) from site_event
 		where event_start_date<=#{eventDate}
 		and event_end_date>=#{eventDate}
+		and event_approve='Y'
 		order by event_no desc
 		]]>
 	</select>
+	
+	<select id="selectEventList" parameterType="SearchVO" resultType="EventVO">
+		select f.*
+		from(
+			select rownum as rnum, e.*
+			from(
+				select * from site_event
+				<if test="keyword!=null and keyword!=''">
+					where res_no=#{keyword}
+				</if>
+				order by (
+				<![CDATA[
+					case when event_end_date<trunc(sysdate) or event_is_end='Y' then 0
+						 when event_start_date>trunc(sysdate) then 1
+						 else 2
+					end
+				]]>
+				) desc, event_no desc
+			)e
+		)f
+		<![CDATA[
+		where f.rnum>#{firstRowNum}
+		and f.rnum<=#{pageSize}+#{firstRowNum}
+		]]>
+	</select>
+	
+	<select id="countEventList" resultType="int" parameterType="string">
+		select count(*) from site_event
+		<if test="value!=null and value!=''">
+			where res_no=#{keyword}
+		</if>
+		order by event_no desc
+	</select>
+	
+	<select id="selectEventByNo" parameterType="int" resultType="EventVO">
+		select * from site_event 
+		where event_no=#{eventNo}
+	</select>
+	
+	<update id="eventApprove" parameterType="int">
+		update site_event
+		set event_approve='Y'
+		where event_no=#{eventNo}
+	</update>
+	
+	<update id="eventClose" parameterType="eventVO">
+		update site_event
+		set event_is_end=#{eventIsEnd}
+		where event_no=#{eventNo}
+	</update>
+	
+	<delete id="deleteEvent" parameterType="int">
+		delete from site_event
+		where event_no=#{eventNo}
+	</delete>
 	
 </mapper>

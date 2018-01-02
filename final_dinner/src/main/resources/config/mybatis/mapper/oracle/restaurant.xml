@@ -66,5 +66,12 @@
 			<include refid="searchWhere"/>
 			order by res_no desc
 		</select>
+		
+		<select id="selectNoByMemId" parameterType="String" resultType="int">
+			select r.res_no from restaurant r
+			join member m
+			on r.mem_no=m.mem_no
+			where m.mem_id=#{memId}
+		</select>
 	
 </mapper>

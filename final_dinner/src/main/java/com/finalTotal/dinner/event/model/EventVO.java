@@ -12,6 +12,11 @@ public class EventVO {
 	private Timestamp eventStartDate;
 	private Timestamp eventEndDate;
 	private Timestamp eventRegdate;
+	private String eventApprove;
+	
+	//입력용
+	private String eventStartStr;
+	private String eventEndStr;
 	
 	public int getEventNo() {
 		return eventNo;
@@ -67,12 +72,32 @@ public class EventVO {
 	public void setEventRegdate(Timestamp eventRegdate) {
 		this.eventRegdate = eventRegdate;
 	}
+	public String getEventStartStr() {
+		return eventStartStr;
+	}
+	public void setEventStartStr(String eventStartStr) {
+		this.eventStartStr = eventStartStr;
+	}
+	public String getEventEndStr() {
+		return eventEndStr;
+	}
+	public void setEventEndStr(String eventEndStr) {
+		this.eventEndStr = eventEndStr;
+	}
+	public String getEventApprove() {
+		return eventApprove;
+	}
+	public void setEventApprove(String eventApprove) {
+		this.eventApprove = eventApprove;
+	}
 	
 	@Override
 	public String toString() {
 		return "EventVO [eventNo=" + eventNo + ", resNo=" + resNo + ", eventTitle=" + eventTitle + ", eventContent="
 				+ eventContent + ", eventThumb=" + eventThumb + ", eventIsEnd=" + eventIsEnd + ", eventStartDate="
-				+ eventStartDate + ", eventEndDate=" + eventEndDate + ", eventRegdate=" + eventRegdate + "]";
+				+ eventStartDate + ", eventEndDate=" + eventEndDate + ", eventRegdate=" + eventRegdate
+				+ ", eventApprove=" + eventApprove + ", eventStartStr=" + eventStartStr + ", eventEndStr=" + eventEndStr
+				+ "]";
 	}
 	
 }

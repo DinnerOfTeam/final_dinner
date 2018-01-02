@@ -73,7 +73,7 @@ public class BoardCon {
 		logger.info("게시판 목록조회 결과, list.size()={}", list.size());
 		
 		model.addAttribute("list", list);
-		model.addAttribute("searchVO", searchVO);
+		model.addAttribute("paging", paging);
 		
 		return "board/list";
 	}

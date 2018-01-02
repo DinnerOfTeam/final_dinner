@@ -63,6 +63,7 @@ public class SearchCont {
 		logger.info("검색- 결과, list.size={}", list.size());
 		
 		model.addAttribute("sidoList", sidoList);
+		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
 		
 		return "search";

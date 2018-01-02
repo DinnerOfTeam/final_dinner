@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 
     
-    <script
-	src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
+    
 <link href="${pageContext.request.contextPath }/css/modules.css"
 	rel="StyleSheet" type="text/css">
 <link href="${pageContext.request.contextPath }/css/style.min.css"

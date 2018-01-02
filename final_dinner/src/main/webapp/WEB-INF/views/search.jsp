@@ -122,6 +122,11 @@
 </script>
 
 <link href="css/site-search.css" rel="stylesheet" type="text/css" media="all" />
+	
+	<c:url var="listURL" value='/search.do'>
+		<c:param name="location" value="${param.location }"></c:param>
+		<c:param name="keyword" value="${param.keyword }"></c:param>
+	</c:url>
 
 	<div class="site-top-title site-title-default" >
 		<div class="container">
@@ -238,6 +243,143 @@
 					</c:if>
 					
 					
+				</div>
+				
+				<div>
+					<!-- 페이징(모바일) -->
+					<div class="visible-xs">
+						<ul class="pager">
+							<c:choose>
+								<c:when test="${paging.currentPage<=1 }">
+									<li class="previous disabled">
+										<span>
+											<i class="fa fa-angle-left"></i>&nbsp;
+											이전
+										</span>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="previous">
+										<a href="${listURL}&currentPage=${paging.currentPage-1}">
+											<i class="fa fa-angle-left"></i>&nbsp;
+											이전
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+							<li class="current">
+								<span>${paging.currentPage }</span>
+							</li>
+							<c:choose>
+								<c:when test="${paging.currentPage>=paging.totalPage }">
+									<li class="next disabled">
+										<span>
+											다음&nbsp;
+											<i class="fa fa-angle-right"></i>
+										</span>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li class="next">
+										<a href="${listURL}&currentPage=${paging.currentPage+1}">
+											다음&nbsp;
+											<i class="fa fa-angle-right"></i>
+										</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</ul>
+					</div>
+					
+					<!-- 페이징 -->
+					<c:if test="${!empty sidoList }">
+						<div class="board-list-sub col-xs-12 hidden-xs">
+							<ul class="pagination">
+								<c:choose>
+									<c:when test="${paging.currentPage>1 }">
+										<li>
+											<a href="${listURL}&currentPage=1" aria-label="First">
+												<i class="fa fa-angle-double-left"></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled">
+											<span aria-label="First">
+												<i class="fa fa-angle-double-left"></i>
+											</span>
+										</li>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${paging.firstBlockPage>1 }">
+										<li>
+											<a href="${listURL}&currentPage=${paging.firstBlockPage-1}" aria-label="Previous">
+												<i class="fa fa-angle-left"></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled">
+											<span aria-label="Previous">
+												<i class="fa fa-angle-left"></i>
+											</span>
+										</li>
+									</c:otherwise>
+								</c:choose>
+								<c:forEach var="i" begin="${paging.firstBlockPage}" end="${paging.lastBlockPage}">
+									<c:choose>
+										<c:when test="${i==paging.currentPage }">
+											<li class="active">
+												<span>
+													${i}
+												</span>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li>
+												<a href="${listURL}&currentPage=${i}">
+													${i}
+												</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${paging.lastBlockPage<paging.totalPage }">
+										<li>
+											<a href="${listURL}&currentPage=${paging.lastBlockPage+1}" aria-label="Next">
+												<i class="fa fa-angle-right"></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled">
+											<span aria-label="Next">
+												<i class="fa fa-angle-right"></i>
+											</span>
+										</li>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${paging.currentPage<paging.totalPage }">
+										<li>
+											<a href="${listURL}&currentPage=${paging.totalPage}" aria-label="Last">
+												<i class="fa fa-angle-double-right"></i>
+											</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li class="disabled">
+											<span aria-label="Last">
+												<i class="fa fa-angle-double-right"></i>
+											</span>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</div>
+					</c:if>
 				</div>
 			</div>
 		</div>

@@ -38,5 +38,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return restaurantDao.countRestarunt(searchVO);
 	}
 
+	@Override
+	public List<Integer> selectNoByMemId(String memId) {
+		return restaurantDao.selectNoByMemId(memId);
+	}
+
 
 }

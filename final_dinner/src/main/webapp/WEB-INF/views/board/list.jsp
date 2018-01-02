@@ -29,8 +29,8 @@
 	<div class="container">
 		<div class="board-inner">
 			<c:url var="listURL" value='/board/list.do'>
-				<c:param name="keyword" value="${searchVO.keyword }"></c:param>
-				<c:param name="type" value="${searchVO.type }"></c:param>
+				<c:param name="keyword" value="${param.keyword }"></c:param>
+				<c:param name="type" value="${param.type }"></c:param>
 			</c:url>
 			<div class="board-list">
 				<div class="row board-list-header hidden-xs">
@@ -49,9 +49,9 @@
 						<c:forEach var="vo" items="${list }">
 							<c:url var='boardURL' value='/board/detail.do'>
 								<c:param name="no" value="${vo.freeNo }"></c:param>
-								<c:param name="keyword" value="${searchVO.keyword }"></c:param>
-								<c:param name="type" value="${searchVO.type }"></c:param>
-								<c:param name="currentPage" value="${searchVO.currentPage}" />
+								<c:param name="keyword" value="${param.keyword }"></c:param>
+								<c:param name="type" value="${param.type }"></c:param>
+								<c:param name="currentPage" value="${paging.currentPage}" />
 							</c:url>
 							<c:set var="rowClass" value="row board-list-row"/>
 							<c:if test="${!empty param.isImport and vo.freeNo==param.no }">
@@ -108,7 +108,7 @@
 				<div class="visible-xs">
 					<ul class="pager">
 						<c:choose>
-							<c:when test="${searchVO.currentPage<=1 }">
+							<c:when test="${paging.currentPage<=1 }">
 								<li class="previous disabled">
 									<span>
 										<i class="fa fa-angle-left"></i>&nbsp;
@@ -118,7 +118,7 @@
 							</c:when>
 							<c:otherwise>
 								<li class="previous">
-									<a href="${listURL}&currentPage=${searchVO.currentPage-1}">
+									<a href="${listURL}&currentPage=${paging.currentPage-1}">
 										<i class="fa fa-angle-left"></i>&nbsp;
 										이전
 									</a>
@@ -126,10 +126,10 @@
 							</c:otherwise>
 						</c:choose>
 						<li class="current">
-							<span>${searchVO.currentPage }</span>
+							<span>${paging.currentPage }</span>
 						</li>
 						<c:choose>
-							<c:when test="${searchVO.currentPage>=searchVO.totalPage }">
+							<c:when test="${paging.currentPage>=paging.totalPage }">
 								<li class="next disabled">
 									<span>
 										다음&nbsp;
@@ -139,7 +139,7 @@
 							</c:when>
 							<c:otherwise>
 								<li class="next">
-									<a href="${listURL}&currentPage=${searchVO.currentPage+1}">
+									<a href="${listURL}&currentPage=${paging.currentPage+1}">
 										다음&nbsp;
 										<i class="fa fa-angle-right"></i>
 									</a>
@@ -161,7 +161,7 @@
 					<div class="board-list-sub col-xs-12 hidden-xs">
 						<ul class="pagination">
 							<c:choose>
-								<c:when test="${searchVO.currentPage>1 }">
+								<c:when test="${paging.currentPage>1 }">
 									<li>
 										<a href="${listURL}&currentPage=1" aria-label="First">
 											<i class="fa fa-angle-double-left"></i>
@@ -177,9 +177,9 @@
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
-								<c:when test="${searchVO.firstBlockPage>1 }">
+								<c:when test="${paging.firstBlockPage>1 }">
 									<li>
-										<a href="${listURL}&currentPage=${searchVO.firstBlockPage-1}" aria-label="Previous">
+										<a href="${listURL}&currentPage=${paging.firstBlockPage-1}" aria-label="Previous">
 											<i class="fa fa-angle-left"></i>
 										</a>
 									</li>
@@ -192,9 +192,9 @@
 									</li>
 								</c:otherwise>
 							</c:choose>
-							<c:forEach var="i" begin="${searchVO.firstBlockPage}" end="${searchVO.lastBlockPage}">
+							<c:forEach var="i" begin="${paging.firstBlockPage}" end="${paging.lastBlockPage}">
 								<c:choose>
-									<c:when test="${i==searchVO.currentPage }">
+									<c:when test="${i==paging.currentPage }">
 										<li class="active">
 											<span>
 												${i}
@@ -211,9 +211,9 @@
 								</c:choose>
 							</c:forEach>
 							<c:choose>
-								<c:when test="${searchVO.lastBlockPage<searchVO.totalPage }">
+								<c:when test="${paging.lastBlockPage<paging.totalPage }">
 									<li>
-										<a href="${listURL}&currentPage=${searchVO.lastBlockPage+1}" aria-label="Next">
+										<a href="${listURL}&currentPage=${paging.lastBlockPage+1}" aria-label="Next">
 											<i class="fa fa-angle-right"></i>
 										</a>
 									</li>
@@ -227,9 +227,9 @@
 								</c:otherwise>
 							</c:choose>
 							<c:choose>
-								<c:when test="${searchVO.currentPage<searchVO.totalPage }">
+								<c:when test="${paging.currentPage<paging.totalPage }">
 									<li>
-										<a href="${listURL}&currentPage=${searchVO.totalPage}" aria-label="Last">
+										<a href="${listURL}&currentPage=${paging.totalPage}" aria-label="Last">
 											<i class="fa fa-angle-double-right"></i>
 										</a>
 									</li>
@@ -252,17 +252,17 @@
 						<div class="col-sm-2 col-sm-offset-2">
 							<select class="form-select" name="type">
 								<option value="title"
-									<c:if test="${searchVO.type=='free_title'}">
+									<c:if test="${param.type=='free_title'}">
 										selected
 									</c:if>
 								>제목</option>
 								<option value="contents"
-									<c:if test="${searchVO.type=='free_contents'}">
+									<c:if test="${param.type=='free_contents'}">
 										selected
 									</c:if>
 								>내용</option>
 								<option value="name"
-									<c:if test="${searchVO.type=='free_name'}">
+									<c:if test="${param.type=='free_name'}">
 										selected
 									</c:if>
 								>작성자</option>
@@ -271,7 +271,7 @@
 						
 						<div class="col-sm-4">
 							<input type="text" class="form-text" id="boardSearchKeyword" name="keyword"
-								placeholder="Search" value="${searchVO.keyword }">
+								placeholder="Search" value="${param.keyword }">
 						</div>
 						<div class="col-sm-2">
 							<input type="submit" class="site-btn-submit site-btn-full" value="검색">
