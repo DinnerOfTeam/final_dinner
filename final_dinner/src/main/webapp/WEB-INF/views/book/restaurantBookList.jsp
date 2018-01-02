@@ -89,42 +89,27 @@
 				}
 				return css; // default return
 
-				/*
-					Note that it is possible to create more complex checks
-					events with the same properties could have different CSS classes depending on the current view:
-
-					var mode = scheduler.getState().mode;
-					if(mode == "day"){
-						// custom logic here
-					}
-					else {
-						// custom logic here
-					}
-				*/
 			};
+			
 
 			var subject = [
-				{ key: '', label: 'Appointment' },
-				{ key: 'english', label: 'English' },
-				{ key: 'math', label: 'Math' },
-				{ key: 'science', label: 'Science' }
 			];
 
 			scheduler.config.lightbox.sections=[
-				{name:"description", height:43, map_to:"text", type:"textarea" , focus:true},
-				{name:"subject", height:20, type:"select", options: subject, map_to:"subject" },
+				{name:"description", height:60, map_to:"text", type:"textarea" , focus:true},
 				{name:"time", height:72, type:"time", map_to:"auto" }
 			];
 
-			scheduler.init('scheduler_here', new Date(2017, 3, 20), "week");
+			scheduler.init('scheduler_here', new Date(), "month");
 
-			scheduler.parse([
-				{ start_date: "2017-04-18 09:00", end_date: "2017-04-18 12:00", text:"English lesson", subject: 'english' },
-				{ start_date: "2017-04-20 10:00", end_date: "2017-04-21 16:00", text:"Math exam", subject: 'math' },
-				{ start_date: "2017-04-21 10:00", end_date: "2017-04-21 14:00", text:"Science lesson", subject: 'science' },
-				{ start_date: "2017-04-23 16:00", end_date: "2017-04-23 17:00", text:"English lesson", subject: 'english' },
-				{ start_date: "2017-04-22 09:00", end_date: "2017-04-22 17:00", text:"Usual event" }
-			], "json");
+		 	scheduler.parse([
+				
+				<c:forEach var="vo" items="${list}">
+					{start_date : "${vo.BOOK_DATE}", end_date : "${vo.BOOK_DATE}", text : "예약자 : " + "${vo.MEM_NAME}" + "\n" + "연락처 : " + "${vo.MEM_TEL1}"},
+				</c:forEach>
+			], "json"); 
+			
+			
 
 		}
 	</script>

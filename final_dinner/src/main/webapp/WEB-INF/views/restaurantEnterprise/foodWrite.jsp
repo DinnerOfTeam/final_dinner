@@ -61,6 +61,60 @@
             $("#insertBoardFrm").submit();
         });
     }); */
+    
+    <!-- 메뉴 추가 -->
+		$(function(){
+			$(document).on("click", ".food-item-box .food-item-del", function(){
+				if($('form[name=addFoodItem]>div.food-item-list>div.food-item-box').length>1){
+					$(this).closest('div.food-item-box').remove();
+				}
+			});
+			
+			var foodItemBox=$("form[name=addFoodItem]>div.food-item-box").eq(0).detach();
+			
+			$(document).on("click", "form[name=addFoodItem] .food-item-add", function(){
+				$('form[name=addFoodItem]>div.food-item-list').append(foodItemBox.clone());
+			});
+			
+			$('form[name=addFoodItem]>div.food-item-list').append(foodItemBox.clone());
+			
+			$('form[name=addFoodItem]').submit(function(){
+				if($('form[name=addFoodItem]>div.food-item-list>div.food-item-box').length<=0){
+					$(this).find('.food-item-add').click();
+					return false;
+				}
+				
+				if($(this).find('#foodMenuNo').val()==0){
+					alert("메뉴 종류를 선택하세요");
+					$(this).find('#foodMenuNo').focus();
+					return false;
+				}
+				
+				var errFlag=true;
+				$(this).find('.food-item-name').each(function(index, element){
+					if($(element).val()==""){
+						alert("메뉴명을 입력하세요");
+						$(element).focus();
+						errFlag=false;
+						return false;
+					}
+				});
+				
+				if(errFlag){
+					$(this).find('.food-item-price').each(function(index, element){
+						if($(element).val()==""){
+							alert("가격을 입력하세요");
+							$(element).focus();
+							errFlag=false;
+							return false;
+						}
+					});
+				}
+				
+				return errFlag;
+			});
+			
+		});
 </script>
 
 
@@ -74,7 +128,7 @@
 					<!-- 	<textarea name="editor" id="editor"
 							style="width: 700px; height: 400px;"></textarea> -->
 		
- 	<!-- login -->
+ 	<%-- <!-- login -->
 	<div class="form-wrap">
 		<div class="row">
 			<div class="form-body " style="width: 75%;">
@@ -127,7 +181,68 @@
 				</div>
 			</div>
 		</div>
+	</div> --%>
+	
+	
+		<div class="site-container-wrap">
+		<div class="container">
+			<div class="form-simple">
+				<form action="<c:url value='/restaurantEnterprise/foodWrite.do' />" method="post" name="addFoodItem">
+					<div class="shadow-box">
+						<div class="form-row">
+							<div class="col-xs-6 col-sm-10">
+								<h3>메뉴 추가</h3>
+							</div>
+							<div class="col-xs-6 col-sm-2">
+								<input type="button"
+									class="site-btn-submit site-btn-full food-item-add" value="추가">
+							</div>
+						</div>
+						
+						<label for="foodMenuNo">메뉴 종류</label>
+						<select class="form-select"
+								name="foodMenuNo" id="foodMenuNo">
+							<option value="0">메뉴 종류</option>
+							<option value="1">식사</option>
+							<option value="2">면류</option>
+							<option value="3">김밥</option>
+							<option value="4">튀김류</option>
+							<option value="5">분식</option>
+						</select>
+						
+					</div>
+					
+					<div class="shadow-box food-item-box">
+						<div class="row">
+							<div class="col-sm-2 col-sm-push-10 form-comp">
+								<input type="button"
+									class="site-btn site-btn-full food-item-del" value="제거">
+							</div>
+							<div class="col-sm-10 col-sm-pull-2">
+								<input type="text" class="form-text food-item-name" placeholder="메뉴명" name="foodItemName">
+							</div>
+						</div>
+						<input type="text" class="form-text food-item-price" placeholder="가격" name="foodItemPrice">
+						<textarea placeholder="설명" class="form-text food-item-desc" name="foodItemDesc"></textarea>
+					</div>
+					
+					<div class="food-item-list">
+						
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6 form-comp">
+							<input type="submit" class="site-btn-submit site-btn-full" value="등록">
+						</div>
+						<div class="col-sm-6 form-comp">
+							<a href="#" class="site-btn site-btn-full">취소</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
+	
 </body>
 </html>
 

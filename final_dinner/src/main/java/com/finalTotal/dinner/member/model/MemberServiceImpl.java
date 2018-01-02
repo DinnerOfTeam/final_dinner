@@ -66,9 +66,13 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.updateMemberByAdmin(vo);
 	}
 
-	@Override
 	public int insertMemberByAdmin(MemberVO vo) {
 		return memberDao.insertMemberByAdmin(vo);
+	}
+
+	@Override
+	public int memberOut(String memId) {
+		return memberDao.memberOut(memId);
 	}
 	
 }

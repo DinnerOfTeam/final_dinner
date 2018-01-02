@@ -47,6 +47,11 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 		return getSqlSession().selectOne(namespace+".countRestarunt", searchVO);
 	}
 
+	@Override
+	public int restaurantOut(String resNo) {
+		return getSqlSession().delete(namespace+".restaurantOut",resNo);
+	}
+
 	
 	
 	

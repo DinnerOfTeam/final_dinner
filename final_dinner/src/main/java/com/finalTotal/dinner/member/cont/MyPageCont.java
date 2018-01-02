@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.finalTotal.dinner.food.model.FoodMenuService;
 import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
@@ -26,6 +27,9 @@ public class MyPageCont {
 	@Autowired
 	private RestaurantService restaurantService;
 	
+	@Autowired
+	private FoodMenuService foodMenuService;
+	
 	@RequestMapping(value="/myPage.do", method=RequestMethod.GET)
 	public String myPage(HttpSession session, Model model) {
 		String memId = (String)session.getAttribute("memId");
@@ -35,7 +39,7 @@ public class MyPageCont {
 		MemberVO vo = memberService.selectMember(memId);
 		logger.info("마이페이지 정보 띄우기, vo={}",vo);
 		
-		String resNo = restaurantService.selectRes(vo.getMemNo())+"";
+		int resNo = foodMenuService.selectAll2(vo.getMemNo());
 		session.setAttribute("resNo", resNo);
 		logger.info("resNo={}",resNo);
 		

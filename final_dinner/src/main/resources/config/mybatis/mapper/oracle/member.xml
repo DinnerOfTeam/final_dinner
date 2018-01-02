@@ -60,6 +60,12 @@
 	</select>
 	
 	
+	<delete id="memberOut" parameterType="string">
+		delete from member
+		where mem_id=#{memId}
+	</delete>
+	
+	
 </mapper>
 
 

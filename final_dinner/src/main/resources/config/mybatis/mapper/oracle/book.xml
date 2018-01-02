@@ -22,5 +22,20 @@
 			select * from book
 			where mem_no=#{memNo}
 	</select>
+	
+	<select id="selectReservedMember" parameterType="int" resultType="map">
+			SELECT A.BOOK_NO    
+			     , A.MEM_NO    
+			     , A.RES_NO   
+			     , A.BOOK_DATE
+			     , A.BOOK_NUM
+			     , A.BOOK_CHECK
+			     , B.MEM_NAME
+			     , B.MEM_TEL1
+			  FROM BOOK A
+		INNER JOIN MEMBER B
+		        ON (A.MEM_NO = B.MEM_NO)
+		     WHERE RES_NO = (SELECT RES_NO FROM RESTAURANT WHERE MEM_NO = #{memNo})
+	</select>
 
 </mapper>

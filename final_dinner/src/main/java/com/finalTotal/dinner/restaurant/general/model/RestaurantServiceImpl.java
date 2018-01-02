@@ -48,5 +48,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return restaurantDao.countRestarunt(searchVO);
 	}
 
+	@Override
+	public int restaurantOut(String resNo) {
+		return restaurantDao.restaurantOut(resNo);
+				
+	}
+
 
 }

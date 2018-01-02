@@ -75,5 +75,15 @@
 			<include refid="searchWhere"/>
 			order by res_no desc
 		</select>
+		
+		<delete id="restaurantOut" parameterType="string">
+			delete from restaurant
+			where res_no=#{resNo}
+		</delete>
+		
+		
+		
+		
+		
 	
 </mapper>

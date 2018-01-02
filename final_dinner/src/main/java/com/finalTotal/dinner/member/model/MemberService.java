@@ -27,5 +27,7 @@ public interface MemberService {
 	
 	public List<MemberVO> showAll();
 	
+	public int memberOut(String memId);
+	
 	
 }

@@ -110,7 +110,7 @@ a {
 						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br> 
 						<a href="/dinner/book/booking.do">예약정보 조회</a><br>
 						<a href="/dinner/restaurant/restaurantJoin.do">식당등록</a><br>						
-						<a href="#">회원탈퇴</a>
+						<a href="/dinner/member/memberOut.do">회원탈퇴</a>
 					</div>
 					<div class="tab-pane fade" id="business">
 						<a href="/dinner/member/memberEdit.do">회원정보수정</a><br>
@@ -150,8 +150,8 @@ a {
 								</ul>
 							</div>
 						</div> 
-						<a href="#">식당탈퇴</a><br> 
-						<a href="#">회원탈퇴</a>
+						<a href="/dinner/restaurantEnterprise/restaurantOut.do">식당탈퇴</a><br> 
+						<a href="/dinner/member/memberOut.do">회원탈퇴</a>
 					</div>
 				</div>
 			</li>

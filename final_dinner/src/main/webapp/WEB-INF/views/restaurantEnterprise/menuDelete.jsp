@@ -37,15 +37,17 @@
 action="<c:url value='/restaurantEnterprise/menuDelete.do'/>" 
 	onsubmit="return send(this)">
 		<!-- 삭제 처리시 no가 필요하므로 hidden field에 넣어서 넘긴다 -->
+		<!-- 
 		<input type="hidden" name="foodItemNo" value="${param.foodItemNo}">
-		
+		 -->
+		 
 		<fieldset>
 		<legend>메뉴 삭제</legend>
 			<div class="col-xs-5">
-						<select class="form-select" name="foodContact1">
+						<select class="form-select" name="foodItemNo">
 							<option>메뉴선택</option>
 					<c:forEach var="vo" items="${list }" >
-							<option value="${vo.foodItemNo }">${vo.foodItemName}</option>
+							<option value="${vo.foodItemNo }" >${vo.foodItemName}</option>
 							
 					</c:forEach>
 						</select>
