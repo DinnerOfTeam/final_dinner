@@ -56,5 +56,15 @@ public class QuestionServiceImpl implements QuestionService{
 	public List<QuestionVO> searchAll(SearchVO vo) {
 		return questionDao.searchAll(vo);
 	}
+
+	@Override
+	public int getTotal(SearchVO vo) {
+		return questionDao.getTotal(vo);
+	}
+
+	@Override
+	public List<QuestionVO> adminSelectAll() {
+		return questionDao.adminSelectAll();
+	}
 	
 }

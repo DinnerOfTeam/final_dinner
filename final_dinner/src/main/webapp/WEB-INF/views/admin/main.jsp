@@ -106,6 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class=""><a href="#ABook" data-toggle="tab">예약관리</a></li>
 				<li class="active"><a href="#ARes" data-toggle="tab">업체지도</a></li>
 				<li class=""><a href="#ARest" data-toggle="tab">업체관리</a></li>
+				<li class=""><a href="#AQna" data-toggle="tab">질문관리</a></li>
 			</ul>
 		</div>
 		<div class="fadeIn animated" data-wow-delay=".5s">
@@ -133,6 +134,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="tab-pane fade" id="ARest">
 					<div class="container" title="업체관리">
 						<c:import url="/admin/restaurant/ArestList.do"></c:import>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="AQna">
+					<div class="container" title="질문관리">
+						<c:import url="/admin/qna/Aqna.do"></c:import>
 					</div>
 				</div>
 			</div>

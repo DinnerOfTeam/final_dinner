@@ -13,4 +13,8 @@
 	<select id="selectByNo" parameterType="int" resultType="AnswerVO">
 		select * from qna_answer where qna_answer_no=#{qnaAnswerNo}
 	</select>
+	
+	<select id="selectByQuestionNo" parameterType="int" resultType="AnswerVO">
+		select * from qna_answer where qna_question_no=#{qnaAnswerNo}
+	</select>
 </mapper>

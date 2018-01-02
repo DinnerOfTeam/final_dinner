@@ -13,6 +13,7 @@ public class QuestionVO {
 	private String questionPwd;
 	private int qnaTypeNo;
 	private String memName;
+	private int isAnswer;
 	public int getQnaQuestionNo() {
 		return qnaQuestionNo;
 	}
@@ -73,12 +74,18 @@ public class QuestionVO {
 	public void setMemName(String memName) {
 		this.memName = memName;
 	}
+	public int getIsAnswer() {
+		return isAnswer;
+	}
+	public void setIsAnswer(int isAnswer) {
+		this.isAnswer = isAnswer;
+	}
 	@Override
 	public String toString() {
 		return "QuestionVO [qnaQuestionNo=" + qnaQuestionNo + ", memNo=" + memNo + ", questionTitle=" + questionTitle
 				+ ", questionContent=" + questionContent + ", questionViewCount=" + questionViewCount
 				+ ", questionRegdate=" + questionRegdate + ", questionOpen=" + questionOpen + ", questionPwd="
-				+ questionPwd + ", qnaTypeNo=" + qnaTypeNo + ", memName=" + memName + "]";
+				+ questionPwd + ", qnaTypeNo=" + qnaTypeNo + ", memName=" + memName + ", isAnswer=" + isAnswer + "]";
 	}
 	
 }
