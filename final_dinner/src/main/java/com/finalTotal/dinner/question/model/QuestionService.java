@@ -14,4 +14,6 @@ public interface QuestionService {
 	public List<QuestionVO> selectByType(int qnaTypeNo);
 	public int updateQna(QuestionVO vo);
 	public int deleteQna(int no);
+	public int getTotal(SearchVO vo);
+	public List<QuestionVO> adminSelectAll();
 }

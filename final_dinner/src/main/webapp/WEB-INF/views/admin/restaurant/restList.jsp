@@ -32,8 +32,7 @@
 	margin: 0.1em 0 0.25em 0;
 }
 img.res_thum {
-	width: 334px;
-	height: 334.2px;
+	height: auto;
 }
 </style>
 
