@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.finalTotal.dinner.restaurant.search.model.RestaruntSearchVO;
 
@@ -58,6 +59,28 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public int restaurantOut(String resNo) {
 		return restaurantDao.restaurantOut(resNo);
 				
+	}
+
+	@Override
+	@Transactional
+	public int insertPhotoList(List<RestaurantPhotoVO> photoList) {
+		int cnt=0;
+		
+		for(RestaurantPhotoVO vo : photoList) {
+			cnt= restaurantDao.insertRestaurantPhoto(vo);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public List<RestaurantPhotoVO> selectPhotoByresNo(int resNo) {
+		return restaurantDao.selectPhotoByresNo(resNo);
+	}
+
+	@Override
+	public int deletePhotoByNo(int resNo) {
+		return restaurantDao.deletePhotoByNo(resNo);
 	}
 
 

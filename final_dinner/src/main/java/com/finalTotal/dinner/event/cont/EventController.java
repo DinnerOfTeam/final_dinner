@@ -136,7 +136,7 @@ public class EventController {
 			//이미지 업로드
 			String fileName="";
 			try {
-				List<Map<String, Object>> fileList=fileUtil.fileUploadByKey(request, "resThumbnail", FileUtil.IMAGE_UPLOAD);
+				List<Map<String, Object>> fileList=fileUtil.fileUploadByKey(request, "resThumbnail", FileUtil.IMAGE_UPLOAD, false);
 				
 				if(fileList!=null && !fileList.isEmpty()) {
 					Map<String, Object> thumbImg=fileList.get(0);

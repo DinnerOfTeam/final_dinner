@@ -1,6 +1,7 @@
 package com.finalTotal.dinner.restaurant.general.cont;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.finalTotal.dinner.board.model.BoardDataVO;
 import com.finalTotal.dinner.common.FileUtil;
 import com.finalTotal.dinner.member.cont.LoginCont;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantPhotoVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
@@ -46,23 +49,41 @@ public class RestaurantCont {
 	    
 	    //이미지 업로드 처리
 	    String resThumbnail="";	  
-	    	
-			try {
-				List<Map<String, Object>> list;
-				list = fileUtil.fileupload(request, FileUtil.IMAGE_UPLOAD);
-				
-				for(Map<String, Object> map:list) {
-					resThumbnail=(String)map.get("filename");
-					
-					vo.setResThumbnail(resThumbnail);
-				}
+	    
+	    List<RestaurantPhotoVO> imageList=new ArrayList<RestaurantPhotoVO>();
+		try {
+			List<Map<String, Object>> listThumb=null;
+			listThumb=fileUtil.fileUploadByKey(request, "imageThumb", FileUtil.IMAGE_UPLOAD, false);
 			
-				logger.info("vo={}",vo);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(listThumb!=null && !listThumb.isEmpty()) {
+				Map<String, Object> map=listThumb.get(0);
+				
+				resThumbnail=(String)map.get("filename");
+				
+				vo.setResThumbnail(resThumbnail);
 			}
+		
+			logger.info("vo={}",vo);
+			
+			List<Map<String, Object>> listFileImg=null;
+			listFileImg=fileUtil.fileUploadByKey(request, "imageUpload", FileUtil.IMAGE_UPLOAD);
+			if(listFileImg!=null && !listFileImg.isEmpty()) {
+				for(Map<String, Object> dataMap : listFileImg) {
+					RestaurantPhotoVO imageVO = new RestaurantPhotoVO();
+					imageVO.setResPhotoName((String)dataMap.get("filename"));
+					imageVO.setResPhotoOriginalName((String)dataMap.get("originalFilename"));
+					imageVO.setResPhotoTitle("이미지");
+					
+					imageList.add(imageVO);
+				}
+			}
+			
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 			
 			
 			//db insert    
@@ -74,8 +95,18 @@ public class RestaurantCont {
 	    String url = "";
 	    
 	    if(cnt > 0) {
+	    	//이미지 DB작업
+	    	for(RestaurantPhotoVO photoVO : imageList) {
+	    		photoVO.setResNo(vo.getResNo());
+	    	}
+	    	int cntImg=restaurantService.insertPhotoList(imageList);
+	    	
 	        msg = "식당등록이되었습니다.";
 	        url = "/member/myPage.do";
+	        
+	        if(cntImg==0) {
+	        	msg = "식당 등록 완료 / 이미지 등록 실패";
+	        }
 	    }else{
 	        msg = "식당등록실패";
 	    }

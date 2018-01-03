@@ -14,4 +14,8 @@ public interface RestaurantService {
     public int countRestarunt(RestaruntSearchVO searchVO);
     public List<Integer> selectNoByMemId(String memId);
     public int restaurantOut(String resNo);
+    
+    public int insertPhotoList(List<RestaurantPhotoVO> photoList);
+    public List<RestaurantPhotoVO> selectPhotoByresNo(int resNo);
+    public int deletePhotoByNo(int resNo);
 }
