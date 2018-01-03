@@ -38,8 +38,36 @@
 	color: #777;
 }
 
+.event_info{
+	font-size: 1em;
+	margin: 0.5em 0 0 0;
+	color: #555;
+}
+
 #event_list tr:hover .event_date{
 	color: #FFF;
+}
+
+.event-detail-title{
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.event-info-wrap{
+	margin: 0.5em 0;
+}
+
+.event-detail-content{
+	min-height: 30em;
+}
+
+.event-detail-btn{
+	margin: 1em 0;
+	text-align: right;
+}
+
+.event-detail-btn > *{
+	min-width: 7.5em;
 }
 
 @media (max-width: 767px) {
@@ -51,6 +79,12 @@
 	#event_list td,
 	#event_list th{
 		padding: 0.5em;
+		display: block;
+		border: none;
+		text-align: center;
+	}
+	
+	.event-detail-title{
 		display: block;
 		border: none;
 		text-align: center;

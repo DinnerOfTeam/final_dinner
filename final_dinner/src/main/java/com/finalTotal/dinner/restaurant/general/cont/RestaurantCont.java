@@ -50,11 +50,12 @@ public class RestaurantCont {
 			try {
 				List<Map<String, Object>> list;
 				list = fileUtil.fileupload(request, FileUtil.IMAGE_UPLOAD);
+				
 				for(Map<String, Object> map:list) {
 					resThumbnail=(String)map.get("filename");
 					
 					vo.setResThumbnail(resThumbnail);
-				}			
+				}
 			
 				logger.info("vo={}",vo);
 			} catch (IllegalStateException e) {

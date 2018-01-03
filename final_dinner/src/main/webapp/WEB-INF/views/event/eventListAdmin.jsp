@@ -1,7 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../inc/top.jsp" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- bootstrap-css -->
+<link href="${pageContext.request.contextPath }/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<!--// bootstrap-css -->
+<!-- css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css" type="text/css" media="all" />
+<!--// css -->
+<!-- font-awesome icons -->
+<link href="${pageContext.request.contextPath }/css/font-awesome.css" rel="stylesheet"> 
+<!-- //font -->
+<script src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/bootstrap.js"></script>
+<link href="${pageContext.request.contextPath }/css/jquery-ui.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/codestyle.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/site-event.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/jquery/jquery-ui.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$('.event-set-end').click(function(){
@@ -28,8 +48,9 @@
 		});
 	});
 </script>
+</head>
+<body>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/site-event.css">
 
 <c:url var="listURL" value='/admin/event/eventList.do'></c:url>
 <jsp:useBean id="nowDate" class="java.util.Date"/>
@@ -65,7 +86,7 @@
 									</div>
 								</td>
 								<td>
-									<a href="<c:url value='/event/eventDetail.do?eventNo=${eventVO.eventNo }'/>">
+									<a href="<c:url value='/event/eventDetail.do?mode=admin&eventNo=${eventVO.eventNo }'/>">
 										${eventVO.eventTitle }
 									</a>
 									&nbsp;
@@ -264,4 +285,5 @@
 	</div>
 </div>
 
-<%@include file="../inc/footer.jsp" %>
+</body>
+</html>
