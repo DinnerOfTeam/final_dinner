@@ -53,7 +53,9 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 		
 	}
 	
+
 	@Override
+
 	public int restaurantOut(String resNo) {
 		return getSqlSession().delete(namespace+".restaurantOut",resNo);
 	}

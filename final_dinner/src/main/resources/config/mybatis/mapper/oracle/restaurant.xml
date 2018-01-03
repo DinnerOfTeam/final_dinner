@@ -76,12 +76,14 @@
 			order by res_no desc
 		</select>
 		
-		<select id="selectNoByMemId" parameterType="string" resultType="int">
+		
+		<select id="selectNoByMemId" parameterType="String" resultType="int">
 			select r.res_no from restaurant r
 			join member m
 			on r.mem_no=m.mem_no
 			where m.mem_id=#{memId}
 		</select>
+		
 		
 		<delete id="restaurantOut" parameterType="string">
 			delete from restaurant
@@ -100,8 +102,6 @@
 											res_photo_desc)
 			values(#{resPhotoNo},#{resNo},#{resPhotoName},#{resPhotoOriginalName},#{resPhotoTitle},#{resPhotoDesc});
 		</insert>
-		
-		
 		
 		
 		
