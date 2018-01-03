@@ -67,6 +67,11 @@
 						<input type="text" class="form-text" name="resWorkDay" placeholder="영업일(월~금, 연중무휴, ...)" required="">
 						<input type="text" class="form-text" name="resWorkHour" placeholder="영업시간" required="">
 						
+						<div class="form-group">
+							<label for="imageThumb">썸네일</label>
+							<input type="file" name="imageThumb" id="imageThumb">
+						</div>
+						
 					<div class="row form-group">
 						<label class="col-xs-9">첨부파일</label>
 						<div class="col-xs-3">
@@ -75,7 +80,7 @@
 						<div class="site-fileup-list">
 							<div class="site-fileup-row">
 								<div class="col-xs-9">
-									<input type="file" name="imageUpload" id="imageUpload">
+									<input type="file" name="imageUpload">
 								</div>
 								<div class="col-xs-3">
 									<input type="button" class="btn-file-del site-btn btn-block" value="삭제">

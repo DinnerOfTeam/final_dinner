@@ -78,7 +78,10 @@
 										+"-"+ eventEndDate.getDate();
 								
 								//썸네일
-								var eThumb=$tableTd.clone().append($("<img>").attr("src", eventThumb));
+								var eThumb=$tableTd.clone()
+									.append($('<div class="eventListImg"></div>')
+												.append($("<img>").attr("src", eventThumb))
+									);
 								
 								//제목, 기간, 링크
 								var eTitle=$tableTd.clone();
@@ -315,14 +318,9 @@
 										<i class="fa fa-angle-left"></i>
 									</a>
 								</li>
-								<li>
-									<a href="#">
-										1
-									</a>
-								</li>
 								<li class="active">
 									<a href="#">
-										2
+										1
 									</a>
 								</li>
 								<li class="disabled">

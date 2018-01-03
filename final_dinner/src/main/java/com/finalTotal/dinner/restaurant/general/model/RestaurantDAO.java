@@ -15,4 +15,10 @@ public interface RestaurantDAO {
     public List<Integer> selectNoByMemId(String memId);
     
     public int restaurantOut(String resNo);
+    
+    public int insertRestaurantPhoto(RestaurantPhotoVO photoVO);
+    public List<RestaurantPhotoVO> selectPhotoByresNo(int resNo);
+    public int deletePhotoByNo(int resNo);
+    
+    
 }

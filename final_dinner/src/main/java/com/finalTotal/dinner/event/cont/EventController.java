@@ -26,6 +26,7 @@ import com.finalTotal.dinner.common.SearchVO;
 import com.finalTotal.dinner.event.model.EventService;
 import com.finalTotal.dinner.event.model.EventVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
 @Controller
 public class EventController {
@@ -135,7 +136,7 @@ public class EventController {
 			//이미지 업로드
 			String fileName="";
 			try {
-				List<Map<String, Object>> fileList=fileUtil.fileUploadByKey(request, "resThumbnail", FileUtil.IMAGE_UPLOAD);
+				List<Map<String, Object>> fileList=fileUtil.fileUploadByKey(request, "resThumbnail", FileUtil.IMAGE_UPLOAD, false);
 				
 				if(fileList!=null && !fileList.isEmpty()) {
 					Map<String, Object> thumbImg=fileList.get(0);
@@ -407,8 +408,45 @@ public class EventController {
 	}
 	
 	@RequestMapping("/event/eventDetail.do")
-	public String eventDetail(@RequestParam(defaultValue="0") int eventNo) {
-		return null;
+	public String eventDetail(@RequestParam(defaultValue="0") int eventNo,
+			Model model) {
+		logger.info("이벤트 상세보기, 파라미터 eventNo={}", eventNo);
+		
+		String msg="";
+		boolean back= false;
+		
+		EventVO eVO=null;
+		RestaurantVO rVO=null;
+		
+		if(eventNo==0) {
+			msg="잘못된 URL입니다";
+			back=true;
+			
+			return "common/message";
+		}else {
+			eVO=eventService.selectEventByNo(eventNo);
+			logger.info("상세보기 결과 VO={}", eVO);
+			
+			if(eVO==null || eVO.getEventNo()==0) {
+				msg="존재하지 않거나 삭제된 이벤트입니다";
+				back=true;
+			}
+			
+			rVO=restaruntService.selectByNo(eVO.getResNo());
+			logger.info("상세보기 식당정보 결과 VO={}", rVO);
+		}
+		
+		if(back) {
+			model.addAttribute("msg", msg);
+			model.addAttribute("back", back);
+			
+			return "common/message";
+		}
+		
+		model.addAttribute("eVO", eVO);
+		model.addAttribute("rVO", rVO);
+		
+		return "event/eventDetail";
 	}
 	
 }
