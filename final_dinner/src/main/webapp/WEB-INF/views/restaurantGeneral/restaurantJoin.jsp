@@ -25,21 +25,21 @@
 }
 </style>
 
-<!-- <script type="text/javascript">
-	$(function () {
-		$('#startDay').datepicker({
-			dateFormat:'yy-mm-dd',
-			changeYear:true,
-			dayNamesMin:['일','월','화','수','목','금','토'],
-			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월',]
+ <script type="text/javascript">
+ $(function(){
+		$('.btn-file-del').click(function(){
+			$(this).parent().parent().remove();
 		});
 		
-		$('button').click(function () {
-			var d = $('#startDay').datepicker('getDate');
-			alert(d);
+		var $fileRow=$('.site-fileup-list').find('.site-fileup-row').eq(0).clone(true);
+		$fileRow.find('input[type=file]').val('');
+		
+		$('.btn-file-add').click(function(){
+			$(this).parent().parent().find('.site-fileup-list').append($fileRow.clone(true));
 		});
-	});
-</script> -->
+ });
+ 
+</script>
 
 <%@include file="../inc/mypageSide.jsp" %>
 
@@ -67,7 +67,28 @@
 						<input type="text" class="form-text" name="resWorkDay" placeholder="영업일(월~금, 연중무휴, ...)" required="">
 						<input type="text" class="form-text" name="resWorkHour" placeholder="영업시간" required="">
 						
-						<input type ="file" name="imageUpload" id="imageUpload" required="">
+						<div class="form-group">
+							<label for="imageThumb">썸네일</label>
+							<input type="file" name="imageThumb" id="imageThumb">
+						</div>
+						
+					<div class="row form-group">
+						<label class="col-xs-9">첨부파일</label>
+						<div class="col-xs-3">
+							<input type="button" class="btn-file-add site-btn-submit btn-block" value="추가">
+						</div>
+						<div class="site-fileup-list">
+							<div class="site-fileup-row">
+								<div class="col-xs-9">
+									<input type="file" name="imageUpload">
+								</div>
+								<div class="col-xs-3">
+									<input type="button" class="btn-file-del site-btn btn-block" value="삭제">
+								</div>
+							</div>
+						</div>
+					</div>
+						
 						
 						
 						<input type="text" class="form-text" name="resMaxPerson" placeholder="최대인원" required="">

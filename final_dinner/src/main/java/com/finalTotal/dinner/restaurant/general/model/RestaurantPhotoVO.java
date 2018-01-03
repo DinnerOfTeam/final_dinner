@@ -3,26 +3,26 @@ package com.finalTotal.dinner.restaurant.general.model;
 import java.sql.Timestamp;
 
 public class RestaurantPhotoVO {
-	private int resPhotoNo;
-	private int resNo;
-	private String resPhotoName;
-	private String photoOriginalName;
-	private String resPhotoTitle;
-	private String resPhotoDesc;
-	private Timestamp resPhotoRegdate;
+	private int resPhotoNo; //식당사진번호
+	private int resNo;	//식당번호
+	private String resPhotoName; //사진이름
+	private String resPhotoOriginalName; //사진실제이름
+	private String resPhotoTitle; //이미지제목
+	private String resPhotoDesc; //이미지설명
+	private Timestamp resPhotoRegdate; //등록일
 	
 	public RestaurantPhotoVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RestaurantPhotoVO(int resPhotoNo, int resNo, String resPhotoName, String photoOriginalName,
+	public RestaurantPhotoVO(int resPhotoNo, int resNo, String resPhotoName, String resPhotoOriginalName,
 			String resPhotoTitle, String resPhotoDesc, Timestamp resPhotoRegdate) {
 		super();
 		this.resPhotoNo = resPhotoNo;
 		this.resNo = resNo;
 		this.resPhotoName = resPhotoName;
-		this.photoOriginalName = photoOriginalName;
+		this.resPhotoOriginalName = resPhotoOriginalName;
 		this.resPhotoTitle = resPhotoTitle;
 		this.resPhotoDesc = resPhotoDesc;
 		this.resPhotoRegdate = resPhotoRegdate;
@@ -52,12 +52,12 @@ public class RestaurantPhotoVO {
 		this.resPhotoName = resPhotoName;
 	}
 
-	public String getPhotoOriginalName() {
-		return photoOriginalName;
+	public String getResPhotoOriginalName() {
+		return resPhotoOriginalName;
 	}
 
-	public void setPhotoOriginalName(String photoOriginalName) {
-		this.photoOriginalName = photoOriginalName;
+	public void setResPhotoOriginalName(String resPhotoOriginalName) {
+		this.resPhotoOriginalName = resPhotoOriginalName;
 	}
 
 	public String getResPhotoTitle() {
@@ -87,7 +87,7 @@ public class RestaurantPhotoVO {
 	@Override
 	public String toString() {
 		return "RestaurantPhotoVO [resPhotoNo=" + resPhotoNo + ", resNo=" + resNo + ", resPhotoName=" + resPhotoName
-				+ ", photoOriginalName=" + photoOriginalName + ", resPhotoTitle=" + resPhotoTitle + ", resPhotoDesc="
+				+ ", resPhotoOriginalName=" + resPhotoOriginalName + ", resPhotoTitle=" + resPhotoTitle + ", resPhotoDesc="
 				+ resPhotoDesc + ", resPhotoRegdate=" + resPhotoRegdate + "]";
 	}
 	

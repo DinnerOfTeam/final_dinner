@@ -139,7 +139,7 @@
 						</div>
 
 					</fieldset>
-					   <input type ="text" name="chkId" id="chkId">
+					   <input type ="hidden" name="chkId" id="chkId">
 
 					<button id="wr_submit" class="site-btn-submit site-btn-full">회원가입</button>
 					<div class="signup-text">

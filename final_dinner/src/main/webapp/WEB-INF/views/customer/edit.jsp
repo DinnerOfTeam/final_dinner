@@ -27,7 +27,7 @@
 						<textarea name="questionContent" class="form-text">${vo.questionContent}</textarea>
 						<div class="form-row">
 						<div class="col-sm-6">
-							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="답변달기">
+							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="수정하기">
 						</div>
 						<div class="col-sm-6">
 							<a href="<c:url value='/customer/list.do'/>" class="site-btn site-btn-full">목록</a>

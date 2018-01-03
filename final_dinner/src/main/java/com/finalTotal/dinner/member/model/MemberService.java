@@ -26,6 +26,9 @@ public interface MemberService {
 	public int updateMemberByAdmin(MemberVO vo);
 	
 	public List<MemberVO> showAll();
+	public List<MemberVO> showAll2(int currentPage);
+	
+	public int memberOut(String memId);
 	
 	
 }

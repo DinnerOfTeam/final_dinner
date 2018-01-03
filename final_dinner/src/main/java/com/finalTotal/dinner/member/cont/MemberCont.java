@@ -1,5 +1,7 @@
 package com.finalTotal.dinner.member.cont;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -166,6 +168,56 @@ public class MemberCont {
 		model.addAttribute("url",url);
 		
 		return "common/message";
+	}
+	
+	@RequestMapping(value="/memberOut.do", method=RequestMethod.GET)
+	public void memberOut_get(HttpSession session) {
+		String memId = (String)session.getAttribute("memId");
+		logger.info("회원탈퇴 페이지 보여주기, 파라미터 memId={}", memId);
+	}
+	
+	@RequestMapping(value="/memberOut.do", method=RequestMethod.POST)
+	public String memberOut_post(@RequestParam String memPwd,
+				HttpSession session, HttpServletResponse response,
+				Model model) {
+		
+		String memId = (String)session.getAttribute("memId");
+		
+		logger.info("회원탈퇴 처리, 파라미터 memId={}, memPwd={}", memId, memPwd);
+		
+		//로그인 체크
+		String msg = "", url="/member/memberOut.do";
+		int result = memberService.loginCheck(memId, memPwd);
+		
+		if(result==memberService.LOGIN_OK) {
+			int cnt = memberService.memberOut(memId);
+			logger.info("회원 탈퇴 결과, cnt={}",cnt);
+			if(cnt>0) {
+				msg="회원탈퇴처리되었습니다";
+				url="/index.do";
+				
+				//session정보 제거
+				session.invalidate();
+				
+				//cookie 삭제
+				Cookie ck  = new Cookie("ck_memId", memId);
+				ck.setPath("/");
+				ck.setMaxAge(0);
+				response.addCookie(ck);				
+			}else {
+				msg="회원탈퇴 실패";
+			}
+		}else if(result==MemberService.PWD_DISAGREE) {
+			msg="비밀번호가 일치하지 않습니다.";
+		}else {
+			msg="비밀번호 체크 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/message";
+		
 	}
 	
 	

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.finalTotal.dinner.common.SearchVO;
+
 @Service
 public class QuestionServiceImpl implements QuestionService{
 	
@@ -51,9 +53,24 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
+
 	public List<QuestionTypeVO> selectTypeAll() {
 		return questionDao.selectTypeAll();
 	}
 	
+
+	public List<QuestionVO> searchAll(SearchVO vo) {
+		return questionDao.searchAll(vo);
+	}
+
+	@Override
+	public int getTotal(SearchVO vo) {
+		return questionDao.getTotal(vo);
+	}
+
+	@Override
+	public List<QuestionVO> adminSelectAll() {
+		return questionDao.adminSelectAll();
+	}
 	
 }

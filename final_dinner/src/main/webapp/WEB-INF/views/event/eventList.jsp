@@ -3,55 +3,7 @@
 <%@include file="../inc/top.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/jquery-ui.min.event.css">
-<style type="text/css">
-	
-	#event_list tbody td{
-		padding: 0.75em;
-	}
-	
-	#event_list tbody td>img{
-		width: 100%;
-	}
-	
-	#eventDatePick{
-		padding: 0;
-	}
-	
-	#eventDatePick > *{
-		margin: 0 auto;
-		width: 100%;
-		border: none;
-	}
-	
-	.event_date{
-		font-size: 0.75em;
-		margin: 0.5em 0 0 0;
-		color: #777;
-	}
-	
-	#event_list tr:hover .event_date{
-		color: #FFF;
-	}
-	
-	@media (max-width: 767px) {
-	
-		#event_list tbody tr{
-			border-bottom: 1px solid lightgray;
-		}
-	
-		#event_list td,
-		#event_list th{
-			padding: 0.5em;
-			display: block;
-			border: none;
-			text-align: center;
-		}
-		
-		#event_list td img{
-			margin: 0 auto;
-		}
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/site-event.css">
 
 <script type="text/javascript">
 	$(function(){
@@ -126,7 +78,10 @@
 										+"-"+ eventEndDate.getDate();
 								
 								//썸네일
-								var eThumb=$tableTd.clone().append($("<img>").attr("src", eventThumb));
+								var eThumb=$tableTd.clone()
+									.append($('<div class="eventListImg"></div>')
+												.append($("<img>").attr("src", eventThumb))
+									);
 								
 								//제목, 기간, 링크
 								var eTitle=$tableTd.clone();
@@ -296,7 +251,7 @@
 	</div>
 </div>
 
-<div class="site-container-wrap">
+<div class="site-content-wrap">
 	<div class="container">
 		<div class="col-sm-5 col-sm-push-7 col-md-4 col-md-push-8">
 		
@@ -363,14 +318,9 @@
 										<i class="fa fa-angle-left"></i>
 									</a>
 								</li>
-								<li>
-									<a href="#">
-										1
-									</a>
-								</li>
 								<li class="active">
 									<a href="#">
-										2
+										1
 									</a>
 								</li>
 								<li class="disabled">

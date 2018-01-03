@@ -56,8 +56,22 @@
 	</update>
 	
 	<select id="showAll" resultType="MemberVO">
-		select * from member
+		select * from member 
 	</select>
+	
+	<select id="showAll2" parameterType="int" resultType="MemberVO">
+		select * from
+			(select rownum as rsnum, a.* from
+			(select * from member 
+			        order by mem_grade desc, mem_regdate) a)
+			        where rsnum between (#{currentPage}- 1)* 10+ 1 and (#{currentPage}- 1)* 10+ 10
+	</select>
+	
+	
+	<delete id="memberOut" parameterType="string">
+		delete from member
+		where mem_id=#{memId}
+	</delete>
 	
 	
 </mapper>

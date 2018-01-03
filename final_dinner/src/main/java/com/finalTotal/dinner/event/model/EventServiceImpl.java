@@ -27,5 +27,35 @@ public class EventServiceImpl implements EventService{
 	public int countEventByDate(String eventDate) {
 		return eventDAO.countEventByDate(eventDate);
 	}
+
+	@Override
+	public List<EventVO> selectEventList(SearchVO vo) {
+		return eventDAO.selectEventList(vo);
+	}
+
+	@Override
+	public int countEventList(String resNo) {
+		return eventDAO.countEventList(resNo);
+	}
+
+	@Override
+	public EventVO selectEventByNo(int eventNo) {
+		return eventDAO.selectEventByNo(eventNo);
+	}
+
+	@Override
+	public int eventApprove(int eventNo) {
+		return eventDAO.eventApprove(eventNo);
+	}
+	
+	@Override
+	public int eventClose(EventVO vo) {
+		return eventDAO.eventClose(vo);
+	}
+
+	@Override
+	public int deleteEvent(int eventNo) {
+		return eventDAO.deleteEvent(eventNo);
+	}
 	
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.finalTotal.dinner.board.model.BoardDataService;
 import com.finalTotal.dinner.board.model.BoardDataVO;
@@ -73,7 +74,7 @@ public class BoardCon {
 		logger.info("게시판 목록조회 결과, list.size()={}", list.size());
 		
 		model.addAttribute("list", list);
-		model.addAttribute("searchVO", searchVO);
+		model.addAttribute("paging", paging);
 		
 		return "board/list";
 	}
@@ -481,6 +482,34 @@ public class BoardCon {
 		model.addAttribute("url", url);
 		model.addAttribute("back", back);
 		return "common/message";
+	}
+	
+	@RequestMapping("/download.do")
+	public ModelAndView download_board(@RequestParam(defaultValue="0") int fileNo,
+			HttpServletRequest request) {
+		logger.info("파일 다운로드, 파라미터 fileNo={}", fileNo);
+		
+		Map<String, Object> model=new HashMap<String, Object>();
+		
+		File file=null;
+		String oFileName=null;
+		if(fileNo==0) {
+			model.put("wrongURL", true);
+		}else {
+			BoardDataVO dataVO=boardDataService.selectFileByNo(fileNo);
+			logger.info("파일 조회결과 dataVO={}", dataVO);
+			
+			String fileName=dataVO.getFreeDataName();
+			oFileName=dataVO.getFreeDataOriginalName();
+			
+			String path=fileUtil.getUploadPath(request, FileUtil.FILE_UPLOAD);
+			file=new File(path, fileName);
+		}
+		
+		model.put("downloadFile", file);
+		model.put("originalName", oFileName);
+		
+		return new ModelAndView("downloadView", model);
 	}
 	
 	//수정/삭제 권한 확인

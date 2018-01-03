@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+    
+<%@include file="../inc/top.jsp"%>   
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 
+<%@include file="../inc/mypageSide.jsp"%>
 
-<%@include file="../inc/top.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#memPwd').focus();
+		$('#pwd').focus();
 		
 		$('form[name=frmOut]').submit(function(){
 			if($('#memPwd').val()==''){
@@ -23,6 +31,9 @@
 	});
 	
 </script>
+
+</head>
+<body>
 
 <article class="simpleForm">
 	<form name="frmOut" method="post" 
@@ -43,4 +54,9 @@
 	</form>
 </article>
 
-<%@include file="../inc/footer.jsp" %>
+</body>
+</html>
+
+
+
+<%@include file="../inc/footer.jsp"%>

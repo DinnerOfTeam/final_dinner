@@ -47,6 +47,9 @@
 				<c:if test="${vo.qnaTypeNo==4}">
 					예약문의
 				</c:if>
+				<c:if test="${vo.qnaTypeNo== 0}">
+					기타문의
+				</c:if>
 				</div>
 				<div class= 'td_div col-sm-9'>${vo.questionTitle }</div>
 			</a>

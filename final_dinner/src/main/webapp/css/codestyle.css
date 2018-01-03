@@ -145,21 +145,21 @@
 }
 
 .site-btn {
-	background: rgb(158, 158, 158);
+	background: rgb(158, 158, 158) !important;
 	margin: 0;
 }
 
 .site-btn:hover {
-	background: rgb(208, 208, 208);
+	background: rgb(208, 208, 208) !important;
 }
 
 .site-btn-submit {
-	background: rgb(158, 22, 22);
+	background: rgb(158, 22, 22) !important;
 	margin: 0;
 }
 
 .site-btn-submit:hover {
-	background: rgb(208, 82, 82);
+	background: rgb(208, 82, 82) !important;
 }
 
 .form-select:hover {

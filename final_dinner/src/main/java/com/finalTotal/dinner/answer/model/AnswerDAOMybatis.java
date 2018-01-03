@@ -1,5 +1,7 @@
 package com.finalTotal.dinner.answer.model;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +15,14 @@ public class AnswerDAOMybatis extends SqlSessionDaoSupport implements AnswerDAO{
 		return getSqlSession().insert(namespace+".insertAnswer", vo);
 	}
 	
-	
-	
 	@Override
 	public AnswerVO selectByNo(int no) {
 		return getSqlSession().selectOne(namespace+".selectByNo", no);
+	}
+
+	@Override
+	public List<AnswerVO> selectByQuestionNo(int no) {
+		return getSqlSession().selectList(namespace+".selectByQuestionNo", no);
 	}
 	
 }

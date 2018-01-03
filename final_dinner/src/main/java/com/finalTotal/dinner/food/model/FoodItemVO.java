@@ -13,7 +13,6 @@ public class FoodItemVO {
 	
 	public FoodItemVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public FoodItemVO(int foodItemNo, int foodMenuNo, String foodItemName, String foodItemDesc, int foodItemPrice,

@@ -2,6 +2,7 @@ package com.finalTotal.dinner.restaurant.enterprise.cont;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
@@ -26,6 +28,9 @@ public class RestaurantInformationCont {
 	
 	@Autowired
 	private RestaurantService restaurantService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	
 	@RequestMapping(value="/restaurantListView.do", method=RequestMethod.GET)
@@ -47,17 +52,17 @@ public class RestaurantInformationCont {
 	}
 	
 	@RequestMapping("/restaurantInformation.do")
-	public String Information(@RequestParam int resNo, Model model) {
+	public String Information(@RequestParam String resNo, Model model) {
 		logger.info("식당 정보상세 페이지 보여주기 파라미터 resNo={}",resNo);
 		
-		if(resNo==0) {
-			model.addAttribute("msg", "잘못된 url입니다");
-			model.addAttribute("url", "/restaurantEnterprise/restaurantInformation.do");
+		if(resNo==null || resNo.equals("null") ) {
+			model.addAttribute("msg", "식당 등록을 하셔야 합니다");
+			model.addAttribute("url", "/member/myPage.do");
 			
 			return "common/message";			
 		}
 		
-		RestaurantVO vo = restaurantService.selectByNo(resNo);
+		RestaurantVO vo = restaurantService.selectByNo((Integer.parseInt(resNo)));
 		logger.info("상세보기 결과, vo={}",vo);
 		
 		model.addAttribute("vo", vo);
@@ -67,6 +72,53 @@ public class RestaurantInformationCont {
 		return "restaurantEnterprise/restaurantInformation";
 	}
 	
+	@RequestMapping(value="/restaurantOut.do", method=RequestMethod.GET)
+	public void restaurantOut_get(HttpSession session) {
+		
+		int resNo = (Integer) session.getAttribute("resNo");
+		logger.info("식당 탈퇴 페이지 보여주기, 파라미터 resNo={}", resNo);
+	}
+	
+	@RequestMapping(value="/restaurantOut.do", method=RequestMethod.POST)
+	public String restaurantOut_post(@RequestParam String memPwd,
+				HttpSession session, HttpServletResponse response,
+				Model model) {
+		
+		String resNo = (String)session.getAttribute("resNo");
+		String memId = (String)session.getAttribute("memId");
+		
+		logger.info("식당 탈퇴 처리,  파라미터 resNo={}, memPwd={}",resNo, memPwd);
+		
+		//로그인 체크
+		String msg = "", url="/restaurantEnterprise/restaurantOut.do";
+		int result = memberService.loginCheck(memId, memPwd);
+		
+		if(result==memberService.LOGIN_OK) {
+			int cnt = restaurantService.restaurantOut(resNo);
+			logger.info("식당 탙퇴 결과, cnt={}",cnt);
+			if(cnt>0) {
+				msg="식당 탈퇴처리되었습니다";
+				url="member/myPage.do";
+			
+				//cookie삭제
+				Cookie ck = new Cookie("ck_ressNo", resNo);
+				ck.setPath("/");
+				ck.setMaxAge(0);
+				response.addCookie(ck);
+			}else {
+				msg="식당탈퇴 실패";
+			}
+		}else if(result==MemberService.PWD_DISAGREE) {
+			msg="비밀번호가 일치하지 않습니다";
+		}else {
+			msg="비밀번호 체크 실패";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	
 	
 

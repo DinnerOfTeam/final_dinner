@@ -1,6 +1,7 @@
 package com.finalTotal.dinner.book.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,16 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<BookVO> selectAll(int memNo) {
 		return bookDao.selectAll(memNo);
+	}
+
+	@Override
+	public List<Map<String,Object>> selectReservedMember(int memNo) {
+		return bookDao.selectReservedMember(memNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> adminSelectDay(Map<String, Object> map) {
+		return bookDao.adminSelectDay(map);
 	}
 	
 }

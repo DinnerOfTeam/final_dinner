@@ -104,15 +104,21 @@ public class FileUtil {
 	}
 	
 	public List<Map<String, Object>> fileUploadByKey(HttpServletRequest request, String key , int uploadGb) throws IllegalStateException, IOException {
+		return fileUploadByKey(request, key , uploadGb, true);
+	}
+	
+	public List<Map<String, Object>> fileUploadByKey(HttpServletRequest request, String key , int uploadGb, boolean uploadMulti) throws IllegalStateException, IOException {
 		//파일 업로드 처리
+		//uploadMulti : false일경우, 하나의파일만 업로드 받음
+		
 		MultipartHttpServletRequest multipartRequest
-			=(MultipartHttpServletRequest) request;
+		=(MultipartHttpServletRequest) request;
 		
 		List<MultipartFile> fileList
-			=multipartRequest.getFiles(key);
+		=multipartRequest.getFiles(key);
 		
 		List<Map<String, Object>> list
-			=new ArrayList<Map<String, Object>>();
+		=new ArrayList<Map<String, Object>>();
 		
 		for(MultipartFile tempFile : fileList) {
 			
@@ -140,6 +146,8 @@ public class FileUtil {
 				
 				list.add(resultMap);
 			}
+			
+			if(!uploadMulti) break;
 		}//while
 		
 		return list;

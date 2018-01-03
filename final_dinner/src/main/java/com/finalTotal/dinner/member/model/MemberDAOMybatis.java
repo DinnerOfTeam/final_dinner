@@ -49,4 +49,13 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	public int insertMemberByAdmin(MemberVO vo) {
 		return getSqlSession().insert(namespace+".insertMemberByAdmin", vo);
 	}
+
+	@Override
+	public int memberOut(String memId) {
+		return getSqlSession().delete(namespace+".memberOut",memId);
+	}
+	@Override
+	public List<MemberVO> showAll2(int currentPage) {
+		return getSqlSession().selectList(namespace+ ".showAll2", currentPage);
+	}
 }
