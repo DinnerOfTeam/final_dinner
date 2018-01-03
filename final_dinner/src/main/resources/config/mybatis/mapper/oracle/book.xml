@@ -47,5 +47,6 @@
 	        group by trunc(book_date)
 	        order by trunc(book_date)
 	</select>
-
+	
+	
 </mapper>

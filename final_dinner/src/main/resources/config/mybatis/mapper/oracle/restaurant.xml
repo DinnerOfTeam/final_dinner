@@ -76,23 +76,34 @@
 			order by res_no desc
 		</select>
 		
-<<<<<<< HEAD
-		<select id="selectNoByMemId" parameterType="String" resultType="int">
+		<select id="selectNoByMemId" parameterType="string" resultType="int">
 			select r.res_no from restaurant r
 			join member m
 			on r.mem_no=m.mem_no
 			where m.mem_id=#{memId}
 		</select>
-=======
+		
 		<delete id="restaurantOut" parameterType="string">
 			delete from restaurant
 			where res_no=#{resNo}
 		</delete>
 		
+		<insert id="restaurantPhoto" parameterType="string">
+			<selectKey  keyProperty="resPhotoNo" resultType="int" order="BEFORE">
+				select restaurant_photo_seq.nextval from dual
+			</selectKey>
+			insert into restaurant_photo(res_photo_no,
+											res_no,
+											res_photo_name,
+											res_photo_original_name,
+											res_photo_title,
+											res_photo_desc)
+			values(#{resPhotoNo},#{resNo},#{resPhotoName},#{resPhotoOriginalName},#{resPhotoTitle},#{resPhotoDesc});
+		</insert>
 		
 		
 		
 		
->>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
+		
 	
 </mapper>
