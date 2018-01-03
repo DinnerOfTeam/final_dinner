@@ -229,10 +229,10 @@
 										<div class="restaurant-search-overlay">
 											<div class="restaurant-overlay-btn">
 												<div class="col-md-6">
-													<a href="/dinner/book/restaurantBooking.do" class="site-btn-submit site-btn-full">예약</a>
+													<a href="${pageContext.request.contextPath }/book/restaurantBooking.do" class="site-btn-submit site-btn-full">예약</a>
 												</div>
 												<div class="col-md-6">
-													<a href="#" class="site-btn site-btn-full">상세보기</a>
+													<a href='<c:url value="/restaurant/detail.do?resNo=${resItem.resNo }"/>' class="site-btn site-btn-full">상세보기</a>
 												</div>
 											</div>
 										</div>
