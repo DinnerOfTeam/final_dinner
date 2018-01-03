@@ -49,5 +49,11 @@ public class QuestionServiceImpl implements QuestionService{
 	public int deleteQna(int no) {
 		return questionDao.deleteQna(no);
 	}
+
+	@Override
+	public List<QuestionTypeVO> selectTypeAll() {
+		return questionDao.selectTypeAll();
+	}
+	
 	
 }

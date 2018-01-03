@@ -62,4 +62,8 @@
 	<delete id="deleteQna" parameterType="int">
 		delete from qna_question where qna_question_no=#{qnaQuestionNo}
 	</delete>
+	
+	<select id="selectTypeAll" resultType="QuestionTypeVO">
+		select * from QNA_TYPE
+	</select>
 </mapper>

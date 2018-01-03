@@ -18,4 +18,37 @@
 		insert into vote_item(vote_item_no, vote_no,item_title)
 		values(#{voteItemNo}, #{voteNo}, #{itemTitle})
 	</insert>
+	
+	<select id="selectVoteAll" resultType="VoteVO">
+		select v.* , m.mem_name
+		from vote v
+		left join member m on v.mem_no = m.mem_no
+		order by vote_no desc
+	</select>
+	
+	<select id="selectByGroup" parameterType="int" resultType="VoteVO">
+		select *
+		from vote
+		where group_no=#{groupNo}
+	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="VoteVO">
+		select * 
+		from vote
+		where vote_no=#{voteNo}
+	</select>
+	
+	<select id="selectByVno" parameterType="int" resultType="Vote_ItemVO">
+		select *
+		from vote_item
+		where vote_no =#{voteNo}
+	</select>
+	
+	<insert id="insertLog" parameterType="Vote_LogVO">
+		<selectKey resultType="int" keyProperty="voteLogNo" order="BEFORE">
+			select vote_log_seq.nextval from dual
+		</selectKey>
+		insert into vote_log (vote_log_no, vote_no, member_no, vote_item_no)
+		values(#{voteLogNo}, #{voteNo}, #{memberNo}, #{voteItemNo})
+	</insert>
 </mapper>
