@@ -12,10 +12,6 @@ public interface RestaurantDAO {
     public String selectRes(int memNo);
     public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO);
     public int countRestarunt(RestaruntSearchVO searchVO);
-<<<<<<< HEAD
     public List<Integer> selectNoByMemId(String memId);
-    
-=======
     public int restaurantOut(String resNo);
->>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
 }

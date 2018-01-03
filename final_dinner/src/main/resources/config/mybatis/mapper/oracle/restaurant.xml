@@ -76,23 +76,16 @@
 			order by res_no desc
 		</select>
 		
-<<<<<<< HEAD
 		<select id="selectNoByMemId" parameterType="String" resultType="int">
 			select r.res_no from restaurant r
 			join member m
 			on r.mem_no=m.mem_no
 			where m.mem_id=#{memId}
 		</select>
-=======
+		
 		<delete id="restaurantOut" parameterType="string">
 			delete from restaurant
 			where res_no=#{resNo}
 		</delete>
-		
-		
-		
-		
-		
->>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
 	
 </mapper>

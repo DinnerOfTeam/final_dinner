@@ -49,14 +49,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<Integer> selectNoByMemId(String memId) {
 		return restaurantDao.selectNoByMemId(memId);
-=======
+	}
+	
 	public int restaurantOut(String resNo) {
 		return restaurantDao.restaurantOut(resNo);
-				
->>>>>>> branch 'master' of https://github.com/DinnerOfTeam/final_dinner.git
 	}
 
 
