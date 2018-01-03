@@ -182,3 +182,9 @@ a{
 .restaurant-overlay-btn > div{
 	margin: 0 0 0.75em 0;
 }
+
+.restaurant-search-desc > *{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

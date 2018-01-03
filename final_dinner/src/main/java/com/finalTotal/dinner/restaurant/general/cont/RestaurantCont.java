@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.board.model.BoardDataVO;
 import com.finalTotal.dinner.common.FileUtil;
@@ -114,6 +115,37 @@ public class RestaurantCont {
 	    model.addAttribute("url", url);
 	    
 	    return "common/message";
+	}
+	
+	@RequestMapping("/detail.do")
+	public String detail(@RequestParam(defaultValue="0") int resNo,
+			Model model) {
+		logger.info("식당 페이지 파라미터 resNo={}",resNo);
+		
+		if(resNo==0) {
+			model.addAttribute("msg", "잘못된 URL입니다");
+			model.addAttribute("back", true);
+			
+			return "common/message";
+		}
+		
+		RestaurantVO vo=restaurantService.selectByNo(resNo);
+		logger.info("식당 조회결과 vo={}",vo);
+		
+		if(vo==null || vo.getResNo()==0) {
+			model.addAttribute("msg", "존재하지 않거나 삭제된 식당입니다");
+			model.addAttribute("url", "/search.do");
+			
+			return "common/message";
+		}
+		
+		if(vo.getResIntroduce()!=null && !vo.getResIntroduce().isEmpty()) {
+			vo.setResIntroduce(vo.getResIntroduce().replace("\r\n", "<br>"));
+		}
+		
+		model.addAttribute("vo", vo);
+		
+		return "restaurant/detail";
 	}
 	
 }

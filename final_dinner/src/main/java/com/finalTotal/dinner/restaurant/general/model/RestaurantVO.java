@@ -12,7 +12,7 @@ public class RestaurantVO {
 	private String resWorkDay; //영업일
 	private String resWorkHour; //영업시간
 	private String resThumbnail; //썸네일(이미지 경로)-fileName과 같음
-	private int resGrade; //평점(0.0~5.0) 0.5단위
+	private float resGrade; //평점(0.0~5.0) 0.5단위
 	private int resMaxPerson; //최대인원(예약가능한 최대인원)
 	private String resContact1;	//연락처1
 	private String resContact2;	//연락처2
@@ -29,7 +29,7 @@ public class RestaurantVO {
 	}
 
 	public RestaurantVO(int resNo, int memNo, int foodTypeNo, int resTypeNo, String resName, String resIntroduce,
-			String resWorkDay, String resWorkHour, String resThumbnail, int resGrade, int resMaxPerson,
+			String resWorkDay, String resWorkHour, String resThumbnail, float resGrade, int resMaxPerson,
 			String resContact1, String resContact2, String resContact3, String resZipcode, String resAddress,
 			String resAddressDetail, Date resRegdate, String resStatus) {
 		super();
@@ -126,11 +126,11 @@ public class RestaurantVO {
 		this.resThumbnail = resThumbnail;
 	}
 
-	public int getResGrade() {
+	public float getResGrade() {
 		return resGrade;
 	}
 
-	public void setResGrade(int resGrade) {
+	public void setResGrade(float resGrade) {
 		this.resGrade = resGrade;
 	}
 
