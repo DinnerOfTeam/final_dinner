@@ -50,9 +50,12 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 	@Override
 	public List<Integer> selectNoByMemId(String memId) {
 		return getSqlSession().selectList(namespace+".selectNoByMemId", memId);
+		
 	}
+	
 
 	@Override
+
 	public int restaurantOut(String resNo) {
 		return getSqlSession().delete(namespace+".restaurantOut",resNo);
 	}

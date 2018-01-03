@@ -104,6 +104,11 @@
 
 			scheduler.init('scheduler_here', new Date(), "month");
 			
+			/*  scheduler.attachEvent("onConfirmedBeforeEventDelete", function(id,ev){ //삭제버튼 눌렀을때
+		            var pschNo = ev.pschid;
+		            location.href="schedulerDelete.do?pschNo="+pschNo;
+		       });
+			 */
 			
 			scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){
 				 var startdate=ev.start_date;
@@ -117,7 +122,7 @@
 					
 					{start_date : start,
 						end_date : end, 
-						text :"${vo.MEM_NAME}" +" "+ "${vo.BOOK_NUM}"+"명"+ "\n" 
+						text :"${vo.MEM_NAME}"+" "+ "${vo.BOOK_NUM}"+"명"+ "\n" 
 			+ "연락처 : " + "${vo.MEM_TEL1}"+"-"+"${vo.MEM_TEL2}"+"-"+"${vo.MEM_TEL3}"+"\n"+"시간:"+"${vo.BOOK_TIME}"},
 			], "json"); 
 			

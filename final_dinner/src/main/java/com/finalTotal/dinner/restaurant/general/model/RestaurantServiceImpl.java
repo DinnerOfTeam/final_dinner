@@ -53,8 +53,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return restaurantDao.selectNoByMemId(memId);
 	}
 	
+	@Override
+	
 	public int restaurantOut(String resNo) {
 		return restaurantDao.restaurantOut(resNo);
+				
 	}
 
 

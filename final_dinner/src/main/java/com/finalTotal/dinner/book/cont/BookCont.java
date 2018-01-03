@@ -69,11 +69,11 @@ public class BookCont {
 		logger.info("식당 예약 조회페이지 ");
 	
 		int memNo = (Integer)session.getAttribute("memNo");
-		logger.info("memNo",memNo);
+		logger.info("파라미터 memNo={}",memNo);
 		
 		// memNo에 해당하는 업체에 예약된 손님 가져오기
 		List<Map<String,Object>> list = bookService.selectReservedMember(memNo);
-		logger.info("식당 예약조회 결과, list.size()={}");
+		logger.info("식당 예약조회 결과, list.size()={}",list.size());
 		
 		model.addAttribute("list",list);
 		

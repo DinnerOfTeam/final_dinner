@@ -13,5 +13,6 @@ public interface RestaurantDAO {
     public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO);
     public int countRestarunt(RestaruntSearchVO searchVO);
     public List<Integer> selectNoByMemId(String memId);
+    
     public int restaurantOut(String resNo);
 }
