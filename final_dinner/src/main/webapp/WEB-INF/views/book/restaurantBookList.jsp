@@ -104,11 +104,11 @@
 
 			scheduler.init('scheduler_here', new Date(), "month");
 			
-			/*  scheduler.attachEvent("onConfirmedBeforeEventDelete", function(id,ev){ //삭제버튼 눌렀을때
+		/* 	 scheduler.attachEvent("onConfirmedBeforeEventDelete", function(id,ev){ //삭제버튼 눌렀을때
 		            var pschNo = ev.pschid;
 		            location.href="schedulerDelete.do?pschNo="+pschNo;
-		       });
-			 */
+		       }); */
+			 
 			
 			scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){
 				 var startdate=ev.start_date;

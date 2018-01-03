@@ -54,7 +54,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 	
 	@Override
-	
 	public int restaurantOut(String resNo) {
 		return restaurantDao.restaurantOut(resNo);
 				
