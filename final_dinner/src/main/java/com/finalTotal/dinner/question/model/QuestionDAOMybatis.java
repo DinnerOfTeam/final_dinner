@@ -51,6 +51,10 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 	}
 
 	@Override
+	public List<QuestionTypeVO> selectTypeAll() {
+		return getSqlSession().selectList(namespace+".selectTypeAll");
+	}
+
 	public List<QuestionVO> searchAll(SearchVO vo) {
 		return getSqlSession().selectList(namespace+ ".searchAll", vo);
 	}

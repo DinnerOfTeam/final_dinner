@@ -19,6 +19,7 @@ public class VoteVO {
 	private String voteTitle, voteDesc, voteIsEnd, voteMultiSel;
 	private Date voteRegdate, voteEndDate;
 	private String endDate;
+	private String memName;
 	public int getVoteNo() {
 		return voteNo;
 	}
@@ -80,11 +81,19 @@ public class VoteVO {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
 	@Override
 	public String toString() {
 		return "VoteVO [voteNo=" + voteNo + ", memNo=" + memNo + ", groupNo=" + groupNo + ", voteTitle=" + voteTitle
 				+ ", voteDesc=" + voteDesc + ", voteIsEnd=" + voteIsEnd + ", voteMultiSel=" + voteMultiSel
-				+ ", voteRegdate=" + voteRegdate + ", voteEndDate=" + voteEndDate + ", endDate=" + endDate + "]";
+				+ ", voteRegdate=" + voteRegdate + ", voteEndDate=" + voteEndDate + ", endDate=" + endDate
+				+ ", memName=" + memName + "]";
 	}
+	
 	
 }

@@ -24,8 +24,6 @@ public class MyPageCont {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	private RestaurantService restaurantService;
 	
 	@Autowired
 	private FoodMenuService foodMenuService;
@@ -40,11 +38,12 @@ public class MyPageCont {
 		logger.info("마이페이지 정보 띄우기, vo={}",vo);
 		
 		int resNo = foodMenuService.selectAll2(vo.getMemNo());
+		
+	
 		session.setAttribute("resNo", resNo);
 		logger.info("resNo={}",resNo);
 		
-		model.addAttribute("vo",vo);
-		
+		model.addAttribute("vo",vo);			
 		return "member/myPage";
 		
 	}

@@ -68,6 +68,9 @@
 		delete from qna_question where qna_question_no=#{qnaQuestionNo}
 	</delete>
 	
+	<select id="selectTypeAll" resultType="QuestionTypeVO">
+		select * from QNA_TYPE
+	</select>
 	<select id="searchAll" parameterType="SearchVO" resultType="QuestionVO">
 		select * from
 		(select b.*, rownum as rsnum from

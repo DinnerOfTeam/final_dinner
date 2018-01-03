@@ -14,6 +14,8 @@ public interface QuestionDAO {
 	public List<QuestionVO> selectByType(int qnaTypeNo);
 	public int updateQna(QuestionVO vo);
 	public int deleteQna(int no);
+	public List<QuestionTypeVO> selectTypeAll();
+
 	public int getTotal(SearchVO vo);
 	public List<QuestionVO> adminSelectAll();
 }

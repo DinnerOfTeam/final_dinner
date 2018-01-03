@@ -53,6 +53,12 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
+
+	public List<QuestionTypeVO> selectTypeAll() {
+		return questionDao.selectTypeAll();
+	}
+	
+
 	public List<QuestionVO> searchAll(SearchVO vo) {
 		return questionDao.searchAll(vo);
 	}

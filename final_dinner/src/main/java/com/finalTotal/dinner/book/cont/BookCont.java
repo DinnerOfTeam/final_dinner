@@ -54,7 +54,7 @@ public class BookCont {
 		
 		int cnt = bookService.deleteBook(vo.getBookNo());
 		
-		msg="삭제되었습니다";
+		msg="취소되었습니다";
 		url="/book/booking.do";
 		
 		model.addAttribute("msg",msg);
@@ -78,6 +78,15 @@ public class BookCont {
 		model.addAttribute("list",list);
 		
 		return "book/restaurantBookList";
+	}
+	
+	
+
+	@RequestMapping("/restaurantBooking.do")
+	public String restaurantBooking() {
+		logger.info("test page");
+		
+		return "book/restaurantBooking"; 
 	}
 	
 	

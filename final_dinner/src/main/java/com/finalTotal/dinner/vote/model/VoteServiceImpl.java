@@ -1,6 +1,7 @@
 package com.finalTotal.dinner.vote.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +37,38 @@ public class VoteServiceImpl implements VoteService{
 		return cnt;
 	}
 
+	@Override
+	public List<VoteVO> selectVoteAll() {
+		return voteDao.selectVoteAll();
+	}
+
+	@Override
+	public VoteVO selectByGroup(int groupNo) {
+		return voteDao.selectByGroup(groupNo);
+	}
 	
 	
+	@Override
+	public VoteVO selectByNo(int voteNo) {
+		return voteDao.selectByNo(voteNo);
+	}
+
+	@Override
+	public List<Vote_ItemVO> selectByVno(int voteNo) {
+		return voteDao.selectByVno(voteNo);
+	}
+
+	@Override
+	@Transactional
+	public int insertLog(List<Vote_LogVO> list) {
+		int cnt = 0;
+		for(Vote_LogVO vo:list)
+		{
+			cnt = voteDao.insertLog(vo);
+		}
+		
+		return cnt;
+	}
 	
 
 }
