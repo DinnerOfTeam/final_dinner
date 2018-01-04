@@ -182,47 +182,47 @@ START MODULE AREA 2: Sub Navigation 1
 															<tr>
 						<td align="center">1</td>
 						<td>
-							<a href="/main/bbs.php?table=notice&action=view&num=65" >[안내] 12월 22일, 28일 토스 결제 서비스 점검 공지</a>
+							<a href="/main/bbs.php?table=notice&action=view&num=65" >[안내] 1월 22일, 28일 이벤트 서비스 점검 공지</a>
 						</td>
 						<td align="center">2</td>
 						<td align="center">
-							2017-12-14						</td>
+							2017-1-1						</td>
 					</tr>
 										<tr>
 						<td align="center">2</td>
 						<td>
-							<a href="/main/bbs.php?table=notice&action=view&num=64" >[안내] LG U+ 휴대폰 본인확인 서비스 중단 발생 안내</a>
+							<a href="/main/bbs.php?table=notice&action=view&num=64" >[안내] 1월 1일 예약 서비스 오류 발생 처리</a>
 						</td>
 						<td align="center">84</td>
 						<td align="center">
-							2017-12-12						</td>
+							2017-1-1						</td>
 					</tr>
 										<tr>
 						<td align="center">3</td>
 						<td>
-							<a href="/main/bbs.php?table=notice&action=view&num=63" >[안내] 11월 26일 SC제일은행 관련 결제 일시 중단 안내</a>
+							<a href="/main/bbs.php?table=notice&action=view&num=63" >[안내] 1월 26일 그룹관련서비스 일시 정검 안내</a>
 						</td>
 						<td align="center">417</td>
 						<td align="center">
-							2017-11-24						</td>
+							2017-1-26						</td>
 					</tr>
 										<tr>
 						<td align="center">4</td>
 						<td>
-							<a href="/main/bbs.php?table=notice&action=view&num=62" >[공지] 파일콕 서비스 임시 점검 안내</a>
+							<a href="/main/bbs.php?table=notice&action=view&num=62" >[공지] 식당 위치 지도 오류 서비스 임시 점검 안내</a>
 						</td>
 						<td align="center">860</td>
 						<td align="center">
-							2017-11-21						</td>
+							2017-1-21						</td>
 					</tr>
 										<tr>
 						<td align="center">5</td>
 						<td>
-							<a href="/main/bbs.php?table=notice&action=view&num=61" >[공지] 정보통신망을 이용한 영상물(비디오물) 등급분류관련 ..</a>
+							<a href="/main/bbs.php?table=notice&action=view&num=61" >[공지] 휴면 계정 일괄 삭제 안내</a>
 						</td>
 						<td align="center">739</td>
 						<td align="center">
-							2017-11-16						</td>
+							2017-1-16						</td>
 					</tr>
 					        </tbody>
 			</table>

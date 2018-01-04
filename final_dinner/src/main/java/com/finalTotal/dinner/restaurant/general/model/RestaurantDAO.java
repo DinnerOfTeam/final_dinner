@@ -20,5 +20,7 @@ public interface RestaurantDAO {
     public List<RestaurantPhotoVO> selectPhotoByresNo(int resNo);
     public int deletePhotoByNo(int resNo);
     
+    public List<RestaurantTypeVO> restaurantType();
+    
     
 }

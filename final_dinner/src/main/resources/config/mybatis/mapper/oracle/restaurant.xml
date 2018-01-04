@@ -111,5 +111,9 @@
 			delete from restaurant_photo
 			where res_photo_no=#{resNo}
 		</delete>
+		
+		<select id="restaurantType" resultType="restaurantTypeVO">
+			select * from restaurant_type
+		</select>
 	
 </mapper>

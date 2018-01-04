@@ -73,6 +73,11 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 		return getSqlSession().delete(namespace+".insertRestaurantPhoto", resNo);
 	}
 
+	@Override
+	public List<RestaurantTypeVO> restaurantType() {
+		return getSqlSession().selectList(namespace+".restaurantType");
+	}
+
 	
 	
 	

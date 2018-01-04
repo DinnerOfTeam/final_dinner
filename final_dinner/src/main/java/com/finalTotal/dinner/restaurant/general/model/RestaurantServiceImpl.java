@@ -92,6 +92,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 		
 		return cnt;
 	}
+	
+	public List<RestaurantTypeVO> restaurantType() {
+		return restaurantDao.restaurantType();
+	}
 
 
 }

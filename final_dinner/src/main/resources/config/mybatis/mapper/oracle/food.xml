@@ -38,6 +38,7 @@
 	
 	
 	
+	
 	<delete id="deleteMenu" parameterType="int">
 		delete from food_item where food_item_no=#{foodItemNo}
 	</delete>
