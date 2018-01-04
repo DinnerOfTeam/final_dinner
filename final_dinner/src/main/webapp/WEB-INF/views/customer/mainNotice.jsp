@@ -12,7 +12,7 @@
 <div class="container fadeInUp animated" data-wow-delay=".5s">
 		<div class= 'row qna_header'>
 		<div class="img_size col-sm-6">
-			<h1><a href="index.html" ><img src="../images/logo.jpg" alt="" />고객센터</a></h1>
+			<h1><a href="#" ><img src="../images/qnamain2.png" alt="" />고객센터</a></h1>
 		</div>
 		<div class= 'col-sm-1'>&nbsp;</div>
 		<form name="frmQnaSearch" method="get" action="<c:url value='/customer/list.do'/>">

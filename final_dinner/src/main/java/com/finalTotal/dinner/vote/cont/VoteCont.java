@@ -49,6 +49,7 @@ public class VoteCont {
 			memNo = (Integer)session.getAttribute("memNo");
 			voteVO.setMemNo(memNo);
 		}
+		
 		List<Vote_ItemVO> list = new ArrayList<Vote_ItemVO>();
 		
 		for(int i=0; i<itemArr.length; i++) {
@@ -65,7 +66,7 @@ public class VoteCont {
 		String msg="", url="";
 		if(cnt>0) {
 			msg="투표등록완료";
-			url="/indiGroup/vote/list.do";
+			url="/indiGroup/vote/list.do?groupNo="+voteVO.getGroupNo();
 		}else {
 			msg="투표등록실패";
 			url="/voteReg.do";
@@ -78,12 +79,13 @@ public class VoteCont {
 	}
 	
 	@RequestMapping("/list.do")
-	public String list(@ModelAttribute VoteVO voteVo, Model model) {
+	public String list(@ModelAttribute VoteVO voteVo, Model model,
+			@RequestParam(defaultValue="0")int groupNo) {
 		//출력하기
 		logger.info("vote전체 조회하기");
 		
 		List<VoteVO> list =null;
-		list = voteService.selectVoteAll();
+		list = voteService.selectByGroup(groupNo);
 		logger.info("투표 목록조회 결과, list.size()="+list.size());
 		
 		model.addAttribute("list", list);
@@ -117,7 +119,7 @@ public class VoteCont {
 		if(session.getAttribute("memNo")!=null)
 		{
 			memNo = (Integer)session.getAttribute("memNo");
-			Logvo.setMemberNo(memNo);
+			Logvo.setMemNo(memNo);
 		}
 		
 		List<Vote_LogVO> list = new ArrayList<Vote_LogVO>();
@@ -125,7 +127,7 @@ public class VoteCont {
 		for(int i=0; i<itemNo.length; i++) {
 			Vote_LogVO logvo =  new Vote_LogVO();
 			logvo.setVoteItemNo(itemNo[i]);
-			logvo.setMemberNo(memNo);
+			logvo.setMemNo(memNo);
 			
 			int voteNo=Logvo.getVoteNo();
 			logvo.setVoteNo(voteNo);

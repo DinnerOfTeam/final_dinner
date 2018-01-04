@@ -59,9 +59,9 @@
 					</div>
 					
 					<div class="table-sub col-xs-12 col-sm-4 col-sm-offset-8 col-md-2 col-md-offset-10">
-						<a class="site-btn-submit site-btn-full" href="write.do" role="button">
+						<a class="site-btn-submit site-btn-full" href="<c:url value='voteReg.do?groupNo=${param.groupNo }'/>" role="button">
 							<i class="fa fa-pencil"></i>&nbsp;
-							글쓰기
+							투표등록
 						</a>
 					</div>
 					

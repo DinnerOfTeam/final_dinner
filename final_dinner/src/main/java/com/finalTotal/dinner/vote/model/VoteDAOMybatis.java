@@ -28,8 +28,8 @@ public class VoteDAOMybatis extends SqlSessionDaoSupport implements VoteDAO{
 	}
 
 	@Override
-	public VoteVO selectByGroup(int groupNo) {
-		return getSqlSession().selectOne(namespace+".selectByGroup",groupNo);
+	public List<VoteVO> selectByGroup(int groupNo) {
+		return getSqlSession().selectList(namespace+".selectByGroup",groupNo);
 	}
 
 	
@@ -48,5 +48,9 @@ public class VoteDAOMybatis extends SqlSessionDaoSupport implements VoteDAO{
 		return getSqlSession().insert(namespace+".insertLog",vo);
 	}
 
-	
+	@Override
+	public List<VoteVO> selectVote(int groupNo) {
+		return getSqlSession().selectList(namespace+".selectVote", groupNo);
+	}
+
 }

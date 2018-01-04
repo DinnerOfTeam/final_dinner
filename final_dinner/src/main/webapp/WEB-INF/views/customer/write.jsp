@@ -27,10 +27,12 @@
 						<div class="form-row">
 							<select class="form-select" name="qnaTypeNo">	
 								<option value="0">문의사항을 선택해 주세요</option>
-								<option value="1">로그인문의</option>
-								<option value="2">회원문의</option>
+								<c:forEach var="vo" items="${type }" >
+								<option value="${vo.qnaTypeNo }">${vo.qnaTypeName }</option>
+								</c:forEach>
+<!-- 								<option value="2">회원문의</option>
 								<option value="3">업체문의</option>
-								<option value="4">예약문의</option>
+								<option value="4">예약문의</option> -->
 							</select>
 						</div>
 

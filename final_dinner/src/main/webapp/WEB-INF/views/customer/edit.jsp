@@ -10,7 +10,11 @@
 		height: 100%;
 	}
 </style>
-
+<script type="text/javascript">
+	function cls(){
+		window.close();
+	}
+</script>
 <div class="form-wrap">
 		<div class="container">
 			<div class="form-body">
@@ -27,10 +31,8 @@
 						<textarea name="questionContent" class="form-text">${vo.questionContent}</textarea>
 						<div class="form-row">
 						<div class="col-sm-6">
-							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="수정하기">
-						</div>
-						<div class="col-sm-6">
-							<a href="<c:url value='/customer/list.do'/>" class="site-btn site-btn-full">목록</a>
+							<input type="submit" name="Sign In" class="site-btn-submit" value="수정하기">
+							<input type="button" name="cancel" class="site-btn" onclick="cls()" value="닫기">
 						</div>
 					</div>
 					</form>

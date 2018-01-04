@@ -25,6 +25,7 @@ import com.finalTotal.dinner.member.model.MemberService;
 import com.finalTotal.dinner.member.model.MemberServiceImpl;
 import com.finalTotal.dinner.member.model.MemberVO;
 import com.finalTotal.dinner.question.model.QuestionService;
+import com.finalTotal.dinner.question.model.QuestionTypeVO;
 import com.finalTotal.dinner.question.model.QuestionVO;
 
 
@@ -42,8 +43,12 @@ public class QuestionCon {
 
 	//글쓰기
 	@RequestMapping(value="/write.do", method=RequestMethod.GET)
-	String write_get() {
+	String write_get(Model model) {
 		logger.info("글쓰기 화면 보여주기");
+		
+		List<QuestionTypeVO> list = questionService.selectTypeAll();
+		logger.info("질문타입 개수 list={}", list.size());
+		model.addAttribute("type",list);
 		
 		return "customer/write";
 	}
