@@ -30,7 +30,7 @@
 
 	<!-- //login -->
 	<div class="row fadeInUp animated" data-wow-delay=".5s">
-		<fieldset class='border_fieldset'>
+		<fieldset >
 			<legend>예약정보 조회</legend>
 			<table class='table tb_hover'>
 				<thead class='row'>
