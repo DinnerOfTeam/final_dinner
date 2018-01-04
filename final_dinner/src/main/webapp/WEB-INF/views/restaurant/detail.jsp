@@ -86,7 +86,7 @@
 	}
 	
 	.res-info .panel-title > a{
-		dislay: block;
+		display: block;
 	}
 </style>
 
@@ -168,7 +168,7 @@
 									<!-- Indicators -->
 									<ol class="carousel-indicators">
 										<c:forEach var="i" begin="0" end="${fn:length(photoList)-1 }">
-											<li data-target="carousel-res-photo" data-slide-to="${i }"
+											<li data-target="#carousel-res-photo" data-slide-to="${i }"
 											<c:if test="${i==0 }">
 												class="active"
 											</c:if>
