@@ -43,7 +43,7 @@ public class VoteServiceImpl implements VoteService{
 	}
 
 	@Override
-	public VoteVO selectByGroup(int groupNo) {
+	public List<VoteVO> selectByGroup(int groupNo) {
 		return voteDao.selectByGroup(groupNo);
 	}
 	
@@ -68,6 +68,11 @@ public class VoteServiceImpl implements VoteService{
 		}
 		
 		return cnt;
+	}
+
+	@Override
+	public List<VoteVO> selectVote(int groupNo) {
+		return voteDao.selectVote(groupNo);
 	}
 	
 

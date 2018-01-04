@@ -27,9 +27,11 @@
 	</select>
 	
 	<select id="selectByGroup" parameterType="int" resultType="VoteVO">
-		select *
-		from vote
+		select v.* , m.mem_name
+		from vote v
+		left join member m on v.mem_no = m.mem_no
 		where group_no=#{groupNo}
+		order by vote_no desc
 	</select>
 	
 	<select id="selectByNo" parameterType="int" resultType="VoteVO">
@@ -48,7 +50,21 @@
 		<selectKey resultType="int" keyProperty="voteLogNo" order="BEFORE">
 			select vote_log_seq.nextval from dual
 		</selectKey>
-		insert into vote_log (vote_log_no, vote_no, member_no, vote_item_no)
-		values(#{voteLogNo}, #{voteNo}, #{memberNo}, #{voteItemNo})
+		insert into vote_log (vote_log_no, vote_no, mem_no, vote_item_no)
+		values(#{voteLogNo}, #{voteNo}, #{memNo}, #{voteItemNo})
 	</insert>
+	
+	<select id="selectVote" resultType="VoteVO">
+		select * 
+		from(
+		    select v.* , m.mem_name
+				from vote v
+				left join member m on v.mem_no = m.mem_no
+				where group_no= #{groupNo}
+				order by vote_no desc
+		)
+		<![CDATA[
+		where rownum<4
+		]]>
+	</select>
 </mapper>

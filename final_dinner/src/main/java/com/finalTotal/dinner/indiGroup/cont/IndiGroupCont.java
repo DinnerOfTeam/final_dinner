@@ -24,6 +24,7 @@ import com.finalTotal.dinner.indiGroup.model.GroupMemberVO;
 import com.finalTotal.dinner.indiGroup.model.GroupRegiVO;
 import com.finalTotal.dinner.indiGroup.model.IndiGroupService;
 import com.finalTotal.dinner.indiGroup.model.IndigroupVO;
+import com.finalTotal.dinner.vote.model.VoteService;
 import com.finalTotal.dinner.vote.model.VoteVO;
  
 @Controller
@@ -35,6 +36,9 @@ public class IndiGroupCont {
 	
 	@Autowired
 	private IndiGroupService group_service;
+	
+	@Autowired
+	private VoteService voteService;
 	
 	@RequestMapping(value= "/groupMain.do")
 	public String groupMain(HttpSession session, Model model) {
@@ -83,16 +87,13 @@ public class IndiGroupCont {
 	}
 	
 	@RequestMapping(value= "/vote.do")
-	public String vote(Model model) {
+	public String vote(Model model, @RequestParam(defaultValue="0")int groupNo) {
 		logger.info("indiGroup vote page");
 		
-		List<VoteVO> vote_list= new ArrayList<VoteVO>();
-		VoteVO vo= new VoteVO();
-		vo.setVoteEndDate(new Date(117, 11, 15));
-		vo.setVoteTitle("오늘 점심은?");
-		vote_list.add(vo);
+		List<VoteVO> list = voteService.selectVote(groupNo);
+		logger.info("그룹투퓨 리스트 조회 결과, list.size()={}", list.size());
 		
-		model.addAttribute("vote_list", vote_list);
+		model.addAttribute("list", list);
 		
 		return "indiGroup/vote";
 	}

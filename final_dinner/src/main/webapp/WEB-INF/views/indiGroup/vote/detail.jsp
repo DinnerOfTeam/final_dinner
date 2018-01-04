@@ -46,7 +46,7 @@
 							<input type="submit" name="Sign In" id="vote" class="site-btn-submit site-btn-full" value="투표하기">
 						</div>
 						<div class="col-sm-6">
-							<a href="<c:url value='/indiGroup/vote/list.do'/>" class="site-btn site-btn-full">목록</a>
+							<a href="<c:url value='/indiGroup/vote/list.do?groupNo=${vo.groupNo }'/>" class="site-btn site-btn-full">목록</a>
 						</div>
 					</div>
 					</form>

@@ -5,7 +5,7 @@ import java.util.Date;
 public class Vote_LogVO {
 	private int voteLogNo;
 	private int voteNo;
-	private int memberNo;
+	private int memNo;
 	private int voteItemNo;
 	private Date voteDate;
 	public int getVoteLogNo() {
@@ -20,11 +20,11 @@ public class Vote_LogVO {
 	public void setVoteNo(int voteNo) {
 		this.voteNo = voteNo;
 	}
-	public int getMemberNo() {
-		return memberNo;
+	public int getMemNo() {
+		return memNo;
 	}
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
 	}
 	public int getVoteItemNo() {
 		return voteItemNo;
@@ -40,9 +40,10 @@ public class Vote_LogVO {
 	}
 	@Override
 	public String toString() {
-		return "Vote_LogVO [voteLogNo=" + voteLogNo + ", voteNo=" + voteNo + ", memberNo=" + memberNo + ", voteItemNo="
+		return "Vote_LogVO [voteLogNo=" + voteLogNo + ", voteNo=" + voteNo + ", memNo=" + memNo + ", voteItemNo="
 				+ voteItemNo + ", voteDate=" + voteDate + "]";
 	}
+	
 
 	
 }

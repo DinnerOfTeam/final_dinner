@@ -15,7 +15,7 @@
 	<div title= "header">
 		<i class="fa fa-check-square left_align" aria-hidden="true"> 투표</i>
 		<span>
-			<a href= "<c:url value='/board/list.do' />">
+			<a href= "<c:url value='/indiGroup/vote/list.do?groupNo=${param.groupNo}' />">
 				<img class='more_img' alt="더보기 이미지" src="${pageContext.request.contextPath }/images/more.JPG">
 			</a>
 		</span>
@@ -28,15 +28,15 @@
 		<table class= 'table_my'>
 			<thead>
 			</thead>
-			<c:forEach var="vo" items="${vote_list }">
+			<c:forEach var="vo" items="${list }">
 				<tr>
 					<th>작성자</th>
 					<th>투표제목</th>
 					<th>완료기한</th>
 				</tr>
 				<tr>
-					<td>장요한</td>
-					<td><a class= 'vote_list' href="<c:url value= '#' />">${vo.voteTitle }</a></td>
+					<td>${vo.memName }</td>
+					<td><a class= 'vote_list' href="<c:url value= '/indiGroup/vote/detail.do?groupNo=${vo.groupNo }&voteNo=${vo.voteNo }' />">${vo.voteTitle }</a></td>
 					<td><fmt:formatDate value="${vo.voteEndDate }" pattern="yy-MM-dd" /></td>
 				<tr>
 			</c:forEach>

@@ -28,6 +28,7 @@ $.applyDatePicker=function(id){
 				<div class="form-info">
 
 					<form action="<c:url value='/indiGroup/vote/voteReg.do'/>" method="post">
+						<input type="hidden" name="groupNo" value="${param.groupNo }">
 						<input type="text" class="form-text" name="voteTitle" placeholder="제목을 입력하세요" required="">
 						<textarea placeholder="내용을 입력하세요" class="form-text" name="voteDesc" required=""></textarea>
 					
@@ -55,10 +56,11 @@ $.applyDatePicker=function(id){
 
 						<div class="form-comp-row">
 							<div class="col-sm-6">
-								<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="Sign up">
+								<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="투표등록">
 							</div>
 							<div class="col-sm-6">
-								<input type="submit" name="cancel" class="site-btn site-btn-full" value="Cancel">
+								<input type="button" name="cancel" class="site-btn site-btn-full" value="취소"
+									onclick="location.href='<c:url value="/indiGroup/vote/list.do?groupNo=${vo.groupNo }"/>'">
 							</div>
 						</div>
 
