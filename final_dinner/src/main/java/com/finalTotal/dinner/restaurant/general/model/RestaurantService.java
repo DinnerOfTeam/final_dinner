@@ -18,4 +18,6 @@ public interface RestaurantService {
     public int insertPhotoList(List<RestaurantPhotoVO> photoList);
     public List<RestaurantPhotoVO> selectPhotoByresNo(int resNo);
     public int deletePhotoByNo(int resNo);
+    public int deletePhotoByArray(int[] resArr);
+    public List<RestaurantTypeVO> restaurantType();
 }

@@ -82,5 +82,20 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return restaurantDao.deletePhotoByNo(resNo);
 	}
 
+	@Override
+	public int deletePhotoByArray(int[] resArr) {
+		int cnt=0;
+		
+		for(int resNo : resArr) {
+			cnt=restaurantDao.deletePhotoByNo(resNo);
+		}
+		
+		return cnt;
+	}
+	
+	public List<RestaurantTypeVO> restaurantType() {
+		return restaurantDao.restaurantType();
+	}
+
 
 }

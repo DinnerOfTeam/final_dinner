@@ -35,6 +35,7 @@
 
 </style>
 
+<!-- 메뉴 추가 -->
 <script type="text/javascript">
    /*  $(function(){
         //전역변수
@@ -62,7 +63,6 @@
         });
     }); */
     
-    <!-- 메뉴 추가 -->
 		$(function(){
 			$(document).on("click", ".food-item-box .food-item-del", function(){
 				if($('form[name=addFoodItem]>div.food-item-list>div.food-item-box').length>1){
@@ -119,13 +119,13 @@
 
 
 
-
+<!-- 	
 <title>foodWrite.jsp</title>
 </head>
 <body>
 
 	
-					<!-- 	<textarea name="editor" id="editor"
+					<textarea name="editor" id="editor"
 							style="width: 700px; height: 400px;"></textarea> -->
 		
  	<%-- <!-- login -->
@@ -184,69 +184,62 @@
 	</div> --%>
 	
 	
-		<div class="site-container-wrap">
-		<div class="container">
-			<div class="form-simple">
-				<form action="<c:url value='/restaurantEnterprise/foodWrite.do' />" method="post" name="addFoodItem">
-					<div class="shadow-box">
-						<div class="form-row">
-							<div class="col-xs-6 col-sm-10">
-								<h3>메뉴 추가</h3>
-							</div>
-							<div class="col-xs-6 col-sm-2">
-								<input type="button"
-									class="site-btn-submit site-btn-full food-item-add" value="추가">
-							</div>
-						</div>
-						
-						
-						
+		
+	<div class="form-simple">
+		<form action="<c:url value='/restaurantEnterprise/foodWrite.do' />" method="post" name="addFoodItem">
+			<div class="shadow-box">
+				<div class="form-row">
+					<div class="col-xs-6 col-sm-10">
+						<h3>메뉴 추가</h3>
 					</div>
-					
-					<div class="shadow-box food-item-box">
-						<label for="foodMenuNo">메뉴 종류</label>
-						<select class="form-select"
-								name="foodMenuNo" id="foodMenuNo">
-							<option value="0">메뉴 종류</option>
-							<option value="1">식사</option>
-							<option value="2">면류</option>
-							<option value="3">김밥</option>
-							<option value="4">튀김류</option>
-							<option value="5">분식</option>
-							<option value="6">기타</option>
-						</select>
-						<div class="row">
-							<div class="col-sm-2 col-sm-push-10 form-comp">
-								<input type="button"
-									class="site-btn site-btn-full food-item-del" value="제거">
-							</div>
-							<div class="col-sm-10 col-sm-pull-2">
-								<input type="text" class="form-text food-item-name" placeholder="메뉴명" name="foodItemName">
-							</div>
-						</div>
-						<input type="text" class="form-text food-item-price" placeholder="가격" name="foodItemPrice">
-						<textarea placeholder="설명" class="form-text food-item-desc" name="foodItemDesc"></textarea>
+					<div class="col-xs-6 col-sm-2">
+						<input type="button"
+							class="site-btn-submit site-btn-full food-item-add" value="추가">
 					</div>
-					
-					<div class="food-item-list">
-						
-					</div>
-					
-					<div class="row">
-						<div class="col-sm-6 form-comp">
-							<input type="submit" class="site-btn-submit site-btn-full" value="등록">
-						</div>
-						<div class="col-sm-6 form-comp">
-							<a href="#" class="site-btn site-btn-full">취소</a>
-						</div>
-					</div>
-				</form>
+				</div>
+				
+				
+				
 			</div>
-		</div>
+			
+			<div class="shadow-box food-item-box">
+				<label for="foodMenuNo">메뉴 종류</label>
+				<select class="form-select"
+						name="foodMenuNo" id="foodMenuNo">
+					<option value="0">메뉴 종류</option>
+					<c:forEach var="menu" items="${menuList }">
+						<option value="${menu.foodMenuNo }">${menu.foodMenuName }</option>
+					</c:forEach>
+					
+				</select>
+				<div class="row">
+					<div class="col-sm-2 col-sm-push-10 form-comp">
+						<input type="button"
+							class="site-btn site-btn-full food-item-del" value="제거">
+					</div>
+					<div class="col-sm-10 col-sm-pull-2">
+						<input type="text" class="form-text food-item-name" placeholder="메뉴명" name="foodItemName">
+					</div>
+				</div>
+				<input type="text" class="form-text food-item-price" placeholder="가격" name="foodItemPrice">
+				<textarea placeholder="설명" class="form-text food-item-desc" name="foodItemDesc"></textarea>
+			</div>
+			
+			<div class="food-item-list">
+				
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-6 form-comp">
+					<input type="submit" class="site-btn-submit site-btn-full" value="등록">
+				</div>
+				<div class="col-sm-6 form-comp">
+					<a href="#" class="site-btn site-btn-full">취소</a>
+				</div>
+			</div>
+		</form>
 	</div>
-	
-</body>
-</html>
+</div>
 
 
 <%@include file="../inc/footer.jsp"%>

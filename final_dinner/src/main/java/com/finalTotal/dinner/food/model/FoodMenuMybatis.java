@@ -35,5 +35,25 @@ public class FoodMenuMybatis extends SqlSessionDaoSupport implements FoodMenuDAO
 		return cnt;
 	}
 
+	@Override
+	public int insertMenu(FoodMenuVO vo) {
+		return getSqlSession().insert(namespace+".insertMenu", vo);
+	}
+
+	@Override
+	public List<FoodMenuVO> selectMenuListByResNo(int resNo) {
+		return getSqlSession().selectList(namespace+".selectMenuListByResNo", resNo);
+	}
+
+	@Override
+	public List<MenuVO> selectMenuByResNo(int resNo) {
+		return getSqlSession().selectList(namespace+".selectMenuByResNo", resNo);
+	}
+
+	@Override
+	public List<FoodItemVO> selectItemByMenuNo(int menuNo) {
+		return getSqlSession().selectList(namespace+".selectByMenuNo", menuNo);
+	}
+
 
 }
