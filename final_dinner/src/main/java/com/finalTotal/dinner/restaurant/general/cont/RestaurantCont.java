@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.finalTotal.dinner.board.model.BoardDataVO;
 import com.finalTotal.dinner.common.FileUtil;
-import com.finalTotal.dinner.member.cont.LoginCont;
+import com.finalTotal.dinner.food.model.FoodMenuService;
+import com.finalTotal.dinner.food.model.MenuVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantPhotoVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
@@ -34,6 +34,9 @@ public class RestaurantCont {
 	private RestaurantService restaurantService;
 	
 	@Autowired
+	private FoodMenuService foodMenuService;
+	
+	@Autowired
 	private FileUtil fileUtil;
 	
 	@RequestMapping(value="/restaurantJoin.do", method=RequestMethod.GET)
@@ -41,8 +44,7 @@ public class RestaurantCont {
 		logger.info("식당등록 페이지");
 		
 		return "restaurantGeneral/restaurantJoin";
-	}
-	
+	}	
 	
 	@RequestMapping(value="/restaurantJoin.do", method=RequestMethod.POST)
 	public String restaurantJoin_post(HttpServletRequest request, @ModelAttribute RestaurantVO vo, Model model) {
@@ -143,9 +145,19 @@ public class RestaurantCont {
 			vo.setResIntroduce(vo.getResIntroduce().replace("\r\n", "<br>"));
 		}
 		
+		//메뉴 찾기
+		List<MenuVO> menuList=foodMenuService.selectMenuByResNo(resNo);
+		logger.info("메뉴 조회결과 menuList.size={}", menuList.size());
+		
+		List<RestaurantPhotoVO> photoList=restaurantService.selectPhotoByresNo(resNo);
+		logger.info("사진 조회결과 photoList.size={}", photoList.size());
+		
 		model.addAttribute("vo", vo);
+		model.addAttribute("menuList", menuList);
+		model.addAttribute("photoList", photoList);
 		
 		return "restaurant/detail";
 	}
+	
 	
 }

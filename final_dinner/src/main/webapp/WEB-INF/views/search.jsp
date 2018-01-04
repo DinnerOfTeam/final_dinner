@@ -213,17 +213,32 @@
 							<div class="restaurant-search-result col-xs-12 col-sm-4">
 								<!-- <a href="#"> -->
 									<div class="restaurant-search-inner">
-										<div class="restaurant-search-img col-xs-4 col-sm-12">
-											<c:if test="${empty resItem.resThumbnail }">
-												<img src="${pageContext.request.contextPath }/images/noImages1x1.png"/>
-											</c:if>
-											<c:if test="${!empty resItem.resThumbnail }">
-												<img src="${pageContext.request.contextPath }/upfiles/upl_images/${resItem.resThumbnail}"/>
-											</c:if>
+										<div class="col-xs-4 col-sm-12">
+											<div class="restaurant-search-img">
+												<c:if test="${empty resItem.resThumbnail }">
+													<img src="${pageContext.request.contextPath }/images/noImages1x1.png"/>
+												</c:if>
+												<c:if test="${!empty resItem.resThumbnail }">
+													<img src="${pageContext.request.contextPath }/upfiles/upl_images/${resItem.resThumbnail}"/>
+												</c:if>
+											</div>
 										</div>
 										<div class="restaurant-search-desc col-xs-8 col-sm-12">
 											<h2>${resItem.resName }</h2>
-											<h4>평점 : ${resItem.resGrade }/5</h4><%-- 별점표시로 변경예정 --%>
+											<h4>
+												평점 : 
+												<c:set var="gradeB" value="${resItem.resGrade%1 }"/>
+												<c:set var="gradeA" value="${resItem.resGrade-gradeB}"/>
+												<span class="res-grade">
+													<c:forEach begin="1" end="${gradeA }">
+														<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+													</c:forEach>
+													<c:if test="${gradeB>0 }">
+														<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+													</c:if>
+												</span>
+												<span>${resItem.resGrade }/5</span>
+											</h4>
 											<p>영업일 : ${resItem.resWorkDay }</p>
 										</div>
 										<div class="restaurant-search-overlay">

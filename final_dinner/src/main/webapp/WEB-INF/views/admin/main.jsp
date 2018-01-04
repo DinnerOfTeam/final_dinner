@@ -36,8 +36,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
+		
+		function resizeIframe(iframe){
+			var h = iframe.get(0).contentWindow.document.body.scrollHeight;
+			console.log(h);
+			
+			iframe.height(h);
+		}
+		
+		$('iframe#adminEvent').on("load", function(){
+			resizeIframe($(this));
+			
+			window.scrollTo(0,0);
+		});
+		
+		$(window).resize(function(){
+			resizeIframe($('iframe#adminEvent'));
+		});
+		
+		$($('iframe#adminEvent').get(0).contentWindow).resize(function(){
+			resizeIframe($('iframe#adminEvent'));
+		});
+		
 	});
-</script>	
+	
+	
+</script>
 <!--animate-->
 <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" media="all">
 <link href="${pageContext.request.contextPath }/css/codestyle.css" rel="stylesheet" type="text/css">
@@ -63,6 +87,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	form#ad_log input {
 		color: black;
 	}
+	iframe.iframe-full{
+		border: none;
+		width: 100%;
+		height: 50em;
+		overflow: hidden;
+	}
+	
+	#AEvent{
+		min-width: 100%;
+	}
+	
 </style>
 <title>DOT 관리자 페이지</title>
 </head>
@@ -106,6 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class="active"><a href="#ARes" data-toggle="tab">업체지도</a></li>
 				<li class=""><a href="#ARest" data-toggle="tab">업체관리</a></li>
 				<li class=""><a href="#AQna" data-toggle="tab">질문관리</a></li>
+				<li class=""><a href="#AEvent" data-toggle="tab">이벤트관리</a></li>
 			</ul>
 		</div>
 		<div class="fadeIn animated" data-wow-delay=".5s">
@@ -138,6 +174,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="tab-pane fade" id="AQna">
 					<div class="container" title="질문관리">
 						<c:import url="/admin/qna/Aqna.do"></c:import>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="AEvent">
+					<div title="이벤트관리">
+						<iframe src="<c:url value='/admin/event/eventList.do'/>" class="iframe-full" id="adminEvent"></iframe>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
 package com.finalTotal.dinner.food.cont;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,10 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.food.model.FoodItemVO;
 import com.finalTotal.dinner.food.model.FoodItemVO2;
 import com.finalTotal.dinner.food.model.FoodMenuService;
+import com.finalTotal.dinner.food.model.FoodMenuVO;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
 
 
 @Controller
@@ -28,10 +32,26 @@ public class FoodCont {
 	@Autowired
 	private FoodMenuService foodMenuService;
 	
+	@Autowired
+	private RestaurantService restaruntService;
+	
 	
 	@RequestMapping(value="/foodWrite.do", method=RequestMethod.GET)
-	public String foodWirte_get() {
+	public String foodWirte_get(HttpSession session , Model model) {
 		logger.info("메뉴등록 페이지");
+
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		
+		List<FoodMenuVO> menuList=foodMenuService.selectMenuListByResNo(resNo);
+		
+		model.addAttribute("menuList", menuList);
 		
 		return "restaurantEnterprise/foodWrite";
 	}
@@ -119,5 +139,72 @@ public class FoodCont {
 		
 	}
 	
+	@RequestMapping(value="/writeMenu.do", method=RequestMethod.GET)
+	public String writeMenu_get() {
+		logger.info("메뉴종류 등록 페이지");
+		
+		return "restaurantEnterprise/writeMenu";
+	}
+	
+	@RequestMapping(value="/writeMenu.do", method=RequestMethod.POST )
+	public String writeMenu_post(@RequestParam String[] foodMenuName, @RequestParam String[] foodMenuDesc,
+			HttpSession session , Model model) {
+		logger.info("메뉴 등록 페이지 파라미터 foodMenuName={}, foodMenuDesc={}", foodMenuName, foodMenuDesc);
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		
+		List<FoodMenuVO> menuList=new ArrayList<FoodMenuVO>();
+		
+		String msg="";
+		String url="";
+		boolean back=false;
+		
+		for(int i=0; i<foodMenuName.length; i++) {
+			String name=foodMenuName[i];
+			String desc=foodMenuDesc[i];
+			
+			if(name==null || name.isEmpty()) {
+				msg="종류명을 입력하세요";
+				url="";
+				back=true;
+				break;
+			}
+			
+			FoodMenuVO fVO=new FoodMenuVO();
+			fVO.setFoodMenuName(name);
+			fVO.setFoodMenuDesc(desc);
+			fVO.setResNo(resNo);
+			
+			menuList.add(fVO);
+		}
+		
+		if(!back) {
+			int cnt=foodMenuService.insertMenuList(menuList);
+			logger.info("메뉴 입력결과 cnt={}", cnt);
+			
+			if(cnt>0) {
+				msg="입력완료";
+				url="/restaurantEnterprise/writeMenu.do";
+			}else {
+				msg="입력실패";
+				url="";
+				back=true;
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("back", back);
+		
+		return "common/message";
+		
+	}
 	
 }

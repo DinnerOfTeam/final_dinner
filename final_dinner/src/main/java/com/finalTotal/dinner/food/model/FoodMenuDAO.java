@@ -9,4 +9,13 @@ public interface FoodMenuDAO {
 	public List<FoodItemVO> selectAll(int foodItemNo);
 	public int deleteMenu(int foodItemNo);
 	public int selectAll2(int memNo);
+	
+	public int insertMenu(FoodMenuVO vo);
+	public List<FoodMenuVO> selectMenuListByResNo(int resNo);
+	public List<MenuVO> selectMenuByResNo(int resNo);
+	
+	public List<FoodItemVO> selectItemByMenuNo(int menuNo);
+	
+	
+	
 }
