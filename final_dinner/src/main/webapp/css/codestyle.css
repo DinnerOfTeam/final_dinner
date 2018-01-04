@@ -17,6 +17,7 @@
 .qna_header {
  padding-bottom: 15px;
  border-bottom: 2px solid #353535;
+ margin-top: 20px;
 }
 .th_div {
  font-weight: bold;
@@ -46,7 +47,7 @@
     width: 23px;
     height: 23px;
     display: inline-block;
-    background-image: url(images/lev.jpg);
+    background-image: url(../images/lev.jpg);
     background-repeat: no-repeat;
     color: white;
   font-weight: bold;

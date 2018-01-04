@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp" %>
+<div class="site-top-title" style="background-color: rgb(81, 151, 255);" >
+	<div class="container">
+		<h1>그룹</h1>
+	</div>
+</div>
 <%@ include file="../inc/indigroupSide.jsp" %>
 <style type="text/css">
 	div.groupList {

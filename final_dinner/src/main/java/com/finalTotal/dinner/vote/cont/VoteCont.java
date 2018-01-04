@@ -114,7 +114,7 @@ public class VoteCont {
 	}
 	@RequestMapping("/vote.do")
 	public String vote_log(HttpServletRequest request, HttpSession session, @ModelAttribute Vote_LogVO Logvo,
-			Model model, @RequestParam int itemNo[] ) {
+			Model model, @RequestParam int itemNo[], @RequestParam int groupNo ) {
 		int memNo=0;
 		if(session.getAttribute("memNo")!=null)
 		{
@@ -140,7 +140,7 @@ public class VoteCont {
 		String msg="", url="";
 		if(cnt>0) {
 			msg="투표완료";
-			url="/indiGroup/vote/list.do";
+			url="/indiGroup/vote/list.do?groupNo="+ groupNo;
 			back=false;
 		}else {
 			msg="투표실패";

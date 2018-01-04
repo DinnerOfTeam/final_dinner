@@ -96,19 +96,24 @@ a {
 			</ul> -->
 			<li class="list-group-item search-location-tabs">
 				<ul class="nav nav-tabs nav-tabs2" id="tab">
-					<li class="active"><a href="#general" data-toggle="tab">일반회원</a></li>
+					<c:if test="${ sessionScope.resNo==0}">
+						<li class="active"><a href="#general" data-toggle="tab">일반회원</a></li>
+					</c:if>
 					<c:if test="${ sessionScope.resNo!=0}">
-						<li class=""><a href="#business" data-toggle="tab">업체회원</a></li>
+						<li class="active"><a href="#business" data-toggle="tab">업체회원</a></li>
 					</c:if>
 				</ul>
 				<div class="tab-content">
+					<c:if test="${ sessionScope.resNo==0}">
 					<div class="tab-pane fade active in" id="general">
 						<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br> 
 						<a href="${pageContext.request.contextPath }/book/booking.do">예약정보 조회</a><br>
 						<a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br>						
 						<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
 					</div>
-					<div class="tab-pane fade" id="business">
+					</c:if>
+					<c:if test="${ sessionScope.resNo!=0}">
+					<div class="tab-pane fade active in" id="business">
 						<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br>
 						
 						<c:if test="${sessionScope.resNo!=null }">
@@ -142,14 +147,15 @@ a {
 							</div>
 							<div class="right-menu2 eee col-md-2 pad_0">
 								<ul>
-									<li><a href="#" class="pad_0 ccc">이벤트등록</a></li>
-									<li><a href="#" class="pad_0 ccc">이벤트삭제</a></li>
+									<li><a href="<c:url value= '/member/event/writeEvent.do' />" class="pad_0 ccc">이벤트등록</a></li>
+									<li><a href="<c:url value= '/member/event/eventList.do' />" class="pad_0 ccc">이벤트관리</a></li>
 								</ul>
 							</div>
 						</div> 
 						<a href="${pageContext.request.contextPath }/restaurantEnterprise/restaurantOut.do">식당탈퇴</a><br> 
 						<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
 					</div>
+					</c:if>
 				</div>
 			</li>
 

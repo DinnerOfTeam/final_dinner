@@ -144,7 +144,7 @@
 		$('#seachMap2').click(function() {
 			var add1= $('#addr_sido2 :selected').text();
 			var add2= $('#addr_sigungu2 :selected').text();
-			$('#seachedMap').find('div').remove();
+			$('#seachedMap2').find('div').remove();
 
 			var mapContainer = document.getElementById('seachedMap2'), // 지도를 표시할 div 
 			    mapOption = {

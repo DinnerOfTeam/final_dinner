@@ -4,7 +4,7 @@
 
 
 	<!-- banner -->
-	 <div class="banner">
+	 <div class="banner wow fadeInUp" data-wow-delay=".5s">
 			<div class="slider">
 				<h2 class="wow shake animated" data-wow-delay=".5s">Triplex</h2>
 				<!-- <div class="border" style="height: 200px"></div> -->

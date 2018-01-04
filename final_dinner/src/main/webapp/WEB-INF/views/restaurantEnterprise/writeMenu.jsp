@@ -70,7 +70,7 @@
 						<input type="text" class="form-text food-menu-name" placeholder="종류명" name="foodMenuName">
 					</div>
 				</div>
-				<textarea placeholder="설명" class="form-text food-menu-desc" name="foodMenuDesc"></textarea>
+				<textarea placeholder="설명" class="form-text food-menu-desc" name="foodMenuDesc" required="required"></textarea>
 			</div>
 			
 			<div class="food-menu-list">

@@ -163,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="<c:url value= '/event/eventList.do'/>">이벤트</a></li>								
 								<li><a href="<c:url value= '/customer/mainNotice.do'/>">고객센터</a></li>
 								<li><a href="<c:url value= '/indiGroup/groupMain.do'/>">그룹</a></li>
-								<li><a href="<c:url value= '/code.do'/>">코드</a></li>
+<%-- 								<li><a href="<c:url value= '/code.do'/>">코드</a></li> --%>
 							</ul>	
 							<div class="clearfix"> </div>
 						</div>	

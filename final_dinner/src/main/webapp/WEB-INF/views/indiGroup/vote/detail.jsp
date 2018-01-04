@@ -33,12 +33,14 @@
 					<form method="post"
 					action="<c:url value='/indiGroup/vote/vote.do'/>" onsubmit="return send(this)">
 						<input type="hidden" name="voteNo" value="${param.voteNo}"/>
+						<input type="hidden" name="groupNo" value="${param.groupNo}"/>
 						<input type="text" class="form-text" name="voteTitle" value="${vo.voteTitle}">
 						<textarea name="voteDesc" class="form-text">${vo.voteDesc}</textarea>
 						
 						<c:forEach var="vi" items="${list}">
-							<input type="checkbox" name="itemNo" value="${vi.voteItemNo}"/>
-							<input type="text" value="${vi.itemTitle}">
+							<label>
+								<input type="checkbox" name="itemNo" value="${vi.voteItemNo}"/>
+							${vi.itemTitle}</label>
 						</c:forEach>
 						
 						<div class="form-row">
