@@ -32,7 +32,7 @@ public class MyPageCont {
 	public String myPage(HttpSession session, Model model) {
 		String memId = (String)session.getAttribute("memId");
 		
-		logger.info("마이페이지, 파라미터 memeId={}",memId);
+		logger.info("마이페이지, 파라미터 memId={}",memId);
 		
 		MemberVO vo = memberService.selectMember(memId);
 		logger.info("마이페이지 정보 띄우기, vo={}",vo);

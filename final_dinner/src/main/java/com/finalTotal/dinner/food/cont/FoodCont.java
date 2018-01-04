@@ -57,13 +57,16 @@ public class FoodCont {
 			}else {
 				vo.setFoodItemDesc("");
 			}
+			
+			
+			int resNo = (Integer)session.getAttribute("resNo");
+			
+			
 			vo.setFoodItemPrice(Integer.parseInt(foodItemPricearr[i]));
 			
 			cnt += foodMenuService.insertFoodMenu(vo);
 			logger.info("메뉴 등록 결과, cnt={}",cnt);
 		}
-		
-		
 		
 		String msg = "", url="";
 		

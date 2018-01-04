@@ -89,18 +89,17 @@ a {
 		
 		<div data-layout="al16 al-o2 de-o1 de6 ec4">
 			<nav class="MOD_SUBNAVIGATION1_Menu" >
-			<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs">???</p>
-			<ul>
+			<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs">${ sessionScope.memId}</p>
+			<!-- <ul>
 				<li><a href="/dinner/member/memberEdit.do">회원정보 수정</a></li>
-				<li><a href="#">회원탈퇴</a></li>
-				<li><a href="#">Sub menu item 3</a></li>
-				<li><a href="#">Sub menu item 4</a></li>
-				<li><a href="#">Sub menu item 5</a></li>
-			</ul>
+				<li><a href="/dinner/member/memberOut.do">회원탈퇴</a></li>
+			</ul> -->
 			<li class="list-group-item search-location-tabs">
 				<ul class="nav nav-tabs nav-tabs2" id="tab">
 					<li class="active"><a href="#general" data-toggle="tab">일반회원</a></li>
-					<li class=""><a href="#business" data-toggle="tab">업체회원</a></li>
+					<c:if test="${ sessionScope.resNo!=0}">
+						<li class=""><a href="#business" data-toggle="tab">업체회원</a></li>
+					</c:if>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane fade active in" id="general">

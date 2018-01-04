@@ -23,6 +23,10 @@
 	padding: 0px !important;
 	margin: 0px !important;
 }
+
+.ccc{
+	text-align: right;	
+}
 </style>
 
  <script type="text/javascript">
@@ -57,10 +61,19 @@
 				<div class="form-info">
 					<form action="<c:url value='/restaurant/restaurantJoin.do' />" method="post"
 						enctype="multipart/form-data" >
-						<input type="text" class="form-text" name="resNo" placeholder="식당번호" required="">
-						<input type="text" class="form-text" name="memNo" placeholder="회원번호" required="">
-						<input type="text" class="form-text" name="foodTypeNo" placeholder="음식종류번호" required="">
-						<input type="text" class="form-text" name="resTypeNo" placeholder="식당종류번호" required="">
+						
+					<div class="form-row">
+						<div class="col-xs-3">
+								<select class="form-select" name="resTypeNo">
+									<option>식당종류</option>
+										<c:forEach var="vo" items="${typeList }"> 
+											<option value="${vo.resTypeNo }">${vo.resTypeName }</option>
+										</c:forEach>
+								</select>
+						</div>
+					</div>		
+						
+						
 						<input type="text" class="form-text" name="resName" placeholder="식당이름" required="">
 
 						<textarea placeholder="소개" name="resIntroduce" class="form-text" required=""></textarea>
@@ -97,11 +110,22 @@
 						<div class="form-row">
 							<div class="col-xs-3">
 								<select class="form-select" name="resContact1">
-									<option>010</option>
-									<option>011</option>
-									<option>012</option>
-									<option>016</option>
-									<option>019</option>
+									<option>02</option>
+									<option>032</option>
+									<option>031</option>
+									<option>033</option>
+									<option>041</option>
+									<option>043</option>
+									<option>063</option>
+									<option>062</option>
+									<option>061</option>
+									<option>054</option>
+									<option>053</option>
+									<option>055</option>
+									<option>052</option>
+									<option>051</option>
+									<option>064</option>
+									
 								</select>
 							</div>
 							<span class="form-txt form-static">-</span>
@@ -145,7 +169,7 @@
 
 						
 						<div class="form-comp-row">
-							<div class="col-sm-6">
+							<div class="col-sm-6 ccc">
 								<input type="submit" name="Sign In" class="site-btn-submit" value="등록">
 							</div>
 							<div class="col-sm-6">

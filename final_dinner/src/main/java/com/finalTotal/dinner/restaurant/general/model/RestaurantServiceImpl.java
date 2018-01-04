@@ -82,5 +82,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 		return restaurantDao.deletePhotoByNo(resNo);
 	}
 
+	@Override
+	public List<RestaurantTypeVO> restaurantType() {
+		return restaurantDao.restaurantType();
+	}
+
 
 }

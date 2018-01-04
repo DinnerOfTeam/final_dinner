@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import com.finalTotal.dinner.common.FileUtil;
 import com.finalTotal.dinner.member.cont.LoginCont;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantPhotoVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantTypeVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
 @Controller
@@ -37,15 +39,21 @@ public class RestaurantCont {
 	private FileUtil fileUtil;
 	
 	@RequestMapping(value="/restaurantJoin.do", method=RequestMethod.GET)
-	public String restaurantJoin_get() {
+	public String restaurantJoin_get(@ModelAttribute RestaurantTypeVO vo, Model model) {
 		logger.info("식당등록 페이지");
+			
+			List<RestaurantTypeVO> typeList = restaurantService.restaurantType();
+			logger.info("식당종류 파라미터 typeList={}",typeList);
+			
+			model.addAttribute("typeList", typeList);
 		
 		return "restaurantGeneral/restaurantJoin";
 	}
 	
 	
 	@RequestMapping(value="/restaurantJoin.do", method=RequestMethod.POST)
-	public String restaurantJoin_post(HttpServletRequest request, @ModelAttribute RestaurantVO vo, Model model) {
+	public String restaurantJoin_post(HttpServletRequest request, @ModelAttribute RestaurantVO vo, Model model,
+						HttpSession session) {
 	    logger.info("식당 등록 페이지 파라미터 vo={}",vo);
 	    
 	    //이미지 업로드 처리
@@ -63,6 +71,9 @@ public class RestaurantCont {
 				
 				vo.setResThumbnail(resThumbnail);
 			}
+			
+			int memNo = (Integer)session.getAttribute("memNo");
+			vo.setMemNo(memNo);
 		
 			logger.info("vo={}",vo);
 			
