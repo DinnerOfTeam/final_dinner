@@ -1,6 +1,6 @@
 $(function() {
 	$.editMember= function(idx) {
-		var inEl= $('tr').eq(idx).find('td input');
+		var inEl= $('#mytable tr').eq(idx).find('td input');
 		var memNo= inEl.first().val();
 		if(inEl.is(':disabled')) {
 			inEl.prop('disabled', '');
@@ -35,14 +35,14 @@ $(function() {
 	
 	$.indexing= function() {
 		var count= 0;
-		$('table').find('tr').each(function() {
+		$('table#mytable').find('tr').each(function() {
 			$(this).find('input').eq(1).val(count);
 			count+= 1;
 		});
 	}
 	
 	$.deleteMember= function(idx) {
-		var trEl= $('tr').eq(idx);
+		var trEl= $('#mytable tr').eq(idx);
 		trEl.hide();
 		return false;
 		event.preventDefault();
@@ -76,7 +76,7 @@ $(function() {
 				'<input id= "items['+ count+ '].memTel3" size="4"/>');
 		tdEl5.append(inEl5);
 		var tdEl6= $('<td></td>');
-		var inEl6= $('<input id= "items['+ count+ '].memGrade" size="1"/>');
+		var inEl6= $('<input id= "items['+ count+ '].memGrade" size="1" value="0"/>');
 		tdEl6.append(inEl6);
 		var tdEl7= $('<td></td>');
 		var inEl7= $('<button class="btn btn-primary" onclick="$.editMember('+ count+ ')">Edit</button> '+ 
@@ -90,7 +90,7 @@ $(function() {
 		trEl.append(tdEl5);
 		trEl.append(tdEl6);
 		trEl.append(tdEl7);
-		$('table').append(trEl);
+		$('table#mytable').append(trEl);
 	}
 	$.indexing();
 });

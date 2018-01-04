@@ -42,10 +42,10 @@
 	</select>
 	
 	<select id="adminSelectDay" resultType="Map" parameterType="Map">
-		select trunc(book_date) as book_date, count(*) as count from book
+		select to_char(book_date, 'yyyy-MM-dd') as book_dates, count(*) as count from book
 			where book_date between #{startDay} and #{endDay}
-	        group by trunc(book_date)
-	        order by trunc(book_date)
+	        group by to_char(book_date, 'yyyy-MM-dd')
+	        order by book_dates
 	</select>
 	
 	

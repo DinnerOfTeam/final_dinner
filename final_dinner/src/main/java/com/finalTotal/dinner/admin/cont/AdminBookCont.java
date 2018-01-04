@@ -1,5 +1,7 @@
 package com.finalTotal.dinner.admin.cont;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,17 +25,22 @@ public class AdminBookCont {
 	private BookService ser;
 	
 	@RequestMapping("/Abook.do")
-	public void bookList(@RequestParam String startDay,
-			@RequestParam String endDay, Model model) {
+	public void bookList(@RequestParam(required=false) String startDay,
+			@RequestParam(required=false) String endDay, Model model) {
 		log.info("admin book parameter : startDay={}, endDay={}", startDay, endDay);
 		
-/*		Map<String, Object> map= new HashMap<String, Object>();
+		Map<String, Object> map= new HashMap<String, Object>();
+		SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+		if(startDay== null|| startDay.isEmpty()) {
+			startDay= sdf.format(new Date());
+			endDay= sdf.format(new Date());
+		}
 		map.put("startDay", startDay);
 		map.put("endDay", endDay);
 		List<Map<String, Object>> list= ser.adminSelectDay(map);
 		log.info("list.size()={}", list.size());
 		
-		model.addAttribute("list", list);*/
+		model.addAttribute("list", list);
 	}
 
 }

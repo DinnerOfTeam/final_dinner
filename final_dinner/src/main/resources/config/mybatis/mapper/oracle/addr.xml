@@ -30,8 +30,9 @@
 		select * from addr_sido
 	</select>
 	
-	<select id="allSigungu" resultType="AddrVO">
+	<select id="allSigungu" resultType="SigunguVO">
 		select * from addr_sigungu where sido_no= #{sidoNo }
+			order by sigungu_name
 	</select>
 	
 </mapper>

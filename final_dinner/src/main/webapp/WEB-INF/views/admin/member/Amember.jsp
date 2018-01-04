@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="${pageContext.request.contextPath }/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/admin/member.js"></script>
 <p>회원</p>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

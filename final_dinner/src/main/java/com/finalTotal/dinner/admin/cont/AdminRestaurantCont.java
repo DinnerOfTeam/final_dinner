@@ -59,7 +59,8 @@ public class AdminRestaurantCont {
 	@RequestMapping("/getSigungu.do")
 	@ResponseBody
 	public List<SigunguVO> getSigungu(@RequestParam int sidoNo) {
-		List<SigunguVO> sigungu_list= addr_ser.selectSigungu(sidoNo);
+		List<SigunguVO> sigungu_list= addr_ser.allSigungu(sidoNo);
+		log.info("sigungu_list.size={}", sigungu_list.size());
 		
 		return sigungu_list;
 	}
@@ -70,7 +71,7 @@ public class AdminRestaurantCont {
 		
 		model.addAttribute("list", list);
 		
-		return "admin/restaurant/restList";
+		return "admin/restaurant/ArestList";
 	}
 
 }
