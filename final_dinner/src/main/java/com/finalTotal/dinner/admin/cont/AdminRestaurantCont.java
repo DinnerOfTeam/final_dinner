@@ -39,6 +39,17 @@ public class AdminRestaurantCont {
 		model.addAttribute("res_list", res_list);
 	}
 	
+	@RequestMapping("/Ares3.do")
+	public void resList3(Model model) {
+		List<SidoVO> sido_list= addr_ser.selectSido();
+		
+		model.addAttribute("sido_list", sido_list);
+		log.info("sido 검색 결과 list.size()= {}", sido_list.size());
+		
+		List<RestaurantVO> res_list= res_ser.all();
+		model.addAttribute("res_list", res_list);
+	}
+	
 	@RequestMapping("/Ares2.do")
 	public void searchMap(@RequestParam String Akey, Model model) {
 		log.info("지도 장소검색 page parameter : Akey={}", Akey);

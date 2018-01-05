@@ -60,7 +60,7 @@ $.applyDatePicker=function(id){
 							</div>
 							<div class="col-sm-6">
 								<input type="button" name="cancel" class="site-btn site-btn-full" value="취소"
-									onclick="location.href='<c:url value="/indiGroup/vote/list.do?groupNo=${vo.groupNo }"/>'">
+									onclick="location.href='<c:url value="/indiGroup/vote/list.do?groupNo=${param.groupNo }"/>'">
 							</div>
 						</div>
 

@@ -29,17 +29,19 @@
 	     <beans:property name="order" value="0" />
 	</beans:bean>
 	
-<!-- 	<interceptors>
+	<interceptors>
 		<interceptor>
-			<mapping path="/indiGroup/*"/>
-			
-			<mapping path="/customer/*"/>
+			<mapping path="/indiGroup/**"/>
+			<mapping path="/member/myPage.do"/>
+			<mapping path="/member/memberEdit.do"/>
+			<mapping path="/member/memberOut.do"/>
+			<mapping path="/customer/**"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		<interceptor>
 			<mapping path="/**"/>
 			<beans:ref bean="chattingUserInterceptor"/>
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
 	
 </beans:beans>
