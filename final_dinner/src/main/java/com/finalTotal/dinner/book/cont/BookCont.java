@@ -1,5 +1,7 @@
 package com.finalTotal.dinner.book.cont;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.book.model.BookService;
 import com.finalTotal.dinner.book.model.BookVO;
@@ -81,12 +84,53 @@ public class BookCont {
 	}
 	
 	
+	
 
-	@RequestMapping("/restaurantBooking.do")
-	public String restaurantBooking() {
-		logger.info("test page");
+	@RequestMapping(value="/restaurantBooking.do",method=RequestMethod.GET)
+	public String insertBook_get() {
+		logger.info("예약 페이지");
 		
 		return "book/restaurantBooking"; 
+	}
+	
+	@RequestMapping(value="/restaurantBooking.do",method=RequestMethod.POST)
+	public String insertBook_post(@ModelAttribute BookVO bookVo, HttpSession session,
+			Model model) {
+		logger.info("예약 페이지 ,파라미터 bookVo={}", bookVo);
+		
+		String s_date = bookVo.getS_bookDate();
+		String[] date_arr= s_date.split("-");
+		int year= Integer.parseInt(date_arr[0]);
+		year-= 1900;
+		int month= Integer.parseInt(date_arr[1]);
+		month--;
+		int date= Integer.parseInt(date_arr[2]);
+		Date d= new Date(year, month, date);
+		bookVo.setBookDate(d);
+		
+		
+		int memNo = (Integer)session.getAttribute("memNo");
+		logger.info("파라미터 memNo={}",memNo);
+		
+		bookVo.setMemNo(memNo);
+				
+		String msg="", url="";
+		
+		int cnt = bookService.insertBook(bookVo);
+		
+		if(cnt>0) {
+			msg="예약이 완료되었습니다";
+			url="/book/booking.do";
+		}else {
+			msg="식당 예약 실패";
+			url="/book/restaurantBooking";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);	
+		
+		
+		return "common/message"; 
 	}
 	
 	

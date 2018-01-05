@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('a[name=vote]').click(function(){
+			var url = $(this).attr('href');
+			window.open(url, '',
+					'left=0,top=0,width=450,height=500,locations=yes,resizable=yes');
+			
+			return false;
+		});
+	});
+</script>
 	<div class="table-wrap">
 		<div class="container">
 			<div class="table-box">
@@ -19,7 +30,7 @@
 						<c:if test="${!empty list }">
 							<c:forEach var="vo" items="${list }">
 						<div class="table-tr">
-							<a href="<c:url value='/indiGroup/vote/detail.do?groupNo=${vo.groupNo }&voteNo=${vo.voteNo }'/>">
+							<a href="<c:url value='/indiGroup/vote/detail.do?groupNo=${vo.groupNo }&voteNo=${vo.voteNo }'/>" name="vote">
 								<div class="table-td table-td-center table-xs-left table-xs-sub col-xs-4 col-sm-2">
 									<p>${vo.memName} </p>
 								</div>
@@ -66,7 +77,7 @@
 					</div>
 					
 					<!-- 페이징 -->
-					<div class="table-sub col-xs-12 hidden-xs">
+					<!-- <div class="table-sub col-xs-12 hidden-xs">
 						<ul class="pagination">
 							<li class="disabled">
 								<a href="#" aria-label="First">
@@ -101,7 +112,7 @@
 						</ul>
 					</div>
 					
-					<!-- 검색폼 -->
+					검색폼
 					<div class="form-info form-row">
 						<form name="frmBoardSearch" method="get" action="#">
 							<div class="col-sm-2 col-sm-offset-2">
@@ -121,7 +132,7 @@
 							</div>
 						</form>
 						
-					</div>
+					</div> -->
 					
 				</div>
 			</div>

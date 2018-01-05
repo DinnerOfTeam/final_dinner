@@ -30,8 +30,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public List<RestaurantVO> all() {
-		return restaurantDao.all();
+	public List<RestaurantVO> allStandby() {
+		return restaurantDao.allStandby();
+	}
+	
+	@Override
+	public List<RestaurantVO> allApprove() {
+		return restaurantDao.allApprove();
 	}
 	
 	@Override
@@ -95,6 +100,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	public List<RestaurantTypeVO> restaurantType() {
 		return restaurantDao.restaurantType();
+	}
+
+	@Override
+	public int updateApprove(int resNo) {
+		return restaurantDao.updateApprove(resNo);
+	}
+
+	@Override
+	public int updateBan(int resNo) {
+		return restaurantDao.updateBan(resNo);
 	}
 
 

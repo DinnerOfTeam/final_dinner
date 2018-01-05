@@ -11,6 +11,18 @@
 		color: #353535;
 	}
 </style>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('a[name=vote]').click(function(){
+			var url = $(this).attr('href');
+			window.open(url, '',
+					'left=0,top=0,width=450,height=500,locations=yes,resizable=yes');
+			
+			return false;
+		});
+	});
+</script>
 <div title= 'vote'>
 	<div title= "header">
 		<i class="fa fa-check-square left_align" aria-hidden="true"> 투표</i>
@@ -36,7 +48,8 @@
 				</tr>
 				<tr>
 					<td>${vo.memName }</td>
-					<td><a class= 'vote_list' href="<c:url value= '/indiGroup/vote/detail.do?groupNo=${vo.groupNo }&voteNo=${vo.voteNo }' />">${vo.voteTitle }</a></td>
+					<!--  -->
+					<td><a class= 'vote_list' name="vote" href="<c:url value= '/indiGroup/vote/detail.do?groupNo=${vo.groupNo }&voteNo=${vo.voteNo }' />">${vo.voteTitle }</a></td>
 					<td><fmt:formatDate value="${vo.voteEndDate }" pattern="yy-MM-dd" /></td>
 				<tr>
 			</c:forEach>

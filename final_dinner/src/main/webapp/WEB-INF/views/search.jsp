@@ -121,12 +121,131 @@
 			arrLoc=locationValue.split(",");
 		}
 		reDrawLocation();
+		
+		
+		/*모달  */
+		var modalLayer = $("#modalLayer");
+		var modalLink = $(".modalLink");
+		var modalCont = $(".modalContent");
+		var marginLeft = modalCont.outerWidth()/3;
+		var marginTop = modalCont.outerHeight()/3; 
+
+		modalLink.click(function(){
+		   var resNo = $(this).prev("input[type=hidden]").val();
+		   $(".modalContent").find("input[name=resNo]").val(resNo);
+		   
+		   bgLayerOpen();
+		  modalLayer.fadeIn("slow");
+		  modalCont.css({"margin-top" : -marginTop, "margin-left" : -marginLeft});
+		  $(this).blur();
+		  $(".modalContent").focus();
+		  $("#bookNum").focus();
+		  
+		  return false;
+		});
+
+		function bgLayerOpen() {
+		    if(!$('.bgLayer').length) {
+		        $('<div class="bgLayer"></div>').appendTo($('body'));
+		    }
+		    var object = $(".bgLayer");
+		    var w = $(document).width()+12;
+		    var h = $(document).height();
+
+		    object.css({'width':w,'height':h}); 
+		    object.fadeIn(500); 
+		}
+		function bgLayerClear(){
+		    var object = $('.bgLayer');
+		   if(object.length) {
+		       object.fadeOut(500, function() {
+		            object.remove();
+		      });
+		    }
+		}
+
+		$('.closeModal').hover(function(){
+		   $(this).css('opacity','0.3');
+		},function(){
+		   $(this).css('opacity','1');
+		});
+		
+		//datepicker
+		$('#s_bookDate').datepicker({
+			dateFormat:'yy-mm-dd',
+			dayNamesMin:['일','월','화','수','목','금','토'],
+			monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월',]
+		});
+		
+		$(".cancelbw").click(function(){
+			bgLayerClear();
+			$("#modalLayer").hide();
+		});
+		
 	});
+	
+
 </script>
+
+<style type="text/css">
+	/* 모달관련 css */
+.mask {
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   left: 0;
+   top: 0;
+   z-index: 20;
+   background: #000;
+   opacity: .5;
+   filter: alpha(opacity = 50);
+}
+
+#modalLayer {
+   display: none;
+   position: absolute;
+   left: 50%;
+   top: 40%;
+}
+
+#modalLayer .modalContent {
+   width: 800px;
+   height:400px;
+   padding: 5px;
+   border: 1px solid #ccc;
+   position: absolute;
+   left: 50%;
+   top: 40%;
+   transform: translateX(-25%);
+   z-index: 20;
+   border-radius: 10px;
+   background: #FDFDFD;
+}
+
+#modalLayer .modalContent button {
+   position: absolute;
+   right: 0;
+   top: 0;
+   cursor: pointer;
+}
+
+.bgLayer {
+   display: none;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: #000;
+   opacity: .5;
+   filter: alpha(opacity = 50);
+   z-index: 10;
+}
+</style>
 
 <link href="css/site-search.css" rel="stylesheet" type="text/css" media="all" />
 	
-	<c:url var="listURL" value='/search.do'>
+	<c:url var="listURL" value='/search.do'>-
 		<c:param name="location" value="${param.location }"></c:param>
 		<c:param name="keyword" value="${param.keyword }"></c:param>
 	</c:url>
@@ -232,7 +351,9 @@
 										<div class="restaurant-search-overlay">
 											<div class="restaurant-overlay-btn">
 												<div class="col-md-6">
-													<a href="${pageContext.request.contextPath }/book/restaurantBooking.do" class="site-btn-submit site-btn-full">예약</a>
+													<%-- <a href="${pageContext.request.contextPath }/book/restaurantBooking.do?resNo=${resItem.resNo}" class="site-btn-submit site-btn-full">예약</a> --%>
+													<input type="hidden" value="${resItem.resNo }">	
+													<button class="modalLink site-btn-submit site-btn-full">예약</button>
 												</div>
 												<div class="col-md-6">
 													<a href='<c:url value="/restaurant/detail.do?resNo=${resItem.resNo }"/>' class="site-btn site-btn-full">상세보기</a>
@@ -388,6 +509,89 @@
 		</div>
 	</div>
 	<!-- //search -->
+	
+	
+	<!-- 모달-->
+	<div id="modalLayer">
+     <div class="modalContent">
+        <div style="padding:5px; margin:0 auto; width:95%; height:90%; position:relative;">
+        <div class="newsDetail" style="margin:0 auto; width:100%; height:95%;">
+          <!-- 컨텐츠 부분-->
+          
+          <!-- 모달로 띄워지는 예약 페이지 -->
+	
+	<div class="form-wrap">
+		<div class="container" style="width: 750px;">
+			<h2 class="eee">예약	</h2>
+			<div class="form-simple">
+				 <form action="<c:url value='/book/restaurantBooking.do' />" method="post">
+			
+					<input type="hidden" name="resNo" >
+					
+					<div class="form-row">
+						<div class="col-sm-4">
+							<input type="text" class="form-text" name="bookNum" id="bookNum" placeholder="인원" required="">
+						</div>
+						
+						<div class="col-sm-4">
+							<input type="text" class="form-text" name="bookTime" id="bookTime" placeholder="시간" required="">
+						</div>
+						
+						<div class="col-sm-4">
+						<input type="text" class="form-text"  name="s_bookDate" id="s_bookDate" placeholder="예약날짜" required="" >
+						</div>
+					
+					</div>
+				<!-- 	<div class="form-row">
+						<div class="col-sm-4">
+							<input type="text" class="form-text" placeholder="이름">
+						</div>
+					</div>
+					<div class="form-row">
+					<p class="bbb">연락처</p>
+						<div class="col-xs-3">
+							<select class="form-select">
+								<option>010</option>
+								<option>011</option>
+								<option>012</option>
+								<option>016</option>
+								<option>019</option>
+							</select>
+						</div>
+						<span class="form-txt form-static">-</span>
+						<div class="col-xs-3">
+							<input type="text" class="user form-text">
+						</div>
+						<span class="form-txt form-static">-</span>
+						<div class="col-xs-3">
+							<input type="text" class="user form-text">
+						</div>
+					</div> 
+					
+					
+					<textarea placeholder="요청사항을 적어주세요" class="form-text" required=""></textarea> -->
+					
+					<div class="form-comp-row" style="padding-left: 200px">
+						<div class="col-sm-4">
+							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="예약">
+						</div>
+						<div class="col-sm-4">
+							<input type="reset" name="cancel" class="site-btn site-btn-full cancelbw" value="취소">
+						</div>
+					</div>
+
+					
+					<div class="signup-text">
+						<a href="login.html">Already have an account? Login here.</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+        </div>
+        </div>
+     </div>
+   </div>
 
 
 

@@ -23,21 +23,12 @@
 </style>
 
 
-<%@include file="../inc/mypageSide.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
 <script type="text/javascript">
 
-$(function () {
-	$('#startDay').datepicker({
-		dateFormat:'yy-mm-dd',
-		dayNamesMin:['일','월','화','수','목','금','토'],
-		monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월',]
-	});
-	
 
-});
 </script>
 
 </head>
@@ -52,22 +43,23 @@ $(function () {
 			<div class="form-simple">
 				 <form action="<c:url value='/book/restaurantBooking.do' />" method="post">
 			
+					<input type="hidden" name="resNo" value="${param.resNo }">
 					
 					<div class="form-row">
 						<div class="col-sm-4">
-							<input type="text" class="form-text" placeholder="인원" required="">
+							<input type="text" class="form-text" name="bookNum" id="bookNum" placeholder="인원" required="">
 						</div>
 						
 						<div class="col-sm-4">
-							<input type="text" class="form-text" placeholder="시간" required="">
+							<input type="text" class="form-text" name="bookTime" id="bookTime" placeholder="시간" required="">
 						</div>
 						
 						<div class="col-sm-4">
-						<input type="text" class="form-text" name="startDay" placeholder="날짜" id="startDay">
+						<input type="text" class="form-text"  name="s_bookDate" id="s_bookDate" placeholder="예약날짜" required="" >
 						</div>
 					
 					</div>
-					<div class="form-row">
+				<!-- 	<div class="form-row">
 						<div class="col-sm-4">
 							<input type="text" class="form-text" placeholder="이름">
 						</div>
@@ -94,13 +86,13 @@ $(function () {
 					</div> 
 					
 					
-					<textarea placeholder="요청사항을 적어주세요" class="form-text" required=""></textarea>
+					<textarea placeholder="요청사항을 적어주세요" class="form-text" required=""></textarea> -->
 					
-					<div class="form-comp-row">
-						<div class="col-sm-6">
+					<div class="form-comp-row" style="padding-left: 200px">
+						<div class="col-sm-4">
 							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="예약">
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<input type="submit" name="cancel" class="site-btn site-btn-full" value="취소">
 						</div>
 					</div>
