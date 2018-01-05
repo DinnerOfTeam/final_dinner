@@ -37,18 +37,10 @@
 img.res_thum {
 	height: auto;
 }
-div.align_right {
-	text-align: right;
-}
 </style>
-<script type="text/javascript">
-	$(function() {
-		$('tr.tr_red').find('td label').css('color', 'red');
-		$('tr.tr_blue').find('td label').css('color', 'blue');
-	});
-</script>
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div>
 	<h1 align="center" style="color: #428bca">Restaurant Table Edit</h1>
@@ -57,10 +49,6 @@ div.align_right {
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">
-					<div class="align_right">
-						<span class= 'badge badge-primary'>승인대기중</span>
-						<span class= 'badge badge-danger'>반려됨</span>
-					</div>
 					<table id="mytable_res" class="table table-bordered">
 <%-- 						<colgroup>
 							<col style="width: 13%">
@@ -77,29 +65,22 @@ div.align_right {
 
 						<tbody>
 							<c:forEach var="vo" items="${list }" varStatus="idx">
-								<c:if test="${vo.resStatus== 'ban' }">
-									<tr class= 'tr_red'>
-								</c:if>
-								<c:if test="${vo.resStatus!= 'ban' }">
-									<tr class= 'tr_blue'>
-								</c:if>
+								<tr>
 									<td>
 										<input value= '${vo.resNo }' type="hidden"/>
 										<label>${vo.resName }</label>
 									</td>
 									<td>
-										<c:if test="${!empty vo.memEmail1 }">
-											<label>${vo.memEmail1 }@${vo.memEmail2 }</label>
-										</c:if>
+										<label></label>
 									</td>
 									<td>
 										<label>${vo.resAddressDetail }</label>
 									</td>
 									<td>
 										<button class="btn btn-primary"
-											onclick="$.approveRes(${idx.count})">승인</button>
+											onclick="$.editRes(${idx.count})">승인</button>
 										<button class="btn btn-danger"
-											onclick="$.banRes(${idx.count})">반려</button>
+											onclick="$.deleteRes(${idx.count})">반려</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -109,5 +90,33 @@ div.align_right {
 			</div>
 
 		</div>
+	</div>
+</div>
+
+<div class="food-search-result wow fadeIn animated" data-wow-delay=".5s">
+	<div class="container">
+		<c:forEach var="vo" items="${list }">
+		<div class="restaurant-search-result col-xs-12 col-sm-4">
+			<a href="#">
+				<div class="restaurant-search-inner">
+					<div class="restaurant-search-img col-xs-4 col-sm-12">
+						<c:if test="${empty vo.resThumbnail }">
+						<img class= 'res_thum' src="http://placehold.it/150x150"/>
+						</c:if>
+						<c:if test="${!empty vo.resThumbnail }">
+						<img class= 'res_thum' src="<c:url value='/upfiles/upl_images/${vo.resThumbnail }' />"/>
+						</c:if>
+					</div>
+					<div class="restaurant-search-desc col-xs-8 col-sm-12">
+						<h2>${vo.resName }</h2>
+						<h4>평점 : ${vo.resGrade }/5</h4>
+					</div>
+					<div class= 'col-sm-12 visible-xs'>
+						${vo.resIntroduce }
+					</div>
+				</div>
+			</a>
+		</div>
+		</c:forEach>
 	</div>
 </div>

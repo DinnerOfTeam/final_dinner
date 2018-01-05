@@ -13,9 +13,9 @@
 
 
 <script type="text/javascript">
-	function openMap(key) {
+	function openMap(key1, key2) {
 /* 		window.open('<c:url value="/book/map.do"/>', 'c', 'width= 400px, height= 400px'); */
-		window.open('<c:url value="/admin/restaurant/Ares2.do?Akey='+key + '"/>', 'c', 'width= 400px, height= 400px');
+		window.open('<c:url value="/admin/restaurant/Ares2.do?Akey='+key1+ key2 + '"/>', 'c', 'width= 400px, height= 400px');
 	}
 </script>
 
@@ -53,7 +53,7 @@
 								<td>${vo.resAddress }
 								<input type="button" 
 								style="background-image: url('<c:url value="/images/Marker_26px.png"/>'); width:30px;"
-									onclick="openMap('${vo.resAddressDetail }')" />   
+									onclick="openMap('${vo.resAddressDetail }', '${vo.resName }')" />   
 								
 							
 								</td>

@@ -35,7 +35,7 @@ public class AdminRestaurantCont {
 		model.addAttribute("sido_list", sido_list);
 		log.info("sido 검색 결과 list.size()= {}", sido_list.size());
 		
-		List<RestaurantVO> res_list= res_ser.all();
+		List<RestaurantVO> res_list= res_ser.allApprove();
 		model.addAttribute("res_list", res_list);
 	}
 	
@@ -46,7 +46,7 @@ public class AdminRestaurantCont {
 		model.addAttribute("sido_list", sido_list);
 		log.info("sido 검색 결과 list.size()= {}", sido_list.size());
 		
-		List<RestaurantVO> res_list= res_ser.all();
+		List<RestaurantVO> res_list= res_ser.allApprove();
 		model.addAttribute("res_list", res_list);
 	}
 	
@@ -78,11 +78,29 @@ public class AdminRestaurantCont {
 	
 	@RequestMapping("/ArestList.do")
 	public String restList(Model model) {
-		List<RestaurantVO> list= res_ser.all();
+		List<RestaurantVO> list= res_ser.allStandby();
 		
 		model.addAttribute("list", list);
 		
 		return "admin/restaurant/ArestList";
 	}
 
+	@RequestMapping("/update.do")
+	@ResponseBody
+	public String updateRes(@RequestParam int resNo,
+			@RequestParam String type,
+			@RequestParam(required= false) String msg) {
+		
+		String res= "<res><result>";
+		int cnt= 0;
+		if(type.equals("app")) {
+			cnt= res_ser.updateApprove(resNo);
+		}else if(type.equals("ban")) {
+			cnt= res_ser.updateBan(resNo);
+		}
+		res+= cnt+ "</result></res>";
+		
+		
+		return res;
+	}
 }

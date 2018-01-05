@@ -28,8 +28,13 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 	}
 
 	@Override
-	public List<RestaurantVO> all() {
-		return getSqlSession().selectList(namespace+".all");
+	public List<RestaurantVO> allStandby() {
+		return getSqlSession().selectList(namespace+".allStandby");
+	}
+	
+	@Override
+	public List<RestaurantVO> allApprove() {
+		return getSqlSession().selectList(namespace+".allApprove");
 	}
 	
 	@Override
@@ -78,7 +83,13 @@ public class RestaurantDAOMybatis extends SqlSessionDaoSupport implements Restau
 		return getSqlSession().selectList(namespace+".restaurantType");
 	}
 
-	
-	
-	
+	@Override
+	public int updateApprove(int resNo) {
+		return getSqlSession().update(namespace+ ".updateApprove", resNo);
+	}
+
+	@Override
+	public int updateBan(int resNo) {
+		return getSqlSession().update(namespace+ ".updateBan", resNo);
+	}
 }

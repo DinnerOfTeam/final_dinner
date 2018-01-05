@@ -22,6 +22,7 @@ public class RestaurantVO {
 	private String resAddressDetail; //상세주소
 	private Date resRegdate; //등록일
 	private String resStatus; //상태(승인대기중,승인됨,차단됨)
+	private String memEmail1, memEmail2;
 	
 	public RestaurantVO() {
 		super();
@@ -52,6 +53,22 @@ public class RestaurantVO {
 		this.resAddressDetail = resAddressDetail;
 		this.resRegdate = resRegdate;
 		this.resStatus = resStatus;
+	}
+
+	public String getMemEmail1() {
+		return memEmail1;
+	}
+
+	public void setMemEmail1(String memEmail1) {
+		this.memEmail1 = memEmail1;
+	}
+
+	public String getMemEmail2() {
+		return memEmail2;
+	}
+
+	public void setMemEmail2(String memEmail2) {
+		this.memEmail2 = memEmail2;
 	}
 
 	public int getResNo() {

@@ -108,19 +108,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="top-header-info">
 					<div class="top-header-right">
 						<div class="top-header-right-info">
-							<c:if test="${empty sessionScope.memId }">
+							<c:if test="${empty sessionScope.admin_memId }">
 							<form id= 'ad_log' action="<c:url value= '/admin/login/login.do'/>" method="post" >
 								<label>아이디 : <input type="text" name= 'memId' size="5"></label>
 								<label>비밀번호 : <input type="text" name= 'memPwd' size="8"></label>
 							</form>
 							</c:if>
 							<ul>
-								<c:if test="${empty sessionScope.memId }">
+								<c:if test="${empty sessionScope.admin_memId }">
 								<li><a href="<c:url value= '#'/>">로그인</a></li>
 								<li><a href="<c:url value= '/member/signup.do'/>">회원가입</a></li>
 								</c:if>
 								
-								<c:if test="${!empty sessionScope.memId }">								
+								<c:if test="${!empty sessionScope.admin_memId }">								
 								<li><a href="<c:url value= '/login/logout.do'/>">로그아웃</a>
 								<a href="<c:url value= '/member/myPage.do'/>">마이페이지</a></li>
 								</c:if>
@@ -135,10 +135,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 			<ul class="nav-pills admin-tabs">
-				<li class=""><a href="#AMember" data-toggle="tab">회원관리</a></li>
+				<li class="active"><a href="#AMember" data-toggle="tab">회원관리</a></li>
 				<li class=""><a href="#ABoard" data-toggle="tab">게시판관리</a></li>
 				<li class=""><a href="#ABook" data-toggle="tab">예약관리</a></li>
-				<li class="active"><a href="#ARes" data-toggle="tab">업체지도</a></li>
+				<li class=""><a href="#ARes" data-toggle="tab">업체지도</a></li>
 				<li class=""><a href="#ARest" data-toggle="tab">업체관리</a></li>
 				<li class=""><a href="#AQna" data-toggle="tab">질문관리</a></li>
 				<li class=""><a href="#AEvent" data-toggle="tab">이벤트관리</a></li>
@@ -146,7 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="fadeIn animated" data-wow-delay=".5s">
 			<div class="search-tab-content tab-content">
-				<div class="tab-pane fade" id="AMember">
+				<div class="tab-pane fade active in" id="AMember">
 					<div class="container" title="회원">
 						<c:import url="/admin/member/Amember.do"></c:import>
 					</div>
@@ -161,7 +161,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<c:import url="/admin/book/Abook.do"></c:import>
 					</div>
 				</div>
-				<div class="tab-pane fade active in" id="ARes">
+				<div class="tab-pane fade" id="ARes">
 					<div class="container" title="업체지도">
 						<c:import url="/admin/restaurant/Ares.do"></c:import>
 					</div>

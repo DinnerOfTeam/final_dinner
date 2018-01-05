@@ -5,33 +5,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cdbb1fcc37fcc24c8dd0e57204ffee3c&libraries=services"></script>
 <script>
 	$(function() {
-		var container = document.getElementById('map');
-		var options = {
-				center: new daum.maps.LatLng(37.54867003431813, 127.01539018309835),
-				level: 9,
-		};
-		// 지도를 생성합니다    
-		var map = new daum.maps.Map(container, options); 
-
-		<c:forEach var="vo" items="${res_list }">
-		// 주소-좌표 변환 객체를 생성합니다
-		var geocoder = new daum.maps.services.Geocoder();
-		geocoder.addressSearch('${vo.resAddressDetail }', function(result, status) {
-
-		    // 정상적으로 검색이 완료됐으면 
-		     if (status === daum.maps.services.Status.OK) {
-
-		        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-		        // 결과값으로 받은 위치를 마커로 표시합니다
-		        var marker = new daum.maps.Marker({
-		            map: map,
-		            position: coords,
-		            title: '${vo.resName}',
-		        });
-		    }
-		});
-		</c:forEach>
 		
 		$('#searchMap').click(function() {
 			var add1= $('#addr_sido :selected').text();

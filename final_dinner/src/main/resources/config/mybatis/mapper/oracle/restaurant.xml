@@ -5,6 +5,7 @@
 <mapper namespace="config.mybatis.mapper.oracle.restaurant">
 		<sql id="searchWhere">
 			<where>
+				res_status= 'approve'
 				<if test="keyword!=null and keyword!=''">
 					res_name like '%' || #{keyword} || '%'
 				</if>
@@ -43,8 +44,25 @@
 			where res_no=#{resNo}
 		</select>
 		
-		<select id="all" resultType="RestaurantVO">
-			select * from restaurant
+		<select id="allStandby" resultType="RestaurantVO">
+			select r.*, m.mem_Email1, m.mem_Email2, substr(r.res_status, 0, 1)
+				from restaurant r join member m on r.mem_no= m.mem_No
+				where res_status= 'standby'
+				order by substr(res_status, 0, 1) desc, res_no asc
+		</select>
+		
+		<select id="allApprove" resultType="RestaurantVO">
+			select * from restaurant where res_status= 'approve'
+		</select>
+		
+		<select id="updateApprove" parameterType="int">
+			update restaurant set res_status= 'approve'
+				where res_no= #{resNo}
+		</select>
+		
+		<select id="updateBan" parameterType="int">
+			update restaurant set res_status= 'ban'
+				where res_no= #{resNo}
 		</select>
 		
 		<select id="selectRes" parameterType="int" resultType="string">

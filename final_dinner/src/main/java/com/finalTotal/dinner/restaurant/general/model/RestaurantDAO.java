@@ -8,7 +8,8 @@ public interface RestaurantDAO {
     public int insertRestuarant(RestaurantVO vo);
     public List<RestaurantVO> selectAll(int memNo);
     public RestaurantVO selectByNo(int resNo);
-    public List<RestaurantVO> all();
+    public List<RestaurantVO> allStandby();
+    public List<RestaurantVO> allApprove();
     public String selectRes(int memNo);
     public List<RestaurantVO> searchRestarunt(RestaruntSearchVO searchVO);
     public int countRestarunt(RestaruntSearchVO searchVO);
@@ -22,5 +23,6 @@ public interface RestaurantDAO {
     
     public List<RestaurantTypeVO> restaurantType();
     
-    
+    public int updateApprove(int resNo);
+    public int updateBan(int resNo);
 }

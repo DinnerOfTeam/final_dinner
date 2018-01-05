@@ -56,7 +56,7 @@
 	</update>
 	
 	<select id="showAll" resultType="MemberVO">
-		select * from member 
+		select * from member order by mem_grade desc, mem_regdate
 	</select>
 	
 	<select id="showAll2" parameterType="int" resultType="MemberVO">
