@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
 	$(function(){
@@ -24,8 +25,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/site-event.css">
 
 <c:url var="listURL" value='/member/event/eventList.do'></c:url>
-<jsp:useBean id="nowDate" class="java.util.Date"/>
-
+<jsp:useBean id="today" class="java.util.Date"/>
+<fmt:formatDate var="nowDate" value="${today}" type="Date" pattern="yyyy-MM-dd"/>
 <%@include file="../inc/mypageSide.jsp" %>
 
 	<div class="table-box">

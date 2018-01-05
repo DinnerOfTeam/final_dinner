@@ -53,7 +53,8 @@
 
 
 <c:url var="listURL" value='/admin/event/eventList.do'></c:url>
-<jsp:useBean id="nowDate" class="java.util.Date"/>
+<jsp:useBean id="today" class="java.util.Date"/>
+<fmt:formatDate var="nowDate" value="${today}" type="Date" pattern="yyyy-MM-dd"/>
 
 <div class="site-content-wrap">
 	<div class="container">

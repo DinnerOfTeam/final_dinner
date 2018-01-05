@@ -17,5 +17,8 @@ public interface FoodMenuDAO {
 	public List<FoodItemVO> selectItemByMenuNo(int menuNo);
 	
 	
+	public int deleteMenuParent(int foodMenuNo);
+	public int deleteFoodMenuByResNo(int resNo);
+	public int deleteItemByResNo(int resNo);
 	
 }

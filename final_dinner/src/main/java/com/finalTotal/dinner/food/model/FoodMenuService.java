@@ -15,4 +15,13 @@ public interface FoodMenuService {
 	public List<MenuVO> selectMenuByResNo(int resNo);
 	
 	public List<FoodItemVO> selectItemByMenuNo(int menuNo);
+	
+	public int insertMenuVOList(List<MenuVO> list);
+	
+	public int deleteMenuParent(int foodMenuNo);
+	public int deleteFoodMenuByResNo(int resNo);
+	public int deleteItemByResNo(int resNo);
+	
+	public int deleteAllMenuByResNo(int resNo);
+	
 }

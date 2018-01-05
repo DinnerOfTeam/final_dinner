@@ -20,23 +20,27 @@
 	</insert>
 	
 	<select id="selectEventByDate" parameterType="SearchVO" resultType="EventVO">
-		<![CDATA[
 		select f.*
 		from(
 			select rownum as rnum, e.*
 			from(
 				select * from site_event 
+				<![CDATA[
 				where event_start_date<=#{keyword}
 				and event_end_date>=#{keyword}
+				]]>
 				and event_approve='Y'
 				order by (
+					<![CDATA[
 					case when event_end_date<trunc(sysdate) or event_is_end='Y' then 0
 						 when event_start_date>trunc(sysdate) then 1
 						 else 2
 					end
+					]]>
 				) desc, event_no desc
 			)e
 		)f
+		<![CDATA[
 		where f.rnum>#{firstRowNum}
 		and f.rnum<=#{pageSize}+#{firstRowNum}
 		]]>

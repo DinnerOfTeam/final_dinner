@@ -60,14 +60,15 @@
 		var sigunguCache=new Array();
 		
 		$('#search-select-sido').change(function(){
-			var sidoVal=$('#search-select-sido > option:selected');
-			var sidoData=sidoVal.data("sido");
-			sidoVal=sidoVal.val();
+			var sidoSel=$('#search-select-sido > option:selected');
+			var sidoVal=sidoSel.val();
+			var sidoLoc=$.trim(sidoSel.text());
+			var sidoData="sido_" + sidoVal;
 			
 			if(sidoVal>0){
-				var $row=$('<div></div>').attr('class', 'row');
-				var $sigungu=$('<div></div>').attr('class', 'col-xs-6 col-sm-3 col-md-2');
-				var $sigunguAnchor=$('<a href="#"></a>');
+				var $row=$('<div/>', {'class' : "row"});
+				var $sigungu=$('<div/>', {'class' : 'col-xs-6 col-sm-3 col-md-2'});
+				var $sigunguAnchor=$('<a/>', {'href' : "#"});
 				var $siList=$('#search-list-sigungu');
 				
 				function createSigunguList(data , res){
@@ -92,19 +93,21 @@
 				}
 				
 				if(sidoData in sigunguCache){
-					createSigunguList(sidoData ,sigunguCache[sidoData]);
+					createSigunguList(sidoLoc ,sigunguCache[sidoData]);
 				}else{
 					$.ajax({
 						url: '<c:url value="/addr/getSigungu.do"/>',
 						data: 'sidoNo='+sidoVal,
 						dataType: 'json',
 						success: function(res){
-							createSigunguList(sidoData ,res);
+							if(res.length>0){
+								createSigunguList(sidoLoc, res);
 							
-							sigunguCache[sidoData]=res;
+								sigunguCache[sidoData]=res;
+							}
 						},
 						error:function(xhr, status, msg){
-							$siList.html("<p>에러가 발생했습니다</p>");
+							$siList.html($("<p/>", {'text' : '에러가 발생했습니다'}));
 						}
 					});
 				}
@@ -151,28 +154,13 @@
 						<select class="form-select" id="search-select-sido">
 							<option value="0">시/도 선택</option>
 							<c:forEach var="sido" items="${sidoList }">
-								<option value="${sido.sidoNo }"
-									data-sido="${sido.sidoName }">
+								<option value="${sido.sidoNo }">
 									${sido.sidoName }
 								</option>
 							</c:forEach>
 						</select>
 					</div>
 					<div class="search-tab-content" id="search-list-sigungu"></div>
-					
-					<%-- <div class="search-tab-content tab-content">
-						<c:forEach var="addr" items="${addrList }">
-							<div class="tab-pane fade active in" id="sido-no-${addr.sidoVO.sidoNo }">
-								<div class="row">
-									<c:forEach var="sigungu" items="${addr.sigunguList }">
-										<div class="col-xs-6 col-sm-3 col-md-2">
-											<a href="#" data-loc="${sigungu.sigunguName }">${sigungu.sigunguName }</a>
-										</div>
-									</c:forEach>
-								</div>
-							</div>
-						</c:forEach>
-					</div> --%>
 				</c:if>
 				
 			</div>

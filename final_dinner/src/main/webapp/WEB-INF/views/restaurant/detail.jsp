@@ -164,38 +164,42 @@
 					<div role="tabpanel" class="tab-pane" id="res-photo">
 						<div>
 							<c:if test="${!empty photoList }">
-								<div id="carousel-res-photo" class="carousel slide" data-ride="carousel">
-									<!-- Indicators -->
-									<ol class="carousel-indicators">
-										<c:forEach var="i" begin="0" end="${fn:length(photoList)-1 }">
-											<li data-target="#carousel-res-photo" data-slide-to="${i }"
-											<c:if test="${i==0 }">
-												class="active"
-											</c:if>
-											></li>
-										</c:forEach>
-									</ol>
-									
-									<!-- Wrapper for slides -->
-									<div class="carousel-inner" role="listbox">
-										<c:forEach var="photo" items="${photoList }" varStatus="photoStatus">
-											<c:set var="itemAct" value="${photoStatus.index==0? ' active' : '' } "/>
-											<div class="item${itemAct }">
-												<img src="${pageContext.request.contextPath }/upfiles/upl_images/${photo.resPhotoName}"
-													alt="${photo.resPhotoTitle }">
+								<div class="row">
+									<div class="col-md-9 col-xs-6">
+										<div id="carousel-res-photo" class="carousel slide" data-ride="carousel">
+											<!-- Indicators -->
+											<ol class="carousel-indicators">
+												<c:forEach var="i" begin="0" end="${fn:length(photoList)-1 }">
+													<li data-target="#carousel-res-photo" data-slide-to="${i }"
+													<c:if test="${i==0 }">
+														class="active"
+													</c:if>
+													></li>
+												</c:forEach>
+											</ol>
+											
+											<!-- Wrapper for slides -->
+											<div class="carousel-inner" role="listbox">
+												<c:forEach var="photo" items="${photoList }" varStatus="photoStatus">
+													<c:set var="itemAct" value="${photoStatus.index==0? ' active' : '' } "/>
+													<div class="item${itemAct }">
+														<img src="${pageContext.request.contextPath }/upfiles/upl_images/${photo.resPhotoName}"
+															alt="${photo.resPhotoTitle }">
+													</div>
+												</c:forEach>
 											</div>
-										</c:forEach>
+										
+											<!-- Controls -->
+											<a class="left carousel-control" href="#carousel-res-photo" role="button" data-slide="prev">
+												<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+												<span class="sr-only">Previous</span>
+											</a>
+											<a class="right carousel-control" href="#carousel-res-photo" role="button" data-slide="next">
+												<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+												<span class="sr-only">Next</span>
+											</a>
+										</div>
 									</div>
-								
-									<!-- Controls -->
-									<a class="left carousel-control" href="#carousel-res-photo" role="button" data-slide="prev">
-										<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-										<span class="sr-only">Previous</span>
-									</a>
-									<a class="right carousel-control" href="#carousel-res-photo" role="button" data-slide="next">
-										<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-										<span class="sr-only">Next</span>
-									</a>
 								</div>
 							</c:if>
 							<c:if test="${empty photoList }">

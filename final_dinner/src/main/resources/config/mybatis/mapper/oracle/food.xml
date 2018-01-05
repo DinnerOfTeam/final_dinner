@@ -43,6 +43,19 @@
 		delete from food_item where food_item_no=#{foodItemNo}
 	</delete>
 	
+	<delete id="deleteMenuParent" parameterType="int">
+		delete from food_menu where food_menu_no=#{foodMenuNo}
+	</delete>
+	
+	<delete id="deleteFoodMenuByResNo" parameterType="int">
+		delete from food_menu where food_menu_no=#{resNo}
+	</delete>
+	
+	<delete id="deleteItemByResNo" parameterType="int">
+		delete from food_item
+		where food_menu_no in(select food_menu_no from food_menu where res_no=#{resNo});
+	</delete>
+	
 	<insert id="insertMenu" parameterType="FoodItemVO">
 		<selectKey  keyProperty="foodMenuNo" resultType="int" order="BEFORE">
 			select food_menu_seq.nextval from dual

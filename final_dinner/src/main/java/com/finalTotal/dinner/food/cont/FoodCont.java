@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.finalTotal.dinner.food.model.FoodItemVO;
 import com.finalTotal.dinner.food.model.FoodItemVO2;
 import com.finalTotal.dinner.food.model.FoodMenuService;
 import com.finalTotal.dinner.food.model.FoodMenuVO;
+import com.finalTotal.dinner.food.model.MenuVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
 
 
@@ -171,7 +173,10 @@ public class FoodCont {
 		
 		for(int i=0; i<foodMenuName.length; i++) {
 			String name=foodMenuName[i];
-			String desc=foodMenuDesc[i];
+			String desc="";
+			if(foodMenuDesc.length>i) {
+				desc=foodMenuDesc[i];
+			}
 			
 			if(name==null || name.isEmpty()) {
 				msg="종류명을 입력하세요";
@@ -208,6 +213,29 @@ public class FoodCont {
 		
 		return "common/message";
 		
+	}
+	
+	@RequestMapping("/menuBackUp.do")
+	public ModelAndView menuBackUp(HttpSession session) {
+
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		logger.info("메뉴 백업 파라미터, resNo={}", resNo);
+		
+		if(resNo==0) {
+			return new ModelAndView("/WEB-INF/views/common/message.jsp", "msg", "잘못된 접근입니다");
+		}
+		
+		List<MenuVO> menuList=foodMenuService.selectMenuByResNo(resNo);
+		logger.info("메뉴 조회 결과 menuList.size={}", menuList.size());
+		
+		return new ModelAndView("downloadMenuExelView", "menuList", menuList);
 	}
 	
 }

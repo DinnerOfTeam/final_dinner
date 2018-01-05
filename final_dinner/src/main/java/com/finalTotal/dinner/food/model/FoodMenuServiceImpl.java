@@ -64,5 +64,51 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 	public List<FoodItemVO> selectItemByMenuNo(int menuNo) {
 		return foodMenuDao.selectItemByMenuNo(menuNo);
 	}
+	
+	@Override
+	@Transactional
+	public int insertMenuVOList(List<MenuVO> list) {
+		int cnt=0;
+		
+		for(MenuVO mVO : list) {
+			FoodMenuVO fVO=mVO.getFoodMenuVO();
+			cnt=foodMenuDao.insertMenu(fVO);
+			
+			List<FoodItemVO> iList=mVO.getFoodItemList();
+			for(FoodItemVO iVO : iList) {
+				iVO.setFoodMenuNo(fVO.getFoodMenuNo());
+				
+				cnt=foodMenuDao.insertFoodMenu(iVO);
+			}
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int deleteMenuParent(int foodMenuNo) {
+		return foodMenuDao.deleteMenuParent(foodMenuNo);
+	}
+
+	@Override
+	public int deleteFoodMenuByResNo(int resNo) {
+		return foodMenuDao.deleteFoodMenuByResNo(resNo);
+	}
+
+	@Override
+	public int deleteItemByResNo(int resNo) {
+		return foodMenuDao.deleteItemByResNo(resNo);
+	}
+
+	@Override
+	@Transactional
+	public int deleteAllMenuByResNo(int resNo) {
+		int cnt=0;
+		
+		cnt=foodMenuDao.deleteItemByResNo(resNo);
+		cnt=foodMenuDao.deleteFoodMenuByResNo(resNo);
+		
+		return cnt;
+	}
 
 }

@@ -39,7 +39,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		
 		function resizeIframe(iframe){
 			var h = iframe.get(0).contentWindow.document.body.scrollHeight;
-			console.log(h);
 			
 			iframe.height(h);
 		}
