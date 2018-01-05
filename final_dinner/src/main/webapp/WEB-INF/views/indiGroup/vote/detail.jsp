@@ -13,7 +13,10 @@
 			}
 		});
 	});
-
+	
+	function cls(){
+		window.close();
+	}
 </script>
 <style>
 	.form-body{
@@ -34,8 +37,8 @@
 					action="<c:url value='/indiGroup/vote/vote.do'/>" onsubmit="return send(this)">
 						<input type="hidden" name="voteNo" value="${param.voteNo}"/>
 						<input type="hidden" name="groupNo" value="${param.groupNo}"/>
-						<input type="text" class="form-text" name="voteTitle" value="${vo.voteTitle}">
-						<textarea name="voteDesc" class="form-text">${vo.voteDesc}</textarea>
+						<input type="text" class="form-text" name="voteTitle" value="${vo.voteTitle}" ReadOnly>
+						<textarea name="voteDesc" class="form-text" ReadOnly>${vo.voteDesc}</textarea>
 						
 						<c:forEach var="vi" items="${list}">
 							<label>
@@ -45,10 +48,9 @@
 						
 						<div class="form-row">
 						<div class="col-sm-6">
-							<input type="submit" name="Sign In" id="vote" class="site-btn-submit site-btn-full" value="투표하기">
-						</div>
-						<div class="col-sm-6">
-							<a href="<c:url value='/indiGroup/vote/list.do?groupNo=${vo.groupNo }'/>" class="site-btn site-btn-full">목록</a>
+							<input type="submit" name="Sign In" id="vote" class="site-btn-submit" value="투표하기">
+							<input type="button" name="cancel" class="site-btn" onclick="cls()" value="닫기">
+							<%-- <a href="<c:url value='/indiGroup/vote/list.do?groupNo=${vo.groupNo }'/>" class="site-btn site-btn-full">목록</a> --%>
 						</div>
 					</div>
 					</form>
