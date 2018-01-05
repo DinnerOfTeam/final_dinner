@@ -4,6 +4,16 @@
 
 <mapper namespace="config.mybatis.mapper.oracle.book">
 	
+	<insert id="insertBook" parameterType="BookVO">
+		<selectKey  keyProperty="bookNo" resultType="int" order="BEFORE">
+			select book_seq.nextval from dual
+		</selectKey>
+			
+			insert into book(book_no, mem_no, res_no, book_date, book_num, book_time)
+			values(#{bookNo}, #{memNo}, #{resNo}, #{bookDate}, #{bookNum}, #{bookTime})
+			
+	</insert>
+	
 	
 	<delete id="deleteBook" parameterType="int">
 		delete from book where book_no=#{bookNo}

@@ -9,9 +9,11 @@ public class BookVO {
 	private Date bookDate;	//예약날짜
 	private Date bookRegdate; //예약등록날짜
 	private int bookNum;  //인원수
-	private String bookCheck; //승인여부
-	private String resAddress; //예약정보 볼때 필요한 식당 주소
-	private String resAddressDetail; //예약정보 볼때 필요한 식당 상세주소
+	private String bookCheck; //승인여부	
+	private int bookTime; //예약시간
+	private String s_bookDate;
+	private String resAddress;//예약정보 볼때 필요한 식당 주소
+	private String resAddressDetail;//예약정보 볼때 필요한 식당 상세주소
 	private String resName;
 	
 	public BookVO() {
@@ -20,7 +22,7 @@ public class BookVO {
 	}
 
 	public BookVO(int bookNo, int memNo, int resNo, Date bookDate, Date bookRegdate, int bookNum, String bookCheck,
-			String resAddress, String resName) {
+			int bookTime, String s_bookDate, String resAddress, String resAddressDetail, String resName) {
 		super();
 		this.bookNo = bookNo;
 		this.memNo = memNo;
@@ -29,7 +31,10 @@ public class BookVO {
 		this.bookRegdate = bookRegdate;
 		this.bookNum = bookNum;
 		this.bookCheck = bookCheck;
+		this.bookTime = bookTime;
+		this.s_bookDate = s_bookDate;
 		this.resAddress = resAddress;
+		this.resAddressDetail = resAddressDetail;
 		this.resName = resName;
 	}
 
@@ -89,6 +94,22 @@ public class BookVO {
 		this.bookCheck = bookCheck;
 	}
 
+	public int getBookTime() {
+		return bookTime;
+	}
+
+	public void setBookTime(int bookTime) {
+		this.bookTime = bookTime;
+	}
+
+	public String getS_bookDate() {
+		return s_bookDate;
+	}
+
+	public void setS_bookDate(String s_bookDate) {
+		this.s_bookDate = s_bookDate;
+	}
+
 	public String getResAddress() {
 		return resAddress;
 	}
@@ -116,14 +137,12 @@ public class BookVO {
 	@Override
 	public String toString() {
 		return "BookVO [bookNo=" + bookNo + ", memNo=" + memNo + ", resNo=" + resNo + ", bookDate=" + bookDate
-				+ ", bookRegdate=" + bookRegdate + ", bookNum=" + bookNum + ", bookCheck=" + bookCheck + ", resAddress="
-				+ resAddress + ", resName=" + resName + "]";
+				+ ", bookRegdate=" + bookRegdate + ", bookNum=" + bookNum + ", bookCheck=" + bookCheck + ", bookTime="
+				+ bookTime + ", s_bookDate=" + s_bookDate + ", resAddress=" + resAddress + ", resAddressDetail="
+				+ resAddressDetail + ", resName=" + resName + "]";
 	}
 
 	
-
-	
-
 	
 	
 }

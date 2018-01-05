@@ -12,4 +12,5 @@ public interface BookService {
 	public List<BookVO> selectAll(int memNo);
 	public List<Map<String,Object>> selectReservedMember(int memNo);
 	public List<Map<String,Object>> adminSelectDay(Map<String, Object> map);
+	public int insertBook(BookVO BookVo);
 }
