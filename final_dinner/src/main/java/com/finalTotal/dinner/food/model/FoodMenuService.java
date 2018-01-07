@@ -24,4 +24,5 @@ public interface FoodMenuService {
 	
 	public int deleteAllMenuByResNo(int resNo);
 	
+	public int restoreMenu(List<MenuVO> list, int resNo);
 }

@@ -75,10 +75,12 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 			cnt=foodMenuDao.insertMenu(fVO);
 			
 			List<FoodItemVO> iList=mVO.getFoodItemList();
-			for(FoodItemVO iVO : iList) {
-				iVO.setFoodMenuNo(fVO.getFoodMenuNo());
-				
-				cnt=foodMenuDao.insertFoodMenu(iVO);
+			if(iList!=null) {
+				for(FoodItemVO iVO : iList) {
+					iVO.setFoodMenuNo(fVO.getFoodMenuNo());
+					
+					cnt=foodMenuDao.insertFoodMenu(iVO);
+				}
 			}
 		}
 		
@@ -107,6 +109,37 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 		
 		cnt=foodMenuDao.deleteItemByResNo(resNo);
 		cnt=foodMenuDao.deleteFoodMenuByResNo(resNo);
+		
+		return cnt;
+	}
+	
+	@Override
+	@Transactional
+	public int restoreMenu(List<MenuVO> list, int resNo) {
+		int cnt=0;
+		
+		//deleteAllMenuByResNo
+		
+		if(resNo>0) {
+			cnt=foodMenuDao.deleteItemByResNo(resNo);
+			cnt=foodMenuDao.deleteFoodMenuByResNo(resNo);
+		}
+		
+		//insertMenuVOList
+		
+		for(MenuVO mVO : list) {
+			FoodMenuVO fVO=mVO.getFoodMenuVO();
+			cnt=foodMenuDao.insertMenu(fVO);
+			
+			List<FoodItemVO> iList=mVO.getFoodItemList();
+			if(iList!=null) {
+				for(FoodItemVO iVO : iList) {
+					iVO.setFoodMenuNo(fVO.getFoodMenuNo());
+					
+					cnt=foodMenuDao.insertFoodMenu(iVO);
+				}
+			}
+		}
 		
 		return cnt;
 	}

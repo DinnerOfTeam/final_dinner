@@ -48,12 +48,12 @@
 	</delete>
 	
 	<delete id="deleteFoodMenuByResNo" parameterType="int">
-		delete from food_menu where food_menu_no=#{resNo}
+		delete from food_menu where res_no=#{resNo}
 	</delete>
 	
 	<delete id="deleteItemByResNo" parameterType="int">
 		delete from food_item
-		where food_menu_no in(select food_menu_no from food_menu where res_no=#{resNo});
+		where food_menu_no in(select food_menu_no from food_menu where res_no=#{resNo})
 	</delete>
 	
 	<insert id="insertMenu" parameterType="FoodItemVO">

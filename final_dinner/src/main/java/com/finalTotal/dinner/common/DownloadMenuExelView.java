@@ -1,6 +1,7 @@
 package com.finalTotal.dinner.common;
 
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -51,13 +52,33 @@ public class DownloadMenuExelView extends AbstractView{
 		//열
 		XSSFCell cell=null;
 		
-		int k=0;
+		int k=1;
+		
+		row=menuSheet.createRow(0);
+		cell=row.createCell(0);
+		cell.setCellValue("이름");
+		cell=row.createCell(1);
+		cell.setCellValue("설명");
+		
+		row=itemSheet.createRow(0);
+		cell=row.createCell(0);
+		cell.setCellValue("종류 번호");	//메뉴종류와 연결용
+		
+		cell=row.createCell(1);
+		cell.setCellValue("이름");	//메뉴 이름
+		
+		cell=row.createCell(2);
+		cell.setCellValue("설명");
+		
+		cell=row.createCell(3);
+		cell.setCellValue("가격");
+		
 		for(int i=0; i<menuList.size(); i++) {
 			//메뉴종류 저장
 			MenuVO menuVO=menuList.get(i);
 			
 			FoodMenuVO fVO=menuVO.getFoodMenuVO();
-			row=menuSheet.createRow(i);
+			row=menuSheet.createRow((i+1));
 			cell=row.createCell(0);
 			cell.setCellValue(fVO.getFoodMenuName());	//메뉴종류 이름
 			
@@ -86,7 +107,7 @@ public class DownloadMenuExelView extends AbstractView{
 				k++;
 				
 				cell=row.createCell(0);
-				cell.setCellValue((i+1));	//메뉴종류와 연결용
+				cell.setCellValue((i+2));	//메뉴종류와 연결용
 				
 				cell=row.createCell(1);
 				cell.setCellValue(iName);	//메뉴 이름
@@ -101,11 +122,13 @@ public class DownloadMenuExelView extends AbstractView{
 			
 		}
 		
-		//시험용(다운로드 대신)
-		FileOutputStream fileoutputstream=new FileOutputStream("D:\\lecture\\test.xlsx");
-		workBook.write(fileoutputstream);
+		OutputStream out = response.getOutputStream();
 		
-		fileoutputstream.close();
+		response.setContentType(getContentType());
+		response.setHeader("Content-disposition", "attachment;filename=res_menu_backup.xlsx");
+		workBook.write(out);
+		out.flush();
+		
 		workBook.close();
 	}
 	

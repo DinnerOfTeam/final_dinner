@@ -1,10 +1,21 @@
 package com.finalTotal.dinner.food.cont;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +25,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.finalTotal.dinner.food.model.FoodItemVO;
@@ -236,6 +249,202 @@ public class FoodCont {
 		logger.info("메뉴 조회 결과 menuList.size={}", menuList.size());
 		
 		return new ModelAndView("downloadMenuExelView", "menuList", menuList);
+	}
+	
+	@RequestMapping(value="/menuRestore.do", method=RequestMethod.GET )
+	public void restoreMenu_get() {
+		logger.info("식당 메뉴 복구 페이지");
+	}
+	
+	@RequestMapping(value="/menuRestore.do", method=RequestMethod.POST )
+	public String restoreMenu_post(@RequestParam(defaultValue="N") String isOverwrite, 
+	HttpServletRequest request, MultipartRequest multiRequest, Model model) {
+		HttpSession session=request.getSession();
+
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		
+		logger.info("식당 메뉴 복구 페이지, 파라미터 isOverwrite={}, resNo={}", isOverwrite, resNo);
+		
+		String msg="", url="";
+		boolean back=false;
+		
+		if(resNo==0) {
+			msg="";
+			back=true;
+		}else {
+			int overWrite=0;
+			if(isOverwrite.equals("Y")) {
+				overWrite=resNo;
+			}
+			
+			MultipartFile menuFile=null;
+			File file=null;
+			try {
+				menuFile=multiRequest.getFile("menuFile");
+				if(!menuFile.isEmpty()) {
+					file=new File(menuFile.getOriginalFilename());
+				
+					menuFile.transferTo(file);
+					
+				}else {
+					msg="파일이 없습니다";
+					back=true;
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(!back) {
+				List<MenuVO> menuList=new ArrayList<MenuVO>();
+				Workbook workbook=null;
+				try {
+					workbook=WorkbookFactory.create(file);
+					
+					//
+					Map<Integer, List<FoodItemVO>>itemList=new HashMap<Integer, List<FoodItemVO>>();
+					
+					Sheet itemSheet=workbook.getSheetAt(1);
+					int itemRows=itemSheet.getPhysicalNumberOfRows();
+					for(int itemRowindex=1; itemRowindex<itemRows; itemRowindex++){
+						Row itemRow=itemSheet.getRow(itemRowindex);
+						
+						if(itemRow!=null) {
+							FoodItemVO itemVO=new FoodItemVO();
+							Cell itemCell=itemRow.getCell(0);
+							int key=0;
+								
+							if(itemCell!=null) {
+								key=(int) itemCell.getNumericCellValue();
+							}
+							
+							itemCell=itemRow.getCell(1);
+							String itemName="";
+							if(itemCell!=null) {
+								itemName=itemCell.getStringCellValue();
+							}
+							
+							itemCell=itemRow.getCell(2);
+							String itemDesc="";
+							if(itemCell!=null) {
+								itemDesc=itemCell.getStringCellValue();
+								if(itemDesc==null) {
+									itemDesc="";
+								}
+							}
+							
+							itemCell=itemRow.getCell(3);
+							int itemPrice=0;
+							if(itemCell!=null) {
+								itemPrice=(int) itemCell.getNumericCellValue();
+							}
+							
+							itemVO.setFoodItemName(itemName);
+							itemVO.setFoodItemDesc(itemDesc);
+							itemVO.setFoodItemPrice(itemPrice);
+							
+							
+							List<FoodItemVO> voList=null;
+							
+							if(itemList.containsKey(key)) {
+								voList=itemList.get(key);
+							}else {
+								voList=new ArrayList<FoodItemVO>();
+								itemList.put(key, voList);
+							}
+							
+							voList.add(itemVO);
+						}
+						
+					}
+					
+					Sheet sheet=workbook.getSheetAt(0);
+					int rows=sheet.getPhysicalNumberOfRows();
+					for(int rowindex=1; rowindex<rows; rowindex++){
+						MenuVO mVO = new MenuVO();
+						FoodMenuVO fVO = new FoodMenuVO();
+						
+						Row row=sheet.getRow(rowindex);
+						
+						Cell cell=row.getCell(0);
+						String menuName="";
+						if(cell!=null) {
+							menuName=cell.getStringCellValue();
+						}
+						
+						cell=row.getCell(1);
+						String menuDesc="";
+						if(cell!=null) {
+							menuDesc=cell.getStringCellValue();
+							if(menuDesc==null) {
+								menuDesc="";
+							}
+						}
+						
+						
+						fVO.setFoodMenuName(menuName);
+						fVO.setFoodMenuDesc(menuDesc);
+						fVO.setResNo(resNo);
+						
+						mVO.setFoodMenuVO(fVO);
+						
+						List<FoodItemVO> menuItemList=null;
+						
+						int menuCode=rowindex+1;
+						
+						if(itemList.containsKey(menuCode)) {
+							menuItemList=itemList.get(menuCode);
+						}
+						
+						if(menuItemList!=null && !menuItemList.isEmpty()) {
+							mVO.setFoodItemList(menuItemList);
+						}
+						
+						menuList.add(mVO);
+					}
+					logger.info("데이터 추출결과, menuList.size={}", menuList.size());
+					
+					if(menuList!=null && !menuList.isEmpty()) {
+						int cnt=foodMenuService.restoreMenu(menuList, overWrite);
+						
+						if(cnt>0) {
+							msg="복원 완료";
+							url="/restaurantEnterprise/foodWrite.do";
+							back=false;
+						}else {
+							msg="복원 실패";
+							back=true;
+						}
+						
+					}else {
+						msg="데이터가 없거나 양식이 잘못되엇습니다";
+						back=true;
+					}
+				} catch (InvalidFormatException e) {
+					//e.printStackTrace();
+					msg="지원하지 않는 파일형식 입니다";
+					back=true;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("back", back);
+		
+		return "common/message";
 	}
 	
 }
