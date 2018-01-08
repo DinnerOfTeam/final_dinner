@@ -22,4 +22,13 @@ public interface FoodMenuDAO {
 	public int deleteItemByResNo(int resNo);
 	public int deleteItemByMenuNo(int menuNo);
 	
+	public int selectResNoByItemNo(int itemNo);
+	public int selectResNoByMenuNo(int menuNo);
+	
+	public FoodItemVO selectItemByNo(int itemNo);
+	public FoodMenuVO selectMenuByNo(int menuNo);
+	
+	public int editItem(FoodItemVO vo);
+	public int editMenu(FoodMenuVO vo);
+	
 }

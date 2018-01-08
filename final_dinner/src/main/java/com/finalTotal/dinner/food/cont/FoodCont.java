@@ -92,8 +92,6 @@ public class FoodCont {
 			}
 			
 			
-			int resNo = (Integer)session.getAttribute("resNo");
-			
 			
 			vo.setFoodItemPrice(Integer.parseInt(foodItemPricearr[i]));
 			
@@ -105,7 +103,7 @@ public class FoodCont {
 		
 		if(cnt==foodMenuNoarr.length) {
 			msg="메뉴 등록되었습니다";
-			url="/restaurantEnterprise/foodWrite.do";
+			url="/restaurantEnterprise/menuList.do";
 		}else {
 			msg= "메뉴 등록 실패";
 		}
@@ -143,7 +141,7 @@ public class FoodCont {
 		
 		if(cnt>0) {
 			msg="삭제되었습니다";
-			url="/member/myPage.do";
+			url="/restaurantEnterprise/menuList.do";
 		}else {
 			msg="삭제 실패";
 		}
@@ -210,7 +208,7 @@ public class FoodCont {
 			
 			if(cnt>0) {
 				msg="입력완료";
-				url="/restaurantEnterprise/writeMenu.do";
+				url="/restaurantEnterprise/menuList.do";
 			}else {
 				msg="입력실패";
 				url="";
@@ -414,8 +412,8 @@ public class FoodCont {
 						int cnt=foodMenuService.restoreMenu(menuList, overWrite);
 						
 						if(cnt>0) {
-							msg="복원 완료";
-							url="/restaurantEnterprise/foodWrite.do";
+							msg="복원 실패";
+							url="/restaurantEnterprise/menuList.do";
 							back=false;
 						}else {
 							msg="복원 실패";
@@ -423,7 +421,7 @@ public class FoodCont {
 						}
 						
 					}else {
-						msg="데이터가 없거나 양식이 잘못되엇습니다";
+						msg="데이터가 없거나 양식이 잘못되었습니다";
 						back=true;
 					}
 				} catch (InvalidFormatException e) {
@@ -470,6 +468,323 @@ public class FoodCont {
 		model.addAttribute("menuList", list);
 		
 		return "restaurantEnterprise/menuList";
+	}
+	
+	@RequestMapping("/deleteMenu.do")
+	public String deleteMenu(@RequestParam(defaultValue="0") int menuNo, HttpSession session, Model model) {
+
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		logger.info("메뉴 삭제 파라미터, menuNo={}, resNo={}", menuNo, resNo);
+		
+		String msg="", url="";
+		boolean back=false;
+		if(menuNo==0) {
+			msg="잘못된 URL입니다.";
+			back=true;
+		}else if(resNo==0) {
+			msg="접근권한이 없습니다";
+			url="/index.do";
+			back=false;
+		}else{
+			int rNo=foodMenuService.selectResNoByMenuNo(menuNo);
+			if(rNo!=resNo) {
+				msg="삭제권한이 없습니다";
+				url="";
+				back=true;
+			}
+			
+			if(!back) {
+				int cnt=foodMenuService.deleteAllMenuByMenuNo(menuNo);
+				logger.info("메뉴 삭제 결과 cnt={}", cnt);
+				
+				if(cnt>0) {
+					return "redirect:/restaurantEnterprise/menuList.do";
+				}else {
+					msg="삭제 실패";
+					url="";
+					back=true;
+				}
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("back", back);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping("/deleteItem.do")
+	public String deleteItem(@RequestParam(defaultValue="0") int itemNo, HttpSession session, Model model) {
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		logger.info("메뉴 내용 삭제 파라미터, itemNo={}, resNo={}", itemNo, resNo);
+		
+		String msg="", url="";
+		boolean back=false;
+		if(itemNo==0) {
+			msg="잘못된 URL입니다.";
+			back=true;
+		}else if(resNo==0) {
+			msg="접근권한이 없습니다";
+			url="/index.do";
+			back=false;
+		}else{
+			int rNo=foodMenuService.selectResNoByItemNo(itemNo);
+			if(rNo!=resNo) {
+				msg="삭제권한이 없습니다";
+				url="";
+				back=true;
+			}
+			
+			if(!back) {
+				int cnt=foodMenuService.deleteMenu(itemNo);
+				logger.info("메뉴 내용 삭제 결과 cnt={}", cnt);
+				
+				if(cnt>0) {
+					return "redirect:/restaurantEnterprise/menuList.do";
+				}else {
+					msg="삭제 실패";
+					url="";
+					back=true;
+				}
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("back", back);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping(value="/editItem.do", method=RequestMethod.GET)
+	public String editItem_get(@RequestParam(defaultValue="0") int itemNo, HttpSession session , Model model) {
+		logger.info("메뉴등록 페이지, 파라미터 itemNo={}", itemNo);
+
+		String memId=(String)session.getAttribute("memId");
+		
+		String msg="";
+		boolean isError=false;
+		List<FoodMenuVO> menuList=null;
+		FoodItemVO itemVO=null;
+		
+		if(itemNo==0) {
+			msg="잘못된 URL 입니다.";
+			isError=true;
+		}else {
+			//식당번호 가져오기
+			List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+			int resNo=0;
+			if(resNoList!=null && !resNoList.isEmpty()) {
+				resNo=resNoList.get(0);
+			}
+			
+			int rNo=foodMenuService.selectResNoByItemNo(itemNo);
+			if(rNo!=resNo) {
+				msg="수정 권한이 없습니다";
+				isError=true;
+			}else {
+				menuList=foodMenuService.selectMenuListByResNo(resNo);
+				logger.info("메뉴등록 - 메뉴 종류 목록 조회 결과 menuList.size={}", menuList.size());
+				
+				itemVO=foodMenuService.selectItemByNo(itemNo);
+				logger.info("메뉴등록 - 메뉴 조회 결과 itemVO={}", itemVO);
+				
+			}
+		}
+		
+		if(isError) {
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", "/restaurantEnterprise/menuList.do");
+
+			return "common/message";
+		}
+		
+		model.addAttribute("itemVO", itemVO);
+		model.addAttribute("menuList", menuList);
+		
+		return "restaurantEnterprise/editItem";
+	}
+	
+	@RequestMapping(value="/editItem.do", method=RequestMethod.POST)
+	public String editItem_post(@ModelAttribute FoodItemVO fVO, HttpSession session, Model model) {
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		logger.info("메뉴 내용 편집 파라미터, fVO={}, resNo={}", fVO, resNo);
+		
+		String msg="", url="";
+		boolean back=false;
+		if(resNo==0) {
+			msg="접근권한이 없습니다";
+			url="/index.do";
+			back=false;
+		}else{
+			if(fVO==null || fVO.getFoodItemNo()==0) {
+				msg="잘못된 접근입니다";
+				url="";
+				back=true;
+			}else if(fVO.getFoodItemName()==null || fVO.getFoodItemName().isEmpty()){
+				msg="메뉴명을 입력하세요";
+				url="";
+				back=true;
+			}else if(fVO.getFoodItemPrice()==0){
+				msg="가격을 입력하세요";
+				url="";
+				back=true;
+			}else {
+				int rNo=foodMenuService.selectResNoByItemNo(fVO.getFoodItemNo());
+				if(rNo!=resNo) {
+					msg="편집권한이 없습니다";
+					url="";
+					back=true;
+				}
+				
+				if(!back) {
+					int cnt=foodMenuService.editItem(fVO);
+					logger.info("메뉴 내용 삭제 결과 cnt={}", cnt);
+					
+					if(cnt>0) {
+						return "redirect:/restaurantEnterprise/menuList.do";
+					}else {
+						msg="삭제 실패";
+						url="";
+						back=true;
+					}
+				}
+				
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("back", back);
+		
+		return "common/message";
+	}
+	
+	@RequestMapping(value="/editMenu.do", method=RequestMethod.GET)
+	public String editMenu_get(@RequestParam(defaultValue="0") int menuNo, HttpSession session , Model model) {
+		logger.info("메뉴 종류 편집 페이지, 파라미터 menuNo={}", menuNo);
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		String msg="";
+		boolean isError=false;
+		FoodMenuVO menuVO=null;
+		
+		if(menuNo==0) {
+			msg="잘못된 URL입니다.";
+			isError=true;
+		}else {
+			//식당번호 가져오기
+			List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+			int resNo=0;
+			if(resNoList!=null && !resNoList.isEmpty()) {
+				resNo=resNoList.get(0);
+			}
+			
+			int rNo=foodMenuService.selectResNoByMenuNo(menuNo);
+			if(rNo!=resNo) {
+				msg="수정 권한이 없습니다";
+				isError=true;
+			}else {
+				menuVO=foodMenuService.selectMenuByNo(menuNo);
+				logger.info("메뉴 종류 등록 - 메뉴 조회 결과 itemVO={}", menuVO);
+				
+			}
+		}
+		
+		if(isError) {
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", "/restaurantEnterprise/menuList.do");
+			
+			return "common/message";
+		}
+		
+		model.addAttribute("menuVO", menuVO);
+		
+		return "restaurantEnterprise/editMenu";
+	}
+	
+	@RequestMapping(value="/editMenu.do", method=RequestMethod.POST)
+	public String editMenu_post(@ModelAttribute FoodMenuVO mVO, HttpSession session, Model model) {
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		logger.info("메뉴 종류 편집 파라미터, mVO={}, resNo={}", mVO, resNo);
+		
+		String msg="", url="";
+		boolean back=false;
+		if(resNo==0) {
+			msg="접근권한이 없습니다";
+			url="/index.do";
+			back=false;
+		}else{
+			if(mVO==null || mVO.getFoodMenuNo()==0) {
+				msg="잘못된 접근입니다";
+				url="";
+				back=true;
+			}else if(mVO.getFoodMenuName()==null || mVO.getFoodMenuName().isEmpty()){
+				msg="종류명을 입력하세요";
+				url="";
+				back=true;
+			}else {
+				int rNo=foodMenuService.selectResNoByMenuNo(mVO.getFoodMenuNo());
+				if(rNo!=resNo) {
+					msg="편집권한이 없습니다";
+					url="";
+					back=true;
+				}
+				
+				if(!back) {
+					int cnt=foodMenuService.editMenu(mVO);
+					logger.info("메뉴 내용 삭제 결과 cnt={}", cnt);
+					
+					if(cnt>0) {
+						return "redirect:/restaurantEnterprise/menuList.do";
+					}else {
+						msg="삭제 실패";
+						url="";
+						back=true;
+					}
+				}
+				
+			}
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		model.addAttribute("back", back);
+		
+		return "common/message";
 	}
 	
 }

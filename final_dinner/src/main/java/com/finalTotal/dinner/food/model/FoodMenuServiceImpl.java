@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FoodMenuServiceImpl implements FoodMenuService{
-
 	
 	@Autowired
 	private FoodMenuDAO foodMenuDao;
@@ -159,6 +158,36 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 		cnt=foodMenuDao.deleteMenuParent(menuNo);
 		
 		return cnt;
+	}
+
+	@Override
+	public int selectResNoByItemNo(int itemNo) {
+		return foodMenuDao.selectResNoByItemNo(itemNo);
+	}
+
+	@Override
+	public int selectResNoByMenuNo(int menuNo) {
+		return foodMenuDao.selectResNoByMenuNo(menuNo);
+	}
+
+	@Override
+	public FoodItemVO selectItemByNo(int itemNo) {
+		return foodMenuDao.selectItemByNo(itemNo);
+	}
+
+	@Override
+	public FoodMenuVO selectMenuByNo(int menuNo) {
+		return foodMenuDao.selectMenuByNo(menuNo);
+	}
+
+	@Override
+	public int editItem(FoodItemVO vo) {
+		return foodMenuDao.editItem(vo);
+	}
+
+	@Override
+	public int editMenu(FoodMenuVO vo) {
+		return foodMenuDao.editMenu(vo);
 	}
 
 }

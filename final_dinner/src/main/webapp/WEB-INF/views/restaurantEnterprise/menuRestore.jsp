@@ -57,16 +57,16 @@
 					<input type="file" name="menuFile" id="menuFile">
 				</div>
 				<div class="form-comp">
-					<label>기존 메뉴 삭제</label>
+					<label>기존 메뉴</label>
 					<input type="radio" name="isOverwrite" value="Y" id="overwriteY">
 					<label for="overwriteY">삭제</label>
 					<input type="radio" name="isOverwrite" value="N" id="overwriteN" checked>
-					<label for="overwriteN">보존</label>
+					<label for="overwriteN">유지</label>
 				</div>
 					
 				<div class="row">
 					<div class="col-sm-6 form-comp">
-						<input type="submit" class="site-btn-submit site-btn-full" value="복원">
+						<input type="submit" class="site-btn-submit site-btn-full" value="확인">
 					</div>
 					<div class="col-sm-6 form-comp">
 						<input type="reset" class="site-btn site-btn-full" value="취소">

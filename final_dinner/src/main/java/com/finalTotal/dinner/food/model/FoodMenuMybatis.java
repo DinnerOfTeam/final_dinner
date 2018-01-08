@@ -75,5 +75,51 @@ public class FoodMenuMybatis extends SqlSessionDaoSupport implements FoodMenuDAO
 		return getSqlSession().delete(namespace+".deleteItemByMenuNo" , menuNo);
 	}
 
+	@Override
+	public int selectResNoByItemNo(int itemNo) {
+		int res=0;
+		
+		Integer result=getSqlSession().selectOne(namespace+".selectResNoByItemNo", itemNo);
+		
+		if(result!=null) {
+			res=result;
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int selectResNoByMenuNo(int menuNo) {
+		int res=0;
+		
+		Integer result=getSqlSession().selectOne(namespace+".selectResNoByMenuNo", menuNo);
+		
+		if(result!=null) {
+			res=result;
+		}
+		
+		return res;
+	}
+
+	@Override
+	public FoodItemVO selectItemByNo(int itemNo) {
+		return getSqlSession().selectOne(namespace+".selectItemByNo", itemNo);
+	}
+
+	@Override
+	public FoodMenuVO selectMenuByNo(int menuNo) {
+		return getSqlSession().selectOne(namespace+".selectMenuByNo", menuNo);
+	}
+
+	@Override
+	public int editItem(FoodItemVO vo) {
+		return getSqlSession().update(namespace+".editItem", vo);
+	}
+
+	@Override
+	public int editMenu(FoodMenuVO vo) {
+		return getSqlSession().update(namespace+".editMenu", vo);
+	}
+
 
 }

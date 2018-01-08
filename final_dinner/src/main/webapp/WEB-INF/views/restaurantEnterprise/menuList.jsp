@@ -7,9 +7,28 @@
 
 	<script type="text/javascript">
 		$(function(){
-			
+			$(document).on("click" , ".res-menu-btn-del", function(){
+				return confirm("삭제하시겠습니까?");
+			});
 		});
 	</script>
+	
+	<style type="text/css">
+		.res-menu-btn{
+			padding: 0.5em;
+			font-size: 0.75em;
+		}
+		
+		li .res-menu-btn{
+			margin-left: 0.5em;
+			padding: 0.25em 0.5em;
+			background-color: #EEE;
+		}
+		li .res-menu-btn:hover{
+			text-decoration: none;
+			background-color: #CCC;
+		}
+	</style>
 	
 	<div class="shadow-box">
 		<h3>메뉴 목록</h3>
@@ -34,18 +53,26 @@
 						<div id="item${menuVar.foodMenuNo }" class="panel-collapse collapse" role="tabpanel" aria-labelledby="menu${menuVar.foodMenuNo }">
 							<div class="panel-body">
 								<div class="row">
-									<p class="col-xs-12 col-sm-8">${menuVar.foodMenuDesc }</p>
-									<%-- <a data-toggle="collapse" data-parent="#accordion" href=""
-											aria-controls="item${menuVar.foodMenuNo }" class="col-xs-6 col-sm-2">
-										${menuVar.foodMenuName }
-									</a> --%>
+									<div class="col-sm-6 col-md-offset-6 col-md-3">
+										<a href='<c:url value="/restaurantEnterprise/editMenu.do?menuNo=${menuVar.foodMenuNo }"/>'
+												class="site-btn site-btn-full res-menu-btn">수정</a>
+									</div>
+									<div class="col-sm-6 col-md-3">
+										<a href='<c:url value="/restaurantEnterprise/deleteMenu.do?menuNo=${menuVar.foodMenuNo }"/>'
+												class="site-btn-submit site-btn-full res-menu-btn res-menu-btn-del">삭제</a>
+									</div>
 								</div>
+								<p>${menuVar.foodMenuDesc }</p>
 								<hr>
 								<ul>
 									<c:forEach var="menuItem" items="${itemVar }">
 										<li>
 											<h5>${menuItem.foodItemName } - ₩
 												<fmt:formatNumber value="${menuItem.foodItemPrice }" pattern="#,###"/>
+												<a href='<c:url value="/restaurantEnterprise/editItem.do?itemNo=${menuItem.foodItemNo }"/>'
+													class="res-menu-btn">수정</a>
+												<a href='<c:url value="/restaurantEnterprise/deleteItem.do?itemNo=${menuItem.foodItemNo }"/>'
+													class="res-menu-btn res-menu-btn-del">삭제</a>
 											</h5>
 											<p>${menuItem.foodItemDesc }</p>
 										</li>

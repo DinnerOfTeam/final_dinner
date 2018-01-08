@@ -85,7 +85,7 @@ a {
 
 
 <section class="MOD_SUBNAVIGATION1 container">
-	<div style="display: inline-block; float: left;" class="col-md-3">
+	<div class="col-md-3">
 		
 		<div data-layout="al16 al-o2 de-o1 de6 ec4">
 			<nav class="MOD_SUBNAVIGATION1_Menu" >
@@ -138,6 +138,7 @@ a {
 							</div>
 							<div class="right-menu1 eee col-md-2 pad_0">
 								<ul>
+									<li><a href="<c:url value='/restaurantEnterprise/menuList.do'/>" class="pad_0 ccc">메뉴 목록</a></li>
 									<li><a href="<c:url value='/restaurantEnterprise/writeMenu.do'/>" class="pad_0 ccc">메뉴종류 등록</a></li>
 									<li><a href="<c:url value='/restaurantEnterprise/foodWrite.do'/>" class="pad_0 ccc">메뉴등록</a></li>
 									<li><a href="<c:url value='/restaurantEnterprise/menuDelete.do'/>" class="pad_0 ccc">메뉴삭제</a></li>
@@ -173,4 +174,4 @@ a {
 		
 	</div>
 	
-	<div style="display: inline-block; float: left;" class="col-md-9">
+	<div class="col-md-9">
