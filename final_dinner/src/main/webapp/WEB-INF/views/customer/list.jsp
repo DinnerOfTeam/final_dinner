@@ -7,7 +7,8 @@
 		<h1>고객센터</h1>
 	</div>
 </div>
-<%@ include file="tab_menu.jsp" %>
+<%-- <%@ include file="tab_menu.jsp" %> --%>
+<c:import url="/customer/tab_menu.do"/>
 <script type="text/javascript">
 	function goPage(page) {
 		$('form[name=frm_page]').find('input[name=currentPage]').val(page);

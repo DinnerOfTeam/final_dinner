@@ -31,16 +31,24 @@
 
 </style>
 	<div class="tab_menu container">
-		<div class= 'col-sm-3'>
+		<div class= 'col-sm-2'>
 			<a href="<c:url value="/customer/list.do"/>">전체</a>
 		</div>
-		<div class= 'col-sm-3'>
-			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=1"/>">회원문의</a>
+		<%-- <div class= 'col-sm-2'>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=1"/>">로그인문의</a>
 		</div>
-		<div class= 'col-sm-3'>
-			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=2"/>">업체문의</a>
+		<div class= 'col-sm-2'>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=2"/>">회원문의</a>
 		</div>
-		<div class= 'col-sm-3'>
-			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=3"/>">예약문의</a>
+		<div class= 'col-sm-2'>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=3"/>">업체문의</a>
 		</div>
+		<div class= 'col-sm-2'>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=4"/>">예약문의</a>
+		</div> --%>
+		<c:forEach var="vo" items="${type }">
+		<div class= 'col-sm-2'>
+			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=${vo.qnaTypeNo }"/>">${vo.qnaTypeName }</a>
+		</div>
+		</c:forEach>
 	</div>

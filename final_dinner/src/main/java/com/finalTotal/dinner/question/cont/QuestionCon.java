@@ -279,5 +279,14 @@ public class QuestionCon {
 		return "common/msgPopup";
 	}
 	
+	@RequestMapping(value="/tab_menu.do")
+	public String list_tab(Model model)
+	{
+		List<QuestionTypeVO> list = questionService.selectTypeAll();
+		logger.info("질문타입 개수 list={}", list.size());
+		model.addAttribute("type",list);
+		
+		return "customer/tab_menu";
+	}
 	
 }

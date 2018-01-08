@@ -6,7 +6,8 @@
 		<h1>고객센터</h1>
 	</div>
 </div>
-<%@ include file="tab_menu.jsp" %>
+<%-- <%@ include file="tab_menu.jsp" %> --%>
+<c:import url="/customer/tab_menu.do"/>
 	<div class="table-wrap">
 		<div class="container">
 			<div class="table-box">
