@@ -106,12 +106,13 @@ a {
 				</ul>
 				<div class="tab-content">
 					<c:if test="${ sessionScope.resNo==0}">
-						<div class="tab-pane fade active in" id="general">
-							<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br> 
-							<a href="${pageContext.request.contextPath }/book/booking.do">예약정보 조회</a><br>
-							<a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br>						
-							<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
-						</div>
+
+					<div class="tab-pane fade active in" id="general">
+						<a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a><br> 
+						<a href="<c:url value='/book/booking.do'/>">예약정보 조회</a><br>
+						<a href="<c:url value='/restaurant/restaurantJoin.do'/>">식당등록</a><br>						
+						<a href="<c:url value='/member/memberOut.do'/>">회원탈퇴</a>
+					</div>
 					</c:if>
 					<c:if test="${ sessionScope.resNo!=0}">
 					<div class="tab-pane fade" id="general">
@@ -122,13 +123,13 @@ a {
 					</div>
 					
 					<div class="tab-pane fade active in" id="business">
-						<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br>
+						<a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a><br>
 						
 						<c:if test="${sessionScope.resNo!=null }">
-							<a href="${pageContext.request.contextPath }/restaurantEnterprise/restaurantInformation.do?resNo=${sessionScope.resNo }">식당정보확인</a><br>
+							<a href="<c:url value='/restaurantEnterprise/restaurantInformation.do?resNo=${sessionScope.resNo }'/>">식당정보확인</a><br>
 						</c:if>
 						
-						<a href="${pageContext.request.contextPath }/book/restaurantBookList.do">식당예약조회</a><br>
+						<a href="<c:url value='/book/restaurantBookList.do'/>">식당예약조회</a><br>
 						<div class='container pad_0'>
 							<div class='col-md-1 pad_0 bbb'>
 								<a class="right-toggle1" data-toggle="right" href="#"> 식당정보수정
@@ -137,9 +138,10 @@ a {
 							</div>
 							<div class="right-menu1 eee col-md-2 pad_0">
 								<ul>
-									<li><a href="${pageContext.request.contextPath }/restaurantEnterprise/writeMenu.do" class="pad_0 ccc">메뉴종류등록</a></li>
-									<li><a href="${pageContext.request.contextPath }/restaurantEnterprise/foodWrite.do" class="pad_0 ccc">메뉴등록</a></li>
-									<li><a href="${pageContext.request.contextPath }/restaurantEnterprise/menuDelete.do" class="pad_0 ccc">메뉴삭제</a></li>
+									<li><a href="<c:url value='/restaurantEnterprise/writeMenu.do'/>" class="pad_0 ccc">메뉴종류 등록</a></li>
+									<li><a href="<c:url value='/restaurantEnterprise/foodWrite.do'/>" class="pad_0 ccc">메뉴등록</a></li>
+									<li><a href="<c:url value='/restaurantEnterprise/menuDelete.do'/>" class="pad_0 ccc">메뉴삭제</a></li>
+									<li><a href="<c:url value='/restaurantEnterprise/menuRestore.do'/>" class="pad_0 ccc">메뉴 백업/복원</a></li>
 								</ul>
 							</div>
 						</div>
@@ -157,8 +159,8 @@ a {
 								</ul>
 							</div>
 						</div> 
-						<a href="${pageContext.request.contextPath }/restaurantEnterprise/restaurantOut.do">식당탈퇴</a><br> 
-						<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
+						<a href="<c:url value='/restaurantEnterprise/restaurantOut.do'/>">식당탈퇴</a><br> 
+						<a href="<c:url value='/member/memberOut.do'/>">회원탈퇴</a>
 					</div>
 					</c:if>
 				</div>

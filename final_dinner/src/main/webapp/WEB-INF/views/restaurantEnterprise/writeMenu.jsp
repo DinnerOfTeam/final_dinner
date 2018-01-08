@@ -48,7 +48,7 @@
 		});
 	</script>
 	<div class="form-simple">
-		<form action="#" method="post" name="addFoodMenu">
+		<form action="<c:url value='/restaurantEnterprise/writeMenu.do'/>" method="post" name="addFoodMenu">
 			<div class="shadow-box">
 				<div class="form-row">
 					<div class="col-xs-6 col-sm-10">

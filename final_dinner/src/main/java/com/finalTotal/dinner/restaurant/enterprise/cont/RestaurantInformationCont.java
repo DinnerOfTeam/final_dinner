@@ -120,6 +120,4 @@ public class RestaurantInformationCont {
 		return "common/message";
 	}
 	
-	
-
 }
