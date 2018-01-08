@@ -105,7 +105,7 @@ public class FoodCont {
 		
 		if(cnt==foodMenuNoarr.length) {
 			msg="메뉴 등록되었습니다";
-			url="/member/myPage.do";
+			url="/restaurantEnterprise/foodWrite.do";
 		}else {
 			msg= "메뉴 등록 실패";
 		}
@@ -121,9 +121,9 @@ public class FoodCont {
 	public String deleteMenu_get(HttpSession session, Model model) {
 		logger.info("삭제 페이지");
 		
-		int memNo = (Integer)session.getAttribute("memNo");
+		int resNo = (Integer)session.getAttribute("resNo");
 		
-		List<FoodItemVO> list = foodMenuService.selectAll(memNo);
+		List<FoodItemVO> list = foodMenuService.selectAll(resNo);
 		logger.info("삭제할 메뉴 목록, list.size()={}, list+{}", list.size(),list);
 		
 		model.addAttribute("list", list);

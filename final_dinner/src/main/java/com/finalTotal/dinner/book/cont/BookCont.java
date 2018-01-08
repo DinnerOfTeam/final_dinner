@@ -36,7 +36,7 @@ public class BookCont {
 		logger.info("예약 정보조회 페이지");
 		
 		int memNo = (Integer)session.getAttribute("memNo");
-		logger.info("memNo",memNo);
+		logger.info("memNo={}",memNo);
 		
 		List<BookVO> list = bookService.selectByAdd(memNo);
 		logger.info("예약 확인 정보조회 결과, list.size()={},list={}",list.size(),list);
