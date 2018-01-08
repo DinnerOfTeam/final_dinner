@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FoodMenuServiceImpl implements FoodMenuService{
-
 	
 	@Autowired
 	private FoodMenuDAO foodMenuDao;
@@ -101,6 +100,7 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 	public int deleteItemByResNo(int resNo) {
 		return foodMenuDao.deleteItemByResNo(resNo);
 	}
+	
 
 	@Override
 	@Transactional
@@ -142,6 +142,52 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 		}
 		
 		return cnt;
+	}
+
+	@Override
+	public int deleteItemByMenuNo(int menuNo) {
+		return foodMenuDao.deleteItemByMenuNo(menuNo);
+	}
+
+	@Override
+	@Transactional
+	public int deleteAllMenuByMenuNo(int menuNo) {
+		int cnt=0;
+		
+		cnt=foodMenuDao.deleteItemByMenuNo(menuNo);
+		cnt=foodMenuDao.deleteMenuParent(menuNo);
+		
+		return cnt;
+	}
+
+	@Override
+	public int selectResNoByItemNo(int itemNo) {
+		return foodMenuDao.selectResNoByItemNo(itemNo);
+	}
+
+	@Override
+	public int selectResNoByMenuNo(int menuNo) {
+		return foodMenuDao.selectResNoByMenuNo(menuNo);
+	}
+
+	@Override
+	public FoodItemVO selectItemByNo(int itemNo) {
+		return foodMenuDao.selectItemByNo(itemNo);
+	}
+
+	@Override
+	public FoodMenuVO selectMenuByNo(int menuNo) {
+		return foodMenuDao.selectMenuByNo(menuNo);
+	}
+
+	@Override
+	public int editItem(FoodItemVO vo) {
+		return foodMenuDao.editItem(vo);
+	}
+
+	@Override
+	public int editMenu(FoodMenuVO vo) {
+		return foodMenuDao.editMenu(vo);
 	}
 
 }

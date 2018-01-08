@@ -2,91 +2,122 @@
     pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%-- <link href="${pageContext.request.contextPath }/css/#.css" rel="stylesheet" type="text/css"> --%>
+<link href="${pageContext.request.contextPath }/css/res-detail.css" rel="stylesheet" type="text/css">
 <style type="text/css">
-	.res-head{
-		padding: 2.5em;
-		background-color: rgb(158, 22, 22);
-		color: white;
+	
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		/* 모달 */
+		var modalLayer = $("#modalLayer");
+		var modalLink = $(".modalLink");
+		var modalCont = $(".modalContent");
+		var marginLeft = modalCont.outerWidth()/3;
+		var marginTop = modalCont.outerHeight()/3; 
+
+		modalLink.click(function(){
+		  bgLayerOpen();
+		  modalLayer.fadeIn("slow");
+		  modalCont.css({"margin-top" : -marginTop, "margin-left" : -marginLeft});
+		  $(this).blur();
+		  $(".modalContent").focus();
+		  $("#bookNum").focus();
+		  
+		  return false;
+		});
+
+		function bgLayerOpen() {
+		    if(!$('.bgLayer').length) {
+		        $('<div class="bgLayer"></div>').appendTo($('body'));
+		    }
+		    var object = $(".bgLayer");
+		    var w = $(document).width()+12;
+		    var h = $(document).height();
+
+		    object.css({'width':w,'height':h}); 
+		    object.fadeIn(500); 
+		}
+		function bgLayerClear(){
+		    var object = $('.bgLayer');
+		   if(object.length) {
+		       object.fadeOut(500, function() {
+		            object.remove();
+		      });
+		    }
+		}
+
+		$('.closeModal').hover(function(){
+		   $(this).css('opacity','0.3');
+		},function(){
+		   $(this).css('opacity','1');
+		});
+		
+		//datepicker
+		$('#s_bookDate').datepicker({
+			dateFormat:'yy-mm-dd'
+		});
+		
+		$(".cancelbw").click(function(){
+			bgLayerClear();
+			$("#modalLayer").hide();
+		});
+	});
+</script>
+
+<style type="text/css">
+	/* 모달관련 css */
+	.mask {
+	   width: 100%;
+	   height: 100%;
+	   position: fixed;
+	   left: 0;
+	   top: 0;
+	   z-index: 20;
+	   background: #000;
+	   opacity: .5;
+	   filter: alpha(opacity = 50);
 	}
 	
-	.res-grade{
-		display: inline-block;
-		min-width: 7.5em;
+	#modalLayer {
+	   display: none;
+	   position: absolute;
+	   left: 50%;
+	   top: 40%;
 	}
 	
-	.res-thumb-wrap{
-		padding: 0.5em;
+	#modalLayer .modalContent {
+	   width: 800px;
+	   height:400px;
+	   padding: 5px;
+	   border: 1px solid #ccc;
+	   position: absolute;
+	   left: 50%;
+	   top: 40%;
+	   transform: translateX(-25%);
+	   z-index: 20;
+	   border-radius: 10px;
+	   background: #FDFDFD;
 	}
 	
-	.res-thumb{
-		position: relative;
-		background-color: #777;
-		overflow: hidden;
+	#modalLayer .modalContent button {
+	   position: absolute;
+	   right: 0;
+	   top: 0;
+	   cursor: pointer;
 	}
 	
-	.res-thumb:before{
-		content: "";
-		display: block;
-		padding-top: 100%;
-	}
-	
-	.res-thumb > img{
-		width: 100%;
-		max-height: 100%;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-color: #555;
-		margin: auto;
-	}
-	
-	.res-info{
-		margin: 1em 0;
-	}
-	
-	.res-info ul.nav{
-		margin: 0;
-	}
-	
-	.res-info .nav > li{
-		margin: 0 !important;	
-	}
-	
-	.res-info .nav > li > a {
-	    padding: 15px;
-	    color: #000;
-	    font-weight: bold;
-	    border-radius: 0;
-	}
-	
-	.res-info .nav > li > a:hover{
-		background-color: #DDD;
-	}
-	
-	.res-info .nav > li.active > a,
-	.res-info .nav > li.active > a:hover,
-	.res-info .nav > li.active > a:focus{
-		background-color: rgb(158, 22, 22);
-		color: #FFF;
-	}
-	
-	.res-info .tab-content{
-		padding: 0.75em;
-	}
-	
-	.res-info .tab-content>div{
-		min-height: 15em;
-	}
-	
-	.res-info #carousel-res-photo .carousel-inner > div > img{
-		width: 100%;
-	}
-	
-	.res-info .panel-title > a{
-		display: block;
+	.bgLayer {
+	   display: none;
+	   position: absolute;
+	   top: 0;
+	   left: 0;
+	   width: 100%;
+	   height: 100%;
+	   background: #000;
+	   opacity: .5;
+	   filter: alpha(opacity = 50);
+	   z-index: 10;
 	}
 </style>
 
@@ -134,9 +165,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-md-3">
-				<a href="<c:url value='/book/restaurantBooking.do'/>" class="site-btn site-btn-full">
-					예약하기
-				</a>
+				<button class="modalLink site-btn site-btn-full">예약하기</button>
 			</div>
 		</div>
 	</div>
@@ -246,6 +275,52 @@
 						<c:if test="${empty menuList }">
 							<p>등록된 메뉴가 없습니다</p>
 						</c:if>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modalLayer">
+     <div class="modalContent">
+        <div style="padding:5px; margin:0 auto; width:95%; height:90%; position:relative;">
+	        <div class="newsDetail" style="margin:0 auto; width:100%; height:95%;">
+		          
+				<!-- 모달로 띄워지는 예약 페이지 -->
+				<div class="form-wrap">
+					<div class="container" style="width: 750px;">
+						<h2 class="eee">예약</h2>
+						<div class="form-simple">
+							 <form action="<c:url value='/book/restaurantBooking.do' />" method="post">
+						
+								<input type="hidden" name="resNo" value="${vo.resNo}">
+								
+								<div class="form-row">
+									<div class="col-sm-4">
+										<input type="text" class="form-text" name="bookNum" id="bookNum" placeholder="인원" required>
+									</div>
+									
+									<div class="col-sm-4">
+										<input type="text" class="form-text" name="bookTime" id="bookTime" placeholder="시간" required>
+									</div>
+									
+									<div class="col-sm-4">
+									<input type="text" class="form-text"  name="s_bookDate" id="s_bookDate" placeholder="예약날짜" required>
+									</div>
+								
+								</div>
+								
+								<div class="form-comp-row" style="padding-left: 200px">
+									<div class="col-sm-4">
+										<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="예약">
+									</div>
+									<div class="col-sm-4">
+										<input type="reset" name="cancel" class="site-btn site-btn-full cancelbw" value="취소">
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

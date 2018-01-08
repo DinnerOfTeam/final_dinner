@@ -37,9 +37,9 @@
 action="<c:url value='/restaurantEnterprise/menuDelete.do'/>" 
 	onsubmit="return send(this)">
 		<!-- 삭제 처리시 no가 필요하므로 hidden field에 넣어서 넘긴다 -->
-		<!-- 
-		<input type="hidden" name="foodItemNo" value="${param.foodItemNo}">
-		 -->
+		
+	<%-- 	<input type="hidden" name="foodItemNo" value="${param.foodItemNo}"> --%>
+		 
 		 
 		<fieldset>
 		<legend>메뉴 삭제</legend>

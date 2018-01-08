@@ -47,6 +47,10 @@
 		delete from food_menu where food_menu_no=#{foodMenuNo}
 	</delete>
 	
+	<delete id="deleteItemByMenuNo" parameterType="int">
+		delete from food_item where food_menu_no=#{foodMenuNo}
+	</delete>
+	
 	<delete id="deleteFoodMenuByResNo" parameterType="int">
 		delete from food_menu where res_no=#{resNo}
 	</delete>
@@ -75,9 +79,44 @@
 	</select>
 	
 	<select id="selectByMenuNo" parameterType="int" resultType="FoodItemVO">
-			select * from food_item
-			where food_menu_no = #{foodMenuNo}
+		select * from food_item
+		where food_menu_no = #{foodMenuNo}
 	</select>
 	
+	<select id="selectItemByNo" parameterType="int" resultType="FoodItemVO">
+		select * from food_item
+		where food_item_no = #{foodItemNo}
+	</select>
+	
+	<select id="selectMenuByNo" parameterType="int" resultType="FoodMenuVO">
+		select * from food_menu
+		where food_menu_no = #{foodMenuNo}
+	</select>
+	
+	<select id="selectResNoByItemNo" parameterType="int" resultType="int">
+		select m.res_no from food_item i
+		join food_menu m
+		on i.food_menu_no=m.food_menu_no
+		where i.food_item_no=#{foodItemNo}
+	</select>
+	
+	<select id="selectResNoByMenuNo" parameterType="int" resultType="int">
+		select res_no from food_menu
+		where food_menu_no=#{foodMenuNo}
+	</select>
+	
+	<update id="editItem" parameterType="FoodItemVO">
+		update food_item
+		set food_menu_no=#{foodMenuNo}, food_item_name=#{foodItemName},
+			food_item_desc=#{foodItemDesc}, food_item_price=#{foodItemPrice}
+		where food_item_no=#{foodItemNo}
+	</update>
+	
+	<update id="editMenu" parameterType="FoodMenuVO">
+		update food_menu
+		set food_menu_name=#{foodMenuName},
+			food_menu_desc=#{foodMenuDesc}
+		where food_menu_no=#{foodMenuNo}
+	</update>
 
 </mapper>

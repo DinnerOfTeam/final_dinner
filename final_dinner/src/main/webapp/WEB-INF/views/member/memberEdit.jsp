@@ -31,7 +31,7 @@
 
 <div class="login">
 	<div class="row">
-		<div class="login-body">
+		<div class="login-body" style="width: 75%;">
 			<div class="form-heading">
 				<h1>회원정보수정</h1>
 

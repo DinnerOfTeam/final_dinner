@@ -85,7 +85,7 @@ a {
 
 
 <section class="MOD_SUBNAVIGATION1 container">
-	<div style="display: inline-block; float: left;" class="col-md-3">
+	<div class="col-md-3">
 		
 		<div data-layout="al16 al-o2 de-o1 de6 ec4">
 			<nav class="MOD_SUBNAVIGATION1_Menu" >
@@ -100,11 +100,13 @@ a {
 						<li class="active"><a href="#general" data-toggle="tab">일반회원</a></li>
 					</c:if>
 					<c:if test="${ sessionScope.resNo!=0}">
+						<li class=""><a href="#general" data-toggle="tab">일반회원</a></li>
 						<li class="active"><a href="#business" data-toggle="tab">업체회원</a></li>
 					</c:if>
 				</ul>
 				<div class="tab-content">
 					<c:if test="${ sessionScope.resNo==0}">
+
 					<div class="tab-pane fade active in" id="general">
 						<a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a><br> 
 						<a href="<c:url value='/book/booking.do'/>">예약정보 조회</a><br>
@@ -113,14 +115,18 @@ a {
 					</div>
 					</c:if>
 					<c:if test="${ sessionScope.resNo!=0}">
+					<div class="tab-pane fade" id="general">
+							<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br> 
+							<a href="${pageContext.request.contextPath }/book/booking.do">예약정보 조회</a><br>
+							<a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br>						
+							<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
+					</div>
+					
 					<div class="tab-pane fade active in" id="business">
 						<a href="<c:url value='/member/memberEdit.do'/>">회원정보수정</a><br>
 						
 						<c:if test="${sessionScope.resNo!=null }">
 							<a href="<c:url value='/restaurantEnterprise/restaurantInformation.do?resNo=${sessionScope.resNo }'/>">식당정보확인</a><br>
-						</c:if>
-						<c:if test="${ sessionScope.resNo==null }">
-							식당정보확인<br>
 						</c:if>
 						
 						<a href="<c:url value='/book/restaurantBookList.do'/>">식당예약조회</a><br>
@@ -132,6 +138,7 @@ a {
 							</div>
 							<div class="right-menu1 eee col-md-2 pad_0">
 								<ul>
+									<li><a href="<c:url value='/restaurantEnterprise/menuList.do'/>" class="pad_0 ccc">메뉴 목록</a></li>
 									<li><a href="<c:url value='/restaurantEnterprise/writeMenu.do'/>" class="pad_0 ccc">메뉴종류 등록</a></li>
 									<li><a href="<c:url value='/restaurantEnterprise/foodWrite.do'/>" class="pad_0 ccc">메뉴등록</a></li>
 									<li><a href="<c:url value='/restaurantEnterprise/menuDelete.do'/>" class="pad_0 ccc">메뉴삭제</a></li>
@@ -167,4 +174,4 @@ a {
 		
 	</div>
 	
-	<div style="display: inline-block; float: left;" class="col-md-9">
+	<div class="col-md-9">

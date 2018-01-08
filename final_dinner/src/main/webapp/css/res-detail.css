@@ -1,0 +1,84 @@
+.res-head{
+	padding: 2.5em;
+	background-color: rgb(158, 22, 22);
+	color: white;
+}
+
+.res-grade{
+	display: inline-block;
+	min-width: 7.5em;
+}
+
+.res-thumb-wrap{
+	padding: 0.5em;
+}
+
+.res-thumb{
+	position: relative;
+	background-color: #777;
+	overflow: hidden;
+}
+
+.res-thumb:before{
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+
+.res-thumb > img{
+	width: 100%;
+	max-height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #555;
+	margin: auto;
+}
+
+.res-info{
+	margin: 1em 0;
+}
+
+.res-info ul.nav{
+	margin: 0;
+}
+
+.res-info .nav > li{
+	margin: 0 !important;	
+}
+
+.res-info .nav > li > a {
+    padding: 15px;
+    color: #000;
+    font-weight: bold;
+    border-radius: 0;
+}
+
+.res-info .nav > li > a:hover{
+	background-color: #DDD;
+}
+
+.res-info .nav > li.active > a,
+.res-info .nav > li.active > a:hover,
+.res-info .nav > li.active > a:focus{
+	background-color: rgb(158, 22, 22);
+	color: #FFF;
+}
+
+.res-info .tab-content{
+	padding: 0.75em;
+}
+
+.res-info .tab-content>div{
+	min-height: 15em;
+}
+
+.res-info #carousel-res-photo .carousel-inner > div > img{
+	width: 100%;
+}
+
+.res-info .panel-title > a{
+	display: block;
+}

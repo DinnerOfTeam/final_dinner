@@ -36,7 +36,7 @@
 
 <article class="simpleForm">
 	<form name="frmOut" method="post" 
-		action="<c:url value='/restaurantEnterprise/restaurantOut.do'/>"	>
+		action="<c:url value='/restaurantEnterprise/restaurantOut.do'/>">
 		<fieldset>
 			<legend>식당 탈퇴</legend>
 			<p class="p">식당을 탈퇴하시겠습니까?</p>
