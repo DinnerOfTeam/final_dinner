@@ -77,6 +77,9 @@
 			scheduler.config.limit_time_select = true;
 			scheduler.config.details_on_dblclick = true;
 			scheduler.config.details_on_create = true;
+			
+			scheduler.config.buttons_left = [];
+		    scheduler.config.buttons_right = ["dhx_cancel_btn"];
 
 			scheduler.templates.event_class=function(start, end, event){
 				var css = "";
@@ -109,11 +112,11 @@
 		            location.href="schedulerDelete.do?pschNo="+pschNo;
 		       }); */
 			 
-			
+			/* 
 			scheduler.attachEvent("onEventSave",function(id,ev,is_new,original){
 				 var startdate=ev.start_date;
 				 console.log(startdate);
-			 });
+			 }); */
 				<c:forEach var="vo" items="${list}">
 				var start = '<fmt:formatDate value= "${vo.BOOK_DATE}" pattern= "yyyy-MM-dd" /> ${vo.BOOK_TIME}';
 				var end = '<fmt:formatDate value= "${vo.BOOK_DATE}" pattern= "yyyy-MM-dd" /> ${vo.BOOK_TIME}';

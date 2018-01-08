@@ -75,27 +75,7 @@
 				</tbody>
 			</table>
 		</fieldset>
-		<div class='page_div'>
-			<ul class='pagination'>
-				<li><a aria-label='Previous'><i class="fa fa-angle-left"></i></a></li>
-				<li><a>1</a></li>
-				<li><a>2</a></li>
-				<li><a>3</a></li>
-				<li><a aria-label='Next'><i class="fa fa-angle-right"></i></a></li>
-			</ul>
-		</div>
-		<div class='search_form'>
-			<label for='search_condition' class='sr-only'>검색</label> <select
-				id='search_condition' name='search_condition'>
-				<option>제목</option>
-				<option>내용</option>
-				<option>작성자</option>
-				<option>작성일</option>
-			</select> <input type='text'>
-			<button>
-				<span class='glyphicon glyphicon-search' />
-			</button>
-		</div>
+		
 	</div>
 
 

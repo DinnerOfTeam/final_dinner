@@ -7,7 +7,6 @@ This software is covered by GPL license. You also can obtain Commercial or Enter
 (c) Dinamenta, UAB.
 */
 window.dhtmlXScheduler = window.scheduler = { version: "4.4.0" };
-
 if (!window.dhtmlx) {
 	dhtmlx = function(obj){
 		for (var a in obj) dhtmlx[a]=obj[a];
