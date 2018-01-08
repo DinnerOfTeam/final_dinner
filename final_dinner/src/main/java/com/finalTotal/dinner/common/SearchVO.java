@@ -11,6 +11,7 @@ public class SearchVO {
 	protected int totalPage;		//최대 페이지 수
 	protected int totalRecord;	//최대 레코드 수
 	protected int qnaTypeNo;	//최대 레코드 수
+	protected int groupNo;
 	
 	public String getKeyword() {
 		return keyword;
@@ -23,6 +24,12 @@ public class SearchVO {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public int getGroupNo() {
+		return groupNo;
+	}
+	public void setGroupNo(int groupNo) {
+		this.groupNo = groupNo;
 	}
 	public int getQnaTypeNo() {
 		return qnaTypeNo;
@@ -77,6 +84,6 @@ public class SearchVO {
 		return "SearchVO [keyword=" + keyword + ", type=" + type + ", currentPage=" + currentPage + ", firstRowNum="
 				+ firstRowNum + ", pageSize=" + pageSize + ", firstBlockPage=" + firstBlockPage + ", lastBlockPage="
 				+ lastBlockPage + ", totalPage=" + totalPage + ", totalRecord=" + totalRecord + ", qnaTypeNo="
-				+ qnaTypeNo + "]";
+				+ qnaTypeNo + ", groupNo=" + groupNo + "]";
 	}
 }

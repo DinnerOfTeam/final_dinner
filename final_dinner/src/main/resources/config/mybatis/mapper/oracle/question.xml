@@ -70,7 +70,7 @@
 		        where qna_type_no= #{qnaTypeNo}
 				<include refid="searchWhere2"/>
 		        order by qna_question_no desc) b)
-		    where rsnum between #{firstRowNum}+ 1 and #{firstRowNum}+ #{pageSize}
+		    where rsnum between #{firstRowNum} and #{firstRowNum}+ #{pageSize}
 	</select>
 	<select id="getTotalType" parameterType="SearchVO" resultType="int">
 		select count(*) from qna_question a
@@ -100,7 +100,7 @@
 		        left join member m on a.mem_no = m.mem_no
 				<include refid="searchWhere"/>
 		        order by qna_question_no desc) b)
-		    where rsnum between #{firstRowNum}+ 1 and #{firstRowNum}+ #{pageSize}
+		    where rsnum between #{firstRowNum} and #{firstRowNum}+ #{pageSize}
 	</select>
 	
 	<select id="getTotal" parameterType="SearchVO" resultType="int">

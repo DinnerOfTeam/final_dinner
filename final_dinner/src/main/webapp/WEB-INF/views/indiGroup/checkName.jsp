@@ -36,7 +36,7 @@
 		<label for="groupName">그룹명 : </label>
 		<input type="text" name="groupName" id="groupName"
 		 value="${param.groupName}">
-		<input type="submit" value="아이디 확인">
+		<input type="submit" value="그룹명 확인">
 		<c:if test="${result> 0}">
 			<p>이미 등록된 그룹명 입니다. 다른 그룹명을 입력하세요</p>
 		</c:if>
