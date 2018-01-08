@@ -46,10 +46,10 @@
 								</div>
 								<div class="table-td table-td-title col-xs-12 col-sm-6">
 									<c:if test="${vo.questionOpen==1 }">
-									<p>${vo.questionTitle }
+									<p>${vo.questionTitle }</p>
 									</c:if>
 									<c:if test="${vo.questionOpen==2 }">
-									<p color="#BDBDBD">※비밀글 입니다.※
+									<p color="#BDBDBD">※비밀글 입니다.※</p>
 									</c:if>
 									<c:if test="${empty vo.questionOpen }">
 										<p>${vo.questionTitle }

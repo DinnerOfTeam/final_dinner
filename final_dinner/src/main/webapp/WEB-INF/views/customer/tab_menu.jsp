@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
 .tab_menu {
     position: relative;
@@ -47,8 +48,8 @@
 			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=4"/>">예약문의</a>
 		</div> --%>
 		<c:forEach var="vo" items="${type }">
-		<div class= 'col-sm-2'>
-			<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=${vo.qnaTypeNo }"/>">${vo.qnaTypeName }</a>
-		</div>
+			<div class= 'col-sm-2'>
+				<a href="<c:url value="/customer/listByCategory.do?qnaTypeNo=${vo.qnaTypeNo }"/>">${vo.qnaTypeName }</a>
+			</div>
 		</c:forEach>
 	</div>
