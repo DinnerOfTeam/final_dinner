@@ -47,6 +47,10 @@
 		delete from food_menu where food_menu_no=#{foodMenuNo}
 	</delete>
 	
+	<delete id="deleteItemByMenuNo" parameterType="int">
+		delete from food_item where food_menu_no=#{foodMenuNo}
+	</delete>
+	
 	<delete id="deleteFoodMenuByResNo" parameterType="int">
 		delete from food_menu where res_no=#{resNo}
 	</delete>

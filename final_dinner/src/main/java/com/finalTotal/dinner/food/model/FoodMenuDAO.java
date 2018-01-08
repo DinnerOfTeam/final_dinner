@@ -20,5 +20,6 @@ public interface FoodMenuDAO {
 	public int deleteMenuParent(int foodMenuNo);
 	public int deleteFoodMenuByResNo(int resNo);
 	public int deleteItemByResNo(int resNo);
+	public int deleteItemByMenuNo(int menuNo);
 	
 }

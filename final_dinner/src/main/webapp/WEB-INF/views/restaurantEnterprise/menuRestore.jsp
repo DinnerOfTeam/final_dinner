@@ -7,7 +7,28 @@
 
 	<script type="text/javascript">
 		$(function(){
-			
+			var extensionList=["XLS", "XLSX"];
+			$('form[name=restoreFoodMenu]').submit(function(){
+				var fileName=$('#menuFile').val();
+				var fileExtension = fileName.substr(fileName.lastIndexOf(".")+1).toUpperCase();
+				
+				if($('#menuFile').val()==""){
+					alert("업로드할 파일을 선택하세요");
+					$('#menuFile').focus();
+					return false;
+				}else if(extensionList.indexOf(fileExtension)== -1){
+					alert("엑셀 파일(xls, xlsx)만 업로드 가능합니다");
+					$('#menuFile').val("");
+					return false;
+				}else{
+					var msg="메뉴를 복원하시겠습니까?";
+					if($("input[name=isOverwrite]:checked").val()=="Y"){
+						msg+=" 기존메뉴는 삭제됩니다.";
+					}
+					
+					return confirm(msg);
+				}
+			});
 		});
 	</script>
 	
@@ -32,7 +53,7 @@
 					name="restoreFoodMenu" enctype="multipart/form-data">
 				<h3>복원</h3>
 				<div class="form-comp">
-					<label for="menuFile"></label>
+					<label for="menuFile">파일 (엑셀 파일)</label>
 					<input type="file" name="menuFile" id="menuFile">
 				</div>
 				<div class="form-comp">

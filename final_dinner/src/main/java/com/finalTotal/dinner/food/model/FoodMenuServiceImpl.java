@@ -101,6 +101,7 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 	public int deleteItemByResNo(int resNo) {
 		return foodMenuDao.deleteItemByResNo(resNo);
 	}
+	
 
 	@Override
 	@Transactional
@@ -140,6 +141,22 @@ public class FoodMenuServiceImpl implements FoodMenuService{
 				}
 			}
 		}
+		
+		return cnt;
+	}
+
+	@Override
+	public int deleteItemByMenuNo(int menuNo) {
+		return foodMenuDao.deleteItemByMenuNo(menuNo);
+	}
+
+	@Override
+	@Transactional
+	public int deleteAllMenuByMenuNo(int menuNo) {
+		int cnt=0;
+		
+		cnt=foodMenuDao.deleteItemByMenuNo(menuNo);
+		cnt=foodMenuDao.deleteMenuParent(menuNo);
 		
 		return cnt;
 	}

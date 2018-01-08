@@ -70,5 +70,10 @@ public class FoodMenuMybatis extends SqlSessionDaoSupport implements FoodMenuDAO
 		return getSqlSession().delete(namespace+".deleteItemByResNo" , resNo);
 	}
 
+	@Override
+	public int deleteItemByMenuNo(int menuNo) {
+		return getSqlSession().delete(namespace+".deleteItemByMenuNo" , menuNo);
+	}
+
 
 }

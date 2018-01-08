@@ -71,8 +71,6 @@ public class FoodCont {
 		return "restaurantEnterprise/foodWrite";
 	}
 	
-	
-	
 	@RequestMapping(value="/foodWrite.do", method=RequestMethod.POST )
 	public String foodWirte(HttpSession session , @ModelAttribute FoodItemVO2 vo2, Model model) {
 		logger.info("메뉴 등록 페이지 파라미터 vo={}",vo2);
@@ -445,6 +443,33 @@ public class FoodCont {
 		model.addAttribute("back", back);
 		
 		return "common/message";
+	}
+	
+	@RequestMapping("/menuList.do")
+	public String menuList(HttpSession session, Model model) {
+
+		String memId=(String)session.getAttribute("memId");
+		
+		//식당번호 가져오기
+		List<Integer> resNoList=restaruntService.selectNoByMemId(memId);
+		int resNo=0;
+		if(resNoList!=null && !resNoList.isEmpty()) {
+			resNo=resNoList.get(0);
+		}
+		logger.info("메뉴 목록 파라미터, resNo={}", resNo);
+		
+		if(resNo==0) {
+			model.addAttribute("msg", "잘못된 접근 입니다");
+			model.addAttribute("url", "/index.do");
+			
+			return "common/message";
+		}
+		
+		List<MenuVO> list=foodMenuService.selectMenuByResNo(resNo);
+		
+		model.addAttribute("menuList", list);
+		
+		return "restaurantEnterprise/menuList";
 	}
 	
 }
