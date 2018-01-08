@@ -100,27 +100,32 @@ a {
 						<li class="active"><a href="#general" data-toggle="tab">일반회원</a></li>
 					</c:if>
 					<c:if test="${ sessionScope.resNo!=0}">
+						<li class=""><a href="#general" data-toggle="tab">일반회원</a></li>
 						<li class="active"><a href="#business" data-toggle="tab">업체회원</a></li>
 					</c:if>
 				</ul>
 				<div class="tab-content">
 					<c:if test="${ sessionScope.resNo==0}">
-					<div class="tab-pane fade active in" id="general">
-						<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br> 
-						<a href="${pageContext.request.contextPath }/book/booking.do">예약정보 조회</a><br>
-						<a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br>						
-						<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
-					</div>
+						<div class="tab-pane fade active in" id="general">
+							<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br> 
+							<a href="${pageContext.request.contextPath }/book/booking.do">예약정보 조회</a><br>
+							<a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br>						
+							<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
+						</div>
 					</c:if>
 					<c:if test="${ sessionScope.resNo!=0}">
+					<div class="tab-pane fade" id="general">
+							<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br> 
+							<a href="${pageContext.request.contextPath }/book/booking.do">예약정보 조회</a><br>
+							<a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br>						
+							<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
+					</div>
+					
 					<div class="tab-pane fade active in" id="business">
 						<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br>
 						
 						<c:if test="${sessionScope.resNo!=null }">
 							<a href="${pageContext.request.contextPath }/restaurantEnterprise/restaurantInformation.do?resNo=${sessionScope.resNo }">식당정보확인</a><br>
-						</c:if>
-						<c:if test="${ sessionScope.resNo==null }">
-							식당정보확인<br>
 						</c:if>
 						
 						<a href="${pageContext.request.contextPath }/book/restaurantBookList.do">식당예약조회</a><br>
