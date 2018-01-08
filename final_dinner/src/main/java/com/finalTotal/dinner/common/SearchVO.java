@@ -10,6 +10,7 @@ public class SearchVO {
 	protected int lastBlockPage;	//현재 블록의 마지막 페이지
 	protected int totalPage;		//최대 페이지 수
 	protected int totalRecord;	//최대 레코드 수
+	protected int qnaTypeNo;	//최대 레코드 수
 	
 	public String getKeyword() {
 		return keyword;
@@ -22,6 +23,12 @@ public class SearchVO {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public int getQnaTypeNo() {
+		return qnaTypeNo;
+	}
+	public void setQnaTypeNo(int qnaTypeNo) {
+		this.qnaTypeNo = qnaTypeNo;
 	}
 	public int getCurrentPage() {
 		return currentPage;
@@ -65,12 +72,11 @@ public class SearchVO {
 	public void setTotalRecord(int totalRecord) {
 		this.totalRecord = totalRecord;
 	}
-	
 	@Override
 	public String toString() {
 		return "SearchVO [keyword=" + keyword + ", type=" + type + ", currentPage=" + currentPage + ", firstRowNum="
 				+ firstRowNum + ", pageSize=" + pageSize + ", firstBlockPage=" + firstBlockPage + ", lastBlockPage="
-				+ lastBlockPage + ", totalPage=" + totalPage + ", totalRecord=" + totalRecord + "]";
+				+ lastBlockPage + ", totalPage=" + totalPage + ", totalRecord=" + totalRecord + ", qnaTypeNo="
+				+ qnaTypeNo + "]";
 	}
-	
 }

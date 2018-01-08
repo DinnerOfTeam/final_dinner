@@ -79,6 +79,27 @@ public class MemberServiceImpl implements MemberService{
 	public List<MemberVO> showAll2(int currentPage) {
 		return memberDao.showAll2(currentPage);
 	}
+
+	@Override
+	public int adminCheck(String memId, String memPwd) {
+		int result=0;
+		String dbPwd = memberDao.selectPwd(memId);
+		if(dbPwd==null || dbPwd.isEmpty()) {
+			result=ID_NONE; //해당 아이디 없음
+		}else {
+			dbPwd= memberDao.selectAdmin(memId);
+			if(dbPwd==null || dbPwd.isEmpty()) {
+				result= NO_ADMIN; // 관리자 아님
+			}else {
+				if(dbPwd.equals(memPwd)) {
+					result=LOGIN_OK; //로그인성공
+				}else {
+					result=PWD_DISAGREE; //비밀번호 불일치
+				}
+			}
+		}
+		return result;
+	}
 	
 }
 

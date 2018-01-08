@@ -18,6 +18,7 @@ public class BoardVO {
 	private String freeTitle;
 	private String freeContents;
 	private Timestamp freeRegdate;
+	private int rnum;
 	
 	private int commentCount;
 	private int fileCount;
@@ -28,6 +29,12 @@ public class BoardVO {
 	}
 	public void setFreeNo(int freeNo) {
 		this.freeNo = freeNo;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getMemNo() {
 		return memNo;

@@ -11,6 +11,7 @@ public interface IndiGroupService {
 	public int regiGroup(GroupRegiVO vo);
 	public int cancelGroup(GroupRegiVO vo);
 	public int insertGroupMember(GroupMemberVO vo);
+	public int deleteGroupMember(GroupMemberVO vo);
 	public List<IndigroupVO> selectMyGroup(int memNo);
 	public int countNumberGroupMember(int groupNo);
 	public List<GroupMemberVO> showAllUser(int groupNo);
@@ -19,4 +20,5 @@ public interface IndiGroupService {
 	public IndigroupVO selectByGNtoMN(int groupNo);
 	public List<GroupRegiVO> selectRegiList(int groupNo);
 	public IndigroupVO selectByGroupNo(int groupNo);
+	public List<IndigroupVO> allGroup();
 }

@@ -21,4 +21,7 @@ public interface IndigroupDAO {
 	public IndigroupVO selectByGNtoMN(int groupNo);
 	public List<GroupRegiVO> selectRegiList(int groupNo);
 	public IndigroupVO selectByGroupNo(int groupNo);
+	public int isGroupTop(int groupNo);
+	public int deleteGroup(int groupNo);
+	public List<IndigroupVO> allGroup();
 }

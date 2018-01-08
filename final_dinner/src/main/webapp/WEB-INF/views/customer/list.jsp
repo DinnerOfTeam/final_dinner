@@ -15,7 +15,7 @@
 		$('form[name=frm_page]').submit();
 	}
 </script>
-<form name="frm_page" action="<c:url value='/customer/list.do' />">
+<form name="frm_page" action="<c:url value='/customer/list.do' />" method="post">
 	<input type="hidden" name="keyword" value="${searchVO.keyword }">
 	<input type="hidden" name="type" value="${searchVO.type}">
 	<input type="hidden" name="currentPage" value="">
@@ -42,17 +42,14 @@
 						<div class="table-tr">
 							<a href="<c:url value='/customer/countUpdate.do?no=${vo.qnaQuestionNo}'/>">
 								<div class="table-td table-td-center col-sm-1 hidden-xs">
-									<p>${vo.qnaQuestionNo }</p>
+									<p>${page.totalRecord- vo.rsnum+ 1 }</p>
 								</div>
 								<div class="table-td table-td-title col-xs-12 col-sm-6">
 									<c:if test="${vo.questionOpen==1 }">
-									<p>${vo.questionTitle }</p>
+									<p>${vo.questionTitle }
 									</c:if>
 									<c:if test="${vo.questionOpen==2 }">
-									<p color="#BDBDBD">※비밀글 입니다.※</p>
-									</c:if>
-									<c:if test="${empty vo.questionOpen }">
-										<p>${vo.questionTitle }
+									<p color="#BDBDBD">※비밀글 입니다.※
 									</c:if>
 									<c:if test="${vo.isAnswer> 0 }">
 										<img alt="reply ok image" src="<c:url value= '/images/re_ok.jpg' />">
@@ -81,16 +78,14 @@
 							<c:if test="${searchVO.currentPage== 1 }">
 								<li class="previous disabled">
 									<a>
-										<i class="fa fa-angle-left"></i>&nbsp;
-										이전
+										<i class="fa fa-angle-left">&nbsp;이전</i>
 									</a>
 								</li>
 							</c:if>
 							<c:if test="${searchVO.currentPage!= 1 }">
 								<li class="previous">
 									<a href="#" onclick="goPage(${searchVO.currentPage- 1 })">
-										<i class="fa fa-angle-left"></i>&nbsp;
-										이전
+										<i class="fa fa-angle-left">&nbsp;이전</i>
 									</a>
 								</li>
 							</c:if>
@@ -100,16 +95,14 @@
 							<c:if test="${searchVO.currentPage== searchVO.totalPage }">
 								<li class="next disabled">
 									<a>
-										<i class="fa fa-angle-right"></i>
-										다음&nbsp;
+										<i class="fa fa-angle-right">다음&nbsp;</i>
 									</a>
 								</li>
 							</c:if>
 							<c:if test="${searchVO.currentPage!= searchVO.totalPage }">
 								<li class="next">
 									<a href="#" onclick="goPage(${searchVO.currentPage+ 1 })">
-										<i class="fa fa-angle-right"></i>&nbsp;
-										다음&nbsp;
+										다음&nbsp;<i class="fa fa-angle-right"></i>
 									</a>
 								</li>
 							</c:if>
@@ -214,7 +207,7 @@
 					
 					<!-- 검색폼 -->
 					<div class="form-info form-row">
-						<form name="frmBoardSearch" method="get" action="#">
+						<form name="frmBoardSearch" method="post" action="#">
 							<div class="col-sm-2 col-sm-offset-2">
 								<select class="form-select" name="type">
 									<option value="title">제목</option>
