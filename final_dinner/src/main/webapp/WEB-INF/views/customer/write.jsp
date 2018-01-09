@@ -41,7 +41,7 @@
 						<div class="form-row">
 							<label>공개여부 : </label>
 							<label class="radio-inline">
-							  <input type="radio" name="questionOpen" id="inlineRadio1" value="1" selected> 공개글
+							  <input type="radio" name="questionOpen" id="inlineRadio1" value="1" checked> 공개글
 							</label>
 							<label class="radio-inline">
 							  <input type="radio" name="questionOpen" id="inlineRadio2" value="2"> 비밀글

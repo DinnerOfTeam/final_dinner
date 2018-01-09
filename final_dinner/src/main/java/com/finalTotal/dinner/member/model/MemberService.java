@@ -11,9 +11,11 @@ public interface MemberService {
 		public static final int LOGIN_OK=1;  //로그인 성공
 		public static final int ID_NONE=2;   //해당 아이디 없음
 		int PWD_DISAGREE=3; //비밀번호 불일치 //앞에 public static final는 생략가능
+		int NO_ADMIN= 4;
 		
 	
 	public int loginCheck(String memId, String memPwd);
+	public int adminCheck(String memId, String memPwd);
 	
 	public MemberVO selectMember(String memId);
 	

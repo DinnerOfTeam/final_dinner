@@ -14,6 +14,7 @@ public class QuestionVO {
 	private int qnaTypeNo;
 	private String memName;
 	private int isAnswer;
+	private int rsnum;
 	public int getQnaQuestionNo() {
 		return qnaQuestionNo;
 	}
@@ -25,6 +26,12 @@ public class QuestionVO {
 	}
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
+	}
+	public int getRsnum() {
+		return rsnum;
+	}
+	public void setRsnum(int rsnum) {
+		this.rsnum = rsnum;
 	}
 	public String getQuestionTitle() {
 		return questionTitle;
@@ -85,7 +92,8 @@ public class QuestionVO {
 		return "QuestionVO [qnaQuestionNo=" + qnaQuestionNo + ", memNo=" + memNo + ", questionTitle=" + questionTitle
 				+ ", questionContent=" + questionContent + ", questionViewCount=" + questionViewCount
 				+ ", questionRegdate=" + questionRegdate + ", questionOpen=" + questionOpen + ", questionPwd="
-				+ questionPwd + ", qnaTypeNo=" + qnaTypeNo + ", memName=" + memName + ", isAnswer=" + isAnswer + "]";
+				+ questionPwd + ", qnaTypeNo=" + qnaTypeNo + ", memName=" + memName + ", isAnswer=" + isAnswer
+				+ ", rsnum=" + rsnum + "]";
 	}
 	
 }

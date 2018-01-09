@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import com.finalTotal.dinner.indiGroup.model.GroupMemberVO;
 import com.finalTotal.dinner.indiGroup.model.GroupRegiVO;
 import com.finalTotal.dinner.indiGroup.model.IndiGroupService;
 import com.finalTotal.dinner.indiGroup.model.IndigroupVO;
+import com.finalTotal.dinner.member.model.MemberVO;
 import com.finalTotal.dinner.vote.model.VoteService;
 import com.finalTotal.dinner.vote.model.VoteVO;
  
@@ -138,13 +140,15 @@ public class IndiGroupCont {
 			HttpSession session, Model model) {
 		logger.info("group regi page parameter : groupName={}", groupName);
 		
+		List<IndigroupVO> list= null;
 		if(groupName== null|| groupName.isEmpty()) {
-			return "indiGroup/group/regi";
+			list= group_service.allGroup();
+		}else {
+			Map<String, Object> map= new HashMap<String, Object>();
+			map.put("groupName", groupName);
+			map.put("memNo", (Integer)session.getAttribute("memNo"));
+			list= group_service.selectByGroupName(map);
 		}
-		Map<String, Object> map= new HashMap<String, Object>();
-		map.put("groupName", groupName);
-		map.put("memNo", (Integer)session.getAttribute("memNo"));
-		List<IndigroupVO> list= group_service.selectByGroupName(map);
 		model.addAttribute("list", list);
 		
 		return "indiGroup/group/regi";
@@ -232,7 +236,29 @@ public class IndiGroupCont {
 		
 		return "common/message";
 	}
-
+	
+	@RequestMapping("/groupOut.do")
+	public String groupOut(@ModelAttribute GroupMemberVO vo,
+			HttpServletRequest req, 
+			Model model) {
+		logger.info("group out page parameter : vo={}", vo);
+		
+		String msg= "탈퇴 실패", url= "/indiGroup/chat/main.do?groupNo="+ vo.getGroupNo();
+		if(vo.getGroupMemNo()== 0) {
+			int memNo= (Integer)req.getSession().getAttribute("memNo");
+			vo.setMemNo(memNo);
+			int cnt= group_service.deleteGroupMember(vo);
+			logger.info("그룹 탈퇴 결과 : cnt={}", cnt);
+			if(cnt> 0) {
+				msg= "탈퇴 성공";
+				url= "/indiGroup/groupMain.do";
+			}
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
+	}
 	
 	public int getLastDay(int year, int month) {
 		switch(month) {

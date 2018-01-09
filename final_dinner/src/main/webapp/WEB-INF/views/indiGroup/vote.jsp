@@ -40,12 +40,13 @@
 		<table class= 'table_my'>
 			<thead>
 			</thead>
-			<c:forEach var="vo" items="${list }">
 				<tr>
 					<th>작성자</th>
 					<th>투표제목</th>
 					<th>완료기한</th>
 				</tr>
+			<c:if test="${!empty list }">
+			<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>${vo.memName }</td>
 					<!--  -->
@@ -53,6 +54,10 @@
 					<td><fmt:formatDate value="${vo.voteEndDate }" pattern="yy-MM-dd" /></td>
 				<tr>
 			</c:forEach>
+			</c:if>
+			<c:if test="${empty list }">
+					<tr><td colspan="3" style="text-align: center;">그룹투표가 비었습니다.</td></tr>
+			</c:if>
 		</table>
 	</div>
 	

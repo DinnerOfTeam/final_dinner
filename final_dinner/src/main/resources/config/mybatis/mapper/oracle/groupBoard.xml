@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="config.groupBoard">
+	<sql id="searchWhere">
+		<if test="keyword!=null and keyword!=''">
+			<if test="!type.equals('name')">
+				and gboard_${type} like '%' || #{keyword} || '%'
+			</if>
+			<if test="type.equals('name')">
+				and mem_name like '%'|| #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="selectList" parameterType="SearchVO" resultType="GroupBoardVO">
+		select * from
+		(select b.*, rownum as rsnum from
+		    (select a.*, m.mem_name
+		        from group_board a
+		        left join member m on a.mem_no = m.mem_no
+		        where group_no= #{groupNo}
+				<include refid="searchWhere"/>
+		        order by gboard_no desc) b)
+		    where rsnum between #{firstRowNum} and #{firstRowNum}+ #{pageSize}
+	</select>
+	
+	<select id="selectListTotal" parameterType="SearchVO" resultType="int">
+		select count(*) from group_board where group_no= #{groupNo}
+			<include refid="searchWhere" />
+	</select>
+	
+	<select id="listNotice" parameterType="int" resultType="GroupBoardVO">
+		select * from
+			(select a.*, m.mem_name from group_board a left join member m
+				on a.mem_no= m.mem_no
+				where group_no= #{groupNo}
+				order by a.gboard_no desc)
+			<![CDATA[
+			where rownum< 4
+			]]>
+	</select>
+	
+	<insert id="insertBoard" parameterType="GroupBoardVO">
+		<selectKey order="BEFORE" resultType="int" keyProperty="gboardNo">
+			select group_board_seq.nextval from dual
+		</selectKey>
+		insert into group_board(gboard_no, mem_no, group_no, gboard_title, gboard_contents)
+				values(#{gboardNo}, #{memNo}, #{groupNo}, #{gboardTitle}, #{gboardContents})
+	</insert>
+	
+	<select id="selectByNo" parameterType="int" resultType="GroupBoardVO">
+		select * from groupBoard where gboard_no= #{gboardNo}
+	</select>
+</mapper>

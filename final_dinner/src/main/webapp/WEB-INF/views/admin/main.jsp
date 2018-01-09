@@ -107,22 +107,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="top-header-info">
 					<div class="top-header-right">
 						<div class="top-header-right-info">
-							<c:if test="${empty sessionScope.admin_memId }">
-							<form id= 'ad_log' action="<c:url value= '/admin/login/login.do'/>" method="post" >
-								<label>아이디 : <input type="text" name= 'memId' size="5"></label>
-								<label>비밀번호 : <input type="text" name= 'memPwd' size="8"></label>
-							</form>
-							</c:if>
 							<ul>
-								<c:if test="${empty sessionScope.admin_memId }">
-								<li><a href="<c:url value= '#'/>">로그인</a></li>
-								<li><a href="<c:url value= '/member/signup.do'/>">회원가입</a></li>
-								</c:if>
-								
-								<c:if test="${!empty sessionScope.admin_memId }">								
-								<li><a href="<c:url value= '/login/logout.do'/>">로그아웃</a>
-								<a href="<c:url value= '/member/myPage.do'/>">마이페이지</a></li>
-								</c:if>
+								<li><a href="<c:url value= '/admin/login/logout.do'/>">로그아웃</a></li>
+								<li><a href="<c:url value= '/member/myPage.do'/>">마이페이지</a></li>
 							</ul>
 						</div>
 						

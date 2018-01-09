@@ -118,7 +118,7 @@ a {
 					<div class="tab-pane fade" id="general">
 							<a href="${pageContext.request.contextPath }/member/memberEdit.do">회원정보수정</a><br> 
 							<a href="${pageContext.request.contextPath }/book/booking.do">예약정보 조회</a><br>
-							<a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br>						
+							<%-- <a href="${pageContext.request.contextPath }/restaurant/restaurantJoin.do">식당등록</a><br> --%>						
 							<a href="${pageContext.request.contextPath }/member/memberOut.do">회원탈퇴</a>
 					</div>
 					

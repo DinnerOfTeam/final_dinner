@@ -13,6 +13,17 @@
 			</if>
 		</if>
 	</sql>
+
+	<sql id="searchWhere2">
+		<if test="keyword!=null and keyword!=''">
+			<if test="!type.equals('name')">
+				and question_${type} like '%' || #{keyword} || '%'
+			</if>
+			<if test="type.equals('name')">
+				and mem_name like '%'|| #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
 	
 	<insert id="insertqna" parameterType="QuestionVO">
 		<selectKey resultType="int" keyProperty="qnaQuestionNo" order="BEFORE">
@@ -50,12 +61,22 @@
 		where qna_question_no=#{qnaQuestionNo}
 	</select>
 	
-	<select id="selectByType" parameterType="int" resultType="QuestionVO">
-		select a.*, m.mem_name
-		from qna_question a
-		left join member m on a.mem_no = m.mem_no 
-		where qna_type_no=#{qnaTypeNo}
-		order by qna_question_no desc
+	<select id="selectByType" parameterType="SearchVO" resultType="QuestionVO">
+		select * from
+		(select b.*, rownum as rsnum from
+		    (select a.*, m.mem_name, (select count(*) from qna_answer where qna_question_no= a.qna_question_no) as is_answer
+		        from qna_question a
+		        left join member m on a.mem_no = m.mem_no
+		        where qna_type_no= #{qnaTypeNo}
+				<include refid="searchWhere2"/>
+		        order by qna_question_no desc) b)
+		    where rsnum between #{firstRowNum} and #{firstRowNum}+ #{pageSize}
+	</select>
+	<select id="getTotalType" parameterType="SearchVO" resultType="int">
+		select count(*) from qna_question a
+		        left join member m on a.mem_no = m.mem_no
+		        where qna_type_no= #{qnaTypeNo}
+		<include refid="searchWhere2"/>
 	</select>
 	
 	<update id="updateQna" parameterType="QuestionVO">
@@ -79,7 +100,7 @@
 		        left join member m on a.mem_no = m.mem_no
 				<include refid="searchWhere"/>
 		        order by qna_question_no desc) b)
-		    where rsnum between #{firstRowNum}+ 1 and #{firstRowNum}+ #{pageSize}
+		    where rsnum between #{firstRowNum} and #{firstRowNum}+ #{pageSize}
 	</select>
 	
 	<select id="getTotal" parameterType="SearchVO" resultType="int">

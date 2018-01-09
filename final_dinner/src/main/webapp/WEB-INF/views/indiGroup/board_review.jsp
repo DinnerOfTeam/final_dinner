@@ -23,18 +23,18 @@
 	
 	<div>
 		<table class= 'table_my' >
-			<c:forEach var="vo" items="${review_list }">
 				<tr>
 					<th>작성자</th>
-					<th>후기제목</th>
+					<th>제목</th>
 					<th>등록일</th>
 				</tr>
+				<c:forEach var="vo" items="${list }">
 				<tr>
 					<td>장요한</td>
-					<td><a class= 'vote_list' href="<c:url value= '#' />">${vo.reviewTitle }</a></td>
-					<td><fmt:formatDate value="${vo.reviewRegdate }" pattern="yy-MM-dd" /></td>
+					<td><a class= 'vote_list' href="<c:url value= '#' />">${vo.gboardTitle }</a></td>
+					<td><fmt:formatDate value="${vo.gboardRegdate }" pattern="yy-MM-dd" /></td>
 				<tr>
-			</c:forEach>
+				</c:forEach>
 		</table>
 	</div>
 	

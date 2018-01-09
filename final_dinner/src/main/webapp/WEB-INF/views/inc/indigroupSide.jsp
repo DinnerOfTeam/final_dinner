@@ -21,9 +21,9 @@
 			<div class= 'col-md-3'>
 				<ul class= 'nav nav-pills nav-stacked'>
 					<c:if test="${!empty sessionScope.memId&& !empty param.groupNo }">
-						<li><a href="<c:url value='/indiGroup/groupBoard/list.do' />">그룹게시판보기</a>
-						<li><a href="<c:url value='/indiGroup/vote.do' />">그룹투표보기</a>
-						<li><a href="<c:url value='/indiGroup/groupRegi.do' />">그룹탈퇴</a>
+<%-- 						<li><a href="<c:url value='/indiGroup/groupBoard/list.do' />">그룹게시판보기</a>
+						<li><a href="<c:url value='/indiGroup/vote.do' />">그룹투표보기</a> --%>
+						<li><a href="<c:url value='/indiGroup/groupOut.do?groupNo=${param.groupNo }' />">그룹탈퇴</a>
 					</c:if>
 						<li><a href="<c:url value='/indiGroup/create.do' />">그룹생성</a>
 						<li><a href="<c:url value='/indiGroup/regi.do' />">그룹가입</a>

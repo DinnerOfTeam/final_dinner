@@ -107,12 +107,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }
             }
         }).open();
-        
-        
     }
-</script>	
-	
-	
+</script>
 	
 <!--//end-animate-->
 </head>
@@ -189,7 +185,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										class="active"
 									</c:if>
 								>그룹</a></li>
-<%-- 								<li><a href="<c:url value= '/code.do'/>">코드</a></li> --%>
+								<%-- <li><a href="<c:url value= '/code.do'/>">코드</a></li> --%>
 							</ul>	
 							<div class="clearfix"> </div>
 						</div>	

@@ -13,6 +13,10 @@
 		select mem_Pwd from member where mem_Id=#{memId}
 	</select>
 	
+	<select id="selectPwdByAdminId" parameterType="string" resultType="string">
+		select mem_Pwd from member where mem_Id=#{memId} and mem_grade= 9
+	</select>
+	
 	<select id="selectDup" parameterType="string" resultType="int">
 		select count(*) from member where mem_Id=#{memId}
 	</select>

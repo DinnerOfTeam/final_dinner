@@ -102,6 +102,21 @@ public class IndiGroupServiceImpl implements IndiGroupService{
 	public IndigroupVO selectByGroupNo(int groupNo) {
 		return dao.selectByGroupNo(groupNo);
 	}
+
+	@Override
+	@Transactional
+	public int deleteGroupMember(GroupMemberVO vo) {
+		int memNo= dao.isGroupTop(vo.getGroupNo());
+		if(memNo== vo.getMemNo()) {
+			dao.deleteGroup(vo.getGroupNo());
+		}
+		return dao.deleteGroupMember(vo);
+	}
+
+	@Override
+	public List<IndigroupVO> allGroup() {
+		return dao.allGroup();
+	}
 	
 	
 }

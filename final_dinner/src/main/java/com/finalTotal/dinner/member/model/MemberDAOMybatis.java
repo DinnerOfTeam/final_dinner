@@ -58,4 +58,9 @@ public class MemberDAOMybatis extends SqlSessionDaoSupport
 	public List<MemberVO> showAll2(int currentPage) {
 		return getSqlSession().selectList(namespace+ ".showAll2", currentPage);
 	}
+
+	@Override
+	public String selectAdmin(String memId) {
+		return getSqlSession().selectOne(namespace+ ".selectPwdByAdminId", memId);
+	}
 }
