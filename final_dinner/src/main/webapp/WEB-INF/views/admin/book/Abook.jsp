@@ -2,24 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script type="text/javascript" src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/jquery-ui.css'/>">
-<script type="text/javascript" src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 <p>예약</p><hr>
 <script type="text/javascript">
-	$.applyDate= function(id) {
-		$(id).datepicker({
-			'dateFormat': 'yy-mm-dd',
-			'dayNamesMin': ['일', '월', '화', '수', '목', '금', '토'],
-			'monthNames': ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		});
-	};
 	$(function() {
 		$('button#search_book').click(function() {
 			var s= $('input[name=startDay]').val();
 			var e= $('input[name=endDay]').val();
 			location.href= "<c:url value= '/admin/main.do?startDay="+ s+ "&endDay="+ e+ "' />";
 		});
+		$.applyDate= function(id) {
+			$(id).datepicker({
+				'dateFormat': 'yy-mm-dd',
+			});
+		};
 		$.applyDate('input[name=startDay]');
 		$.applyDate('input[name=endDay]');
 	});

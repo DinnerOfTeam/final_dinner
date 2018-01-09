@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>그룹명 중복검사</title>
+<link href="${pageContext.request.contextPath }/css/codestyle.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" 
 	src="<c:url value='/jquery/jquery-3.2.1.min.js'/>"></script>
 	
@@ -34,7 +34,7 @@
 	<h1>그룹명 중복검사</h1>
 	<form name="frmId" method="post" action="<c:url value='checkName.do'/>">
 		<label for="groupName">그룹명 : </label>
-		<input type="text" name="groupName" id="groupName"
+		<input type="text" class= "form-text" name="groupName" id="groupName"
 		 value="${param.groupName}">
 		<input type="submit" value="그룹명 확인">
 		<c:if test="${result> 0}">
