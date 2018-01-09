@@ -47,8 +47,8 @@
 						<div>
 							<label for="memId" class="lb">회원ID</label> <input type="text"
 								name="memId" id="memId" style="ime-mode: inactive" class="tx"
-								value="${sessionScope.memId}">&nbsp; 
-								<input type="button" value="중복확인" id="btnChkId" title="새창열림">
+								value="${sessionScope.memId}">&nbsp;
+								
 						</div>
 						<div>
 							<label for="memPwd" class="lb">비밀번호</label> 
@@ -160,7 +160,7 @@
 						</div>
 
 					</fieldset>
-					<input type="text" name="chkId" id="chkId"> 
+					<input type="hidden" name="chkId" id="chkId"> 
 					<button id="wr_submit" class="site-btn-submit site-btn-full">회원정보수정</button>
 					<div class="signup-text">
 						<a href="<c:url value= '/login/login.do'/>">로그인</a>
