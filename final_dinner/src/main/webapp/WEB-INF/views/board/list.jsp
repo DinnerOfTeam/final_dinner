@@ -65,7 +65,8 @@
 												<i class="fa fa-arrow-right"></i>
 											</c:when>
 											<c:otherwise>
-												<p>${vo.freeNo }</p>
+<%-- 												<p>${vo.freeNo }</p> --%>
+												<p>${paging.totalRecord- vo.rnum+ 1 }</p>
 											</c:otherwise>
 										</c:choose>
 									</div>

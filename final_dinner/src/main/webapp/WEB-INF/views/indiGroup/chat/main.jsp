@@ -60,8 +60,8 @@
 					<div title="calender">
 						<c:import url="/indiGroup/calender.do" />
 					</div>
-					<div title= 'board_review'>
-						<c:import url="/indiGroup/board_review.do" />
+					<div title= 'group_board'>
+						<c:import url="/indiGroup/groupBoard/listNotice.do" />
 					</div>
 					<div title= 'vote'>
 						<c:import url="/indiGroup/vote.do" />

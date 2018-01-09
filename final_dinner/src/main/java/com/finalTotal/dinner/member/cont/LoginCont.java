@@ -101,6 +101,7 @@ public class LoginCont {
 		//session.invalidate();//세션의 모든 속성을 삭제
 		session.removeAttribute("memId");
 		session.removeAttribute("memName");
+		session.removeAttribute("memNo");
 		
 		String  msg="로그아웃되었습니다", url="/index.do";
 		

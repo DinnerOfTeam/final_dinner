@@ -11,11 +11,12 @@ public interface QuestionDAO {
 	public List<QuestionVO> mainNotice();
 	public int updateReadCount(int no);
 	public QuestionVO selectByNo(int no);
-	public List<QuestionVO> selectByType(int qnaTypeNo);
+	public List<QuestionVO> selectByType(SearchVO vo);
 	public int updateQna(QuestionVO vo);
 	public int deleteQna(int no);
 	public List<QuestionTypeVO> selectTypeAll();
 
 	public int getTotal(SearchVO vo);
+	public int getTotalType(SearchVO vo);
 	public List<QuestionVO> adminSelectAll();
 }

@@ -91,4 +91,19 @@ public class IndiGroupDAOImpl extends SqlSessionDaoSupport
 		return getSqlSession().selectOne(namespace+ ".selectByGroupNo", groupNo);
 	}
 
+	@Override
+	public int isGroupTop(int groupNo) {
+		return getSqlSession().selectOne(namespace+ ".isGroupTop", groupNo);
+	}
+
+	@Override
+	public int deleteGroup(int groupNo) {
+		return getSqlSession().delete(namespace+ ".deleteGroup", groupNo);
+	}
+
+	@Override
+	public List<IndigroupVO> allGroup() {
+		return getSqlSession().selectList(namespace+ ".allGroup");
+	}
+
 }
