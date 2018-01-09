@@ -18,7 +18,7 @@ public class AdminLoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri= request.getRequestURI();
-		if(uri.indexOf("admin/login/log")== -1) {
+		if(uri.indexOf("admin/login/log")== -1|| uri.indexOf("Ares2.do")!= -1) {
 			MemberVO vo= (MemberVO)request.getSession().getAttribute("admin_login");
 			if(vo== null|| vo.getMemId().isEmpty()) {
 				response.setContentType("text/html;charset=utf-8");
