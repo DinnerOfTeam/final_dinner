@@ -93,9 +93,9 @@
 		delete from indigroup where group_no= #{groupNo}
 	</delete>
 	
-	<select id="allGroup" resultType="IndiGroupVO">
-		select a.*, (select count(*) from group_member 
-			where group_no= a.group_no) as numGroupMember
-			from indigroup a
+	<select id="allGroup" resultType="IndiGroupVO" parameterType="int">
+		select a.*, (select mem_name from member where mem_no= a.mem_no) as mem_name,
+				(select count(*) from group_member where group_no= a.group_no) as numGroupMember
+			from indigroup a where group_no not in (select group_no from group_member where mem_no= #{memNo})
 	</select>
 </mapper>
