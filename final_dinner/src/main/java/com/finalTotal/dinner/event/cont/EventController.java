@@ -2,6 +2,9 @@ package com.finalTotal.dinner.event.cont;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +34,8 @@ import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 @Controller
 public class EventController {
 	private static final Logger logger=LoggerFactory.getLogger(EventController.class);
+
+	private static SimpleDateFormat dateParse=new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Autowired
 	public EventService eventService;
@@ -47,6 +52,7 @@ public class EventController {
 	
 	@Autowired
 	private FileUtil fileUtil;
+	
 	
 	@RequestMapping("/event/getEventList.do")
 	@ResponseBody
@@ -119,7 +125,21 @@ public class EventController {
 			}else if(vo.getEventEndStr()==null || vo.getEventEndStr().isEmpty()){
 				msg="이벤트 종료일을 입력하세요";
 			}else {
-				back=false;
+				try {
+					Date startDay=dateParse.parse(vo.getEventStartStr());
+					Date endDay=dateParse.parse(vo.getEventEndStr());
+					
+					int compare=startDay.compareTo(endDay);
+					if(compare>0) {
+						msg="종료일은 시작일과 같거나 큰 날짜만 가능합니다";
+					}else {
+						back=false;
+					}
+					
+				} catch (ParseException e) {
+					//e.printStackTrace();
+					msg="날짜형식 불일치(년-월-일)";
+				}
 			}
 		}
 		

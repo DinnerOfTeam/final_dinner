@@ -8,6 +8,7 @@
 <script type="text/javascript" src="<c:url value='/ckeditor/ckeditor.js'/>"></script>
 <script type="text/javascript">
 	$(function(){
+		var dateChk= /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[0-1])$/;
 		var $eventTitle=$("#eventTitle");
 		var eventContents=CKEDITOR.instances.eventContent;
 		var $eventStartDate=$("#eventStartDate");
@@ -30,7 +31,28 @@
 				alert("종료일을 입력하세요");
 				$eventEndDate.focus();
 				return false;
+			}else{
+				var eventStartDate=$eventStartDate.val();
+				var eventEndDate=$eventEndDate.val();
+				
+				if(!dateChk.test(eventStartDate) || !dateChk.test(eventEndDate)){
+					alert("날짜형식 불일치 (년-월-일)");
+					$eventStartDate.focus();
+					return false;
+				}
+				
+				var dateStart=string2Date(eventStartDate);
+				var dateEnd=string2Date(eventEndDate);
+				
+				if((dateEnd-dateStart)<0){
+					alert("종료일은 시작일과 같거나 큰 날짜만 가능합니다");
+					$eventStartDate.focus();
+					return false;
+				}
 			}
+			
+			
+			return true;
 		});
 		
 		function setDatepicker(sel){
@@ -42,6 +64,12 @@
 		setDatepicker($eventStartDate);
 		setDatepicker($eventEndDate);
 	});
+	
+	function string2Date(str){
+		//yyyy-mm-dd to date
+		var arr = str.split("-");
+		return new Date(arr[0], (arr[1]-1), arr[2]);
+	}
 </script>
 
 <%@include file="../inc/mypageSide.jsp" %>
