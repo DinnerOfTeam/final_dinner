@@ -58,16 +58,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 		
 	});
-	
-	
 </script>
 <!--animate-->
 <link href="${pageContext.request.contextPath }/css/animate.css" rel="stylesheet" type="text/css" media="all">
 <link href="${pageContext.request.contextPath }/css/codestyle.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/js/wow.min.js"></script>
-	<script>
-		 new WOW().init();
-	</script>
+<script>
+	 new WOW().init();
+	 $(function() {
+		 setInterval(function() {
+			 findActiveTab()
+		 }, 2000);
+	 });
+	 function findActiveTab() {
+		 $('ul.admin-tabs').find('li').each(function(idx) {
+			 if($(this).hasClass('active')) {
+				 $.setTabs(idx);
+			 }
+		 });
+	 }
+	 $.setTabs= function(idx) {
+/* 		 alert(idx); */
+		 var ele= $('ul.admin-tabs').find('li').eq(idx).text();
+		 $('div#tab_sel_div').find('input').eq(0).val(idx);
+		 $('div#tab_sel_div').find('input').eq(1).val(ele);
+	 };
+</script>
 <style type="text/css">
 	.admin-tabs li a {
 		padding: 10px 20px;
@@ -120,8 +136,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 			<ul class="nav-pills admin-tabs">
-				<li class="active"><a href="#AMember" data-toggle="tab">회원관리</a></li>
-				<li class=""><a href="#ABoard" data-toggle="tab">게시판관리</a></li>
+				<li class=""><a href="#AMember" data-toggle="tab">회원관리</a></li>
+				<li class="active"><a href="#ABoard" data-toggle="tab">게시판관리</a></li>
 				<li class=""><a href="#ABook" data-toggle="tab">예약관리</a></li>
 				<li class=""><a href="#ARes" data-toggle="tab">업체지도</a></li>
 				<li class=""><a href="#ARest" data-toggle="tab">업체관리</a></li>
@@ -129,9 +145,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<li class=""><a href="#AEvent" data-toggle="tab">이벤트관리</a></li>
 			</ul>
 		</div>
+	<div id= "tab_sel_div">
+		<input type="text" value= "">
+		<input type="text" value= "">
+	</div>
 		<div class="fadeIn animated" data-wow-delay=".5s">
 			<div class="search-tab-content tab-content">
-				<div class="tab-pane fade active in" id="AMember">
+				<div class="tab-pane fade" id="AMember">
 					<div class="container" title="회원">
 						<c:import url="/admin/member/Amember.do"></c:import>
 					</div>
