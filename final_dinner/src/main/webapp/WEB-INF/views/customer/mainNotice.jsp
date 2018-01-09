@@ -66,7 +66,6 @@
 		<div class= 'info' id="color">
 			<div class= 'info_header'>
 				<div class= 'th_div col-sm-9 th_header font_size14'>문의안내</div>
-				<div class= 'col-sm-3 pad_t30'><a>더보기</a></div>
 			</div>
 			<div class= 'col-sm-6'>
 				<a href="write.do">
