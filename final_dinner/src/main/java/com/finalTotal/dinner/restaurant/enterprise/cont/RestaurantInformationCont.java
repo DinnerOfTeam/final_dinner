@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.member.model.MemberService;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantPhotoVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 
@@ -52,22 +53,25 @@ public class RestaurantInformationCont {
 	}
 	
 	@RequestMapping("/restaurantInformation.do")
-	public String Information(@RequestParam String resNo, Model model) {
+	public String Information(@RequestParam(defaultValue="0") int resNo, Model model) {
 		logger.info("식당 정보상세 페이지 보여주기 파라미터 resNo={}",resNo);
 		
-		if(resNo==null || resNo.equals("null") ) {
+		if(resNo==0 ) {
 			model.addAttribute("msg", "식당 등록을 하셔야 합니다");
 			model.addAttribute("url", "/member/myPage.do");
 			
 			return "common/message";			
 		}
 		
-		RestaurantVO vo = restaurantService.selectByNo((Integer.parseInt(resNo)));
+		RestaurantVO vo = restaurantService.selectByNo(resNo);
 		logger.info("상세보기 결과, vo={}",vo);
 		
+		List<RestaurantPhotoVO> photoList=restaurantService.selectPhotoByresNo(resNo);
+		logger.info("사진 조회결과 photoList.size={}", photoList.size());
+		
+		
 		model.addAttribute("vo", vo);
-		
-		
+		model.addAttribute("photoList", photoList);
 		
 		return "restaurantEnterprise/restaurantInformation";
 	}

@@ -48,7 +48,9 @@
 			event.preventDefault();
 			
 			var locationValue=$(this).data("sido") +"-"+ $(this).data("loc");
-			arrLoc.push(locationValue);
+			if(arrLoc.indexOf(locationValue)==-1){
+				arrLoc.push(locationValue);
+			}
 			
 			reDrawLocation();
 		});
@@ -259,7 +261,7 @@
 		<div class="container">
 			<div class="shadow-box-fit wow fadeIn animated" data-wow-delay=".5s">
 				<c:if test="${empty sidoList }">
-					<p>현재 지역 검색을 이용할 수 없습니다.</p>
+					<p>지역 검색을 이용할 수 없습니다.</p>
 				</c:if>
 				<c:if test="${!empty sidoList }">
 					<%-- <ul class="nav nav-pills search-tabs">
@@ -285,7 +287,7 @@
 			<div class="shadow-box wow fadeIn animated" data-wow-delay=".5s">
 				<div class="form-simple">
 					<form action="<c:url value='/search.do'/>" method="get" name="searchFrm" id="search-food">
-					
+						
 						<div class="form-comp">
 							<span class="form-static">
 								<span class="form-txt">지역</span>
@@ -297,6 +299,22 @@
 							<span id="search-location-view" class="form-static"></span>
 						</div>
 						
+						<c:set var="typeNameNow"/>
+						<c:if test="${!empty typeList }">
+							<label for="resTypeNo">식당 종류</label>
+							<select name="resTypeNo" id="resTypeNo" class="form-select">
+								<option value="0">전체</option>
+								<c:forEach var="typeVO" items="${typeList }">
+									<option value="${typeVO.resTypeNo }"
+										<c:if test="${param.resTypeNo==typeVO.resTypeNo }">
+											selected
+											<c:set var="typeNameNow" value="${typeVO.resTypeName }"/>
+										</c:if>
+									>${typeVO.resTypeName }</option>
+								</c:forEach>
+							</select>
+						</c:if>
+						
 						<input type="hidden" name="location" id="search_hidden_loc" value="${param.location }">
 						<input type="text" class="form-text" name="keyword" placeholder="식당명" value="${param.keyword }">
 						<input type="submit" class="site-btn-submit site-btn-full" value="검색">
@@ -306,11 +324,39 @@
 		</div>
 		<div class="food-search-result wow fadeIn animated" data-wow-delay=".5s">
 			<div class="container">
-				<div class="row">
+				<div class="shadow-box ali-center col-xs-12">
+					<span>
+						<c:if test="${!empty param.keyword or !empty param.resTypeNo}">
+							<c:if test="${!empty param.resTypeNo and param.resTypeNo>0}">
+								<c:if test="${empty param.keyword }">
+									식당종류
+								</c:if>
+								'${typeNameNow }'
+								<c:if test="${!empty param.keyword }">
+									에서
+								</c:if>
+							</c:if>
+							<c:if test="${!empty param.keyword }">
+								'${param.keyword }'
+							</c:if>
+							검색 결과
+							: ${paging.totalRecord }건
+							<c:if test="${!empty param.location }">
+								(지역검색 포함)
+							</c:if>
+						</c:if>
+						<c:if test="${empty param.keyword and empty param.resTypeNo}">
+							전체 식당 조회 결과 : ${paging.totalRecord }건
+						</c:if>
+					</span>
+				</div>
 				
+				<div class="row">
 					<c:if test="${empty list }">
-						<div class="shadow-box ali-center">
-							<p>검색결과가 없습니다</p>
+						<div class="col-xs-12">
+							<div class="shadow-box ali-center">
+								<span>검색결과가 없습니다</span>
+							</div>
 						</div>
 					</c:if>
 					<c:if test="${!empty list }">
@@ -414,8 +460,8 @@
 					</div>
 					
 					<!-- 페이징 -->
-					<c:if test="${!empty sidoList }">
-						<div class="board-list-sub col-xs-12 hidden-xs">
+					<c:if test="${!empty list }">
+						<div class="board-list-sub col-xs-12 hidden-xs text-center">
 							<ul class="pagination">
 								<c:choose>
 									<c:when test="${paging.currentPage>1 }">
@@ -528,15 +574,15 @@
 					
 					<div class="form-row">
 						<div class="col-sm-4">
-							<input type="text" class="form-text" name="bookNum" id="bookNum" placeholder="인원" required="">
+							<input type="text" class="form-text" name="bookNum" id="bookNum" placeholder="인원" required>
 						</div>
 						
 						<div class="col-sm-4">
-							<input type="text" class="form-text" name="bookTime" id="bookTime" placeholder="시간" required="">
+							<input type="text" class="form-text" name="bookTime" id="bookTime" placeholder="시간" required>
 						</div>
 						
 						<div class="col-sm-4">
-						<input type="text" class="form-text"  name="s_bookDate" id="s_bookDate" placeholder="예약날짜" required="" >
+						<input type="text" class="form-text"  name="s_bookDate" id="s_bookDate" placeholder="예약날짜" required>
 						</div>
 					
 					</div>

@@ -7,7 +7,7 @@
 			<where>
 				res_status= 'approve'
 				<if test="keyword!=null and keyword!=''">
-					res_name like '%' || #{keyword} || '%'
+					and res_name like '%' || #{keyword} || '%'
 				</if>
 				<if test="locationList!=null">
 					<foreach collection="locationList" item="loc" open="and " separator=" or ">

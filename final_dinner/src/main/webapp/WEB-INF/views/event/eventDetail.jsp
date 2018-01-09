@@ -164,11 +164,11 @@
 				
 				<c:if test="${eventVO.eventEndDate>=nowDate && eventVO.eventIsEnd=='N' }">
 					<a href="<c:url value='/admin/event/eventEndSet.do?eventNo=${eventVO.eventNo }&eventIsEnd=Y'/>"
-							class="site-btn site-btn-full event-set-end">이벤트 종료</a>
+							class="site-btn event-set-end">이벤트 종료</a>
 				</c:if>
 				<c:if test="${eventVO.eventEndDate>=nowDate && eventVO.eventIsEnd=='Y' }">
 					<a href="<c:url value='/admin/event/eventEndSet.do?eventNo=${eventVO.eventNo }&eventIsEnd=N'/>"
-							class="site-btn site-btn-full event-set-end">종료 취소</a>
+							class="site-btn event-set-end">종료 취소</a>
 				</c:if>
 			</c:if>
 			
@@ -188,7 +188,7 @@
 							class="site-btn event-set-approve">이벤트 승인</a>
 				</c:if>
 				<a href="<c:url value='/admin/event/eventDelete.do?eventNo=${eventVO.eventNo }'/>"
-						class="site-btn site-btn-full event-set-del">이벤트 삭제</a>
+						class="site-btn event-set-del">이벤트 삭제</a>
 			</c:if>
 			
 			<a href="${goEventList }" class="site-btn-submit">목록</a>

@@ -29,6 +29,7 @@
 		});
 		
 		function loadEventData(){
+			$("#eventTotal").text(0);
 			var $eventList=$('#event_list>tbody');
 			$eventList.empty();
 			$trError=$tableTr.clone()
@@ -101,7 +102,6 @@
 								eRow.append(eThumb).append(eTitle);
 								
 								$eventList.append(eRow);
-								
 							}
 							
 							//페이징
@@ -199,6 +199,8 @@
 								.append(m_pagerwrap.append(m_pager))
 								.append(pagerwrap.append(pager));
 							
+
+							$("#eventTotal").text(res.paging.totalRecord);
 						}else{
 							$eventList.append($tableTr.clone()
 									.append($emptyTd.clone().text("해당날짜에 진행중인 이벤트가 없습니다")));
@@ -267,9 +269,10 @@
 						<input type="hidden" name="eventDate" id="eventDate">
 						<input type="hidden" name="page" id="eventPaging" value="1">
 					</form>
-					<span id="eventYear"></span>년
-					<span id="eventMonth"></span>월
-					<span id="eventDay"></span>일
+					<span id="eventYear">0000</span>년
+					<span id="eventMonth">00</span>월
+					<span id="eventDay">00</span>일
+					(<span id="eventTotal"></span>건)
 				</div>
 			</div>
 			<div>

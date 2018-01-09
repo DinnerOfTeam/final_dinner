@@ -3,6 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="uriNow" value="${fn:replace(requestScope['javax.servlet.forward.request_uri'], pageContext.request.contextPath, '') }"/>
+<c:set var="uriArr" value="${fn:split(uriNow, '/') }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,12 +159,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li><a href="<c:url value= '/intro/intro.do' />" class="active">브랜드소개</a></li>
-								<li><a href="<c:url value= '/search.do'/>">통합검색</a></li>
-								<li><a href="<c:url value= '/board/list.do'/>">게시판</a></li>
-								<li><a href="<c:url value= '/event/eventList.do'/>">이벤트</a></li>								
-								<li><a href="<c:url value= '/customer/mainNotice.do'/>">고객센터</a></li>
-								<li><a href="<c:url value= '/indiGroup/groupMain.do'/>">그룹</a></li>
+								<li><a href="<c:url value= '/intro/intro.do' />"
+									<c:if test="${uriArr[0]=='intro' }">
+										class="active"
+									</c:if>
+								>브랜드소개</a></li>
+								<li><a href="<c:url value= '/search.do'/>"
+									<c:if test="${uriArr[0]=='search.do' }">
+										class="active"
+									</c:if>
+								>통합검색</a></li>
+								<li><a href="<c:url value= '/board/list.do'/>"
+									<c:if test="${uriArr[0]=='board' }">
+										class="active"
+									</c:if>
+								>게시판</a></li>
+								<li><a href="<c:url value= '/event/eventList.do'/>"
+									<c:if test="${uriArr[0]=='event' }">
+										class="active"
+									</c:if>
+								>이벤트</a></li>								
+								<li><a href="<c:url value= '/customer/mainNotice.do'/>"
+									<c:if test="${uriArr[0]=='customer' }">
+										class="active"
+									</c:if>
+								>고객센터</a></li>
+								<li><a href="<c:url value= '/indiGroup/groupMain.do'/>"
+									<c:if test="${uriArr[0]=='indiGroup' }">
+										class="active"
+									</c:if>
+								>그룹</a></li>
 <%-- 								<li><a href="<c:url value= '/code.do'/>">코드</a></li> --%>
 							</ul>	
 							<div class="clearfix"> </div>

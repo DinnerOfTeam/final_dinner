@@ -194,7 +194,7 @@
 			
 				<!-- 페이징 -->
 				<c:if test="${!empty list }">
-					<div class="board-list-sub col-xs-12 hidden-xs">
+					<div class="board-list-sub col-xs-12 hidden-xs text-center">
 						<ul class="pagination">
 							<c:choose>
 								<c:when test="${paging.currentPage>1 }">

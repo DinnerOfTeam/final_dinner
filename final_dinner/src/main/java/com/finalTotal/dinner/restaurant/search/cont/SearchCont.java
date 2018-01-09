@@ -18,6 +18,7 @@ import com.finalTotal.dinner.addr.model.SidoVO;
 import com.finalTotal.dinner.addr.model.SigunguVO;
 import com.finalTotal.dinner.common.PagingVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantService;
+import com.finalTotal.dinner.restaurant.general.model.RestaurantTypeVO;
 import com.finalTotal.dinner.restaurant.general.model.RestaurantVO;
 import com.finalTotal.dinner.restaurant.search.model.RestaruntSearchVO;
 
@@ -56,12 +57,16 @@ public class SearchCont {
 		searchVO.setFirstBlockPage(paging.getFirstBlockPage());
 		searchVO.setLastBlockPage(paging.getLastBlockPage());
 		
+		List<RestaurantTypeVO> typeList=restaurantService.restaurantType();
+		logger.info("검색-식당종류 조회결과, typeList.size={}", typeList.size());
+		
 		List<SidoVO> sidoList=addrService.selectSido();
 		logger.info("검색-지역정보 조회결과, sidoList.size={}", sidoList.size());
 		
 		List<RestaurantVO> list=restaurantService.searchRestarunt(searchVO);
 		logger.info("검색- 결과, list.size={}", list.size());
 		
+		model.addAttribute("typeList", typeList);
 		model.addAttribute("sidoList", sidoList);
 		model.addAttribute("paging", paging);
 		model.addAttribute("list", list);
