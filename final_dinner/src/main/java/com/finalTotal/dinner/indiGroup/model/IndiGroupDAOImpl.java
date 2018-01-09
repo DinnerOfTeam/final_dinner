@@ -102,8 +102,8 @@ public class IndiGroupDAOImpl extends SqlSessionDaoSupport
 	}
 
 	@Override
-	public List<IndigroupVO> allGroup() {
-		return getSqlSession().selectList(namespace+ ".allGroup");
+	public List<IndigroupVO> allGroup(int memNo) {
+		return getSqlSession().selectList(namespace+ ".allGroup", memNo);
 	}
 
 }

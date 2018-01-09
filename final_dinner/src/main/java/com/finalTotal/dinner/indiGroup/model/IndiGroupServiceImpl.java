@@ -114,8 +114,8 @@ public class IndiGroupServiceImpl implements IndiGroupService{
 	}
 
 	@Override
-	public List<IndigroupVO> allGroup() {
-		return dao.allGroup();
+	public List<IndigroupVO> allGroup(int memNo) {
+		return dao.allGroup(memNo);
 	}
 	
 	
