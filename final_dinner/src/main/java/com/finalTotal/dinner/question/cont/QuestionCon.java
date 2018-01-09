@@ -169,6 +169,10 @@ public class QuestionCon {
 						model.addAttribute("msg", "비밀글은 본인만 확인가능합니다.");
 						model.addAttribute("url", "/customer/list.do");
 						return "common/message";
+					}else if(admin.getMemNo()!= memNo) {
+						model.addAttribute("msg", "비밀글은 본인만 확인가능합니다.");
+						model.addAttribute("url", "/customer/list.do");
+						return "common/message";
 					}
 				}
 			}

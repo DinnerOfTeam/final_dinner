@@ -182,6 +182,38 @@
 			$("#modalLayer").hide();
 		});
 		
+		$.book_submit= function(f) {
+			var num= $(f).find('input[name=bookNum]').val();
+			var time= $(f).find('input[name=bookTime]').val();
+			var date= $(f).find('input[name=s_bookDate]').val();
+/* 			alert(date+ ' '+ time+ '시에 '+ num+ '명이 예약'); */
+			
+			var exptextNum = /^[1-9]+$[0-9]*/g;
+			var exptextTime = /^[0-2]+$[0-9]*/g;
+			if(!exptextNum.test(num)) {
+				alert('인원수는 0명 이상의 숫자만 가능합니다.');
+				$(f).find('input[name=bookNum]').focus();
+					return false;
+			}
+			if(!exptextTime.test(time)) {
+				exptextTime= /^[2]+$[5-9]+/g;
+				if(exptextTime.test(time)) {
+					alert('예약시간은 0~24의 숫자만 가능합니다.');
+					$(f).find('input[name=bookTime]').focus();
+					return false;
+				}
+			}
+			var year= date.substring(0, 4);
+			var month= date.substring(5, 7)- 1;
+			var day= date.substring(8, 11);
+			var d1= new Date(year, month, day);
+			var d2= new Date();
+			if(d1< d2) {
+				alert('이전날짜는 예약할 수 없습니다');
+				return false;
+			}
+			return true;
+		};
 	});
 	
 
@@ -568,17 +600,18 @@
 		<div class="container" style="width: 750px;">
 			<h2 class="eee">예약	</h2>
 			<div class="form-simple">
-				 <form action="<c:url value='/book/restaurantBooking.do' />" method="post">
+				 <form action="<c:url value='/book/restaurantBooking.do' />" method="post" name= "book_frm" id= 'book_frm'
+				 onsubmit="return $.book_submit(this)">
 			
 					<input type="hidden" name="resNo" >
 					
 					<div class="form-row">
 						<div class="col-sm-4">
-							<input type="text" class="form-text" name="bookNum" id="bookNum" placeholder="인원" required>
+							<input type="text" class="form-text" name="bookNum" id="bookNum" placeholder="인원(명)" required>
 						</div>
 						
 						<div class="col-sm-4">
-							<input type="text" class="form-text" name="bookTime" id="bookTime" placeholder="시간" required>
+							<input type="text" class="form-text" name="bookTime" id="bookTime" placeholder="시간(시)" required>
 						</div>
 						
 						<div class="col-sm-4">
@@ -617,7 +650,7 @@
 					
 					<div class="form-comp-row" style="padding-left: 200px">
 						<div class="col-sm-4">
-							<input type="submit" name="Sign In" class="site-btn-submit site-btn-full" value="예약">
+							<input type="submit" name="SignIn" class="site-btn-submit site-btn-full" value="예약">
 						</div>
 						<div class="col-sm-4">
 							<input type="reset" name="cancel" class="site-btn site-btn-full cancelbw" value="취소">

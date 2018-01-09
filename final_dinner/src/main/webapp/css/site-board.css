@@ -1,4 +1,4 @@
-.site-board-title{
+comments-row.site-board-title{
 	padding: 4em 0;
 	background: #DDD;
 	text-align: center;
@@ -222,6 +222,7 @@
 .board-detail-comments{
 	margin: 0;
 	background-color: #FFF;
+	overflow: hidden;
 }
 
 .board-detail-comments-list{
@@ -231,6 +232,24 @@
 
 .board-detail-comments-row{
 	border-bottom: 1px solid #EEE;
+	position: relative;
+}
+
+.board-detail-comments-row:before {
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    content: "";
+    border-bottom: 2px solid #555;
+    border-left: 2px solid #555;
+    position: absolute;
+    left: -0.75em;
+    top: 0.25em;
+    border-bottom-left-radius: 50%;
+}
+
+.board-detail-comments-contents{
+	word-break: break-word;
 }
 
 .board-detail-comments-nodata{

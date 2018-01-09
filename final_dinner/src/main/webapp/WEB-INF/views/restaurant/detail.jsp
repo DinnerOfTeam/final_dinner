@@ -119,6 +119,11 @@
 	   filter: alpha(opacity = 50);
 	   z-index: 10;
 	}
+	
+	.carousel-inner > .item > img{
+		width: 100%;
+		min-width: 100%;
+	}
 </style>
 
 <div class="res-head">

@@ -20,5 +20,5 @@ public interface IndiGroupService {
 	public IndigroupVO selectByGNtoMN(int groupNo);
 	public List<GroupRegiVO> selectRegiList(int groupNo);
 	public IndigroupVO selectByGroupNo(int groupNo);
-	public List<IndigroupVO> allGroup();
+	public List<IndigroupVO> allGroup(int memNo);
 }

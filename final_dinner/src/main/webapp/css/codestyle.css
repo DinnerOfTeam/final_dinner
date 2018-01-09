@@ -302,7 +302,10 @@ textarea.form-text{
 	text-align: right;
 }
 
-
+.form-simple .form-group.form-group-clear,
+.form-info .form-group.form-group-clear{
+	overflow: hidden;
+}
 
 .site-top-title{
 	padding: 4em 0;

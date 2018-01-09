@@ -142,7 +142,8 @@ public class IndiGroupCont {
 		
 		List<IndigroupVO> list= null;
 		if(groupName== null|| groupName.isEmpty()) {
-			list= group_service.allGroup();
+			int memNo= (Integer)session.getAttribute("memNo");
+			list= group_service.allGroup(memNo);
 		}else {
 			Map<String, Object> map= new HashMap<String, Object>();
 			map.put("groupName", groupName);

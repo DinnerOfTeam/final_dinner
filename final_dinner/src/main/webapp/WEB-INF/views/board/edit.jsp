@@ -52,14 +52,18 @@ $(function(){
 					<input type="text" class="form-text" id="freeTitle" name="freeTitle"
 						placeholder="제목" value="${vo.freeTitle }" required>
 						
+					<div class="form-group form-group-clear">
 					<c:if test="${vo.memNo==0 and !empty vo.freePwd }">
 					<label for="freeName" class="sr-only">이름</label>
 					<p class="form-static">${vo.freeName }</p>
 					<input type="hidden" name="freeName" value="${vo.freeName }">
 					
-					<label for="freePwd" class="sr-only">비밀번호</label>
-					<input type="password" id="freePwd" name="freePwd" class="form-text" placeholder="비밀번호" required>
+						<c:if test="${memGrade!=9}">
+							<label for="freePwd" class="sr-only">비밀번호</label>
+							<input type="password" id="freePwd" name="freePwd" class="form-text" placeholder="비밀번호" required>
+						</c:if>
 					</c:if>
+					</div>
 					
 					<div class="form-group">
 						<label for="freeContents" class="sr-only">내용</label>

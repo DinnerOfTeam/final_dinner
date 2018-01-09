@@ -171,6 +171,19 @@ public class CommentCon {
 			model.addAttribute("close", true);
 			return "common/msgPopup";
 		}
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		MemberVO memberVO=null;
+		if(memId!=null && !memId.isEmpty()){
+			memberVO=memberService.selectMember(memId);
+		}
+		int memGrade=0;
+		if(memberVO!=null){
+			memGrade=memberVO.getMemGrade();
+		}
+		
+		model.addAttribute("memGrade", memGrade);
 		model.addAttribute("vo", vo);
 		
 		return "board/comment/edit";
