@@ -8,7 +8,8 @@
 		$('button#search_book').click(function() {
 			var s= $('input[name=startDay]').val();
 			var e= $('input[name=endDay]').val();
-			location.href= "<c:url value= '/admin/main.do?startDay="+ s+ "&endDay="+ e+ "' />";
+			var i= $('input[name=idx]').val();
+			location.href= "<c:url value= '/admin/main.do?idx="+i + "&startDay="+ s+ "&endDay="+ e+ "' />";
 		});
 		$.applyDate= function(id) {
 			$(id).datepicker({
@@ -39,7 +40,7 @@
 		
 		var options = {
 		  chart: {
-		    title: '검색 기간동안의 예약 수',
+		    title: '-',
 		    subtitle: '예약 횟수 (번)'
 		  },
 		  width: 700,
@@ -50,33 +51,10 @@
 		
 		chart.draw(data, google.charts.Line.convertOptions(options));
 	}
-	
-	function drawChart2(datas) {
-		alert(datas);
-		var data = new google.visualization.DataTable();
-		data.addColumn('string', 'Day');
-		data.addColumn('number', '예약수');
-		
-		data.addRows([
-			['0', 0],
-		]);
-		
-		var options = {
-		  chart: {
-		    title: '검색 기간동안의 예약 수',
-		    subtitle: '예약 횟수 (번)'
-		  },
-		  width: 900,
-		  height: 500
-		};
-		
-		var chart = new google.charts.Line(document.getElementById('linechart_material'));
-		
-		chart.draw(data, google.charts.Line.convertOptions(options));
-	}
 </script>
 <div id= 'linechart_material'></div>
 <div class= 'container'>
+	<input type="hidden" name="idx" value="1">
 	<input type="text" name= 'startDay' id='startDay' value="${param.startDay }" />~
 	<input type="text" name= 'endDay' id= "endDay" value="${param.endDay }" />
 	<button id="search_book">검색</button>

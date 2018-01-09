@@ -7,8 +7,8 @@
 		<selectKey resultType="int" keyProperty="voteNo" order="BEFORE">
 			select vote_seq.nextval from dual
 		</selectKey>
-		insert into vote(vote_no, mem_no,group_no,vote_title, vote_desc, vote_end_date)
-		values(#{voteNo}, #{memNo}, #{groupNo}, #{voteTitle}, #{voteDesc}, #{endDate})
+		insert into vote(vote_no, mem_no,group_no,vote_title, vote_desc, vote_end_date, vote_multi_sel)
+		values(#{voteNo}, #{memNo}, #{groupNo}, #{voteTitle}, #{voteDesc}, #{endDate}, #{voteMultiSel})
 	</insert>
 	
 	<insert id="insertItem" parameterType="Vote_ItemVO">
@@ -18,7 +18,7 @@
 		insert into vote_item(vote_item_no, vote_no,item_title)
 		values(#{voteItemNo}, #{voteNo}, #{itemTitle})
 	</insert>
-	
+
 	<select id="selectVoteAll" resultType="VoteVO">
 		select v.* , m.mem_name
 		from vote v
@@ -66,5 +66,16 @@
 		<![CDATA[
 		where rownum<4
 		]]>
+	</select>
+	
+	<select id="whoVoted" parameterType="int" resultType="int">
+		select mem_no from vote_log where vote_no= #{voteNo}
+	</select>
+	
+	<select id="resultVote" parameterType="int" resultType="Vote_ItemVO">
+		select selcNum, (select item_title from vote_item where vote_item_no= d.vote_item_no) as item_title from
+(select (select count(*) from vote_log where vote_item_no= a.vote_item_no) as selcNum, a.vote_item_no
+		from vote_item a left join vote_log b on a.vote_item_no= b.vote_item_no
+		where a.vote_no= #{voteNo} group by a.vote_item_no) d
 	</select>
 </mapper>

@@ -11,4 +11,6 @@ public interface VoteService {
 	public List<Vote_ItemVO> selectByVno(int voteNo);
 	public int insertLog(List<Vote_LogVO> list);
 	public List<VoteVO> selectVote(int groupNo);
+	public List<Integer> whoVoted(int voteNo);
+	public List<Vote_ItemVO> resultVote(int voteNo);
 }

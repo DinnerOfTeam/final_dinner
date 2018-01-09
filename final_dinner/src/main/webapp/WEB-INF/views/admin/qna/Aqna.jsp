@@ -45,7 +45,7 @@
 		}); */
 	});
 </script>
-<p>질문 목록</p>
+<p>QNA 목록</p>
 <div class= 'container'>
 	<c:forEach var="vo" items="${list }">
 		<div class= 'row tr_hover'>
@@ -56,10 +56,11 @@
 			<form class= 'answer_div' action="<c:url value= '/answer/reply.do' />">
 				<div class= 'col-sm-2'>
 					<strong>답변하기</strong>
+					<input type="hidden" name= 'idx' value= "4">
 				</div>
 				<div class= 'col-sm-8'>
 					<input type="hidden" name= 'qnaQuestionNo' value= '${vo.qnaQuestionNo }' />
-					<textarea placeholder= "답변입력" name= answerContent style= "width: 100%" ></textarea>
+					<textarea placeholder= "답변입력" name= answerContent style= "width: 100%" required="required"></textarea>
 				</div>
 				<div class= 'col-sm-2'>
 					<button class="submit_bt">답변</button>

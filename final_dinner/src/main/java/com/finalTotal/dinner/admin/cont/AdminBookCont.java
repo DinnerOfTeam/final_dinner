@@ -34,6 +34,30 @@ public class AdminBookCont {
 		if(startDay== null|| startDay.isEmpty()) {
 			startDay= sdf.format(new Date());
 			endDay= sdf.format(new Date());
+		}else {
+			int sY= Integer.parseInt(startDay.substring(0, 3));
+			int sM= Integer.parseInt(startDay.substring(5, 6));
+			int sD= Integer.parseInt(startDay.substring(8, 9));
+			int eY= Integer.parseInt(endDay.substring(0, 3));
+			int eM= Integer.parseInt(endDay.substring(5, 6));
+			int eD= Integer.parseInt(endDay.substring(8, 9));
+			boolean res= false;
+			if(eY< sY) {
+				res= true;
+			}else {
+				if(eM< sM) {
+					res= true;
+				}else {
+					if(eD< sD) {
+						res= true;
+					}
+				}
+			}
+			if(res) {
+				String temp= endDay;
+				endDay= startDay;
+				startDay= temp;
+			}
 		}
 		map.put("startDay", startDay);
 		map.put("endDay", endDay);
