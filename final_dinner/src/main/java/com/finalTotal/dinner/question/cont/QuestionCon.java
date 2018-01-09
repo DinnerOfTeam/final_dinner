@@ -151,6 +151,7 @@ public class QuestionCon {
 	
 	@RequestMapping("/countUpdate.do")
 	public String countUpdate(@RequestParam(defaultValue="0") int no,
+			HttpSession session,
 			Model model) {
 		logger.info("조회수 증가, 파라미터 no={}", no);
 		
@@ -158,6 +159,19 @@ public class QuestionCon {
 			model.addAttribute("msg", "잘못된 url입니다.");
 			model.addAttribute("url", "/customer/list.do");
 			return "common/message";
+		}else {
+			QuestionVO vo= questionService.selectByNo(no);
+			if(vo.getQuestionOpen().equals("2")) {
+				int memNo = (Integer)session.getAttribute("memNo");
+				if(vo.getMemNo()!= memNo) {
+					MemberVO admin = (MemberVO)session.getAttribute("admin_login");
+					if(admin== null) {
+						model.addAttribute("msg", "비밀글은 본인만 확인가능합니다.");
+						model.addAttribute("url", "/customer/list.do");
+						return "common/message";
+					}
+				}
+			}
 		}
 		
 		int cnt = questionService.updateReadCount(no);
@@ -212,21 +226,33 @@ public class QuestionCon {
 	}
 	
 	@RequestMapping("/listByCategory.do")
-	public String listByCg(@RequestParam(defaultValue="0")int qnaTypeNo,
+	public String listByCg(@ModelAttribute SearchVO searchVo,
 		Model model) {
-		logger.info("카테고리별 게시글 조회, 파라미터 qnaTypeNo={} ", qnaTypeNo);
+		logger.info("카테고리별 게시글 조회, 파라미터 searchVo={} ", searchVo);
 		
-		if(qnaTypeNo==0) {
+		if(searchVo.getQnaTypeNo()==0) {
 			model.addAttribute("msg", "잘못된 url입니다.");
 			model.addAttribute("url", "/list.do");
 			return "common/message";
 		}
+		int totalRecord= questionService.getTotalType(searchVo);
+		PagingVO pageVo= new PagingVO();
+		pageVo.setCurrentPage(searchVo.getCurrentPage());
+		pageVo.setTotalRecord(totalRecord);
+		pageVo.setBlockSize(10);
+		pageVo.setPageSize(10);
 		
+		searchVo.setPageSize(pageVo.getPageSize());
+		searchVo.setTotalPage(pageVo.getTotalPage());
+		searchVo.setFirstRowNum(pageVo.getFirstRowNum());
+		searchVo.setFirstBlockPage(pageVo.getFirstBlockPage());
+		searchVo.setLastBlockPage(pageVo.getLastBlockPage());
 		List<QuestionVO>list
-		= questionService.selectByType(qnaTypeNo);
+		= questionService.selectByType(searchVo);
 		logger.info("카테고리별 조회 결과, list.size()={}", list.size());
 		
 		model.addAttribute("list", list);
+		model.addAttribute("pageVO", pageVo);
 		
 		return "customer/listByCategory";
 	}

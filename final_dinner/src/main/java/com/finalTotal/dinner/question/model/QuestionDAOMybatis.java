@@ -36,8 +36,8 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 	}
 
 	@Override
-	public List<QuestionVO> selectByType(int qnaTypeNo) {
-		return getSqlSession().selectList(namespace+".selectByType",qnaTypeNo);
+	public List<QuestionVO> selectByType(SearchVO vo) {
+		return getSqlSession().selectList(namespace+".selectByType", vo);
 	}
 
 	@Override
@@ -67,6 +67,11 @@ public class QuestionDAOMybatis extends SqlSessionDaoSupport implements Question
 	@Override
 	public List<QuestionVO> adminSelectAll() {
 		return getSqlSession().selectList(namespace+ ".adminSelectAll");
+	}
+
+	@Override
+	public int getTotalType(SearchVO vo) {
+		return getSqlSession().selectOne(namespace+ ".getTotalType", vo);
 	}
 	
 	

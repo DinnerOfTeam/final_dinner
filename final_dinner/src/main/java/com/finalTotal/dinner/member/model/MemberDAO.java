@@ -7,6 +7,7 @@ public interface MemberDAO {
 	
 	
 	public String selectPwd(String memId);
+	public String selectAdmin(String memId);
 	
 	public MemberVO selectMember(String memId);
 	

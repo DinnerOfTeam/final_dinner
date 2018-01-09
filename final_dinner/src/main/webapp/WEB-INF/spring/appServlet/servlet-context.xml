@@ -43,6 +43,10 @@
 			<mapping path="/**"/>
 			<beans:ref bean="chattingUserInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/admin/**"/>
+			<beans:ref bean="adminLoginInterceptor"/>
+		</interceptor>
 	</interceptors>
 	
 </beans:beans>

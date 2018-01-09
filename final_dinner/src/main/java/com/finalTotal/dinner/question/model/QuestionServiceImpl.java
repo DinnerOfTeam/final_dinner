@@ -38,8 +38,8 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
-	public List<QuestionVO> selectByType(int qnaTypeNo) {
-		return questionDao.selectByType(qnaTypeNo);
+	public List<QuestionVO> selectByType(SearchVO vo) {
+		return questionDao.selectByType(vo);
 	}
 
 	@Override
@@ -71,6 +71,11 @@ public class QuestionServiceImpl implements QuestionService{
 	@Override
 	public List<QuestionVO> adminSelectAll() {
 		return questionDao.adminSelectAll();
+	}
+
+	@Override
+	public int getTotalType(SearchVO vo) {
+		return questionDao.getTotalType(vo);
 	}
 	
 }

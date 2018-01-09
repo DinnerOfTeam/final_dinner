@@ -105,12 +105,40 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }
             }
         }).open();
-        
-        
     }
 </script>	
-	
-	
+<script type="text/javascript">
+	$(function() {
+		var url= '${pageContext.request.requestURL }';
+		$('ul.navbar-nav li a').each(function(idx) {
+			if(idx== 0) {
+				if(url.indexOf('/intro/')!= -1) {
+					$(this).addClass('active');
+				}
+			}else if(idx== 1) {
+				if(url.indexOf('/search')!= -1) {
+					$(this).addClass('active');
+				}
+			}else if(idx== 2) {
+				if(url.indexOf('/board/')!= -1) {
+					$(this).addClass('active');
+				}
+			}else if(idx== 3) {
+				if(url.indexOf('/event/')!= -1) {
+					$(this).addClass('active');
+				}
+			}else if(idx== 4) {
+				if(url.indexOf('/customer/')!= -1) {
+					$(this).addClass('active');
+				}
+			}else if(idx== 5) {
+				if(url.indexOf('/indiGroup/')!= -1) {
+					$(this).addClass('active');
+				}
+			}
+		});
+	});
+</script>
 	
 <!--//end-animate-->
 </head>
@@ -157,7 +185,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav">
-								<li><a href="<c:url value= '/intro/intro.do' />" class="active">브랜드소개</a></li>
+								<li><a href="<c:url value= '/intro/intro.do' />">브랜드소개</a></li>
 								<li><a href="<c:url value= '/search.do'/>">통합검색</a></li>
 								<li><a href="<c:url value= '/board/list.do'/>">게시판</a></li>
 								<li><a href="<c:url value= '/event/eventList.do'/>">이벤트</a></li>								

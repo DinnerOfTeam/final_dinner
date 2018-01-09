@@ -84,4 +84,18 @@
 	<select id="selectByGroupNo" parameterType="int" resultType="IndigroupVO">
 		select * from indigroup where group_no= #{groupNo}
 	</select>
+	
+	<select id="isGroupTop" parameterType="int" resultType="int">
+		select mem_no from indigroup where group_no= #{groupNo}
+	</select>
+	
+	<delete id="deleteGroup" parameterType="int">
+		delete from indigroup where group_no= #{groupNo}
+	</delete>
+	
+	<select id="allGroup" resultType="IndiGroupVO">
+		select a.*, (select count(*) from group_member 
+			where group_no= a.group_no) as numGroupMember
+			from indigroup a
+	</select>
 </mapper>
