@@ -47,9 +47,29 @@
 		$(document).on("click", ".search-tab-content .row > div > a", function(){
 			event.preventDefault();
 			
-			var locationValue=$(this).data("sido") +"-"+ $(this).data("loc");
-			if(arrLoc.indexOf(locationValue)==-1){
+			var sidoValue=$(this).data("sido") +"-";
+			var locationValue=sidoValue + $(this).data("loc");
+			var locAllValue=sidoValue +"ALL";
+			var idxOfAll=arrLoc.indexOf(locAllValue);
+			
+			if(locationValue==locAllValue){
+				for(var i=0, len=arrLoc.length; i<len; i++){
+					var locItem=arrLoc[i];
+					if(locItem.indexOf(sidoValue)!=-1){
+						arrLoc.splice(i, 1);
+						i--;
+						len--;
+					}
+				}
+				
 				arrLoc.push(locationValue);
+			}else{
+				if(arrLoc.indexOf(locationValue)==-1){
+					arrLoc.push(locationValue);
+					if(idxOfAll!=-1){
+						arrLoc.splice(idxOfAll, 1);
+					}
+				}
 			}
 			
 			reDrawLocation();
@@ -64,7 +84,7 @@
 		$('#search-select-sido').change(function(){
 			var sidoSel=$('#search-select-sido > option:selected');
 			var sidoVal=sidoSel.val();
-			var sidoLoc=$.trim(sidoSel.text());
+			var sidoLoc=sidoSel.data("keyword");
 			var sidoData="sido_" + sidoVal;
 			
 			if(sidoVal>0){
@@ -75,6 +95,15 @@
 				
 				function createSigunguList(data , res){
 					var $rowClone=$row.clone();
+					
+					$rowClone.append(
+						$sigungu.clone().html(
+							$sigunguAnchor.clone()
+								.text("전체")
+								.data('loc', "ALL")
+								.data('sido', data)
+						)
+					);
 					
 					for(var i=0, len=res.length; i<len; i++){
 						var resSigungu=res[i];
@@ -104,7 +133,7 @@
 						success: function(res){
 							if(res.length>0){
 								createSigunguList(sidoLoc, res);
-							
+								
 								sigunguCache[sidoData]=res;
 							}
 						},
@@ -305,7 +334,7 @@
 						<select class="form-select" id="search-select-sido">
 							<option value="0">시/도 선택</option>
 							<c:forEach var="sido" items="${sidoList }">
-								<option value="${sido.sidoNo }">
+								<option value="${sido.sidoNo }" data-keyword="${sido.sidoSearch }">
 									${sido.sidoName }
 								</option>
 							</c:forEach>
