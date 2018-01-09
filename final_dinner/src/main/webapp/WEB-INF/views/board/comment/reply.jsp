@@ -55,12 +55,12 @@
 				
 				<c:if test="${empty sessionScope.memId}">
 					<div class="form-row">
-						<div class="col-sm-6">
+						<div class="col-xs-12">
 							<label for="commentName" class="sr-only">이름</label>
 							<input type="text" class="form-text" 
 								id="commentName" name="commentName" placeholder="이름" required>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-xs-12">
 							<label for="commentPwd" class="sr-only">비밀번호</label>
 							<input type="password" class="form-text"
 								id="commentPwd" name="commentPwd" placeholder="비밀번호" required>

@@ -50,16 +50,18 @@
 				
 				<c:if test="${vo.memNo==0 and !empty vo.commentPwd }">
 					<div class="form-row">
-						<div class="col-sm-6">
+						<div class="col-xs-12">
 							<label class="sr-only">이름</label>
 							<p class="form-static">${vo.commentName }</p>
 							<input type="hidden" name="commentName" value="${vo.commentName }">
 						</div>
-						<div class="col-sm-6">
+						<c:if test="${memGrade!=9}">
+						<div class="col-xs-12">
 							<label for="commentPwd" class="sr-only">비밀번호</label>
 							<input type="password" class="form-text"
 								id="commentPwd" name="commentPwd" placeholder="비밀번호" required>
 						</div>
+						</c:if>
 					</div>
 				</c:if>
 				

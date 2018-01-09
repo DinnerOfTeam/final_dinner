@@ -121,7 +121,7 @@
 												</div>
 												<div class="comments-act col-right col-sm-4">
 													<a href="<c:url value='/board/comment/reply.do?freeNo=${vo.freeNo }&commentNo=${cVO.commentNo}'/>">답글</a>
-													<c:if test="${memGrade==9 ||!empty cVO.memNo || sessionScope.memNo==cVO.memNo }">
+													<c:if test="${memGrade==9 || cVO.memNo==0 || sessionScope.memNo==cVO.memNo }">
 														|
 														<a href="<c:url value='/board/comment/edit.do?commentNo=${cVO.commentNo}'/>">수정</a>
 														|

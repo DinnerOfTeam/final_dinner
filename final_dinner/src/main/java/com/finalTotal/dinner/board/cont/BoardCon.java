@@ -231,6 +231,19 @@ public class BoardCon {
 			model.addAttribute("url", url);
 			return "common/message";
 		}
+		
+		String memId=(String)session.getAttribute("memId");
+		
+		MemberVO memberVO=null;
+		if(memId!=null && !memId.isEmpty()){
+			memberVO=memberService.selectMember(memId);
+		}
+		int memGrade=0;
+		if(memberVO!=null){
+			memGrade=memberVO.getMemGrade();
+		}
+		
+		model.addAttribute("memGrade", memGrade);
 		model.addAttribute("vo", vo);
 		model.addAttribute("fileMap", fileMap);
 		
