@@ -218,7 +218,8 @@
 													<c:set var="itemAct" value="${photoStatus.index==0? ' active' : '' } "/>
 													<div class="item${itemAct }">
 														<img src="${pageContext.request.contextPath }/upfiles/upl_images/${photo.resPhotoName}"
-															alt="${photo.resPhotoTitle }">
+															alt="${photo.resPhotoTitle }"
+															onerror="errImg(this)">
 													</div>
 												</c:forEach>
 											</div>

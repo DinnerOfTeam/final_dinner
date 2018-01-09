@@ -34,15 +34,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/move-top.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/easing.js"></script>
 <script type="text/javascript">
+	
+	/* $(document).on("error", ".carousel-inner > .item img",function(){
+		$(this).attr("src", "${pageContext.request.contextPath }/images/carouselNoImages.png");
+	}) */
+	
+	function errImg(img){
+		img.src="${pageContext.request.contextPath }/images/carouselNoImages.png";
+	}
+	
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
 			event.preventDefault();
 			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 		});
-		
-		$(document).on("error", ".carousel  .carousel-inner > .item > img", function(){
-			$(this).attr("src", "${pageContext.request.contextPath }/images/carouselNoImages.png");
-		})
 	});
 </script>	
 <!--animate-->
