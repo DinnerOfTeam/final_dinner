@@ -109,7 +109,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="top-header-right-info">
 							<ul>
 								<li><a href="<c:url value= '/admin/login/logout.do'/>">로그아웃</a></li>
-								<li><a href="<c:url value= '/member/myPage.do'/>">마이페이지</a></li>
 							</ul>
 						</div>
 						
