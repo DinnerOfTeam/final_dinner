@@ -24,11 +24,11 @@
 			<div class="table-box">
 				<div class="table-table table-hover">
 					<div class="table-thead hidden-xs">
-						<div class="col-xs-1">번호</div>
-						<div class="col-xs-5">제목</div>
-						<div class="col-xs-2">작성자</div>
-						<div class="col-xs-2">작성일</div>
-						<div class="col-xs-2">그룹명</div>
+						<div class="col-sm-1">번호</div>
+						<div class="col-sm-5">제목</div>
+						<div class="col-sm-2">작성자</div>
+						<div class="col-sm-2">작성일</div>
+						<div class="col-sm-2">그룹명</div>
 					</div>
 					<div class="table-tbody">
 						<c:if test="${empty list }">
@@ -39,18 +39,21 @@
 						<c:if test="${!empty list }">
 							<c:forEach var="vo" items="${list }">
 						<div class="table-tr">
-							<a href="<c:url value='/indiGroup/groupBoard/list.do?gboardNo=${vo.gboardNo}'/>">
+							<a href="<c:url value='/indiGroup/groupBoard/detail.do?gboardNo=${vo.gboardNo}&groupNo=${param.groupNo }'/>">
 								<div class="table-td table-td-center col-sm-1 hidden-xs">
 									<p>${searchVO.totalRecord- vo.rsnum+ 1 }</p>
 								</div>
-								<div class="table-td table-td-title col-xs-12 col-sm-6">
-									<p>${vo.questionTitle }</p>
+								<div class="table-td table-td-title col-xs-12 col-sm-5">
+									<p>${vo.gboardTitle }</p>
 								</div>
 								<div class="table-td table-td-center table-xs-left table-xs-sub col-xs-4 col-sm-2">
 									<p>${vo.memName}</p>
 								</div>
 								<div class="table-td table-td-center table-xs-right table-xs-sub col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
 									<p><fmt:formatDate value="${vo.gboardRegdate }" pattern="yyyy-MM-dd"/></p>
+								</div>
+								<div class="table-td table-td-center table-xs-right table-xs-sub col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
+									<p>${vo.groupName }</p>
 								</div>
 							</a>
 						</div>
@@ -97,7 +100,7 @@
 					</div>
 					
 					<div class="table-sub col-xs-12 col-sm-4 col-sm-offset-8 col-md-2 col-md-offset-10">
-						<a class="site-btn-submit site-btn-full" href="write.do" role="button">
+						<a class="site-btn-submit site-btn-full" href="write.do?groupNo=${param.groupNo }" role="button">
 							<i class="fa fa-pencil"></i>&nbsp;
 							글쓰기
 						</a>
