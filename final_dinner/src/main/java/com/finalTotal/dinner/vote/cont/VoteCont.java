@@ -153,19 +153,21 @@ public class VoteCont {
 		int cnt = voteService.insertLog(list);
 		logger.info("투표결과, cnt={}", cnt);
 		boolean back=true;
+		boolean close=false;
 		String msg="", url="";
 		if(cnt>0) {
 			msg="투표완료";
 			url="/indiGroup/vote/list.do?groupNo="+ groupNo;
 			back=false;
+			close= true;
 		}else {
 			msg="투표실패";
-			
 		}
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url",url);
 		model.addAttribute("back", back);
-		return "common/message";
+		model.addAttribute("close", close);
+		return "common/msgPopup";
 	}
 }
