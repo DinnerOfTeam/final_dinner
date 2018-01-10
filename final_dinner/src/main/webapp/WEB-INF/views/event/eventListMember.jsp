@@ -46,6 +46,8 @@
 				</c:if>
 				<c:if test="${!empty list }">
 					<c:forEach var="eventVO" items="${list }">
+						<fmt:formatDate var="startDate" value="${eventVO.eventStartDate}" type="Date" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate var="endDate" value="${eventVO.eventEndDate}" type="Date" pattern="yyyy-MM-dd"/>
 						<tr>
 							<td>
 								<div class="eventListImg">
@@ -64,16 +66,16 @@
 								&nbsp;
 								<c:if test="${eventVO.eventApprove=='Y' }">
 									<c:choose>
-										<c:when test="${eventVO.eventIsEnd=='Y' || eventVO.eventEndDate<nowDate }">
+										<c:when test="${eventVO.eventIsEnd=='Y' || endDate<nowDate }">
 											<span class="label label-danger">종료</span>
 										</c:when>
 										<c:otherwise>
 											<c:choose>
-												<c:when test="${nowDate<eventVO.eventStartDate }">
-													<span class='label label-default'>준비중</span>
+												<c:when test="${nowDate>=startDate }">
+													<span class="label label-primary">진행중</span>
 												</c:when>
 												<c:otherwise>
-													<span class="label label-primary">진행중</span>
+													<span class='label label-default'>준비중</span>
 												</c:otherwise>
 											</c:choose>
 										</c:otherwise>
@@ -84,9 +86,7 @@
 								</c:if>
 								
 								<p class="event_date">
-									<fmt:formatDate value="${eventVO.eventStartDate }" pattern="yyyy-MM-dd"/>
-									~
-									<fmt:formatDate value="${eventVO.eventEndDate }" pattern="yyyy-MM-dd"/>
+									${startDate } ~ ${endDate }
 								</p>
 							</td>
 							<td>
