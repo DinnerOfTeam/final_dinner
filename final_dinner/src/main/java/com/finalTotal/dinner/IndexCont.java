@@ -27,5 +27,12 @@ public class IndexCont {
 	public void code() {
 		
 	}
+	
+	@RequestMapping("/err404.do")
+	public void err404() {
+		
+	}
+	
+	
 
 }
