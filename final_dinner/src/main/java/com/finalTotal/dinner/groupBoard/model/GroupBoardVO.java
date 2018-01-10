@@ -11,8 +11,8 @@ public class GroupBoardVO {
 			gboard_contents CLOB,  그룹게시판 내용 
 			gboard_regdate DATE default sysdate 그룹게시판 작성일 
 		);*/
-	private int gboardNo, groupNo, memNo;
-	private String gboardTitle, gboardContents, memName;
+	private int gboardNo, groupNo, memNo, rsnum;
+	private String gboardTitle, gboardContents, memName, groupName;
 	private Timestamp gboardRegdate;
 	public int getGboardNo() {
 		return gboardNo;
@@ -20,11 +20,23 @@ public class GroupBoardVO {
 	public void setGboardNo(int gboardNo) {
 		this.gboardNo = gboardNo;
 	}
+	public int getRsnum() {
+		return rsnum;
+	}
+	public void setRsnum(int rsnum) {
+		this.rsnum = rsnum;
+	}
 	public int getGroupNo() {
 		return groupNo;
 	}
 	public void setGroupNo(int groupNo) {
 		this.groupNo = groupNo;
+	}
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 	public int getMemNo() {
 		return memNo;
@@ -58,13 +70,9 @@ public class GroupBoardVO {
 	}
 	@Override
 	public String toString() {
-		return "GroupBoardVO [gboardNo=" + gboardNo + 
-				", groupNo=" + groupNo + 
-				", memNo=" + memNo + 
-				", gboardTitle=" + gboardTitle + 
-				", gboardContents=" + gboardContents + 
-				", memName=" + memName + 
-				", gboardRegdate=" + gboardRegdate + "]";
+		return "GroupBoardVO [gboardNo=" + gboardNo + ", groupNo=" + groupNo + ", memNo=" + memNo + ", gboardTitle="
+				+ gboardTitle + ", gboardContents=" + gboardContents + ", memName=" + memName + ", groupName="
+				+ groupName + ", gboardRegdate=" + gboardRegdate + "]";
 	}
 	
 }

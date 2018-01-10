@@ -17,7 +17,7 @@
 	<select id="selectList" parameterType="SearchVO" resultType="GroupBoardVO">
 		select * from
 		(select b.*, rownum as rsnum from
-		    (select a.*, m.mem_name
+		    (select a.*, m.mem_name, (select group_name from indigroup where group_no= a.group_no) as group_name
 		        from group_board a
 		        left join member m on a.mem_no = m.mem_no
 		        where group_no= #{groupNo}
@@ -51,6 +51,8 @@
 	</insert>
 	
 	<select id="selectByNo" parameterType="int" resultType="GroupBoardVO">
-		select * from groupBoard where gboard_no= #{gboardNo}
+		select a.*, (select mem_name from member where mem_no= a.mem_no ) as mem_name,
+			(select group_name from indigroup where group_no= a.group_no) as group_name
+				 from group_board a where gboard_no= #{gboardNo}
 	</select>
 </mapper>

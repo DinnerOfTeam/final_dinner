@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalTotal.dinner.common.PagingVO;
@@ -67,5 +68,42 @@ public class GroupBoardCont {
 		model.addAttribute("list", list);
 		
 		return "indiGroup/groupBoard/listNotice";
+	}
+	
+	@RequestMapping(value= "/write.do", method= RequestMethod.GET)
+	public void write_form() {
+		log.info("그룹 게시판 글쓰기");
+	}
+	
+	@RequestMapping(value= "/write.do", method= RequestMethod.POST)
+	public String write_submit(@ModelAttribute GroupBoardVO vo,
+			Model model) {
+		log.info("그룹 게시판 글쓰기 parameter : vo={}", vo);
+		
+		int cnt= ser.insertBoard(vo);
+		if(cnt> 0) {
+			return "redirect:/indiGroup/groupBoard/list.do?groupNo="+ vo.getGroupNo();
+		}else {
+			model.addAttribute("msg", "그룹 게시판 글쓰기 실패");
+			model.addAttribute("url", "/indiGroup/groupBoard/write.do?groupNo="+ vo.getGroupNo());
+			
+			return "common/message";
+		}
+	}
+	
+	@RequestMapping("/detail.do")
+	public String detail(@ModelAttribute GroupBoardVO vo,
+			Model model) {
+		if(vo.getGboardNo()== 0) {
+			model.addAttribute("msg", "그룹 게시판 글쓰기 실패");
+			model.addAttribute("url", "/indiGroup/groupBoard/list.do?groupNo="+ vo.getGroupNo());
+			
+			return "common/message";
+		}
+		
+		vo= ser.selectByNo(vo.getGboardNo());
+		model.addAttribute("vo", vo);
+		
+		return "indiGroup/groupBoard/detail";
 	}
 }
