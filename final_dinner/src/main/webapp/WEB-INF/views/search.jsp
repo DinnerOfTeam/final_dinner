@@ -217,16 +217,16 @@
 			var date= $(f).find('input[name=s_bookDate]').val();
 /* 			alert(date+ ' '+ time+ '시에 '+ num+ '명이 예약'); */
 			
-			var exptextNum = /^[1-9]+$[0-9]*/g;
-			var exptextTime = /^[0-2]+$[0-9]*/g;
+			var exptextNum = /^[1-9]+[0-9]*$/g;
+			var exptextTime = /^[0-2]+[0-9]*$/g;
 			if(!exptextNum.test(num)) {
 				alert('인원수는 0명 이상의 숫자만 가능합니다.');
 				$(f).find('input[name=bookNum]').focus();
 					return false;
 			}
 			if(!exptextTime.test(time)) {
-				exptextTime= /^[2]+$[5-9]+/g;
-				if(exptextTime.test(time)) {
+				exptextTime= /^[2]+[5-9]+$/g;
+				if(!exptextTime.test(time)) {
 					alert('예약시간은 0~24의 숫자만 가능합니다.');
 					$(f).find('input[name=bookTime]').focus();
 					return false;
@@ -457,8 +457,10 @@
 											<div class="restaurant-overlay-btn">
 												<div class="col-md-6">
 													<%-- <a href="${pageContext.request.contextPath }/book/restaurantBooking.do?resNo=${resItem.resNo}" class="site-btn-submit site-btn-full">예약</a> --%>
-													<input type="hidden" value="${resItem.resNo }">	
+													<input type="hidden" value="${resItem.resNo }">
+													<c:if test="${!empty sessionScope.memNo }">
 													<button class="modalLink site-btn-submit site-btn-full">예약</button>
+													</c:if>
 												</div>
 												<div class="col-md-6">
 													<a href='<c:url value="/restaurant/detail.do?resNo=${resItem.resNo }"/>' class="site-btn site-btn-full">상세보기</a>

@@ -8,6 +8,7 @@
 		$('#searchMap').click(function() {
 			var add1= $('#addr_sido :selected').text();
 			var add2= $('#addr_sigungu :selected').text();
+			var is2= $('#addr_sigungu :selected').val();
 			$('#map').find('div').remove();
 
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -43,7 +44,11 @@
 			var ps = new daum.maps.services.Places(); 
 
 			// 키워드로 장소를 검색합니다
-			ps.keywordSearch(add1+ add2, placesSearchCB); 
+			if(is2!= 0) {
+				ps.keywordSearch(add1+ add2, placesSearchCB); 
+			}else {
+				ps.keywordSearch(add1, placesSearchCB); 
+			}
 
 			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 			function placesSearchCB (data, status, pagination) {
