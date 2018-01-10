@@ -199,7 +199,7 @@
 						<div>
 							<c:if test="${!empty photoList }">
 								<div class="row">
-									<div class="col-md-9 col-xs-6">
+									<div class="col-sm-9 col-md-6">
 										<div id="carousel-res-photo" class="carousel slide" data-ride="carousel">
 											<!-- Indicators -->
 											<ol class="carousel-indicators">
