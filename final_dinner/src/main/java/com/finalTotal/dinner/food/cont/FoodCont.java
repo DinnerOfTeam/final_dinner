@@ -412,7 +412,7 @@ public class FoodCont {
 						int cnt=foodMenuService.restoreMenu(menuList, overWrite);
 						
 						if(cnt>0) {
-							msg="복원 실패";
+							msg="복원 완료";
 							url="/restaurantEnterprise/menuList.do";
 							back=false;
 						}else {
