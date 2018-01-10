@@ -89,7 +89,7 @@ a {
 		
 		<div data-layout="al16 al-o2 de-o1 de6 ec4">
 			<nav class="MOD_SUBNAVIGATION1_Menu" >
-			<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs">${ sessionScope.memId}</p>
+			<p class="MOD_SUBNAVIGATION1_Menutitle" data-theme="_bgs">${ sessionScope.memName} (${ sessionScope.memId})</p>
 			<!-- <ul>
 				<li><a href="/dinner/member/memberEdit.do">회원정보 수정</a></li>
 				<li><a href="/dinner/member/memberOut.do">회원탈퇴</a></li>
