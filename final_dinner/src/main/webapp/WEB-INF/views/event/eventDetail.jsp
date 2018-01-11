@@ -100,7 +100,7 @@
 									</c:when>
 									<c:otherwise>
 										<c:choose>
-											<c:when test="${startDate }">
+											<c:when test="${startDate>nowDate }">
 												<span class='label label-default'>준비중</span>
 											</c:when>
 											<c:otherwise>
