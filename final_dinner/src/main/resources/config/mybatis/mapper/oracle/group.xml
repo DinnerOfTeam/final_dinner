@@ -97,5 +97,6 @@
 		select a.*, (select mem_name from member where mem_no= a.mem_no) as mem_name,
 				(select count(*) from group_member where group_no= a.group_no) as numGroupMember
 			from indigroup a where group_no not in (select group_no from group_member where mem_no= #{memNo})
+				and group_no not in(select group_no from group_regi where mem_no= #{memNo})
 	</select>
 </mapper>
