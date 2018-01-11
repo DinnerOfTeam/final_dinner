@@ -22,11 +22,16 @@
 		});
 	});
 </script>
+<style type="text/css">
+	legend> a {
+		color: black;
+	}
+</style>
 	
 	<div class="row fadeInUp animated" data-wow-delay=".5s">
 		<form name="groupRegi" id= 'groupRegi' method="post" action="<c:url value='/indiGroup/regiOk.do' />" >
 			<fieldset class='border_fieldset'>
-				<legend>${group.groupName }그룹 가입신청 명단</legend>
+				<legend><a href="<c:url value='/indiGroup/chat/main.do?groupNo=${param.groupNo }' />">${group.groupName }</a>그룹 가입신청 명단</legend>
 			<table class= 'table tb_hover'>
 				<thead>
 				<tr class= 'text_center'>

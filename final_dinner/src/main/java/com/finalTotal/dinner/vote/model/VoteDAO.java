@@ -12,4 +12,6 @@ public interface VoteDAO {
 	public List<Vote_ItemVO> selectByVno(int voteNo);
 	public int insertLog(Vote_LogVO vo);
 	public List<VoteVO> selectVote(int groupNo);
+	public List<Integer> whoVoted(int voteNo);
+	public List<Vote_ItemVO> resultVote(int voteNo);
 }

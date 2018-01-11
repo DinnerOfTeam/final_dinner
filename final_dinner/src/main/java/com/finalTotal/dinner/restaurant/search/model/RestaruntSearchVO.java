@@ -35,8 +35,18 @@ public class RestaruntSearchVO extends SearchVO{
 						&& data[1]!=null && !data[1].isEmpty()) {
 					HashMap<String, String> map=new HashMap<String, String>();
 					
-					map.put("sido", data[0]);
-					map.put("sigungu", data[1]);
+					String sido=data[0];
+					
+					/*if(sido.length()>=3) {
+						sido = sido.substring(0, (sido.length()-1));
+					}*/
+					
+					map.put("sido", sido);
+					if(data[1].equals("ALL")) {
+						map.put("sigungu", "");
+					}else {
+						map.put("sigungu", data[1]);
+					}
 					
 					list.add(map);
 				}

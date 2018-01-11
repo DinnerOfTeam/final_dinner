@@ -3,6 +3,7 @@ package com.finalTotal.dinner.addr.model;
 public class SidoVO {
 	private int sidoNo;
 	private String sidoName;
+	private String sidoSearch;
 	
 	public int getSidoNo() {
 		return sidoNo;
@@ -16,10 +17,16 @@ public class SidoVO {
 	public void setSidoName(String sidoName) {
 		this.sidoName = sidoName;
 	}
+	public String getSidoSearch() {
+		return sidoSearch;
+	}
+	public void setSidoSearch(String sidoSearch) {
+		this.sidoSearch = sidoSearch;
+	}
 	
 	@Override
 	public String toString() {
-		return "SidoVO [sidoNo=" + sidoNo + ", sidoName=" + sidoName + "]";
+		return "SidoVO [sidoNo=" + sidoNo + ", sidoName=" + sidoName + ", sidoSearch=" + sidoSearch + "]";
 	}
 	
 }

@@ -53,4 +53,14 @@ public class VoteDAOMybatis extends SqlSessionDaoSupport implements VoteDAO{
 		return getSqlSession().selectList(namespace+".selectVote", groupNo);
 	}
 
+	@Override
+	public List<Integer> whoVoted(int voteNo) {
+		return getSqlSession().selectList(namespace+ ".whoVoted", voteNo);
+	}
+
+	@Override
+	public List<Vote_ItemVO> resultVote(int voteNo) {
+		return getSqlSession().selectList(namespace+ ".resultVote", voteNo);
+	}
+
 }

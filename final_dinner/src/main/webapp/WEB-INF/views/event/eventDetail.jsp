@@ -5,6 +5,8 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="today" class="java.util.Date"/>
 <fmt:formatDate var="nowDate" value="${today}" type="Date" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="startDate" value="${eVO.eventStartDate}" type="Date" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="endDate" value="${eVO.eventEndDate}" type="Date" pattern="yyyy-MM-dd"/>
 <c:if test="${param.mode!='admin' }">
 	<%@include file="../inc/top.jsp" %>
 </c:if>
@@ -89,19 +91,16 @@
 						<h2 class="event-detail-title">${eVO.eventTitle }</h2>
 						
 						<p class="event_info">
-							기간:
-							<fmt:formatDate value="${eVO.eventStartDate }" pattern="yyyy-MM-dd"/>
-							~
-							<fmt:formatDate value="${eVO.eventEndDate }" pattern="yyyy-MM-dd"/>
+							기간: ${startDate } ~ ${endDate }
 							&nbsp;
 							<c:if test="${eVO.eventApprove=='Y' }">
 								<c:choose>
-									<c:when test="${eVO.eventIsEnd=='Y' || eVO.eventEndDate<nowDate }">
+									<c:when test="${eVO.eventIsEnd=='Y' || endDate<nowDate }">
 										<span class="label label-danger">종료</span>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
-											<c:when test="${nowDate<eVO.eventStartDate }">
+											<c:when test="${startDate>nowDate }">
 												<span class='label label-default'>준비중</span>
 											</c:when>
 											<c:otherwise>

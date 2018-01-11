@@ -48,6 +48,9 @@ public class VoteCont {
 		{
 			memNo = (Integer)session.getAttribute("memNo");
 			voteVO.setMemNo(memNo);
+			if(voteVO.getVoteMultiSel()== null|| voteVO.getVoteMultiSel().isEmpty()) {
+				voteVO.setVoteMultiSel("N");
+			}
 		}
 		
 		List<Vote_ItemVO> list = new ArrayList<Vote_ItemVO>();
@@ -95,6 +98,7 @@ public class VoteCont {
 	@RequestMapping("/detail.do")
 	public String detail(@RequestParam(defaultValue="0")int groupNo,
 			@RequestParam(defaultValue="0")int voteNo,
+			HttpSession session,
 		ModelMap model) {
 		logger.info("투표하기 파라미터 groupNo={}", groupNo);
 		
@@ -106,9 +110,20 @@ public class VoteCont {
 		
 		VoteVO vo = voteService.selectByNo(voteNo);
 		List<Vote_ItemVO> list =voteService.selectByVno(voteNo);
+		List<Integer> mem_list= voteService.whoVoted(voteNo);
+		int memNo= (Integer)session.getAttribute("memNo");
+		boolean res= false;
+		for(Integer i: mem_list) {
+			if(i== memNo) {
+				res= true;
+			}
+		}
+		List<Vote_ItemVO> voted_list= voteService.resultVote(voteNo);
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("list", list);
+		model.addAttribute("voted_list", voted_list);
+		model.addAttribute("isVoted", res);
 		return "/indiGroup/vote/detail";
 		
 	}
@@ -120,6 +135,7 @@ public class VoteCont {
 		{
 			memNo = (Integer)session.getAttribute("memNo");
 			Logvo.setMemNo(memNo);
+			logger.info("memNo={}", memNo);
 		}
 		
 		List<Vote_LogVO> list = new ArrayList<Vote_LogVO>();
@@ -143,11 +159,10 @@ public class VoteCont {
 			msg="투표완료";
 			url="/indiGroup/vote/list.do?groupNo="+ groupNo;
 			back=false;
-			close=true;
+			close= true;
 		}else {
 			msg="투표실패";
-			close=false;
-			
+
 		}
 		
 		model.addAttribute("msg", msg);

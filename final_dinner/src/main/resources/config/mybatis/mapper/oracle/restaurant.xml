@@ -9,13 +9,13 @@
 				<if test="keyword!=null and keyword!=''">
 					and res_name like '%' || #{keyword} || '%'
 				</if>
-				<if test="locationList!=null">
-					<foreach collection="locationList" item="loc" open="and " separator=" or ">
-						res_address like '%' || #{loc.sido} || '%' || #{loc.sigungu} || '%'
-					</foreach>
-				</if>
 				<if test="resTypeNo!=0">
 					and res_type_no=#{resTypeNo}
+				</if>
+				<if test="locationList!=null">
+					<foreach collection="locationList" item="loc" open="and (" separator=" or " close=")">
+						res_address like '%' || #{loc.sido} || '%' || #{loc.sigungu} || '%'
+					</foreach>
 				</if>
 			</where>
 		</sql>

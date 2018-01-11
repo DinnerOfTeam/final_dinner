@@ -11,6 +11,7 @@ public class Vote_ItemVO {
 	private int voteItemNo, voteNo, item_count;
 	private String itemTitle, itemDesc;
 	private String itemArr[];
+	private int selcNum;
 	public int getVoteItemNo() {
 		return voteItemNo;
 	}
@@ -22,6 +23,12 @@ public class Vote_ItemVO {
 	}
 	public void setVoteNo(int voteNo) {
 		this.voteNo = voteNo;
+	}
+	public int getSelcNum() {
+		return selcNum;
+	}
+	public void setSelcNum(int selcNum) {
+		this.selcNum = selcNum;
 	}
 	public int getItem_count() {
 		return item_count;

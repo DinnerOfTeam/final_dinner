@@ -74,6 +74,16 @@ public class VoteServiceImpl implements VoteService{
 	public List<VoteVO> selectVote(int groupNo) {
 		return voteDao.selectVote(groupNo);
 	}
+
+	@Override
+	public List<Integer> whoVoted(int voteNo) {
+		return voteDao.whoVoted(voteNo);
+	}
+
+	@Override
+	public List<Vote_ItemVO> resultVote(int voteNo) {
+		return voteDao.resultVote(voteNo);
+	}
 	
 
 }

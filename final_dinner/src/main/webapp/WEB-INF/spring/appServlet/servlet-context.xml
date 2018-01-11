@@ -35,8 +35,10 @@
 			<mapping path="/member/myPage.do"/>
 			<mapping path="/member/memberEdit.do"/>
 			<mapping path="/member/memberOut.do"/>
+			<mapping path="/member/event/**"/>
 			<mapping path="/restaurantEnterprise/**"/>
 			<mapping path="/customer/**"/>
+			<mapping path="/book/**"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		<interceptor>

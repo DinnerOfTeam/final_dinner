@@ -34,13 +34,15 @@ public class AnswerCont {
 	}*/
 	
 	@RequestMapping("/reply.do")
-	String reply_post(@ModelAttribute AnswerVO answerVo, Model model) {
+	String reply_post(@ModelAttribute AnswerVO answerVo,
+			@RequestParam(required= false, defaultValue= "0") int idx,
+			Model model) {
 		logger.info("답변달기 처리 - 파라미터 answerVo={}", answerVo);
 		
 		int cnt = answerService.insertAnswer(answerVo);
 		logger.info("답변달기 결과, cnt={}", cnt);
 		
-		String msg="", url="/admin/main.do";
+		String msg="", url="/admin/main.do?idx="+ idx;
 		
 		if(cnt>0) {
 			msg="답변등록 처리완료";

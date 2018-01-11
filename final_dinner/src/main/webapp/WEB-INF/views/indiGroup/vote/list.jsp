@@ -38,8 +38,7 @@
 									<p>${vo.voteTitle }</p>
 								</div>
 								<div class="table-td table-td-center table-xs-right table-xs-sub col-xs-4 col-xs-offset-4 col-sm-2 col-sm-offset-0">
-									<p><fmt:formatDate value="${vo.voteRegdate}" pattern="yyyy-MM-dd"/>
-									-<fmt:formatDate value="${vo.voteEndDate}" pattern="yyyy-MM-dd"/></p>
+									<p><fmt:formatDate value="${vo.voteEndDate}" pattern="yyyy-MM-dd"/></p>
 								</div>
 							</a>
 						</div>

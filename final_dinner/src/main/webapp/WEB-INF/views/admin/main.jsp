@@ -69,6 +69,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		 setInterval(function() {
 			 findActiveTab()
 		 }, 2000);
+		 
+		 $('ul.admin-tabs').find('li').each(function(idx) {
+			 var p_idx= '${param.idx}';
+			 if(idx== p_idx) {
+				 $(this).addClass('active');
+			 }
+		 });
+		 $('div.search-tab-content').find('div.tab-pane').each(function(idx) {
+			 var p_idx= '${param.idx}';
+			 if(idx== p_idx) {
+				 $(this).addClass('active in');
+			 }
+		 });
 	 });
 	 function findActiveTab() {
 		 $('ul.admin-tabs').find('li').each(function(idx) {
@@ -137,7 +150,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<ul class="nav-pills admin-tabs">
 				<li class=""><a href="#AMember" data-toggle="tab">회원관리</a></li>
-				<li class="active"><a href="#ABoard" data-toggle="tab">게시판관리</a></li>
 				<li class=""><a href="#ABook" data-toggle="tab">예약관리</a></li>
 				<li class=""><a href="#ARes" data-toggle="tab">업체지도</a></li>
 				<li class=""><a href="#ARest" data-toggle="tab">업체관리</a></li>
@@ -146,19 +158,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</ul>
 		</div>
 	<div id= "tab_sel_div">
-		<input type="text" value= "">
-		<input type="text" value= "">
+		<input type="hidden" value= "">
+		<input type="hidden" value= "">
 	</div>
 		<div class="fadeIn animated" data-wow-delay=".5s">
 			<div class="search-tab-content tab-content">
 				<div class="tab-pane fade" id="AMember">
 					<div class="container" title="회원">
 						<c:import url="/admin/member/Amember.do"></c:import>
-					</div>
-				</div>
-				<div class="tab-pane fade" id="ABoard">
-					<div class="container" title="게시판">
-						<c:import url="/admin/board/Aboard.do"></c:import>
 					</div>
 				</div>
 				<div class="tab-pane fade" id="ABook">

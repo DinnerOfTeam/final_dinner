@@ -199,7 +199,7 @@
 						<div>
 							<c:if test="${!empty photoList }">
 								<div class="row">
-									<div class="col-md-9 col-xs-6">
+									<div class="col-sm-9 col-md-6">
 										<div id="carousel-res-photo" class="carousel slide" data-ride="carousel">
 											<!-- Indicators -->
 											<ol class="carousel-indicators">
@@ -218,7 +218,8 @@
 													<c:set var="itemAct" value="${photoStatus.index==0? ' active' : '' } "/>
 													<div class="item${itemAct }">
 														<img src="${pageContext.request.contextPath }/upfiles/upl_images/${photo.resPhotoName}"
-															alt="${photo.resPhotoTitle }">
+															alt="${photo.resPhotoTitle }"
+															onerror="errImg(this)">
 													</div>
 												</c:forEach>
 											</div>

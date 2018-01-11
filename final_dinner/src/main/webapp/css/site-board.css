@@ -215,6 +215,10 @@
 	min-height: 10em;
 }
 
+.board-detail-content img{
+	max-width: 100%;
+}
+
 .board-detail-btnwrap {
 	font-size: 0.875em;
 }
