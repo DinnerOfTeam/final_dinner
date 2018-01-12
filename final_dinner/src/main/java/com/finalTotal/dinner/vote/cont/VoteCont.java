@@ -162,6 +162,7 @@ public class VoteCont {
 			close= true;
 		}else {
 			msg="투표실패";
+
 		}
 		
 		model.addAttribute("msg", msg);
