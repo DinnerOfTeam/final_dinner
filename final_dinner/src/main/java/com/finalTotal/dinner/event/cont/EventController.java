@@ -1,5 +1,7 @@
 package com.finalTotal.dinner.event.cont;
 
+import static org.junit.Assert.assertFalse;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -56,7 +58,7 @@ public class EventController {
 	
 	@RequestMapping("/event/getEventList.do")
 	@ResponseBody
-	public Map<String, Object> getEventList(@RequestParam String eventDate, @RequestParam(defaultValue="1") int page) {
+	public Map<String, Object> getEventList(@RequestParam(defaultValue="") String eventDate, @RequestParam(defaultValue="1") int page) {
 		logger.info("이벤트 목록 조회하기, 파라미터 eventDate={}, page={}", eventDate, page);
 		Map<String, Object> map=new HashMap<String, Object>();
 		
@@ -65,32 +67,36 @@ public class EventController {
 		PagingVO pagingVO=new PagingVO();
 		pagingVO.setCurrentPage(page);
 		
-		if(eventDate!=null && !eventDate.isEmpty()) {
-			int count=eventService.countEventByDate(eventDate);
-			logger.info("이벤트 목록 개수 조회 결과, count={}", count);
-			
-			pagingVO.setTotalRecord(count);
-			pagingVO.setPageSize(5);
-			
-			
-			pagingVO.getTotalPage();
-			int firstRowNum = pagingVO.getFirstRowNum();
-			pagingVO.getFirstBlockPage();
-			pagingVO.getLastBlockPage();
-			
-			searchVO.setKeyword(eventDate);
-			searchVO.setCurrentPage(page);
-			searchVO.setFirstRowNum(firstRowNum);
-			searchVO.setPageSize(pagingVO.getPageSize());
-			
-			
-			List<EventVO> list=eventService.selectEventByDate(searchVO);
-			logger.info("이벤트 목록 조회 결과, list.size()={}", list.size());
-			
-			status="success";
-			
-			map.put("list", list);
+		
+		if(eventDate==null || eventDate.isEmpty()) {
+			eventDate=null;
 		}
+			
+		int count=eventService.countEventByDate(eventDate);
+		logger.info("이벤트 목록 개수 조회 결과, count={}", count);
+		
+		pagingVO.setTotalRecord(count);
+		pagingVO.setPageSize(5);
+		
+		
+		pagingVO.getTotalPage();
+		int firstRowNum = pagingVO.getFirstRowNum();
+		pagingVO.getFirstBlockPage();
+		pagingVO.getLastBlockPage();
+		
+		searchVO.setKeyword(eventDate);
+		searchVO.setCurrentPage(page);
+		searchVO.setFirstRowNum(firstRowNum);
+		searchVO.setPageSize(pagingVO.getPageSize());
+		
+		
+		List<EventVO> list=eventService.selectEventByDate(searchVO);
+		logger.info("이벤트 목록 조회 결과, list.size()={}", list.size());
+		
+		status="success";
+		
+		map.put("list", list);
+			
 		map.put("status", status);
 		map.put("paging", pagingVO);
 		

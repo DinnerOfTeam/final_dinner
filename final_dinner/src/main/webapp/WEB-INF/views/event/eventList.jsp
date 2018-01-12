@@ -14,10 +14,12 @@
 		var $eventPage=$("#eventPaging");
 		
 		function setDateField(dateText){
-			var arrDate=dateText.split('-');
-			$('#eventYear').text(arrDate[0]);
-			$('#eventMonth').text(arrDate[1]);
-			$('#eventDay').text(arrDate[2]);
+			if(dateText==""){
+				$("#eventSelectedDate").text("전체 검색결과");
+			}else{
+				var arrDate=dateText.split('-');
+				$("#eventSelectedDate").text(arrDate[0] +"년 "+ arrDate[1] +"월 "+ arrDate[2] +"일");
+			}
 			$eventDate.val(dateText);
 		}
 		
@@ -244,6 +246,14 @@
 			loadEventData();
 		});
 		
+		$(document).on("click", "a#event_select_all", function(){
+			event.preventDefault();
+			$('#eventDatePick').datepicker('setDate', null);
+			$eventPage.val(1);
+			setDateField("");
+			loadEventData();
+		});
+		
 	});
 </script>
 
@@ -256,10 +266,14 @@
 <div class="site-content-wrap">
 	<div class="container">
 		<div class="col-sm-5 col-sm-push-7 col-md-4 col-md-push-8">
-		
+			<div class="shadow-box-fit">
+				<a href='#' class="site-btn-submit site-btn-full" id="event_select_all">이벤트 모두 보기</a>
+			</div>
+			
 			<div class="shadow-box">
 				<div id="eventDatePick"></div>
 			</div>
+			
 		</div>
 		<div class="col-sm-7 col-sm-pull-5 col-md-8 col-md-pull-4">
 			<div>
@@ -269,9 +283,7 @@
 						<input type="hidden" name="eventDate" id="eventDate">
 						<input type="hidden" name="page" id="eventPaging" value="1">
 					</form>
-					<span id="eventYear">0000</span>년
-					<span id="eventMonth">00</span>월
-					<span id="eventDay">00</span>일
+					<span id="eventSelectedDate">0000년 00월 00일</span>
 					(<span id="eventTotal"></span>건)
 				</div>
 			</div>

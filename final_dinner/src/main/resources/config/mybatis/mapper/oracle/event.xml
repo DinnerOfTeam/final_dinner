@@ -25,11 +25,13 @@
 			select rownum as rnum, e.*
 			from(
 				select * from site_event 
+				where event_approve='Y'
+				<if test="keyword!=null and keyword!=''">
 				<![CDATA[
-				where event_start_date<=#{keyword}
+				and event_start_date<=#{keyword}
 				and event_end_date>=#{keyword}
 				]]>
-				and event_approve='Y'
+				</if>
 				order by (
 					<![CDATA[
 					case when event_end_date<trunc(sysdate) or event_is_end='Y' then 0
@@ -47,13 +49,14 @@
 	</select>
 	
 	<select id="countEventByDate" parameterType="string" resultType="int">
+		select count(*) from site_event 
+		where event_approve='Y'
+		<if test="value!=null and value!=''">
 		<![CDATA[
-		select count(*) from site_event
-		where event_start_date<=#{eventDate}
+		and event_start_date<=#{eventDate}
 		and event_end_date>=#{eventDate}
-		and event_approve='Y'
-		order by event_no desc
 		]]>
+		</if>
 	</select>
 	
 	<select id="selectEventList" parameterType="SearchVO" resultType="EventVO">
