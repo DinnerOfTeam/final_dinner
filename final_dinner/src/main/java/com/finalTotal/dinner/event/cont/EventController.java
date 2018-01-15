@@ -267,7 +267,7 @@ public class EventController {
 			EventVO eVO=eventService.selectEventByNo(vo.getEventNo());
 			logger.info("업체-이벤트 마감, 이벤트 eVO={}", eVO);
 			
-			if(eVO==null || eVO.getResNo()==resNo) {
+			if(eVO==null || eVO.getResNo()!=resNo) {
 				msg="존재하지 않는 이벤트거나, 권한이 없습니다";
 				back=true;
 			}
