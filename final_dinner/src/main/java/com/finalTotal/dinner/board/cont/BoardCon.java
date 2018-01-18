@@ -116,8 +116,11 @@ public class BoardCon {
 		
 		for(CommentVO cVo : commentList) {
 			if(cVo.getCommentDelFlag().equals("N")) {
-				String commentContents=cVo.getCommentContents().replace("\r\n", "<br>");
-				cVo.setCommentContents(commentContents);
+				String comContent=cVo.getCommentContents();
+				if(comContent!=null && !comContent.isEmpty()){
+					String commentContents=comContent.replace("\r\n", "<br>");
+					cVo.setCommentContents(commentContents);
+				}
 			}
 		}
 		
