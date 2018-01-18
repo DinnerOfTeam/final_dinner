@@ -12,8 +12,8 @@
 				<if test="resTypeNo!=0">
 					and res_type_no=#{resTypeNo}
 				</if>
-				<if test="locationList!=null and locationList.size()!=0">
-					<foreach collection="locationList" item="loc" open="and (" separator=" or " close=")">
+				<if test="locationList!=null">
+					<foreach collection="locationList" item="loc" open="and (" close=")" separator=" or ">
 						res_address like '%' || #{loc.sido} || '%' || #{loc.sigungu} || '%'
 					</foreach>
 				</if>
