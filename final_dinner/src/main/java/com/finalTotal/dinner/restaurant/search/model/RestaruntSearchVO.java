@@ -54,10 +54,19 @@ public class RestaruntSearchVO extends SearchVO{
 			
 			locationList=list;
 		}
+		
+		if(locationList.size()==0){
+			locationList=null;
+		}
+		
 		return locationList;
 	}
 
 	public void setLocationList(List<Map<String, String>> locationList) {
+		if(locationList.size()==0){
+			locationList=null;
+		}
+		
 		this.locationList = locationList;
 	}
 	
