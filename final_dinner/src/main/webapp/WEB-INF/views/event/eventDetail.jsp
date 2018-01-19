@@ -117,7 +117,7 @@
 						
 						<c:if test="${eVO.resNo!=0 }">
 							<p class="event_info">업체명 : ${rVO.resName }</p>
-							<p class="event_info">주소 : ${rVO.resAddress } ${rVO.resAddressDetail }</p>
+							<p class="event_info">주소 : ${rVO.resAddress }</p>
 							<p class="event_info">영업일 : ${rVO.resAddress } ${rVO.resWorkDay }</p>
 						</c:if>
 					</div>

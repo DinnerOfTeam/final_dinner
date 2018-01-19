@@ -155,7 +155,7 @@
 					</span>
 					${vo.resGrade }/5
 				</p>
-				<p>장소 : ${vo.resAddress } ${vo.resAddressDetail }</p>
+				<p>장소 : ${vo.resAddress }</p>
 				<p>영업일 : ${vo.resWorkDay }</p>
 				<p>‎영업시간 : ${vo.resWorkHour }</p>
 				<p>‎연락처 :
